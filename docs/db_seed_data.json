@@ -1,0 +1,7152 @@
+{
+  "sekolah": {
+    "nama_sekolah": "SMA ABDUL WAHID HASYIM TEBUIRENG",
+    "nss": "20540007",
+    "izin_operasional": "421.3/1521/415.28/2014",
+    "luas_tanah_m2": 12300,
+    "alamat": "Jl. Irian jaya no.10 Tebuireng, Cukir",
+    "kecamatan": "Diwek",
+    "kabupaten": "Jombang",
+    "provinsi": "Jawa Timur",
+    "kepala_sekolah": "Drs. H. Hari Winarto, MM.",
+    "ketua_komite": "Drs. Fahmi Amrullah Hadzik"
+  },
+  "total_guru": 66,
+  "guru": [
+    {
+      "id_guru": 1,
+      "nama_lengkap": "Drs. H. Hari Winarto",
+      "pendidikan_terakhir": "S2 Manajemen"
+    },
+    {
+      "id_guru": 2,
+      "nama_lengkap": "Muhammad Ansori, M.PdI",
+      "pendidikan_terakhir": "S2 Bahasa"
+    },
+    {
+      "id_guru": 3,
+      "nama_lengkap": "Mustakim, M.PdI",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 4,
+      "nama_lengkap": "Drs. Djoko Pitono",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 5,
+      "nama_lengkap": "Dwi Indah Lestari, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 6,
+      "nama_lengkap": "H. Suwarso Idris, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 7,
+      "nama_lengkap": "Sri Utami, S.Pd",
+      "pendidikan_terakhir": "S1 Pkn"
+    },
+    {
+      "id_guru": 8,
+      "nama_lengkap": "Siti Nurjanah, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 9,
+      "nama_lengkap": "Drs. Ismail",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 10,
+      "nama_lengkap": "Drs. H.M. Rokhanudin",
+      "pendidikan_terakhir": "S1 Pkn"
+    },
+    {
+      "id_guru": 11,
+      "nama_lengkap": "H. Nadjid, S.Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 12,
+      "nama_lengkap": "Drs. Fahmi Amrullah",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 13,
+      "nama_lengkap": "Partini, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 14,
+      "nama_lengkap": "Cahyonisasi, S. Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 15,
+      "nama_lengkap": "H. Fauzan, S. Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 16,
+      "nama_lengkap": "Sujati, S. Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 17,
+      "nama_lengkap": "Agus Maulana, S. Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 18,
+      "nama_lengkap": "Mukari, S.S, M. Si",
+      "pendidikan_terakhir": "S2 Sosiologi"
+    },
+    {
+      "id_guru": 19,
+      "nama_lengkap": "Abdul Malik, S.Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 20,
+      "nama_lengkap": "Eva Desy Pinasti, S.Si",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 21,
+      "nama_lengkap": "Ida Chusnul Kh, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 22,
+      "nama_lengkap": "Imamudin, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 23,
+      "nama_lengkap": "Ninuk Latifah, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 24,
+      "nama_lengkap": "Isnanik Juni F, M.Si",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 25,
+      "nama_lengkap": "Odik Tugi Hartono, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 26,
+      "nama_lengkap": "Yanuvari Mutik, M.Psi",
+      "pendidikan_terakhir": "S2 Psikologi"
+    },
+    {
+      "id_guru": 27,
+      "nama_lengkap": "Ika Yunita, S.Pd, M.Pd",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 28,
+      "nama_lengkap": "Ulfa Churiwiyah, S.Pd,",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 29,
+      "nama_lengkap": "Husnul Khotimah, S.Si",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 30,
+      "nama_lengkap": "Syam\u2019un Rosyadi, M. HI",
+      "pendidikan_terakhir": "S2 Ilmu"
+    },
+    {
+      "id_guru": 31,
+      "nama_lengkap": "Yuli Kharisma Dzati, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 32,
+      "nama_lengkap": "Defi Aprilia S, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 33,
+      "nama_lengkap": "Suhandoko, S.Pd, M.Pd",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 34,
+      "nama_lengkap": "Rohmawati, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 35,
+      "nama_lengkap": "Sri Mastutik, S,Pd",
+      "pendidikan_terakhir": "S1 Bimbingan"
+    },
+    {
+      "id_guru": 36,
+      "nama_lengkap": "Hartoyo, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 37,
+      "nama_lengkap": "Dwi Mulyani, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 38,
+      "nama_lengkap": "Khudrotun Nafisah, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 39,
+      "nama_lengkap": "Nailul Hikmah, S.PdI",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 40,
+      "nama_lengkap": "Achmad Fauzi, M.Si",
+      "pendidikan_terakhir": "S2 Biologi"
+    },
+    {
+      "id_guru": 41,
+      "nama_lengkap": "Umar Abdul Aziz, S.Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 42,
+      "nama_lengkap": "Busrol Adhim, S.Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 43,
+      "nama_lengkap": "Zainal Abidin, S.Ag",
+      "pendidikan_terakhir": "S1 Agama"
+    },
+    {
+      "id_guru": 44,
+      "nama_lengkap": "Nurul Qomariyah, S.Si",
+      "pendidikan_terakhir": "S1 Biologi"
+    },
+    {
+      "id_guru": 45,
+      "nama_lengkap": "Wahyu Hidatyati, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 46,
+      "nama_lengkap": "Ni\u2019maturrohmah, S.PdI",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 47,
+      "nama_lengkap": "Kartika Cahya Pertiwi,",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 48,
+      "nama_lengkap": "Banu Adya Pradika, SS",
+      "pendidikan_terakhir": "S1 Sastra"
+    },
+    {
+      "id_guru": 49,
+      "nama_lengkap": "Zunita Lisdiana, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 50,
+      "nama_lengkap": "Firdaus Ahlizzami",
+      "pendidikan_terakhir": "S1 Penjas"
+    },
+    {
+      "id_guru": 51,
+      "nama_lengkap": "Yogi Maulana F, S.Pd",
+      "pendidikan_terakhir": "S1 Penjas"
+    },
+    {
+      "id_guru": 52,
+      "nama_lengkap": "Dodi Setyadi, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 53,
+      "nama_lengkap": "Mirza Nurul Laili, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 54,
+      "nama_lengkap": "Resnanto, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 55,
+      "nama_lengkap": "Ahmad Thoriq",
+      "pendidikan_terakhir": "SMA"
+    },
+    {
+      "id_guru": 56,
+      "nama_lengkap": "Moch. Luthfi Fazri",
+      "pendidikan_terakhir": "SMA"
+    },
+    {
+      "id_guru": 57,
+      "nama_lengkap": "Nidhom Ali Hazmi",
+      "pendidikan_terakhir": "SMA"
+    },
+    {
+      "id_guru": 58,
+      "nama_lengkap": "Achmad Qoni\u2019 Ali",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 59,
+      "nama_lengkap": "FATIMAH FITRIANA, S.Sos",
+      "pendidikan_terakhir": "S1 Ilmu Sosial"
+    },
+    {
+      "id_guru": 60,
+      "nama_lengkap": "LIHAM HASAN AL MUJAB, S.H",
+      "pendidikan_terakhir": "S1 Hukum"
+    },
+    {
+      "id_guru": 61,
+      "nama_lengkap": "KHOIROTUNNISA', S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 62,
+      "nama_lengkap": "LAILLATUL FAIZAH, S.Sos",
+      "pendidikan_terakhir": "S1 Ilmu Sosial"
+    },
+    {
+      "id_guru": 63,
+      "nama_lengkap": "EVITRI SUTANTI, S.Si",
+      "pendidikan_terakhir": "S1 Sains"
+    },
+    {
+      "id_guru": 64,
+      "nama_lengkap": "LAZIMAH NUR AINI, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    },
+    {
+      "id_guru": 65,
+      "nama_lengkap": "RIFQI HAWARI, M.Pd",
+      "pendidikan_terakhir": "S2 Pendidikan"
+    },
+    {
+      "id_guru": 66,
+      "nama_lengkap": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "pendidikan_terakhir": "S1 Pendidikan"
+    }
+  ],
+  "total_kelas": 25,
+  "kelas": [
+    {
+      "nama_kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jumlah_siswa": 27,
+      "id_guru_wali": 59
+    },
+    {
+      "nama_kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jumlah_siswa": 25,
+      "id_guru_wali": 60
+    },
+    {
+      "nama_kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jumlah_siswa": 25,
+      "id_guru_wali": 61
+    },
+    {
+      "nama_kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jumlah_siswa": 27,
+      "id_guru_wali": 25
+    },
+    {
+      "nama_kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jumlah_siswa": 31,
+      "id_guru_wali": 51
+    },
+    {
+      "nama_kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jumlah_siswa": 29,
+      "id_guru_wali": 58
+    },
+    {
+      "nama_kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jumlah_siswa": 32,
+      "id_guru_wali": 53
+    },
+    {
+      "nama_kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jumlah_siswa": 31,
+      "id_guru_wali": 62
+    },
+    {
+      "nama_kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jumlah_siswa": 34,
+      "id_guru_wali": 31
+    },
+    {
+      "nama_kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jumlah_siswa": 34,
+      "id_guru_wali": 63
+    },
+    {
+      "nama_kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jumlah_siswa": 26,
+      "id_guru_wali": 20
+    },
+    {
+      "nama_kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jumlah_siswa": 33,
+      "id_guru_wali": 5
+    },
+    {
+      "nama_kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jumlah_siswa": 34,
+      "id_guru_wali": 37
+    },
+    {
+      "nama_kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jumlah_siswa": 32,
+      "id_guru_wali": 49
+    },
+    {
+      "nama_kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jumlah_siswa": 31,
+      "id_guru_wali": 44
+    },
+    {
+      "nama_kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jumlah_siswa": 25,
+      "id_guru_wali": 27
+    },
+    {
+      "nama_kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jumlah_siswa": 23,
+      "id_guru_wali": 64
+    },
+    {
+      "nama_kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jumlah_siswa": 34,
+      "id_guru_wali": 64
+    },
+    {
+      "nama_kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jumlah_siswa": 30,
+      "id_guru_wali": 14
+    },
+    {
+      "nama_kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jumlah_siswa": 33,
+      "id_guru_wali": 65
+    },
+    {
+      "nama_kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jumlah_siswa": 29,
+      "id_guru_wali": 39
+    },
+    {
+      "nama_kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jumlah_siswa": 36,
+      "id_guru_wali": 40
+    },
+    {
+      "nama_kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jumlah_siswa": 26,
+      "id_guru_wali": 21
+    },
+    {
+      "nama_kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jumlah_siswa": 24,
+      "id_guru_wali": 66
+    },
+    {
+      "nama_kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jumlah_siswa": 25,
+      "id_guru_wali": 66
+    }
+  ],
+  "total_siswa": 736,
+  "siswa": [
+    {
+      "nis": "16383",
+      "nama": "ADYPATI NUZHA PUTRA SAFII",
+      "no_urut": 1,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16384",
+      "nama": "ALI AMIRUDIN CAHYO",
+      "no_urut": 2,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16385",
+      "nama": "ANTASENA BANI NATAATMAJA",
+      "no_urut": 3,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16386",
+      "nama": "ARIF HIDAYAT",
+      "no_urut": 4,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16387",
+      "nama": "ARIO ABDILLAH MAZHAZ",
+      "no_urut": 5,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16388",
+      "nama": "BIMA ARYASENO AR-RASYID",
+      "no_urut": 6,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16389",
+      "nama": "DIMAS SAPUTRA",
+      "no_urut": 7,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16390",
+      "nama": "FAITH AZARIA AZFA",
+      "no_urut": 8,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16391",
+      "nama": "IBRAHIM AINUN M",
+      "no_urut": 9,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16392",
+      "nama": "ISNAREJA TURZAITA ZAIN",
+      "no_urut": 10,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16393",
+      "nama": "MAHBUB HAYATULLOH NIDZOMI",
+      "no_urut": 11,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16394",
+      "nama": "MOCH HALIM HILMI",
+      "no_urut": 12,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16395",
+      "nama": "MOCHAMAD VICKY AL FARIZI",
+      "no_urut": 13,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16396",
+      "nama": "MOCHAMMAD RAFAILLAH ATHA",
+      "no_urut": 14,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16397",
+      "nama": "MOHAMMAD THOWAF DZIKRON",
+      "no_urut": 15,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16398",
+      "nama": "MOHAMMAD UFAIR BILBIR",
+      "no_urut": 16,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16399",
+      "nama": "MUCHAMMAD AZZAM AL FARUQ",
+      "no_urut": 17,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16400",
+      "nama": "MUH ARHAM",
+      "no_urut": 18,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16401",
+      "nama": "MUHAMMAD ALFIN FARKHANA",
+      "no_urut": 19,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16402",
+      "nama": "MUHAMMAD ARIF ELSANDY",
+      "no_urut": 20,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16403",
+      "nama": "MUHAMMAD NAUFAL AFKAR",
+      "no_urut": 21,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16404",
+      "nama": "MUHAMMAD RAFSANJANI RAHMANA",
+      "no_urut": 22,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16405",
+      "nama": "MUHAMMAD ROYYAN ALEANSYAH",
+      "no_urut": 23,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16406",
+      "nama": "NADZHIF LUQMAN MUROD",
+      "no_urut": 24,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16407",
+      "nama": "NIZAR AKBAR WARDANA",
+      "no_urut": 25,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16408",
+      "nama": "RAIHAN SURYA AKBAR",
+      "no_urut": 26,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16409",
+      "nama": "RASYA ALDIMAN",
+      "no_urut": 27,
+      "kelas": "X.8",
+      "tingkat": "X",
+      "wali_kelas": "FATIMAH FITRIANA, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16410",
+      "nama": "AHMAD AZAM NUR ZIDAN",
+      "no_urut": 1,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16411",
+      "nama": "AHMAD DAFA MAULANA",
+      "no_urut": 2,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16412",
+      "nama": "ALEANDRO ILHAM RAMADHAN",
+      "no_urut": 3,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16413",
+      "nama": "AULIA RACHMAN",
+      "no_urut": 4,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16414",
+      "nama": "BIMA SYEHKA ZAELANI",
+      "no_urut": 5,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16415",
+      "nama": "EVAN DESTHA SAPUTRA",
+      "no_urut": 6,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16416",
+      "nama": "FAQIH ARSYAD",
+      "no_urut": 7,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16417",
+      "nama": "FARID AHMAD SATRIA TAMA",
+      "no_urut": 8,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16418",
+      "nama": "FELIX NABIHA RASHAD",
+      "no_urut": 9,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16419",
+      "nama": "HABIB HIDAYATULLAH",
+      "no_urut": 10,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16420",
+      "nama": "IHTISHAM IZAZ NAZMI",
+      "no_urut": 11,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16421",
+      "nama": "KUMARA FIRJATULLAH MAHARDIKA",
+      "no_urut": 12,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16422",
+      "nama": "M. AL AFHANTS SYIRIL WAFA",
+      "no_urut": 13,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16423",
+      "nama": "M.DHIKA APRIANSYAH. Z",
+      "no_urut": 14,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16424",
+      "nama": "MOCHAMMAD 'ALAMIL HUDA",
+      "no_urut": 15,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16425",
+      "nama": "MUHAMAD FIKRI AL ISHAQI",
+      "no_urut": 16,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16426",
+      "nama": "MUHAMMAD ADE RAISYA",
+      "no_urut": 17,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16427",
+      "nama": "MUHAMMAD ADITYA JASTIN",
+      "no_urut": 18,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16428",
+      "nama": "MUHAMMAD ANSHORI AL AKBAR",
+      "no_urut": 19,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16429",
+      "nama": "MUHAMMAD DZAKIY AVICENNA AL ZAEN",
+      "no_urut": 20,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16430",
+      "nama": "MUHAMMAD FAWWAZ TSAQIB",
+      "no_urut": 21,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16431",
+      "nama": "MUHAMMAD RIFFAT MARDHOTILLAH",
+      "no_urut": 22,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16432",
+      "nama": "RAFA HABIBULLAH DAVID PRATAMA",
+      "no_urut": 23,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16433",
+      "nama": "RAYYAN NAROTAMA",
+      "no_urut": 24,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16434",
+      "nama": "ROBETH FATIH EL NOFAT",
+      "no_urut": 25,
+      "kelas": "X.1",
+      "tingkat": "X",
+      "wali_kelas": "LIHAM HASAN AL MUJAB, S.H",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16435",
+      "nama": "ACHMAD FAQI NUR FADLI",
+      "no_urut": 1,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16436",
+      "nama": "AFFAN ARDANA NAZARADILA",
+      "no_urut": 2,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16437",
+      "nama": "AHMAD AZZAM MINANUROHMAN",
+      "no_urut": 3,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16438",
+      "nama": "AHMAD HABIBUR ROHMAN ANWARY",
+      "no_urut": 4,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16439",
+      "nama": "APRIAN SAFWAN AFFANDI",
+      "no_urut": 5,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16440",
+      "nama": "ARSAKHA AQILA HADI",
+      "no_urut": 6,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16441",
+      "nama": "FAZA ABDUH HAIKAL",
+      "no_urut": 7,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16442",
+      "nama": "M. FATAN SAID",
+      "no_urut": 8,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16443",
+      "nama": "MAKHIN MUKTI",
+      "no_urut": 9,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16444",
+      "nama": "MAS FAHAD MAULANA ALKAUTSARI",
+      "no_urut": 10,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16445",
+      "nama": "MOCHAMMAD RIDHO KUSBIANTORO",
+      "no_urut": 11,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16446",
+      "nama": "MUHAMAD FAHRI NURJAMAN",
+      "no_urut": 12,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16447",
+      "nama": "MUHAMMAD BUDI MULYA ARI SUJAYA",
+      "no_urut": 13,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16448",
+      "nama": "MUHAMMAD DAFFA FIDNANDA TAUFIQURRAHMAN",
+      "no_urut": 14,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16449",
+      "nama": "MUHAMMAD FARRAS MUHSIN",
+      "no_urut": 15,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16450",
+      "nama": "MUHAMMAD NAUFAL ELZAMI",
+      "no_urut": 16,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16451",
+      "nama": "MUHAMMAD RIZKY AZHARI",
+      "no_urut": 17,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16452",
+      "nama": "MUHAMMAD ULIL ABSOR",
+      "no_urut": 18,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16453",
+      "nama": "MUHAMMAD XAVIAN JUANITO IHSAN",
+      "no_urut": 19,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16454",
+      "nama": "PUTRA DEFA ZABIR RIZQULLAH",
+      "no_urut": 20,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16455",
+      "nama": "RAIHAN FAUZI",
+      "no_urut": 21,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16456",
+      "nama": "RESTU INDRA FEBRIAN",
+      "no_urut": 22,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16457",
+      "nama": "ROZIQUL AKBAR AL-BAIHAQI",
+      "no_urut": 23,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16458",
+      "nama": "SATRIA WIJAYA PRASETYA",
+      "no_urut": 24,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16459",
+      "nama": "SHAFIY SHADIQ",
+      "no_urut": 25,
+      "kelas": "X.2",
+      "tingkat": "X",
+      "wali_kelas": "KHOIROTUNNISA', S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16460",
+      "nama": "ACHMAD SAHAL FAWA'ID",
+      "no_urut": 1,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16461",
+      "nama": "ADAM RAUF NURDIANSYAH",
+      "no_urut": 2,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16462",
+      "nama": "AHMAD HAMIM JAZULI",
+      "no_urut": 3,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16463",
+      "nama": "ALVIETO ARYA GUNAWAN",
+      "no_urut": 4,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16464",
+      "nama": "BALYA QARIM PUTRA UTOMO",
+      "no_urut": 5,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16465",
+      "nama": "DANIAL MASYISY ANSHORI",
+      "no_urut": 6,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16466",
+      "nama": "FADLI FERIZQO ZAMZAMY",
+      "no_urut": 7,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16467",
+      "nama": "FAIZA RIDO RUSLANI",
+      "no_urut": 8,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16468",
+      "nama": "M.ZAKKY NUR AL BAIHAQI",
+      "no_urut": 9,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16469",
+      "nama": "MAHMOUD AHMADINEJAD",
+      "no_urut": 10,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16470",
+      "nama": "MOH. DANISWARA MAHFUDZ AT-TIRMIDZI",
+      "no_urut": 11,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16471",
+      "nama": "MUHAMAD FAUZI MUBAROK",
+      "no_urut": 12,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16472",
+      "nama": "MUHAMAD IRSYAD FANANI",
+      "no_urut": 13,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16473",
+      "nama": "MUHAMMAD AFIFUDDIN IRSYAD SALIM",
+      "no_urut": 14,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16474",
+      "nama": "MUHAMMAD ARRAFI",
+      "no_urut": 15,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16475",
+      "nama": "MUHAMMAD EVAN ADHIPRAMANA SULISTIYO",
+      "no_urut": 16,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16476",
+      "nama": "MUHAMMAD IQBAL WIJDAN",
+      "no_urut": 17,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16477",
+      "nama": "MUHAMMAD MIFTAHUL KHOIR",
+      "no_urut": 18,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16478",
+      "nama": "MUHAMMAD TAQI JAFARI MARTOWIDJOJO",
+      "no_urut": 19,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16479",
+      "nama": "RASYA ANSHORI RAMADHAN",
+      "no_urut": 20,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16480",
+      "nama": "REZA FAHTUR PRATAMA",
+      "no_urut": 21,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16481",
+      "nama": "REZKY PRATAMA AS'ARY",
+      "no_urut": 22,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16482",
+      "nama": "RIDWAN DE ALVINS",
+      "no_urut": 23,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16483",
+      "nama": "RIZKY KURNIA",
+      "no_urut": 24,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16484",
+      "nama": "ROBETH FATIH EL NOFAT",
+      "no_urut": 25,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16485",
+      "nama": "SYAFIQ DIYA UL HAQ",
+      "no_urut": 26,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16486",
+      "nama": "ZAID ZIDAN",
+      "no_urut": 27,
+      "kelas": "X.3",
+      "tingkat": "X",
+      "wali_kelas": "ODIK TUGI HARTONO, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16487",
+      "nama": "AGATHA HASYA AQILAH",
+      "no_urut": 1,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16488",
+      "nama": "AISYA LIYANA ZAHIRA",
+      "no_urut": 2,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16489",
+      "nama": "ANIS MUTHOHAROH",
+      "no_urut": 3,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16490",
+      "nama": "ASHIFATUL ULYA",
+      "no_urut": 4,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16491",
+      "nama": "AWALIAH NUR FATONAH HERMAWAN RUMONIN",
+      "no_urut": 5,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16492",
+      "nama": "AZARIA ASIFANA",
+      "no_urut": 6,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16493",
+      "nama": "BALQIS RATU KAMILA",
+      "no_urut": 7,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16494",
+      "nama": "DEQUEENZA ADENIN AL IBRIZA",
+      "no_urut": 8,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16495",
+      "nama": "DZULVIA BUDI RAISYA",
+      "no_urut": 9,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16496",
+      "nama": "ELEN ZARAVIA",
+      "no_urut": 10,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16497",
+      "nama": "FAKHRIYAH AISYAH SAYYIDAH",
+      "no_urut": 11,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16498",
+      "nama": "FANINA RIKZA KAMILA GANI",
+      "no_urut": 12,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16499",
+      "nama": "FEBRIANI SOLIHATUN NISA'",
+      "no_urut": 13,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16500",
+      "nama": "FRIZKA ADELINA PUTRI",
+      "no_urut": 14,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16501",
+      "nama": "HUSNUL KHOTIMAH",
+      "no_urut": 15,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16502",
+      "nama": "INDAH ARMA MAYANG SARI",
+      "no_urut": 16,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16503",
+      "nama": "INGGAR SAFIRA AZZAHRA",
+      "no_urut": 17,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16504",
+      "nama": "KHANZA AZZALEA MARTHALIESNA",
+      "no_urut": 18,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16505",
+      "nama": "KHAYLA DEWI",
+      "no_urut": 19,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16506",
+      "nama": "NAJWA NUR AZIZAH",
+      "no_urut": 20,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16507",
+      "nama": "QORI ILMIATUS SOLICHA",
+      "no_urut": 21,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16508",
+      "nama": "RHEA ABHINAYA SMARA",
+      "no_urut": 22,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16509",
+      "nama": "SALZABILLA APRILIA TAUVANI",
+      "no_urut": 23,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16510",
+      "nama": "SAVA RINA PURWATI",
+      "no_urut": 24,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16511",
+      "nama": "SITI NUR FADHILLAH",
+      "no_urut": 25,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16512",
+      "nama": "TANISHA ANNASHA PUTRI",
+      "no_urut": 26,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16513",
+      "nama": "THALITA ZALFA KIRANA",
+      "no_urut": 27,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16514",
+      "nama": "ULFI SAFINATUN NAJAH",
+      "no_urut": 28,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16515",
+      "nama": "ULUL AZMI",
+      "no_urut": 29,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16516",
+      "nama": "YUNITA ALFARINI",
+      "no_urut": 30,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16517",
+      "nama": "ZASKIA NURUL HAFIS",
+      "no_urut": 31,
+      "kelas": "X.4",
+      "tingkat": "X",
+      "wali_kelas": "YOGI MAULANA FERDIANSYAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16518",
+      "nama": "ADLINA ALIYYA WIBISONO",
+      "no_urut": 1,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16519",
+      "nama": "AFIKA PUTRI FADHILA",
+      "no_urut": 2,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16520",
+      "nama": "AISYAH NAURAH RAYYANI",
+      "no_urut": 3,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16521",
+      "nama": "AJENG AINUR FAJRIYAH",
+      "no_urut": 4,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16522",
+      "nama": "ALIA ADILA PUTRI",
+      "no_urut": 5,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16523",
+      "nama": "ALMIRA SAFA RAIHANA",
+      "no_urut": 6,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16524",
+      "nama": "AMANDA SALVIA KHAIRUNISA",
+      "no_urut": 7,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16525",
+      "nama": "AQILAH TUHFAH TAZKIYAH",
+      "no_urut": 8,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16526",
+      "nama": "AULIYA LATHIFATUL HASANAH",
+      "no_urut": 9,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16527",
+      "nama": "BELINDA AZALIA ATMAWATI",
+      "no_urut": 10,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16528",
+      "nama": "ELLENA TRYSTANTYA HIDAYAHTUL RAHMAH",
+      "no_urut": 11,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16529",
+      "nama": "GEDZNITA DEVINA MALIK",
+      "no_urut": 12,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16530",
+      "nama": "GENDHIS GANINTA MUNANDAR",
+      "no_urut": 13,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16531",
+      "nama": "ICHA LUTHFIANA",
+      "no_urut": 14,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16532",
+      "nama": "JULVIENI ARYA PRAMITA SARI",
+      "no_urut": 15,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16533",
+      "nama": "KARIMAH AISYAH PUTRI",
+      "no_urut": 16,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16534",
+      "nama": "KEYSHAZENDI ALYA AZAHRA",
+      "no_urut": 17,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16535",
+      "nama": "MAYASA AZKIYA QOLBY",
+      "no_urut": 18,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16536",
+      "nama": "NAILATUS SYIFA",
+      "no_urut": 19,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16537",
+      "nama": "NAURA ZALWA SYAHADA",
+      "no_urut": 20,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16538",
+      "nama": "NAYLA DELISHA AFANDI",
+      "no_urut": 21,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16539",
+      "nama": "NAZURAH GHAISANI KHOIRUNISA",
+      "no_urut": 22,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16540",
+      "nama": "NURI AIDILLAH EFIDEFITA",
+      "no_urut": 23,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16541",
+      "nama": "QATRUNNADA QURRATUL AYN",
+      "no_urut": 24,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16542",
+      "nama": "QUINSHA DIRA SEA ALTHAAF",
+      "no_urut": 25,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16543",
+      "nama": "RODLINA AL MINHATUS SANIYYAH",
+      "no_urut": 26,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16544",
+      "nama": "SAFIRA NABILA",
+      "no_urut": 27,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16545",
+      "nama": "YESIKA ARAPRILYA PUSPITA",
+      "no_urut": 28,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16546",
+      "nama": "ZAFIRA AQIAH ANANTA",
+      "no_urut": 29,
+      "kelas": "X.5",
+      "tingkat": "X",
+      "wali_kelas": "ACHMAD QONI' ALI CHAFID, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16547",
+      "nama": "ABIDA DZIL IZZAH NAWAWI",
+      "no_urut": 1,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16548",
+      "nama": "AIS SAIDATINA",
+      "no_urut": 2,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16549",
+      "nama": "AZMI NOERRIYAH",
+      "no_urut": 3,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16550",
+      "nama": "BALQIIS ZHAAFIRAH MEI",
+      "no_urut": 4,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16551",
+      "nama": "CILA NOVIANTI NUR AINI",
+      "no_urut": 5,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16552",
+      "nama": "DIZYA PUTRI JANEETA",
+      "no_urut": 6,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16553",
+      "nama": "FAFA FARADILA FUADI",
+      "no_urut": 7,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16554",
+      "nama": "FAIZAH NAFEEZA AYU",
+      "no_urut": 8,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16555",
+      "nama": "GESTY ANA AMILIA",
+      "no_urut": 9,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16556",
+      "nama": "HAYATUNNUFUS",
+      "no_urut": 10,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16557",
+      "nama": "INAYAH ALIFATUNNISA",
+      "no_urut": 11,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16558",
+      "nama": "IRDINA ALISHA PUTRI",
+      "no_urut": 12,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16559",
+      "nama": "IRMADYAH USNIDA FALASIFAH",
+      "no_urut": 13,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16560",
+      "nama": "ISYQINA FARHA DHUHA",
+      "no_urut": 14,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16561",
+      "nama": "JULIANA YASMIN",
+      "no_urut": 15,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16562",
+      "nama": "KHANSA KHAIRUSIFA",
+      "no_urut": 16,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16563",
+      "nama": "KUNA KUNI KHUSNUL KHOTIMAH",
+      "no_urut": 17,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16564",
+      "nama": "LAURA HANUM MAHESTY",
+      "no_urut": 18,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16565",
+      "nama": "LAYALI HILYA AULIA",
+      "no_urut": 19,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16566",
+      "nama": "MIDZATUL ARIFAH",
+      "no_urut": 20,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16567",
+      "nama": "MIFTAHUL NABILLATUS ZAHRA",
+      "no_urut": 21,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16568",
+      "nama": "MISSEL CALYSTA PUTRI",
+      "no_urut": 22,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16569",
+      "nama": "NAJLA HELGA PUTRI",
+      "no_urut": 23,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16570",
+      "nama": "NASYWA AZKIA",
+      "no_urut": 24,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16571",
+      "nama": "NIKEISHA SHIFA AZZAHRA",
+      "no_urut": 25,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16572",
+      "nama": "RAHAJENG HAYUNDA KAMARATIH",
+      "no_urut": 26,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16573",
+      "nama": "RAMADHANI AZZILA MUKTI",
+      "no_urut": 27,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16574",
+      "nama": "RASIKAH KHANSA SHABIRAH",
+      "no_urut": 28,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16575",
+      "nama": "SARAH AULIA AL-MAWADDAH",
+      "no_urut": 29,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16576",
+      "nama": "SELSY JUANITA PRATIWI",
+      "no_urut": 30,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16577",
+      "nama": "SITI SALMA AFIFAH",
+      "no_urut": 31,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16578",
+      "nama": "ZALFAA AZZAHRA EMBUN SAMUDRA",
+      "no_urut": 32,
+      "kelas": "X.6",
+      "tingkat": "X",
+      "wali_kelas": "MIRZA NURUL LAILI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16579",
+      "nama": "ALAINA ASSYAKIRA",
+      "no_urut": 1,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16580",
+      "nama": "AMIRA SYARIFA ADELIA YAHYA",
+      "no_urut": 2,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16581",
+      "nama": "ANNI IZZATUL KAROMAH RAFSODI",
+      "no_urut": 3,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16582",
+      "nama": "AQILAH HABIBATUL IZZAH",
+      "no_urut": 4,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16583",
+      "nama": "ASYIFA MEDINA AZZAHRO",
+      "no_urut": 5,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16584",
+      "nama": "ATHA GENDHIS ANANTA",
+      "no_urut": 6,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16585",
+      "nama": "AYESHA BUNGAS EL FAYYAZA",
+      "no_urut": 7,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16587",
+      "nama": "DESTRY ROSDIANA",
+      "no_urut": 8,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16588",
+      "nama": "DINDA SYAFIQA ADELGISA",
+      "no_urut": 9,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16589",
+      "nama": "EARLY NAZILATUZ ZAHROH",
+      "no_urut": 10,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16590",
+      "nama": "ECHA AVRIELLYA LAILATUZZAHRAH",
+      "no_urut": 11,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16591",
+      "nama": "ELYSIANNA SEDAYU RADYSTI",
+      "no_urut": 12,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16592",
+      "nama": "FAKRINA HAINUNATUZ ZAHRA",
+      "no_urut": 13,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16593",
+      "nama": "FAYXA AYU DEWINTA PUTRI SRIKANDI",
+      "no_urut": 14,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16594",
+      "nama": "FILDZAH AMIMAH YUMNA",
+      "no_urut": 15,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16595",
+      "nama": "HAMISA AULIA NAJIB",
+      "no_urut": 16,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16596",
+      "nama": "HANIYA RIHADATUL AISA",
+      "no_urut": 17,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16597",
+      "nama": "HAZLINA SABIQA WIDIASTUTI",
+      "no_urut": 18,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16598",
+      "nama": "KHOIRILA PULUNGAN",
+      "no_urut": 19,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16599",
+      "nama": "LAILA NAHWAH INAYATUL AINIYAH",
+      "no_urut": 20,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16600",
+      "nama": "LAILA NAURA DINA AHMAD",
+      "no_urut": 21,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16601",
+      "nama": "LIYA TASYA ALUNA",
+      "no_urut": 22,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16602",
+      "nama": "MARITZA ADELIA ANINDITA",
+      "no_urut": 23,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16603",
+      "nama": "NI'MATUS SHOLIKHA",
+      "no_urut": 24,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16604",
+      "nama": "NUR AZIZAH HAMNABILLA",
+      "no_urut": 25,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16605",
+      "nama": "NURRAFATUN NISA'",
+      "no_urut": 26,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16606",
+      "nama": "RAZITA ZALIKA PRASHANTI",
+      "no_urut": 27,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16607",
+      "nama": "RINDITA PUTRI HARTANTI",
+      "no_urut": 28,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16608",
+      "nama": "TALITHA AULIA AZHAR",
+      "no_urut": 29,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16609",
+      "nama": "ZAHARA AFNI RAHMA",
+      "no_urut": 30,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16610",
+      "nama": "ZAKIYAH RAMADHANI",
+      "no_urut": 31,
+      "kelas": "X.7",
+      "tingkat": "X",
+      "wali_kelas": "LAILLATUL FAIZAH, S.Sos",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16223",
+      "nama": "ACHMAD ASYAM HABIBIE PRAKOSO",
+      "no_urut": 1,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16188",
+      "nama": "ADITYA ARTHA TRIHUTAMA",
+      "no_urut": 2,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16118",
+      "nama": "ADNAN ABIYYU WAJDI",
+      "no_urut": 3,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16189",
+      "nama": "AGATHA HARIS SINATHRIA",
+      "no_urut": 4,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16081",
+      "nama": "AHMAD WILDAN NUGROHO",
+      "no_urut": 5,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16120",
+      "nama": "ALVINNATA SATRIANO",
+      "no_urut": 6,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16086",
+      "nama": "AQIL AZZAH",
+      "no_urut": 7,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16087",
+      "nama": "ASKAR ADELARD PATU CAHYONO",
+      "no_urut": 8,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16191",
+      "nama": "ATHAYA FAJRUL FALAH WITJAKSONO",
+      "no_urut": 9,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16155",
+      "nama": "ATMADJA HIBRIZI MUHAMMAD",
+      "no_urut": 10,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16128",
+      "nama": "DHOVY HUSYAIN ABDILLAH AL BURHANY",
+      "no_urut": 11,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16158",
+      "nama": "DJIO ARNANDO PRATAMA",
+      "no_urut": 12,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16166",
+      "nama": "ILHAM FAUZAN ZAIN",
+      "no_urut": 13,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16133",
+      "nama": "KEVIN ALVIANO SAPUTRA",
+      "no_urut": 14,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16202",
+      "nama": "KURNIAWAN INDRASETYA",
+      "no_urut": 15,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16098",
+      "nama": "MAHESA PUTRA",
+      "no_urut": 16,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16238",
+      "nama": "MAULANA PUTRA NURMANSYAH",
+      "no_urut": 17,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16239",
+      "nama": "MOHAMAD GHILMAN GHOITSULBARRI",
+      "no_urut": 18,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16241",
+      "nama": "MUH. FARHAN AL FARABY MAHENDRA",
+      "no_urut": 19,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16172",
+      "nama": "MUHAMAD ABQARI MUTADIL",
+      "no_urut": 20,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16207",
+      "nama": "MUHAMAD ARIEF WICAKSONO",
+      "no_urut": 21,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16174",
+      "nama": "MUHAMMAD ALVIN AL FACHRY",
+      "no_urut": 22,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16175",
+      "nama": "MUHAMMAD AUFA AKHDAN SHOFI",
+      "no_urut": 23,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16212",
+      "nama": "MUHAMMAD ILZAM MAFAZA",
+      "no_urut": 24,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16141",
+      "nama": "MUHAMMAD IZZUDIN PURNOMO",
+      "no_urut": 25,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16213",
+      "nama": "MUHAMMAD KAISAN HADANI",
+      "no_urut": 26,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16142",
+      "nama": "MUHAMMAD LISKAT ASKHARI",
+      "no_urut": 27,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16108",
+      "nama": "MUHAMMAD NUR IKHSAN BAITULLOH",
+      "no_urut": 28,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16215",
+      "nama": "MUHAMMAD ZYLDAN FAZA ERZACKY",
+      "no_urut": 29,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16149",
+      "nama": "SANDIA DANISH SYAIFULLAH",
+      "no_urut": 30,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16255",
+      "nama": "SHOFWAN FAHRIZA",
+      "no_urut": 31,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16111",
+      "nama": "TOMMY HADI WINATA",
+      "no_urut": 32,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16257",
+      "nama": "WAFI AHMAD IZZUL HAQ",
+      "no_urut": 33,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16258",
+      "nama": "WILDAN MAULANA",
+      "no_urut": 34,
+      "kelas": "XI.1",
+      "tingkat": "XI",
+      "wali_kelas": "YULI KHARISMA DZATI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16116",
+      "nama": "ACHMAD AL AQWAL FEBRIANO NAJJARSYAH",
+      "no_urut": 1,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16117",
+      "nama": "ADHWA ENDORA",
+      "no_urut": 2,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16079",
+      "nama": "AHMAD DAIROBI",
+      "no_urut": 3,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16224",
+      "nama": "AHMAD FAQIH MUHAJIR",
+      "no_urut": 4,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16153",
+      "nama": "AHMAD KHOIRUN ALI NABIL",
+      "no_urut": 5,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16082",
+      "nama": "AL MULTAZAM YAHYA MUNDHORY",
+      "no_urut": 6,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16154",
+      "nama": "ARYO IMRON FAROQ",
+      "no_urut": 7,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16382",
+      "nama": "AYDIN ABQARI IKHSAN",
+      "no_urut": 8,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16125",
+      "nama": "BAGAS KAMIL KHAIRAN",
+      "no_urut": 9,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16156",
+      "nama": "DERAHID TRI WICAKSONO",
+      "no_urut": 10,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16129",
+      "nama": "DIMAS FAHDIANSYAH",
+      "no_urut": 11,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16159",
+      "nama": "FAIZAL AINURROFIQ 'IRFANY",
+      "no_urut": 12,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16160",
+      "nama": "FARHAN FAJRUL MUNAWAR",
+      "no_urut": 13,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16091",
+      "nama": "FARROS ARKAN XAVIER FADLI",
+      "no_urut": 14,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16096",
+      "nama": "IMAM HAKIKI",
+      "no_urut": 15,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16132",
+      "nama": "ISHLAH ZAIDI",
+      "no_urut": 16,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16167",
+      "nama": "JAZMI NAUFAL ZHAFIR",
+      "no_urut": 17,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16235",
+      "nama": "JOSHUA RIZQI RAHMAT",
+      "no_urut": 18,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16169",
+      "nama": "MAHDIVIEKA AHMAD JZAYDON IRWAN JUNIOR",
+      "no_urut": 19,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16099",
+      "nama": "MAULANA MARZUQ RIDWANUSSALAM",
+      "no_urut": 20,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16205",
+      "nama": "MOH. ILHAM CAHYO NEGORO",
+      "no_urut": 21,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16240",
+      "nama": "MOHAMMAD FACHRI AFANDI",
+      "no_urut": 22,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16140",
+      "nama": "MUHAMMAD CHAIDARIL KAFABIHI",
+      "no_urut": 23,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16176",
+      "nama": "MUHAMMAD FAHRI SUDRAJAT",
+      "no_urut": 24,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16243",
+      "nama": "MUHAMMAD HADZIQUL AZKA",
+      "no_urut": 25,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16106",
+      "nama": "MUHAMMAD IQBAL UBAYDILLAH",
+      "no_urut": 26,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16135",
+      "nama": "MUHAMMAD KHOIRUL AZAM",
+      "no_urut": 27,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16143",
+      "nama": "MUHAMMAD MARZUKI MUBAROK",
+      "no_urut": 28,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16178",
+      "nama": "MUHAMMAD NAUFAL ZAKY AZ-ZAUHARY",
+      "no_urut": 29,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16109",
+      "nama": "MUHAMMAD PANJI HERMAWAN",
+      "no_urut": 30,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16145",
+      "nama": "MUHAMMAD RIZIEQ NAUFAL AR-RASYID",
+      "no_urut": 31,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16244",
+      "nama": "MUHAMMAD WILDAN AZ-ZAKI",
+      "no_urut": 32,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16246",
+      "nama": "NAUFAL MIRZA AWWABI",
+      "no_urut": 33,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16219",
+      "nama": "RIDHO NATA JAGAD",
+      "no_urut": 34,
+      "kelas": "XI.2",
+      "tingkat": "XI",
+      "wali_kelas": "EVITRI SUTANTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16115",
+      "nama": "ABDUL KARIM KHISANI",
+      "no_urut": 1,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16151",
+      "nama": "ACHMAD CHARIRI FAZALMUTTAQI",
+      "no_urut": 2,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16084",
+      "nama": "ANANDA RISCO RAMADANI",
+      "no_urut": 3,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16085",
+      "nama": "ANDANA ATTARIKSA",
+      "no_urut": 4,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16123",
+      "nama": "AUFAA RAKHA BAGUS PUTRA ERWANTO",
+      "no_urut": 5,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16229",
+      "nama": "BIMA ABDUL ROZAK",
+      "no_urut": 6,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16192",
+      "nama": "BINTANG ARYA PUDANA",
+      "no_urut": 7,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16193",
+      "nama": "DANISWARA WISHNU HANANIA",
+      "no_urut": 8,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16195",
+      "nama": "EKA BAYU WICAKSONO",
+      "no_urut": 9,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16088",
+      "nama": "FAIZ MUFLIHUL KHAIR",
+      "no_urut": 10,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16092",
+      "nama": "FATHAHILLAH KHOLIQ FURQANI",
+      "no_urut": 11,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16165",
+      "nama": "GITO NUGROHO",
+      "no_urut": 12,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16197",
+      "nama": "HAFIZ WIJAYA RAHADIAN",
+      "no_urut": 13,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16200",
+      "nama": "HUMAM SHOLAHUDDIN AMAR",
+      "no_urut": 14,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16168",
+      "nama": "KHARIM ABDILLAH RAJI",
+      "no_urut": 15,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16236",
+      "nama": "LEO DWI SATRIA",
+      "no_urut": 16,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16237",
+      "nama": "M. IBRA OUGUSTIUS CAHYO",
+      "no_urut": 17,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16203",
+      "nama": "M. ZAKI BIMA NUR RAHMAN",
+      "no_urut": 18,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16137",
+      "nama": "MAULANA AZKA RAFIE",
+      "no_urut": 19,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16170",
+      "nama": "MICHAEL RAFA THORIQ KEMAL",
+      "no_urut": 20,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16104",
+      "nama": "MUHAMMAD ADIB ALBASID",
+      "no_urut": 21,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16146",
+      "nama": "MUHAMMAD ZUHDI SYAWALI",
+      "no_urut": 22,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16217",
+      "nama": "RAFI EKA MAULANA",
+      "no_urut": 23,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16252",
+      "nama": "REZA ZAKKI ASRA AL GHIFFAR",
+      "no_urut": 24,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16110",
+      "nama": "SA'IF MUHAMMAD THOTI",
+      "no_urut": 25,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16184",
+      "nama": "TUBAGUS AHMAD MUAYYAD MIFTAH",
+      "no_urut": 26,
+      "kelas": "XI.3",
+      "tingkat": "XI",
+      "wali_kelas": "EVA DESSY PINASTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16187",
+      "nama": "ACHMAD SYAUQIH RACHMAN",
+      "no_urut": 1,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16226",
+      "nama": "AJSADAFAARO SANTOSO",
+      "no_urut": 2,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16119",
+      "nama": "ALPHARD ATHA ANDHIKA",
+      "no_urut": 3,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16126",
+      "nama": "BAYU ARDIYATA PRATAMA",
+      "no_urut": 4,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16196",
+      "nama": "ERFAN YASRAYFALDO AL FAJRI",
+      "no_urut": 5,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16380",
+      "nama": "ERLANGGA ALIFIAN NUGRAHA",
+      "no_urut": 6,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16231",
+      "nama": "FACHRY AHMAD VALDANI",
+      "no_urut": 7,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16161",
+      "nama": "FARHAT SYAMSI EFGAN TUHEPALY",
+      "no_urut": 8,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16162",
+      "nama": "FERIS WAHYU KURNIAWAN",
+      "no_urut": 9,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16093",
+      "nama": "GHAFARA JAZILO SAPUTRO",
+      "no_urut": 10,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16233",
+      "nama": "HAFIDZ KAHIRUL AZZAM",
+      "no_urut": 11,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16131",
+      "nama": "HAIKAL ZAKY IZZUDDIN",
+      "no_urut": 12,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16234",
+      "nama": "IKHSAN SUSTARTO",
+      "no_urut": 13,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16134",
+      "nama": "M AROZY AULIA HAKIM",
+      "no_urut": 14,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16097",
+      "nama": "M. FITZAL ASFA MUZAKFAR",
+      "no_urut": 15,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16204",
+      "nama": "M. SHOLAHUDIN AL-AYYUBI",
+      "no_urut": 16,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16136",
+      "nama": "M. ZAHWAN AINURROFIQ",
+      "no_urut": 17,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16100",
+      "nama": "MOH. ALFAN FAHRIZA",
+      "no_urut": 18,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16206",
+      "nama": "MOHAMMAD IBRAHIM YUSUF AS-SUFI",
+      "no_urut": 19,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16138",
+      "nama": "MUHAMAD AMJAD ALIF",
+      "no_urut": 20,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16102",
+      "nama": "MUHAMAD DZAKI DWI PRAYOGA",
+      "no_urut": 21,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16173",
+      "nama": "MUHAMMAD AIRLANGGA",
+      "no_urut": 22,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16211",
+      "nama": "MUHAMMAD DAFFA KHOIRUDDIN",
+      "no_urut": 23,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16177",
+      "nama": "MUHAMMAD HAIDAR FAHMI AL-FATIH",
+      "no_urut": 24,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16214",
+      "nama": "MUHAMMAD ZAENAL ABIDIN",
+      "no_urut": 25,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16247",
+      "nama": "NUR AINUN NAJIB",
+      "no_urut": 26,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16181",
+      "nama": "RAYHAN HAMBALI",
+      "no_urut": 27,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16147",
+      "nama": "REZKY ACHMAD FAHLEVI",
+      "no_urut": 28,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16148",
+      "nama": "RIZKI ALAMSYAH",
+      "no_urut": 29,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16182",
+      "nama": "ROBACH AKBAR MUZAKKI",
+      "no_urut": 30,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16150",
+      "nama": "SHAN YARDAN REYNARD KARIM",
+      "no_urut": 31,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16186",
+      "nama": "WILDAN NABIHAN",
+      "no_urut": 32,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16114",
+      "nama": "ZAHIR AVICENNA",
+      "no_urut": 33,
+      "kelas": "XI.4",
+      "tingkat": "XI",
+      "wali_kelas": "DWI INDAH LESTARI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16078",
+      "nama": "ACHMAD JA'FAR NAFIS AL HISYAM",
+      "no_urut": 1,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16225",
+      "nama": "AHMAD FIRAAS",
+      "no_urut": 2,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16227",
+      "nama": "ALFIANSYAH RISKY MAULANA",
+      "no_urut": 3,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16083",
+      "nama": "ALVIN MASYKUR",
+      "no_urut": 4,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16190",
+      "nama": "ANAS MAHESA BUANA",
+      "no_urut": 5,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16228",
+      "nama": "ARKALIF MAULITIYO GOBIT",
+      "no_urut": 6,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16121",
+      "nama": "ARRIZAL RUBY MAULID DEINDRA",
+      "no_urut": 7,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16124",
+      "nama": "AZKA ABDUL HAKIM",
+      "no_urut": 8,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16127",
+      "nama": "DAFFA DIYAULHAQ PUTRA HUDAYA",
+      "no_urut": 9,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16230",
+      "nama": "DIMAS AGASTYA MAHENDRA",
+      "no_urut": 10,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16130",
+      "nama": "EYVAN JAHWAR RASYDAN",
+      "no_urut": 11,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16381",
+      "nama": "FAHMI IRSYAD MUKHLISON",
+      "no_urut": 12,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16232",
+      "nama": "GEMA ISLAM AL GHAZALI",
+      "no_urut": 13,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16094",
+      "nama": "GIAN ADINATA PRATAMA",
+      "no_urut": 14,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16095",
+      "nama": "IBRA NUR KHOLIK",
+      "no_urut": 15,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16101",
+      "nama": "MOHAMMAD ROSIKHUL ILMY NABAWI",
+      "no_urut": 16,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16139",
+      "nama": "MUHAMAD TAQI ZIAUL FIRDAUS",
+      "no_urut": 17,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16103",
+      "nama": "MUHAMMAD ABDUL FAIQ",
+      "no_urut": 18,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16242",
+      "nama": "MUHAMMAD ABIL SA'AD",
+      "no_urut": 19,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16209",
+      "nama": "MUHAMMAD AZKA ARKANUL HAQ",
+      "no_urut": 20,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16105",
+      "nama": "MUHAMMAD HANAFI",
+      "no_urut": 21,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16107",
+      "nama": "MUHAMMAD KEN ABI RAIHAN",
+      "no_urut": 22,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16179",
+      "nama": "MUHAMMAD RIDHWAN ALFARIZQ",
+      "no_urut": 23,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16144",
+      "nama": "MUHAMMAD RIHAN AN-NURUL FIRDAUS",
+      "no_urut": 24,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16216",
+      "nama": "NANDHO BRILLIANT WASKITO ABDILLA",
+      "no_urut": 25,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16180",
+      "nama": "NAUFAL AL-SHALAHUDDIN",
+      "no_urut": 26,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16245",
+      "nama": "NAUFAL MIFTAHUL SOLIHIN",
+      "no_urut": 27,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16248",
+      "nama": "RAAKAN FAYADH MUSADDAD",
+      "no_urut": 28,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16249",
+      "nama": "RAFFA SYIHAM WIBOWO",
+      "no_urut": 29,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16256",
+      "nama": "SOLAHUDDIN AL AYYUBI. MS",
+      "no_urut": 30,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16220",
+      "nama": "TEVY IVANDER AHMAD",
+      "no_urut": 31,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16113",
+      "nama": "VIYAN AMAR AWALLUDIN",
+      "no_urut": 32,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16221",
+      "nama": "WILDAN BAYU SAPUTRA",
+      "no_urut": 33,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16222",
+      "nama": "ZIAN FAYD MUSOFA",
+      "no_urut": 34,
+      "kelas": "XI.5",
+      "tingkat": "XI",
+      "wali_kelas": "DWI MULYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16320",
+      "nama": "ADWA FATIKHA FITRIA",
+      "no_urut": 1,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16290",
+      "nama": "AILIN MUFIDATUS SHOLICHAH",
+      "no_urut": 2,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16291",
+      "nama": "ALMIRA BELLA MAJALYN",
+      "no_urut": 3,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16322",
+      "nama": "ALYSA QOTRUN NADA",
+      "no_urut": 4,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16323",
+      "nama": "AMANDA REKA AL HIDAYAH",
+      "no_urut": 5,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16353",
+      "nama": "AMANDA SOFIA CANDRAPUTRI",
+      "no_urut": 6,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16325",
+      "nama": "ANNISA AYU RAHMAWATI",
+      "no_urut": 7,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16326",
+      "nama": "AQILAH MAULIDAZZAHRA",
+      "no_urut": 8,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16264",
+      "nama": "ARINA RAHMATIKA KAYYISAH",
+      "no_urut": 9,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16327",
+      "nama": "AROFAH NOVELUNAZWA SAJIDHA",
+      "no_urut": 10,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16329",
+      "nama": "BUNGA PERMATA PUTRI AISYAH",
+      "no_urut": 11,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16331",
+      "nama": "DINA RAUDHATUL JANNAH",
+      "no_urut": 12,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16359",
+      "nama": "HANA WARDATUL JANNAH",
+      "no_urut": 13,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16303",
+      "nama": "HIKMATUZ ZAKIYAH KAMIL",
+      "no_urut": 14,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16308",
+      "nama": "LUTHFIYA QOTRUNADA",
+      "no_urut": 15,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16273",
+      "nama": "LUTHFIYATUL KHALWAH",
+      "no_urut": 16,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16360",
+      "nama": "MAISA AMADEA",
+      "no_urut": 17,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16361",
+      "nama": "MARITZA NUR FAUZIAH",
+      "no_urut": 18,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16274",
+      "nama": "MEISYA CAHYA KUMALA",
+      "no_urut": 19,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16276",
+      "nama": "MULTAZAM MULIA",
+      "no_urut": 20,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16362",
+      "nama": "NADIYA PUTRI FATHIYYAH",
+      "no_urut": 21,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16363",
+      "nama": "NAJHWA FIKRIYA DYNA",
+      "no_urut": 22,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16344",
+      "nama": "NAOMI PUTRI AZ ZAHWA",
+      "no_urut": 23,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16367",
+      "nama": "NUR'AIDA XENIA JULAIKHA",
+      "no_urut": 24,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16368",
+      "nama": "PASHA AYUDHYA YUSUF",
+      "no_urut": 25,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16370",
+      "nama": "RENATHA CITRA SARI",
+      "no_urut": 26,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16315",
+      "nama": "RISMAULA RAHMADANI",
+      "no_urut": 27,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16283",
+      "nama": "SALSABILA ABIDIN",
+      "no_urut": 28,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16373",
+      "nama": "SALSABILA NABIL NUR ROFIFAH EFENDY",
+      "no_urut": 29,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16319",
+      "nama": "TIKA NUR MAYRANITA",
+      "no_urut": 30,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16287",
+      "nama": "YERRIS QURROTUL IZZA",
+      "no_urut": 31,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16348",
+      "nama": "ZAHROTIN AWALINA NURROHMAH",
+      "no_urut": 32,
+      "kelas": "XI.6",
+      "tingkat": "XI",
+      "wali_kelas": "ZUNITA LISDIANA, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16350",
+      "nama": "AGHNIYA ILMI FAKHREZA",
+      "no_urut": 1,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16259",
+      "nama": "AISHA ANNAFI HARIANI",
+      "no_urut": 2,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16261",
+      "nama": "ALYA JAZILA DHIANINGRUM",
+      "no_urut": 3,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16262",
+      "nama": "ANA NAILA RIF'ATIN NISA",
+      "no_urut": 4,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16263",
+      "nama": "ANDINI ZULFA",
+      "no_urut": 5,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16293",
+      "nama": "ANINDYA SALSABILA",
+      "no_urut": 6,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16294",
+      "nama": "ASYIRA ROSYIFA ROSYIDIN",
+      "no_urut": 7,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16355",
+      "nama": "AULIA AISYAH ISMIRANDA",
+      "no_urut": 8,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16295",
+      "nama": "BERKA HIVRIA YOSTIAS",
+      "no_urut": 9,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16297",
+      "nama": "DEVI VADILLLAH ARROSIDAH",
+      "no_urut": 10,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16298",
+      "nama": "DHEA AMMARA ANINDHITA AZ",
+      "no_urut": 11,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16330",
+      "nama": "DINA AZLINA",
+      "no_urut": 12,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16334",
+      "nama": "EMILIA JIHAN GHAIDA ATHAYA",
+      "no_urut": 13,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16337",
+      "nama": "FESSY MAFTUHA RIFA'I",
+      "no_urut": 14,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16338",
+      "nama": "GALUH PUTRI MAHARANI",
+      "no_urut": 15,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16270",
+      "nama": "KARINA AYU MUTHI MAIMUNAH",
+      "no_urut": 16,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16306",
+      "nama": "KHUMAIRO AULIYA UDDINI",
+      "no_urut": 17,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16364",
+      "nama": "NAJMA ALYA SHOFA",
+      "no_urut": 18,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16343",
+      "nama": "NAJMA MAZIDAH PUTRI BUDIANTO",
+      "no_urut": 19,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16277",
+      "nama": "NANDA APTA ZAIN",
+      "no_urut": 20,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16366",
+      "nama": "NASYFA SHAFURA AQNI AL FATAH",
+      "no_urut": 21,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16279",
+      "nama": "NOVIA WIDIYASARI",
+      "no_urut": 22,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16280",
+      "nama": "NURUL FATIMAH AZHARA",
+      "no_urut": 23,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16314",
+      "nama": "REZKIA AL MEISYA DEVIAN",
+      "no_urut": 24,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16371",
+      "nama": "SALMA HABIBATUL KHANSA",
+      "no_urut": 25,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16375",
+      "nama": "SHAILA ILMA ARIM",
+      "no_urut": 26,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16318",
+      "nama": "SHELLA OLIVIA",
+      "no_urut": 27,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16377",
+      "nama": "WITQIH DUNAM AURAPOFAH",
+      "no_urut": 28,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16378",
+      "nama": "WULAN FIRDASARI",
+      "no_urut": 29,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16289",
+      "nama": "ZAHRA AZ ZAHRANI",
+      "no_urut": 30,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16349",
+      "nama": "ZEVINA PRIMA DITA",
+      "no_urut": 31,
+      "kelas": "XI.7",
+      "tingkat": "XI",
+      "wali_kelas": "NURUL QOMARIYAH SAYUTI, S.Si",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16321",
+      "nama": "AISYAH RAHAYU NINGTYAS",
+      "no_urut": 1,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16260",
+      "nama": "AISYAH RAHMA YUSUF",
+      "no_urut": 2,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16351",
+      "nama": "ALYA NAPIROH",
+      "no_urut": 3,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16324",
+      "nama": "AMIROH QORRY AINA",
+      "no_urut": 4,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16292",
+      "nama": "ANA AULIA",
+      "no_urut": 5,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16354",
+      "nama": "ANJUM MALIHA",
+      "no_urut": 6,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16332",
+      "nama": "ELMA AINUN NADHIR",
+      "no_urut": 7,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16335",
+      "nama": "FADILA NURIS FAUZIAH",
+      "no_urut": 8,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16299",
+      "nama": "FARIKA ATHA TALITA",
+      "no_urut": 9,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16268",
+      "nama": "ITA IFTITAHUS SAGHOFAH",
+      "no_urut": 10,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16269",
+      "nama": "IZZATUL WIDAD",
+      "no_urut": 11,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16305",
+      "nama": "KALIFA ARSYA SAQINA",
+      "no_urut": 12,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16339",
+      "nama": "KHADIJA PUTRI NURAINI",
+      "no_urut": 13,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16272",
+      "nama": "KHAILA NURMILA SYAHWA",
+      "no_urut": 14,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16309",
+      "nama": "MALIKA ANJALI",
+      "no_urut": 15,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16341",
+      "nama": "MAULIDIYAH HAMDANA ABDILLAH",
+      "no_urut": 16,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16310",
+      "nama": "MEGAN MELATI SUKMA",
+      "no_urut": 17,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16342",
+      "nama": "NABILA CIKA",
+      "no_urut": 18,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16365",
+      "nama": "NAJMI MEISANI",
+      "no_urut": 19,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16311",
+      "nama": "NAVI SAQIYA",
+      "no_urut": 20,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16312",
+      "nama": "NAYLATUS SA\u2019IDAH",
+      "no_urut": 21,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16345",
+      "nama": "NINGRUM BUDIARTI",
+      "no_urut": 22,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16372",
+      "nama": "SALSABILA AYU PUSPITA SARI",
+      "no_urut": 23,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16347",
+      "nama": "SHAKIRA CHOIRUNNISA",
+      "no_urut": 24,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16286",
+      "nama": "SILVI FAJRIYATUL BADI'AH",
+      "no_urut": 25,
+      "kelas": "XI.8",
+      "tingkat": "XI",
+      "wali_kelas": "IKA YUNITA INDRAWATI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16265",
+      "nama": "ARTAVIA DWI ANGGRAINI",
+      "no_urut": 1,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16356",
+      "nama": "AYSHA KAYLANI PUTRI WAHID",
+      "no_urut": 2,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16266",
+      "nama": "BINA AULIA SAPUTRI",
+      "no_urut": 3,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16296",
+      "nama": "CINTANIA KINAYA EKYANTI",
+      "no_urut": 4,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16357",
+      "nama": "DIVA AMALIA NALINI PUTRI",
+      "no_urut": 5,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16358",
+      "nama": "ELIANA MAFIROH",
+      "no_urut": 6,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16336",
+      "nama": "FADZILATUL KHOMSIYAH HAKIM",
+      "no_urut": 7,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16300",
+      "nama": "FIKI FARACH QONI'ATILLAH",
+      "no_urut": 8,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16301",
+      "nama": "FITRI JULIANA",
+      "no_urut": 9,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16302",
+      "nama": "GALUH RIZKI ARFIANA",
+      "no_urut": 10,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16304",
+      "nama": "INEZ MUMTAZ ELMAJIDA",
+      "no_urut": 11,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16267",
+      "nama": "ISYATUN RODIYA",
+      "no_urut": 12,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16271",
+      "nama": "KAYLA VIVIA RAHMADHANI",
+      "no_urut": 13,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16275",
+      "nama": "MISSOUF SHAHIDHAH ADHAWI",
+      "no_urut": 14,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16278",
+      "nama": "NAURAH ULVIANA RAHMAWATI",
+      "no_urut": 15,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16346",
+      "nama": "NOVIZA LAILI AZHAR",
+      "no_urut": 16,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16316",
+      "nama": "ROSALIE AZALIA",
+      "no_urut": 17,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16284",
+      "nama": "SALSABILA 'AINURROHMAH",
+      "no_urut": 18,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16317",
+      "nama": "SAYYIDA FAIRUZA SYADZILA",
+      "no_urut": 19,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16374",
+      "nama": "SAYYIDAH THIFAL ATQIYAH",
+      "no_urut": 20,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16376",
+      "nama": "TISYA AZALIA RAMADHANI",
+      "no_urut": 21,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16288",
+      "nama": "YUNITA SIWI SUGIARNI",
+      "no_urut": 22,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16379",
+      "nama": "ZULFIA INDANA ZULFA",
+      "no_urut": 23,
+      "kelas": "XI.9",
+      "tingkat": "XI",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15821",
+      "nama": "ACHMAD RIFQI ATQI FAHMI",
+      "no_urut": 1,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15927",
+      "nama": "AHMAD FELANI NAJMI ZAHRON",
+      "no_urut": 2,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15892",
+      "nama": "AKMAL RIDHO HIBATULLOH",
+      "no_urut": 3,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15860",
+      "nama": "AKMALUL HIDAYAT FUADZAM SHAH",
+      "no_urut": 4,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15893",
+      "nama": "ANDIKA SETYA FIRMANSYAH ADINA PUTRA",
+      "no_urut": 5,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15862",
+      "nama": "ATHALLAH FACHRI PRADANA",
+      "no_urut": 6,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15828",
+      "nama": "ATTAR FAWWAZ KAMIL",
+      "no_urut": 7,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15896",
+      "nama": "FACHRY TEGUH RAMADHAN",
+      "no_urut": 8,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15832",
+      "nama": "FADIL MUBAROK",
+      "no_urut": 9,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15864",
+      "nama": "FAQIH AKIF ALMAGHRIBI RAHMAT",
+      "no_urut": 10,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15934",
+      "nama": "FULVIANO CAHYA MAULANA",
+      "no_urut": 11,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15868",
+      "nama": "HAMMAM MUMTAZA",
+      "no_urut": 12,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15869",
+      "nama": "IBRA HAIDAR ALI",
+      "no_urut": 13,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15935",
+      "nama": "IFTIKHAR AMMAR FAIZ",
+      "no_urut": 14,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15936",
+      "nama": "ISNAN ARI NUGROHO",
+      "no_urut": 15,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15837",
+      "nama": "M. ARDHANI AL KATTANY",
+      "no_urut": 16,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15904",
+      "nama": "MAULALHAQ ALFATIH",
+      "no_urut": 17,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15873",
+      "nama": "MAULANA RAFI AZIZ",
+      "no_urut": 18,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15907",
+      "nama": "MOCH. HABIBURROHMAN AL ASAD",
+      "no_urut": 19,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15910",
+      "nama": "MUHAMMAD AL-AKBAR KANZUL KAHFI",
+      "no_urut": 20,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15844",
+      "nama": "MUHAMMAD ASYROF RAHMAN",
+      "no_urut": 21,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15914",
+      "nama": "MUHAMMAD FAHRUL AMIRUL JABBAR",
+      "no_urut": 22,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "16076",
+      "nama": "MUHAMMAD FAIZ KHATAMI BALLETI",
+      "no_urut": 23,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15877",
+      "nama": "MUHAMMAD FATHAN WIRAGUNA",
+      "no_urut": 24,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15945",
+      "nama": "MUHAMMAD KEVIN HIDAYATULLAH",
+      "no_urut": 25,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15948",
+      "nama": "MUHAMMAD RAFIIF ARABIYYU MU'ANNAS",
+      "no_urut": 26,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15915",
+      "nama": "MUHAMMAD RAYHAN HIDAYATULLOH",
+      "no_urut": 27,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15918",
+      "nama": "MUHAMMAD ZAHID HIBATULLOH",
+      "no_urut": 28,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15919",
+      "nama": "NABIL MUHAMMAD",
+      "no_urut": 29,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15920",
+      "nama": "NAJIB ALI AHNAF",
+      "no_urut": 30,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15953",
+      "nama": "NAUFAL PUTRA SAMUDRA",
+      "no_urut": 31,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15848",
+      "nama": "NAUFALELSA MA'ARIF",
+      "no_urut": 32,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15882",
+      "nama": "RADEN ATHYLA PASHA AL HADI",
+      "no_urut": 33,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15851",
+      "nama": "RASYA AUFA NARA HAMIDI",
+      "no_urut": 34,
+      "kelas": "XII.1",
+      "tingkat": "XII",
+      "wali_kelas": "LAZIMAH NUR AINI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15822",
+      "nama": "ACHMAD TANGSI PUSIRAJA",
+      "no_urut": 1,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15823",
+      "nama": "AHMAD FARHAN AL FATIH MASYHURI",
+      "no_urut": 2,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15857",
+      "nama": "AHMAD HILMAN WIBAWA PUTRA HIDAYAT",
+      "no_urut": 3,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15929",
+      "nama": "AHMAD RAJABI",
+      "no_urut": 4,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15931",
+      "nama": "DEFTIAN RIKO PRADITA",
+      "no_urut": 5,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15932",
+      "nama": "FAJRUL AKBAR",
+      "no_urut": 6,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15933",
+      "nama": "FAUZI MIFTAH PURNASATRIA",
+      "no_urut": 7,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15867",
+      "nama": "HAIDAR ALI ZAMANI",
+      "no_urut": 8,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15834",
+      "nama": "IQBAL FIRDAUS AL HAMID",
+      "no_urut": 9,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15835",
+      "nama": "KENNARD FALAHSYAH",
+      "no_urut": 10,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15870",
+      "nama": "KUKUH WICAKSONO",
+      "no_urut": 11,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15871",
+      "nama": "LINTANG CAHYA PUTRA",
+      "no_urut": 12,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15872",
+      "nama": "M. HAFIZ AKBAR PUTRA NADELFA",
+      "no_urut": 13,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15903",
+      "nama": "M. THOHA KHOIRIL ANAM",
+      "no_urut": 14,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15874",
+      "nama": "MIFTAH GHANI AGATA",
+      "no_urut": 15,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15940",
+      "nama": "MOCH. HAVIS YAHYA",
+      "no_urut": 16,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15942",
+      "nama": "MOHAMMAD FAJAR SATRIO NUGROHO",
+      "no_urut": 17,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15843",
+      "nama": "MUHAMMAD ALFARUQ SULANDRA",
+      "no_urut": 18,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15911",
+      "nama": "MUHAMMAD AZKA AL-FIRDAUS",
+      "no_urut": 19,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15845",
+      "nama": "M. FAIZ ALFIANZA",
+      "no_urut": 20,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15949",
+      "nama": "M. YUSRON ALKHAMID",
+      "no_urut": 21,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15880",
+      "nama": "MUHAMMAD ZAKIY ASH-SHABI",
+      "no_urut": 22,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15951",
+      "nama": "MUHAMMAD ZIKRIYA RAMADHANDI",
+      "no_urut": 23,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15952",
+      "nama": "MUMTAZ IRFAN YUSRO",
+      "no_urut": 24,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15849",
+      "nama": "OBED NABIL ROBBANI MAWARDI",
+      "no_urut": 25,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15883",
+      "nama": "RAFAEL ALLANA MUHAMMAD ALFARETA",
+      "no_urut": 26,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15850",
+      "nama": "RAFLI PANJI SETYANTO",
+      "no_urut": 27,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15924",
+      "nama": "RESYA MAULANA ATHO'ILLAH",
+      "no_urut": 28,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15925",
+      "nama": "VALENTINO DANIEL SETYAWAN",
+      "no_urut": 29,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15889",
+      "nama": "ZHAHER HISMAYA",
+      "no_urut": 30,
+      "kelas": "XII.2",
+      "tingkat": "XII",
+      "wali_kelas": "CAHYONISASI, S.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15855",
+      "nama": "ABDULLAH ZACKY IRZA",
+      "no_urut": 1,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15820",
+      "nama": "ACHMAD LUTHFIE BADRUZZAMAN",
+      "no_urut": 2,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15824",
+      "nama": "AHMAD FARIS HUSAINI",
+      "no_urut": 3,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15861",
+      "nama": "ALDEBARAN ARSADANA PUTRA",
+      "no_urut": 4,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15825",
+      "nama": "ALFANDI HADINATA",
+      "no_urut": 5,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15826",
+      "nama": "ANDAKA RISKI",
+      "no_urut": 6,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15831",
+      "nama": "DIMITRI HARMAZ AL HARAMIZAH",
+      "no_urut": 7,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15937",
+      "nama": "JAVIER AKHMAD FAIZAL",
+      "no_urut": 8,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15900",
+      "nama": "KEEFE ATHALLAH RUIZHI",
+      "no_urut": 9,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15938",
+      "nama": "KEY MAS NAZIEF ELFADA",
+      "no_urut": 10,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15836",
+      "nama": "LINGGA ADINATA MOCHTAR",
+      "no_urut": 11,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15901",
+      "nama": "M. ISHAQ LATIF AL-BUSTOMI",
+      "no_urut": 12,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15939",
+      "nama": "MAULANA 'ABDURRAHMAN",
+      "no_urut": 13,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15906",
+      "nama": "MOCH. ARINAL HAQ MUSLIH",
+      "no_urut": 14,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15838",
+      "nama": "MOCHAMMAD AGIS SALMAN ALFARITZI",
+      "no_urut": 15,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15941",
+      "nama": "MOCHAMMAD RAYHAN RAHMATULLOH",
+      "no_urut": 16,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15875",
+      "nama": "MOH ANDIKA AZMI ALTHOF",
+      "no_urut": 17,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15908",
+      "nama": "MOH SOLEH",
+      "no_urut": 18,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15839",
+      "nama": "MOHAMAD RENDI PRASETYA",
+      "no_urut": 19,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15840",
+      "nama": "MOHAMMAD BAGUS YOGA PRATAMA",
+      "no_urut": 20,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15841",
+      "nama": "MOHAMMAD YAZID HIDAYATULLOH",
+      "no_urut": 21,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15912",
+      "nama": "MUHAMMAD BANO TAZAKKA",
+      "no_urut": 22,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15913",
+      "nama": "MUHAMMAD FAHMI AMIRULLAH",
+      "no_urut": 23,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15943",
+      "nama": "MUHAMMAD FAHRI BAIHAQI",
+      "no_urut": 24,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15878",
+      "nama": "MUHAMMAD HAFIZH BINTANG",
+      "no_urut": 25,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15847",
+      "nama": "MUHAMMAD KAYYIS ZAINI",
+      "no_urut": 26,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15947",
+      "nama": "MUHAMMAD RAFIE MAHESWARA",
+      "no_urut": 27,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15879",
+      "nama": "MUHAMMAD RASYA PUTRA HASANUDIN",
+      "no_urut": 28,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15881",
+      "nama": "NI'AM MILLAH YASIN",
+      "no_urut": 29,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15955",
+      "nama": "RAIHAN IKHSANUL ZHAFRAN",
+      "no_urut": 30,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15956",
+      "nama": "RAKHE ABDI RAMADHAN",
+      "no_urut": 31,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15887",
+      "nama": "SAIF NADINDRA MUNTAHA",
+      "no_urut": 32,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15853",
+      "nama": "SYIHABUDDIN AHMAD HILAL",
+      "no_urut": 33,
+      "kelas": "XII.3",
+      "tingkat": "XII",
+      "wali_kelas": "RIFQI HAWARI, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15926",
+      "nama": "ACHMAD HISYAM AZIZI PRAKOSO",
+      "no_urut": 1,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15856",
+      "nama": "AHMAD FAUZI ARDHIANSYAH",
+      "no_urut": 2,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15928",
+      "nama": "AHMAD MAULANA ISHAQ",
+      "no_urut": 3,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15859",
+      "nama": "AHMED TANGGUH MAULANA FIRDAUS",
+      "no_urut": 4,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15894",
+      "nama": "ANTONI BAYU PRASETYO",
+      "no_urut": 5,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15827",
+      "nama": "ARIF KURNIAWAN",
+      "no_urut": 6,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15895",
+      "nama": "AZRI HAZIQ KAMIL",
+      "no_urut": 7,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15829",
+      "nama": "AZZAM NAUFAL PRADIPTA DUSTIN ARY WIBOWO",
+      "no_urut": 8,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15830",
+      "nama": "DAFFA ADIB FADHLURRAHMAN",
+      "no_urut": 9,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15865",
+      "nama": "FARHAN AFIF ADIANSYAH",
+      "no_urut": 10,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15898",
+      "nama": "FATHURROHMAN",
+      "no_urut": 11,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15899",
+      "nama": "HASBI FATURROHMAN",
+      "no_urut": 12,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "16077",
+      "nama": "KINZA ALHAM PURWADI",
+      "no_urut": 13,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15902",
+      "nama": "M. NUR HASAN",
+      "no_urut": 14,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15905",
+      "nama": "MIRZA ANDI ALVIAN",
+      "no_urut": 15,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15946",
+      "nama": "MUHAMMAD NABIL FARHAN",
+      "no_urut": 16,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15916",
+      "nama": "MUHAMMAD SAYYID PANATAGAMA",
+      "no_urut": 17,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15917",
+      "nama": "MUHAMMAD VARDHAN SAPUTRA",
+      "no_urut": 18,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15950",
+      "nama": "MUHAMMAD ZAFIR HAIKAL",
+      "no_urut": 19,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15922",
+      "nama": "RADINKA RIDHO ZAIDAN",
+      "no_urut": 20,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15884",
+      "nama": "RAFFI NUR RAHMAT",
+      "no_urut": 21,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15954",
+      "nama": "RAHMAT ZAKIY HAMDANI",
+      "no_urut": 22,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15923",
+      "nama": "RANGGA BAGUS SUCIPTO",
+      "no_urut": 23,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15957",
+      "nama": "RAZIEL AHMAD ALBANI",
+      "no_urut": 24,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15886",
+      "nama": "RIDHO MAULANA RIFA'I",
+      "no_urut": 25,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15852",
+      "nama": "SYAFIQ HAMADI NAZWAN",
+      "no_urut": 26,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15959",
+      "nama": "TB ARYA ZAKY AL-GHIFARI",
+      "no_urut": 27,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15888",
+      "nama": "THORIQ AL FARIDZI DZULFIKAR WIBOWO",
+      "no_urut": 28,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "15854",
+      "nama": "WISNU DWI PRADANA PUTRA",
+      "no_urut": 29,
+      "kelas": "XII.4",
+      "tingkat": "XII",
+      "wali_kelas": "NAILUL HIKMAH, M.Pd",
+      "jenis_kelamin": "P"
+    },
+    {
+      "nis": "16020",
+      "nama": "ADINDA BILQIST AINIYA FURHA",
+      "no_urut": 1,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16046",
+      "nama": "AFIFAH NUR FADHILAH",
+      "no_urut": 2,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16021",
+      "nama": "AFINA SAVA RUSYDA",
+      "no_urut": 3,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15962",
+      "nama": "AISYAH CITRA ANGEL",
+      "no_urut": 4,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16024",
+      "nama": "AMANTA IBTISAM ERIAN MUMTAZ",
+      "no_urut": 5,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16025",
+      "nama": "AQILA",
+      "no_urut": 6,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16026",
+      "nama": "AQILA FARASA KHANZA JA'CUB",
+      "no_urut": 7,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15964",
+      "nama": "ASIAH NAZMIN LATHIFAH HAMID",
+      "no_urut": 8,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15965",
+      "nama": "AULIA RESTY INDIERA PUTRI",
+      "no_urut": 9,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16029",
+      "nama": "AULIN VENNESA VERONIXA",
+      "no_urut": 10,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16031",
+      "nama": "CARREL YUMNALIA RAMADHANI WURIANSYAH",
+      "no_urut": 11,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15967",
+      "nama": "DAYU NAJWA MINHAJA",
+      "no_urut": 12,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16050",
+      "nama": "DEFINCA PERMATA WIRAHAYUNINGRAT",
+      "no_urut": 13,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16051",
+      "nama": "DESRINA RISMA SAFIRA",
+      "no_urut": 14,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15995",
+      "nama": "DESY ANA KUSUMA AYU",
+      "no_urut": 15,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16052",
+      "nama": "DYANDRA SHAQIINA WIDYARINI",
+      "no_urut": 16,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15998",
+      "nama": "ELYZIA QHUTTRONADA MUAFIROH",
+      "no_urut": 17,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16055",
+      "nama": "GIFA AHLA AMFATA",
+      "no_urut": 18,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16057",
+      "nama": "HAFNA ILMI NAFISAH MAS'UD",
+      "no_urut": 19,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16061",
+      "nama": "JESIKA KIRANA LARASATI",
+      "no_urut": 20,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15972",
+      "nama": "KHOLBITA ZAHRA",
+      "no_urut": 21,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16004",
+      "nama": "LUQMANA ILMA AZZAHRA",
+      "no_urut": 22,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16064",
+      "nama": "NABILA SYIFA RAMZIYYAH",
+      "no_urut": 23,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15977",
+      "nama": "NAURA ZAHIN ASSYIFANI",
+      "no_urut": 24,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16038",
+      "nama": "RACHMA AULIA ZILMI KAFAH",
+      "no_urut": 25,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15979",
+      "nama": "RAHIEL LAYYA LIYUDZA",
+      "no_urut": 26,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16039",
+      "nama": "RATU VANESSHA YUI MUSTIKA",
+      "no_urut": 27,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16009",
+      "nama": "RIA SELVIA DEWI",
+      "no_urut": 28,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16010",
+      "nama": "RIFANNY MAULA SYIFA'",
+      "no_urut": 29,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16041",
+      "nama": "RIRIN RAHMAWATI",
+      "no_urut": 30,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16070",
+      "nama": "RIZKA ZAHRIL AULIA",
+      "no_urut": 31,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16071",
+      "nama": "SAKINA NURUS SALMA",
+      "no_urut": 32,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16043",
+      "nama": "SALSABILA AZ ZAHRA",
+      "no_urut": 33,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16017",
+      "nama": "YUMNA AMELIA PUTRI",
+      "no_urut": 34,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16018",
+      "nama": "ZAHROTUL FITRI KHASANAH",
+      "no_urut": 35,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15988",
+      "nama": "ZERRIN KHALILA FATIKHATUL 'IZZA",
+      "no_urut": 36,
+      "kelas": "XII.5",
+      "tingkat": "XII",
+      "wali_kelas": "ACHMAD FAUZI, M.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15992",
+      "nama": "AUFA ANGGUN FAYYADHAH",
+      "no_urut": 1,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16048",
+      "nama": "CALYA WIDYA PUTRI WIBOWO",
+      "no_urut": 2,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16054",
+      "nama": "GANES ANINDYA",
+      "no_urut": 3,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15969",
+      "nama": "GITA JAZA'ANIL HUSNA",
+      "no_urut": 4,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16056",
+      "nama": "HABIBATI NASYWA SALSABILA",
+      "no_urut": 5,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16062",
+      "nama": "KAEYSA AMIRA FALEEHA",
+      "no_urut": 6,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15970",
+      "nama": "KAILAZAHRA LAZUARDANI",
+      "no_urut": 7,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16035",
+      "nama": "KHANSA ANNIKA FATIN",
+      "no_urut": 8,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16003",
+      "nama": "KHAYLA AISYA HERMAWAN",
+      "no_urut": 9,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15974",
+      "nama": "MAIDAH INSANI KHARIMAH",
+      "no_urut": 10,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16005",
+      "nama": "NAHDAH AULYA KUSUMA WARDANI",
+      "no_urut": 11,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16007",
+      "nama": "NASJWA AUBREY CLEARITA",
+      "no_urut": 12,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16065",
+      "nama": "NEYSA RAYA ZANETA",
+      "no_urut": 13,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16008",
+      "nama": "NI'MATUS SHOLICHAH",
+      "no_urut": 14,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15978",
+      "nama": "PUTRI ELSA ANGGRAINI",
+      "no_urut": 15,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16040",
+      "nama": "RICHA SILVIE AL-FATH",
+      "no_urut": 16,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16011",
+      "nama": "RINA FITRI RAHAYU",
+      "no_urut": 17,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15982",
+      "nama": "SHARIVA AQILA SAJIDA ALVI",
+      "no_urut": 18,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15983",
+      "nama": "SHINTA RAHMA AZIZAH",
+      "no_urut": 19,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16072",
+      "nama": "SITI ATMINAH HASNI",
+      "no_urut": 20,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16013",
+      "nama": "SYARIFATUL AULIA ISMAYATEN",
+      "no_urut": 21,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16074",
+      "nama": "TATA AZEEZA",
+      "no_urut": 22,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16014",
+      "nama": "TSAABITAH BRILLIANT CHOLISTIE",
+      "no_urut": 23,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15987",
+      "nama": "ZAHIRA TALITA ATHIFA",
+      "no_urut": 24,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16045",
+      "nama": "ZAHRA TALITA DZAKIRA",
+      "no_urut": 25,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16019",
+      "nama": "ZAHWA ALMIRA TUNGGA DEWI",
+      "no_urut": 26,
+      "kelas": "XII.6",
+      "tingkat": "XII",
+      "wali_kelas": "IDA CHUSNUL KHOTIMAH, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15989",
+      "nama": "AISYAH NABILA ZAHRA",
+      "no_urut": 1,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16023",
+      "nama": "ALYA RIFDA MOZAHRA",
+      "no_urut": 2,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15991",
+      "nama": "APRILIA LUSIANA LESTARI",
+      "no_urut": 3,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16027",
+      "nama": "ARIFAH NUR ZAHRAH MH",
+      "no_urut": 4,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16028",
+      "nama": "ATHIRA NAURAVI EL SYAKIRA",
+      "no_urut": 5,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15966",
+      "nama": "AWA NAJWA ULA",
+      "no_urut": 6,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16047",
+      "nama": "AZKALUNA NARESWARI AISHA FARDANI",
+      "no_urut": 7,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15996",
+      "nama": "DILLA KHOIROTUZZAHRA",
+      "no_urut": 8,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16053",
+      "nama": "FATINATUR ROFI'AH SABITA HADI",
+      "no_urut": 9,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16059",
+      "nama": "INDRIANI PRITANA",
+      "no_urut": 10,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16033",
+      "nama": "INTAN DWI MAHARANI",
+      "no_urut": 11,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16060",
+      "nama": "JASMINE AULIA RAHMAN",
+      "no_urut": 12,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16001",
+      "nama": "JELITA NANDA SABELA",
+      "no_urut": 13,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16063",
+      "nama": "KEISYA SHOFWA SHAFIRA",
+      "no_urut": 14,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16006",
+      "nama": "NAJWA KHOFIFAH DEVANTI",
+      "no_urut": 15,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16066",
+      "nama": "NITA NURDIANA",
+      "no_urut": 16,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16067",
+      "nama": "QAMARINA NAFISA FAIRUZ AHMADI",
+      "no_urut": 17,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16068",
+      "nama": "RAVITA PUTRI ANGKASA",
+      "no_urut": 18,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16012",
+      "nama": "ROBIATUL ADAWIYAH",
+      "no_urut": 19,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15981",
+      "nama": "SEFYNES BIANDA SATARENA",
+      "no_urut": 20,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16073",
+      "nama": "SYAFIRANIDA IKHWAN",
+      "no_urut": 21,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16015",
+      "nama": "WILDA FARICHA NUR KAMALIA",
+      "no_urut": 22,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15986",
+      "nama": "YASMIN ALTHAFUNNISA",
+      "no_urut": 23,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16075",
+      "nama": "YOVI ASTINA HERNAWATI",
+      "no_urut": 24,
+      "kelas": "XII.7",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15961",
+      "nama": "AISYAH ANANDA YUNITA SARI",
+      "no_urut": 1,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16022",
+      "nama": "AISYAH NABILATUL NUR SARIROH",
+      "no_urut": 2,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15990",
+      "nama": "ALIEFTA AININ QOLBI",
+      "no_urut": 3,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15963",
+      "nama": "AMIRA BINTANG PUTRI ANANTA",
+      "no_urut": 4,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16030",
+      "nama": "AZKA ADZKIYAH",
+      "no_urut": 5,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15993",
+      "nama": "AZZALFA MA'RIFATUL 'AZIZAH",
+      "no_urut": 6,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16049",
+      "nama": "CYNTHIA CAMILLA PUTRI ALISYAHBANA",
+      "no_urut": 7,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15968",
+      "nama": "DEA NURHANIFA",
+      "no_urut": 8,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15997",
+      "nama": "DZAKIYAH AFIFATUNISA",
+      "no_urut": 9,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15999",
+      "nama": "GANDHES JANITRA MUNANDAR",
+      "no_urut": 10,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16000",
+      "nama": "HANIFA HAYATI",
+      "no_urut": 11,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16058",
+      "nama": "HAYA MUTIA LIES NABILAH",
+      "no_urut": 12,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16002",
+      "nama": "KAMILA TUNGGA DEWI",
+      "no_urut": 13,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15971",
+      "nama": "KHEISYA NOVTHALYLA BAMBANG",
+      "no_urut": 14,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15973",
+      "nama": "KIRANA PUTRI ASMARANI",
+      "no_urut": 15,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16036",
+      "nama": "KIRANIA NUR FATIMATUZZAHROH",
+      "no_urut": 16,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15975",
+      "nama": "MUFIYATUL ISTIQOMAH",
+      "no_urut": 17,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15976",
+      "nama": "NAILATUL MUNA",
+      "no_urut": 18,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16069",
+      "nama": "REHANA KHOLIDA AZ-ZAHRA",
+      "no_urut": 19,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15980",
+      "nama": "RIYA FITHRI AZ ZAHROH",
+      "no_urut": 20,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16042",
+      "nama": "SABRINA HAYA ANNUFUS",
+      "no_urut": 21,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15984",
+      "nama": "SHYRNA INDAKA AULIA",
+      "no_urut": 22,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "15985",
+      "nama": "SISKA AMELIA",
+      "no_urut": 23,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16016",
+      "nama": "WULAN NOVITA AYU WINDARI",
+      "no_urut": 24,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    },
+    {
+      "nis": "16044",
+      "nama": "ZAHRA AMELIA RAHMAN",
+      "no_urut": 25,
+      "kelas": "XII.8",
+      "tingkat": "XII",
+      "wali_kelas": "RAHMADANI TRI HANDAYANI, S.Pd",
+      "jenis_kelamin": "L"
+    }
+  ]
+}
