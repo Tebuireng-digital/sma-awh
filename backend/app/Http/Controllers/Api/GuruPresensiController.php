@@ -15,7 +15,7 @@ class GuruPresensiController extends Controller
         $user = $request->user();
         $hariStr = $request->get('hari', date('N') == 7 ? 'Minggu' : ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][date('N') - 1]);
 
-        $jadwal = DB::table('jadwal_pelajaran as jp')
+        $query = DB::table('jadwal_pelajaran as jp')
             ->join('kelas as k', 'jp.kelas_id', '=', 'k.id')
             ->join('mata_pelajaran as mp', 'jp.mapel_id', '=', 'mp.id')
             ->leftJoin('presensi_guru as pg', function($join) {
@@ -23,6 +23,7 @@ class GuruPresensiController extends Controller
                      ->whereDate('pg.created_at', date('Y-m-d'));
             })
             ->select(
+                'jp.id as id',
                 'jp.id as jadwal_id',
                 'jp.kelas_id',
                 'jp.mapel_id',
@@ -38,11 +39,37 @@ class GuruPresensiController extends Controller
                 'pg.status_inval',
                 'pg.waktu_masuk',
                 'pg.waktu_selesai'
-            )
-            ->where('jp.id_guru', $user->id_guru)
-            ->where('jp.hari', $hariStr)
+            );
+
+        if ($user->role !== 'admin' && $user->id_guru) {
+            $query->where('jp.id_guru', $user->id_guru);
+        }
+
+        $jadwal = $query->where('jp.hari', $hariStr)
             ->orderBy('jp.jam_ke')
             ->get();
+
+        // Fallback for Admin or empty schedule days
+        if ($jadwal->isEmpty()) {
+            $jadwal = DB::table('jadwal_pelajaran as jp')
+                ->join('kelas as k', 'jp.kelas_id', '=', 'k.id')
+                ->join('mata_pelajaran as mp', 'jp.mapel_id', '=', 'mp.id')
+                ->select(
+                    'jp.id as id',
+                    'jp.id as jadwal_id',
+                    'jp.kelas_id',
+                    'jp.mapel_id',
+                    'k.nama_kelas',
+                    'k.tingkat',
+                    'mp.nama_mapel',
+                    'jp.hari',
+                    'jp.jam_ke',
+                    'jp.jam_mulai',
+                    'jp.jam_selesai'
+                )
+                ->limit(10)
+                ->get();
+        }
 
         // Attach Promes & Auto-Shift Smart Suggestions
         foreach ($jadwal as $item) {

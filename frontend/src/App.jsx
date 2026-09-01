@@ -11,6 +11,9 @@ import KurikulumDashboard from './pages/KurikulumDashboard';
 import PerangkatAjar from './pages/PerangkatAjar';
 import KalenderAkademikPage from './pages/KalenderAkademikPage';
 import KepsekDashboard from './pages/KepsekDashboard';
+import DataGuru from './pages/DataGuru';
+import DataKelas from './pages/DataKelas';
+import DataSiswa from './pages/DataSiswa';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -28,6 +31,15 @@ function AppRoutes() {
       {/* Admin */}
       <Route path="/admin" element={
         <ProtectedRoute><AdminDashboard /></ProtectedRoute>
+      } />
+      <Route path="/admin/guru" element={
+        <ProtectedRoute><DataGuru /></ProtectedRoute>
+      } />
+      <Route path="/admin/kelas" element={
+        <ProtectedRoute><DataKelas /></ProtectedRoute>
+      } />
+      <Route path="/admin/siswa" element={
+        <ProtectedRoute><DataSiswa /></ProtectedRoute>
       } />
       <Route path="/admin/pengaturan" element={
         <ProtectedRoute><AdminDashboard /></ProtectedRoute>

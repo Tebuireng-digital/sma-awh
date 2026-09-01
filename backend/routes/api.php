@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\PresensiMuridController;
 use App\Http\Controllers\Api\KurikulumController;
 use App\Http\Controllers\Api\PerangkatAjarController;
 use App\Http\Controllers\Api\KalenderAkademikController;
+use App\Http\Controllers\Api\AdminMasterController;
 
 Route::prefix('v1')->group(function () {
 
@@ -32,6 +33,22 @@ Route::prefix('v1')->group(function () {
         Route::post('/admin/wa-disconnect', [AdminPengaturanController::class, 'disconnectWa']);
         Route::post('/admin/wa-test', [AdminPengaturanController::class, 'sendTestWa']);
         Route::post('/admin/wa-rekap-bulanan', [PresensiMuridController::class, 'sendRekapBulananWa']);
+
+        // Admin Master Data CRUD (Guru, Kelas, Siswa)
+        Route::get('/admin/guru', [AdminMasterController::class, 'indexGuru']);
+        Route::post('/admin/guru', [AdminMasterController::class, 'storeGuru']);
+        Route::put('/admin/guru/{id}', [AdminMasterController::class, 'updateGuru']);
+        Route::delete('/admin/guru/{id}', [AdminMasterController::class, 'destroyGuru']);
+
+        Route::get('/admin/kelas', [AdminMasterController::class, 'indexKelas']);
+        Route::post('/admin/kelas', [AdminMasterController::class, 'storeKelas']);
+        Route::put('/admin/kelas/{id}', [AdminMasterController::class, 'updateKelas']);
+        Route::delete('/admin/kelas/{id}', [AdminMasterController::class, 'destroyKelas']);
+
+        Route::get('/admin/siswa', [AdminMasterController::class, 'indexSiswa']);
+        Route::post('/admin/siswa', [AdminMasterController::class, 'storeSiswa']);
+        Route::put('/admin/siswa/{id}', [AdminMasterController::class, 'updateSiswa']);
+        Route::delete('/admin/siswa/{id}', [AdminMasterController::class, 'destroySiswa']);
 
         // Kalender Akademik (Libur & Acara Pondok Tebuireng)
         Route::get('/admin/kalender-akademik', [KalenderAkademikController::class, 'index']);
