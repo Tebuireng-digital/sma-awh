@@ -14,8 +14,13 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'guru', 'kurikulum', 'wali_kelas', 'piket'])->default('guru');
+            $table->enum('role', [
+                'kepala_sekolah', 'waka', 'kepala_tu', 'kurikulum', 'kesiswaan', 
+                'sarana', 'kepegawaian', 'persuratan', 'humas', 'guru', 
+                'wali_kelas', 'bk', 'wali_santri', 'pustakawan', 'siswa', 'admin'
+            ])->default('guru');
             $table->unsignedBigInteger('id_guru')->nullable();
+            $table->unsignedBigInteger('id_siswa')->nullable();
             $table->string('no_hp')->nullable();
             $table->boolean('must_change_password')->default(true);
             $table->rememberToken();

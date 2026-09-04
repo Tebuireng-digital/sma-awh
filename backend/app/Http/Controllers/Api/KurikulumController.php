@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Services\SimantebSyncService;
 
 class KurikulumController extends Controller
 {
@@ -71,8 +70,7 @@ class KurikulumController extends Controller
                 'g.id_guru',
                 'g.nama_lengkap',
                 DB::raw('COUNT(pg.id) as total_sesi'),
-                DB::raw("SUM(CASE WHEN pg.status_kehadiran = 'hadir' THEN 1 ELSE 0 END) as total_hadir"),
-                DB::raw("SUM(CASE WHEN pg.status_inval = 'inval_diklaim' THEN 1 ELSE 0 END) as total_inval")
+                DB::raw("SUM(CASE WHEN pg.status_kehadiran = 'hadir' THEN 1 ELSE 0 END) as total_hadir")
             )
             ->whereMonth('pg.created_at', $bulan)
             ->whereYear('pg.created_at', $tahun)
@@ -85,12 +83,5 @@ class KurikulumController extends Controller
             'tahun' => (int) $tahun,
             'rekap_guru' => $rekap,
         ]);
-    }
-
-    public function triggerSimantebSync(Request $request)
-    {
-        $tanggal = $request->get('tanggal', date('Y-m-d'));
-        $result = SimantebSyncService::syncDailyAttendance($tanggal);
-        return response()->json($result);
     }
 }

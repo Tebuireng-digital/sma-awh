@@ -69,9 +69,9 @@ const KepsekDashboard = () => {
         </div>
 
         <div className="card-surface p-4">
-          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Alert WA Terkirim Ortu</div>
-          <div className="text-2xl font-bold text-amber-800 mt-1 tabular-nums font-mono">24 Pesan</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Sakit, Terlambat & Alpa</div>
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Jumlah Guru Inval</div>
+          <div className="text-2xl font-bold text-amber-800 mt-1 tabular-nums font-mono">1 Guru</div>
+          <div className="text-[11px] text-slate-500 mt-0.5">Menggantikan 2 Sesi Kelas</div>
         </div>
       </div>
 
@@ -112,22 +112,6 @@ const KepsekDashboard = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-
-        <div className="card-surface p-5 space-y-3">
-          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">
-            Status Integrasi Webhook SIMANTEB Pesantren
-          </h2>
-
-          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded text-xs space-y-1">
-            <div className="font-bold text-emerald-950 flex items-center space-x-1">
-              <CheckCircle className="w-4 h-4 text-emerald-600" />
-              <span>Koneksi SIMANTEB Yayasan Tebuireng Terverifikasi</span>
-            </div>
-            <p className="text-emerald-900">
-              Pengiriman otomatis rekapitulasi presensi harian siswa/guru berjalan normal tanpa hambatan.
-            </p>
-          </div>
         </div>
       </div>
     </div>

@@ -6,14 +6,23 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import GuruPresensi from './pages/GuruPresensi';
 import GuruPresensiSiswa from './pages/GuruPresensiSiswa';
-import GuruPiket from './pages/GuruPiket';
 import KurikulumDashboard from './pages/KurikulumDashboard';
-import PerangkatAjar from './pages/PerangkatAjar';
 import KalenderAkademikPage from './pages/KalenderAkademikPage';
 import KepsekDashboard from './pages/KepsekDashboard';
 import DataGuru from './pages/DataGuru';
 import DataKelas from './pages/DataKelas';
 import DataSiswa from './pages/DataSiswa';
+import RaporSTSPage from './pages/RaporSTSPage';
+import ModuleRevisiPage from './pages/ModuleRevisiPage';
+import AdminMapelPage from './pages/AdminMapelPage';
+import AdminJadwalPelajaranPage from './pages/AdminJadwalPelajaranPage';
+
+
+import SaranaPage from './pages/SaranaPage';
+import KepegawaianPage from './pages/KepegawaianPage';
+import BKPage from './pages/BKPage';
+import PerpustakaanPage from './pages/PerpustakaanPage';
+import PersuratanPage from './pages/PersuratanPage';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -41,12 +50,25 @@ function AppRoutes() {
       <Route path="/admin/siswa" element={
         <ProtectedRoute><DataSiswa /></ProtectedRoute>
       } />
+      <Route path="/admin/mapel" element={
+        <ProtectedRoute><AdminMapelPage /></ProtectedRoute>
+      } />
+      <Route path="/admin/jadwal" element={
+        <ProtectedRoute><AdminJadwalPelajaranPage /></ProtectedRoute>
+      } />
       <Route path="/admin/pengaturan" element={
         <ProtectedRoute><AdminDashboard /></ProtectedRoute>
       } />
       <Route path="/admin/kalender" element={
         <ProtectedRoute><KalenderAkademikPage /></ProtectedRoute>
       } />
+
+      {/* Rapor STS (RAPOR STS X-1.docx) */}
+      <Route path="/rapor-sts" element={
+        <ProtectedRoute><RaporSTSPage /></ProtectedRoute>
+      } />
+
+
 
       {/* Guru / Mobile */}
       <Route path="/guru/presensi" element={
@@ -56,17 +78,32 @@ function AppRoutes() {
         <ProtectedRoute><GuruPresensiSiswa /></ProtectedRoute>
       } />
 
-      {/* Guru Piket */}
-      <Route path="/piket" element={
-        <ProtectedRoute><GuruPiket /></ProtectedRoute>
+      {/* Modul Revisi */}
+      <Route path="/kepegawaian" element={
+        <ProtectedRoute><KepegawaianPage /></ProtectedRoute>
+      } />
+      <Route path="/bk" element={
+        <ProtectedRoute><BKPage /></ProtectedRoute>
+      } />
+      <Route path="/sarana" element={
+        <ProtectedRoute><SaranaPage /></ProtectedRoute>
+      } />
+      <Route path="/persuratan" element={
+        <ProtectedRoute><PersuratanPage /></ProtectedRoute>
+      } />
+      <Route path="/humas" element={
+        <ProtectedRoute><ModuleRevisiPage type="humas" /></ProtectedRoute>
+      } />
+      <Route path="/perpustakaan" element={
+        <ProtectedRoute><PerpustakaanPage /></ProtectedRoute>
+      } />
+      <Route path="/portal-siswa" element={
+        <ProtectedRoute><ModuleRevisiPage type="portal-siswa" /></ProtectedRoute>
       } />
 
       {/* Kurikulum */}
       <Route path="/kurikulum" element={
         <ProtectedRoute><KurikulumDashboard /></ProtectedRoute>
-      } />
-      <Route path="/kurikulum/perangkat-ajar" element={
-        <ProtectedRoute><PerangkatAjar /></ProtectedRoute>
       } />
 
       {/* Kepsek */}

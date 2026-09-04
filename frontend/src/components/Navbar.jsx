@@ -11,8 +11,7 @@ const Navbar = ({ onToggleMobileMenu }) => {
         return <span className="bg-emerald-900/60 text-emerald-200 border border-emerald-500/40 text-xs px-2 py-0.5 rounded font-semibold uppercase tracking-wider">Admin Sistem</span>;
       case 'kurikulum':
         return <span className="bg-indigo-900/60 text-indigo-200 border border-indigo-500/40 text-xs px-2 py-0.5 rounded font-semibold uppercase tracking-wider">Waka Kurikulum</span>;
-      case 'piket':
-        return <span className="bg-amber-900/60 text-amber-200 border border-amber-500/40 text-xs px-2 py-0.5 rounded font-semibold uppercase tracking-wider">Guru Piket</span>;
+
       case 'kepala_sekolah':
         return <span className="bg-purple-900/60 text-purple-200 border border-purple-500/40 text-xs px-2 py-0.5 rounded font-semibold uppercase tracking-wider">Kepala Sekolah</span>;
       default:
@@ -43,7 +42,7 @@ const Navbar = ({ onToggleMobileMenu }) => {
               <span className="font-bold text-xs sm:text-sm tracking-wide text-white">SMA KH. A. WAHID HASYIM</span>
               <span className="text-[10px] bg-emerald-700/80 px-1.5 py-0.5 rounded text-emerald-100 font-mono hidden xs:inline-block">TEBUIRENG</span>
             </div>
-            <p className="text-[11px] text-emerald-200/80 hidden sm:block">Portal Presensi Real-Time & Kurikulum Merdeka SIMANTEB</p>
+            <p className="text-[11px] text-emerald-200/80 hidden sm:block">Sistem Informasi Manajemen Sekolah Terpadu</p>
           </div>
         </div>
 

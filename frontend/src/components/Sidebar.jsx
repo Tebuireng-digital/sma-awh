@@ -3,17 +3,22 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   LayoutDashboard, 
-  MapPin, 
   Calendar, 
   BookOpen, 
   Users, 
   UserCheck, 
-  Bell, 
   FileSpreadsheet, 
   BarChart3,
   Smartphone,
   School,
   GraduationCap,
+  FileText,
+  ShieldCheck,
+  Package,
+  Mail,
+  Share2,
+  Library,
+  User,
   X
 } from 'lucide-react';
 
@@ -29,88 +34,120 @@ const Sidebar = ({ mobileOpen, onCloseMobile }) => {
       to: '/dashboard-kepsek',
       label: 'Portal Kepala Sekolah',
       icon: BarChart3,
-      roles: ['admin', 'kepala_sekolah', 'kurikulum'],
+      roles: ['admin', 'kepala_sekolah', 'waka'],
     },
     // Admin Dashboard
     {
       to: '/admin',
-      label: 'Dashboard Admin',
+      label: 'Dashboard Admin Utama',
       icon: LayoutDashboard,
-      roles: ['admin'],
+      roles: ['admin', 'kepala_tu'],
     },
     {
       to: '/admin/guru',
-      label: 'Data Guru',
+      label: 'Data Guru & Pegawai',
       icon: Users,
-      roles: ['admin'],
+      roles: ['admin', 'kepala_tu', 'kepegawaian'],
     },
     {
       to: '/admin/kelas',
       label: 'Data Kelas',
       icon: School,
-      roles: ['admin'],
+      roles: ['admin', 'kurikulum', 'kesiswaan'],
     },
     {
       to: '/admin/siswa',
-      label: 'Data Siswa',
+      label: 'Master Data Siswa',
       icon: GraduationCap,
-      roles: ['admin'],
+      roles: ['admin', 'kesiswaan', 'kurikulum', 'wali_kelas', 'bk'],
     },
     {
-      to: '/admin/pengaturan',
-      label: 'Pengaturan GPS & WA Bot',
-      icon: MapPin,
-      roles: ['admin'],
+      to: '/admin/mapel',
+      label: 'Data Mata Pelajaran',
+      icon: BookOpen,
+      roles: ['admin', 'kurikulum'],
     },
     {
-      to: '/admin/kalender',
-      label: 'Dual Kalender Akademik',
+      to: '/admin/jadwal',
+      label: 'Manajemen Jadwal',
       icon: Calendar,
       roles: ['admin', 'kurikulum'],
     },
-    // Guru / Mobile Presensi
+
+    // Rapor STS & Jadwal (Core Docs)
+    {
+      to: '/rapor-sts',
+      label: 'Rapor STS',
+      icon: FileText,
+      roles: ['admin', 'kepala_sekolah', 'waka', 'kurikulum', 'wali_kelas', 'guru', 'siswa', 'wali_santri'],
+    },
+    // Guru / Presensi
     {
       to: '/guru/presensi',
-      label: 'Mobile Presensi & Jurnal',
+      label: 'Presensi & Jurnal Guru',
       icon: Smartphone,
-      roles: ['admin', 'guru', 'piket', 'kurikulum'],
+      roles: ['admin', 'guru', 'wali_kelas', 'kurikulum'],
     },
     {
       to: '/guru/presensi-siswa',
-      label: 'Absensi Cepat Murid',
+      label: 'Absensi Murid',
       icon: UserCheck,
-      roles: ['admin', 'guru', 'piket', 'kurikulum'],
+      roles: ['admin', 'guru', 'wali_kelas', 'kesiswaan', 'bk'],
     },
-    // Guru Piket
+
+    // Specific Revised Modules
     {
-      to: '/piket',
-      label: 'Panel Guru Piket (Inval)',
-      icon: Bell,
-      roles: ['admin', 'piket', 'guru'],
+      to: '/kepegawaian',
+      label: 'Kepegawaian & HRD',
+      icon: ShieldCheck,
+      roles: ['admin', 'kepala_sekolah', 'kepala_tu', 'kepegawaian'],
     },
-    // Waka Kurikulum
     {
-      to: '/kurikulum',
-      label: 'Waka Kurikulum Dashboard',
+      to: '/bk',
+      label: 'BK & Catatan Rahasia',
       icon: BookOpen,
-      roles: ['admin', 'kurikulum', 'kepala_sekolah'],
+      roles: ['admin', 'kepala_sekolah', 'waka', 'kesiswaan', 'bk'],
     },
     {
-      to: '/kurikulum/perangkat-ajar',
-      label: 'Perangkat Ajar (CP/TP/Promes)',
-      icon: FileSpreadsheet,
-      roles: ['admin', 'kurikulum', 'guru'],
+      to: '/sarana',
+      label: 'Sarana & Prasarana',
+      icon: Package,
+      roles: ['admin', 'kepala_sekolah', 'kepala_tu', 'sarana'],
+    },
+    {
+      to: '/persuratan',
+      label: 'Persuratan & Archiving',
+      icon: Mail,
+      roles: ['admin', 'kepala_sekolah', 'kepala_tu', 'persuratan', 'tu', 'guru', 'waka', 'staf'],
+    },
+    {
+      to: '/humas',
+      label: 'Humas & Branding',
+      icon: Share2,
+      roles: ['admin', 'kepala_sekolah', 'humas'],
+    },
+    {
+      to: '/perpustakaan',
+      label: 'Perpustakaan Digital',
+      icon: Library,
+      roles: ['admin', 'pustakawan', 'guru', 'kepala_sekolah', 'waka', 'kepala_tu', 'siswa', 'wali_santri'],
+    },
+    {
+      to: '/portal-siswa',
+      label: 'Portal Self-Service',
+      icon: User,
+      roles: ['siswa', 'wali_santri'],
     },
   ];
 
   const filteredNav = navItems.filter(item => item.roles.includes(role));
 
   const content = (
-    <div className="h-full flex flex-col justify-between p-4">
-      <div>
+    <div className="w-full flex-1 flex flex-col justify-between p-4 min-h-0">
+      <div className="overflow-y-auto pr-1">
         <div className="flex items-center justify-between mb-3 px-2">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-            Menu Utama ({role})
+          <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">
+            Menu ({role.replace('_', ' ')})
           </span>
           {onCloseMobile && (
             <button 
@@ -145,22 +182,19 @@ const Sidebar = ({ mobileOpen, onCloseMobile }) => {
         </nav>
       </div>
 
-      {/* Quick Demo Switcher info */}
-      <div className="border-t border-slate-100 pt-3 text-[11px] text-slate-400 px-2">
-        <p className="font-semibold text-slate-600 mb-1">SMA KH. A. Wahid Hasyim</p>
-        <p>Terhubung dengan Layanan API Laravel Sanctum</p>
+      <div className="border-t border-slate-100 pt-3 text-[11px] text-slate-400 px-2 shrink-0 mt-4">
+        <p className="font-semibold text-slate-700 mb-0.5">SMA KH. A. WAHID HASYIM</p>
+        <p className="text-[10px]">Portal System - Tebuireng Jombang</p>
       </div>
     </div>
   );
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:block w-64 bg-white border-r border-slate-200 min-h-[calc(100vh-3.5rem)] shrink-0">
+      <aside className="hidden md:flex md:flex-col w-64 bg-white border-r border-slate-200 h-[calc(100vh-3.5rem)] sticky top-14 shrink-0">
         {content}
       </aside>
 
-      {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden flex">
           <div 

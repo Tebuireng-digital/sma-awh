@@ -27,11 +27,8 @@ return new class extends Migration
             $table->id();
             $table->decimal('latitude_sekolah', 10, 7)->default(-7.5878000);
             $table->decimal('longitude_sekolah', 10, 7)->default(112.2345000);
-            $table->integer('radius_toleransi_meter')->default(100);
+            $table->integer('radius_toleransi_meter')->default(1000);
             $table->integer('toleransi_terlambat_menit')->default(20);
-            $table->boolean('wa_bot_enabled')->default(true);
-            $table->string('wa_gateway_url')->default('http://localhost:3000');
-            $table->string('wa_gateway_key')->default('secret_key_bot_tebuireng');
             $table->timestamps();
         });
     }

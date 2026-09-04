@@ -77,7 +77,7 @@ const KurikulumDashboard = () => {
       </div>
 
       {/* Curriculum Summary Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <div className="card-surface p-5 space-y-3">
           <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">
             Ketercapaian Target Per Mata Pelajaran (Fase E & F)
@@ -112,28 +112,6 @@ const KurikulumDashboard = () => {
               <div className="w-full bg-slate-100 rounded-full h-2">
                 <div className="bg-amber-600 h-2 rounded-full" style={{ width: '85%' }}></div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card-surface p-5 space-y-3">
-          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">
-            Status Spreadsheet Excel Import & Template
-          </h2>
-
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded text-xs space-y-2">
-            <p className="text-slate-700">
-              Guru Mapel dapat mengunggah spreadsheet Prota & Promes menggunakan template resmi SMA AWH.
-            </p>
-            <div className="flex items-center space-x-2 pt-1">
-              <a
-                href="/api/v1/kurikulum/perangkat-ajar/template-excel"
-                target="_blank"
-                className="bg-emerald-800 hover:bg-emerald-900 text-white px-3 py-1.5 rounded text-xs font-semibold inline-flex items-center space-x-1"
-              >
-                <FileSpreadsheet className="w-3.5 h-3.5" />
-                <span>Unduh Template Excel Prota/Promes</span>
-              </a>
             </div>
           </div>
         </div>

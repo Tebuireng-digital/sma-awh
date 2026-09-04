@@ -13,9 +13,6 @@ class PengaturanSekolah extends Model
         'longitude_sekolah',
         'radius_toleransi_meter',
         'toleransi_terlambat_menit',
-        'wa_bot_enabled',
-        'wa_gateway_url',
-        'wa_gateway_key',
     ];
 
     protected $casts = [
@@ -23,6 +20,5 @@ class PengaturanSekolah extends Model
         'longitude_sekolah' => 'float',
         'radius_toleransi_meter' => 'integer',
         'toleransi_terlambat_menit' => 'integer',
-        'wa_bot_enabled' => 'boolean',
     ];
 }

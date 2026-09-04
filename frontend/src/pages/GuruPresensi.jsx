@@ -81,7 +81,7 @@ const GuruPresensi = () => {
   const handleSimpanJurnal = async (e) => {
     e.preventDefault();
     if (!presensiActive) {
-      setMessage({ type: 'error', text: 'Langkah 1 Terlewat: Silakan klik tombol "Presensi Masuk KBM (Geofence)" di atas terlebih dahulu!' });
+      setMessage({ type: 'error', text: 'Langkah 1 Terlewat: Silakan klik tombol "Presensi Masuk KBM" di atas terlebih dahulu!' });
       return;
     }
 
@@ -137,7 +137,7 @@ const GuruPresensi = () => {
         </div>
       )}
 
-      {/* Step 1: Select Schedule & Geofence GPS Checkin */}
+      {/* Step 1: Select Schedule & Checkin */}
       <div className="card-surface p-5 space-y-4">
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
@@ -210,7 +210,7 @@ const GuruPresensi = () => {
                 className="w-full py-2.5 bg-emerald-800 hover:bg-emerald-900 disabled:bg-slate-300 text-white font-semibold text-xs rounded-md shadow-sm transition-colors flex items-center justify-center space-x-1.5"
               >
                 <CheckCircle className="w-4 h-4" />
-                <span>{submitting ? 'Memproses Presensi GPS...' : '1. KLIK PRESENSI MASUK KBM (GEOFENCE GPS)'}</span>
+                <span>{submitting ? 'Memproses Presensi...' : '1. KLIK PRESENSI MASUK KBM'}</span>
               </button>
             )}
           </div>

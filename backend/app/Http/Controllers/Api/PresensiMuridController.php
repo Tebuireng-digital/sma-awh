@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Services\WaGatewayService;
 
 class PresensiMuridController extends Controller
 {
@@ -136,76 +135,6 @@ class PresensiMuridController extends Controller
         ]);
     }
 
-    /**
-     * Send Monthly Attendance Summary Report via WhatsApp to Parents (Requires Admin Approval)
-     */
-    public function sendRekapBulananWa(Request $request)
-    {
-        $request->validate([
-            'kelas_id' => 'required|integer',
-            'bulan' => 'required|integer|between:1,12',
-            'tahun' => 'required|integer',
-        ]);
 
-        $kelas = DB::table('kelas')->where('id', $request->kelas_id)->first();
-        if (!$kelas) {
-            return response()->json(['status' => 'error', 'message' => 'Kelas tidak ditemukan.'], 404);
-        }
-
-        $siswaList = DB::table('anggota_kelas as ak')
-            ->join('siswa as s', 'ak.siswa_id', '=', 's.id')
-            ->select('s.id', 's.nama', 's.nis', 's.no_hp_ortu')
-            ->where('ak.kelas_id', $request->kelas_id)
-            ->get();
-
-        $bulanNama = [
-            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
-            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
-            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
-        ][$request->bulan] ?? 'Bulan Ini';
-
-        $totalTerkirim = 0;
-
-        foreach ($siswaList as $s) {
-            if (!$s->no_hp_ortu) continue;
-
-            $rekap = DB::table('presensi_murid_harian')
-                ->where('siswa_id', $s->id)
-                ->whereYear('tanggal', $request->tahun)
-                ->whereMonth('tanggal', $request->bulan)
-                ->select(
-                    DB::raw("SUM(CASE WHEN status = 'HADIR' THEN 1 ELSE 0 END) as total_hadir"),
-                    DB::raw("SUM(CASE WHEN status = 'SAKIT' THEN 1 ELSE 0 END) as total_sakit"),
-                    DB::raw("SUM(CASE WHEN status = 'IZIN' THEN 1 ELSE 0 END) as total_izin"),
-                    DB::raw("SUM(CASE WHEN status = 'TERLAMBAT' THEN 1 ELSE 0 END) as total_terlambat"),
-                    DB::raw("SUM(CASE WHEN status = 'ALPA' THEN 1 ELSE 0 END) as total_alpa")
-                )->first();
-
-            $msg = "📋 *REKAPITULASI PRESENSI BULANAN WALI SANTRI*\n\n";
-            $msg .= "Yth. Bapak/Ibu Wali Santri,\n";
-            $msg .= "Berikut laporan kehadiran bulanan putra/putri Anda:\n";
-            $msg .= "• Nama: *{$s->nama}*\n";
-            $msg .= "• Kelas: *{$kelas->nama_kelas}*\n";
-            $msg .= "• Periode: *{$bulanNama} {$request->tahun}*\n\n";
-            $msg .= "📊 *Rincian Kehadiran:*\n";
-            $msg .= "- Hadir: *" . ($rekap->total_hadir ?? 0) . " Hari*\n";
-            $msg .= "- Sakit: *" . ($rekap->total_sakit ?? 0) . " Hari*\n";
-            $msg .= "- Izin: *" . ($rekap->total_izin ?? 0) . " Hari*\n";
-            $msg .= "- Terlambat: *" . ($rekap->total_terlambat ?? 0) . " Hari*\n";
-            $msg .= "- Alpa: *" . ($rekap->total_alpa ?? 0) . " Hari*\n\n";
-            $msg .= "Laporan ini dikirim secara resmi 1 bulan sekali atas persetujuan Administrator Sekolah.\n";
-            $msg .= "\n---\n*SMA KH. A. Wahid Hasyim Tebuireng*";
-
-            $sent = WaGatewayService::sendMessage($s->no_hp_ortu, $msg, 'ortu', 'rekap_bulanan');
-            if ($sent) {
-                $totalTerkirim++;
-            }
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => "Rekap bulanan kehadiran bulan {$bulanNama} {$request->tahun} berhasil disetujui & dikirim via WA ke {$totalTerkirim} Wali Santri.",
-        ]);
-    }
 
 }

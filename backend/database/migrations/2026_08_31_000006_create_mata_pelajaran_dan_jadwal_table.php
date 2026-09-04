@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('mapel_id')->constrained('mata_pelajaran')->onDelete('cascade');
             $table->unsignedBigInteger('id_guru');
             $table->foreign('id_guru')->references('id_guru')->on('guru')->onDelete('cascade');
-            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
+            $table->enum('hari', ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
             $table->integer('jam_ke')->default(1);
             $table->time('jam_mulai');
             $table->time('jam_selesai');
