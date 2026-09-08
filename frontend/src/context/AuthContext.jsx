@@ -11,6 +11,19 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('sma_awh_token'));
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (token) {
+      client.get('/auth/me')
+        .then((res) => {
+          if (res.data?.user) {
+            setUser(res.data.user);
+            localStorage.setItem('sma_awh_user', JSON.stringify(res.data.user));
+          }
+        })
+        .catch(() => {});
+    }
+  }, [token]);
+
   const login = async (username, password) => {
     setLoading(true);
     try {
@@ -33,6 +46,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginSiswa = async (nisn, password) => {
+    setLoading(true);
+    try {
+      const response = await client.post('/auth/login-siswa', { nisn, password });
+      const { token: authToken, user: userData } = response.data;
+      
+      localStorage.setItem('sma_awh_token', authToken);
+      localStorage.setItem('sma_awh_user', JSON.stringify(userData));
+      
+      setToken(authToken);
+      setUser(userData);
+      return { success: true, user: userData };
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Login siswa / wali murid gagal. Cek NISN/NIS dan kata sandi Anda.',
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await client.post('/auth/logout');
@@ -46,8 +81,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const userRoles = user?.roles && user?.roles.length > 0
+    ? user.roles
+    : (user?.role ? [user.role] : []);
+
+  const hasRole = (roleToCheck) => userRoles.includes(roleToCheck);
+  const hasAnyRole = (roleArray) => Array.isArray(roleArray) && roleArray.some(r => userRoles.includes(r));
+
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, loginSiswa, logout, userRoles, hasRole, hasAnyRole }}>
       {children}
     </AuthContext.Provider>
   );

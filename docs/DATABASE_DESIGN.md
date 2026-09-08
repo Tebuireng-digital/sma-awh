@@ -58,7 +58,7 @@ erDiagram
 * `kecamatan` (VARCHAR 50) -> *"Diwek"*
 * `kabupaten` (VARCHAR 50) -> *"Jombang"*
 * `provinsi` (VARCHAR 50) -> *"Jawa Timur"*
-* `kepala_sekolah` (VARCHAR 150) -> *"Drs. H. Hari Winarto, MM."*
+* `kepala_sekolah` (VARCHAR 150) -> *"NIKMATURROHMAH, M.Pd."*
 * `ketua_komite` (VARCHAR 150) -> *"Drs. Fahmi Amrullah Hadzik"*
 
 ### 2. `guru` (Tenaga Pendidik & Karyawan)

@@ -8,13 +8,31 @@ use Illuminate\Support\Facades\DB;
 
 class PresensiMuridController extends Controller
 {
-    public function getDaftarKelas()
+    public function getDaftarKelas(Request $request)
     {
-        $kelases = DB::table('kelas as k')
+        $user = $request->user();
+        $isFullAccess = $user ? in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka', 'kesiswaan', 'bk', 'tu', 'kepala_tu']) : true;
+
+        $query = DB::table('kelas as k')
             ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
-            ->select('k.id', 'k.nama_kelas', 'k.tingkat', 'k.jumlah_siswa', 'g.nama_lengkap as wali_kelas')
-            ->orderBy('k.id')
-            ->get();
+            ->select('k.id', 'k.nama_kelas', 'k.tingkat', 'k.jumlah_siswa', 'g.nama_lengkap as wali_kelas');
+
+        if (!$isFullAccess && $user && $user->role === 'guru') {
+            $idGuru = $user->id_guru;
+            if (!$idGuru) {
+                $guruRow = DB::table('guru')->where('nama_lengkap', 'LIKE', '%' . $user->name . '%')->first();
+                if ($guruRow) $idGuru = $guruRow->id_guru;
+            }
+
+            if ($idGuru) {
+                $taughtClassIds = DB::table('jadwal_pelajaran')->where('id_guru', $idGuru)->pluck('kelas_id')->toArray();
+                $waliClassIds = DB::table('kelas')->where('id_guru_wali', $idGuru)->pluck('id')->toArray();
+                $allowedIds = array_unique(array_merge($taughtClassIds, $waliClassIds));
+                $query->whereIn('k.id', $allowedIds);
+            }
+        }
+
+        $kelases = $query->orderBy('k.id')->get();
 
         return response()->json([
             'status' => 'success',

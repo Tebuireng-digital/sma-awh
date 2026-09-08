@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'kecamatan' => 'Diwek',
             'kabupaten' => 'Jombang',
             'provinsi' => 'Jawa Timur',
-            'kepala_sekolah' => 'Drs. H. Hari Winarto, MM.',
+            'kepala_sekolah' => 'NIKMATURROHMAH, M.Pd.',
             'ketua_komite' => 'Drs. Fahmi Amrullah Hadzik',
             'created_at' => now(),
             'updated_at' => now(),

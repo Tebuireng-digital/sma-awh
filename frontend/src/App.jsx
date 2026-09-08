@@ -16,6 +16,7 @@ import RaporSTSPage from './pages/RaporSTSPage';
 import ModuleRevisiPage from './pages/ModuleRevisiPage';
 import AdminMapelPage from './pages/AdminMapelPage';
 import AdminJadwalPelajaranPage from './pages/AdminJadwalPelajaranPage';
+import WaliKelasRaporPage from './pages/WaliKelasRaporPage';
 
 
 import SaranaPage from './pages/SaranaPage';
@@ -23,11 +24,37 @@ import KepegawaianPage from './pages/KepegawaianPage';
 import BKPage from './pages/BKPage';
 import PerpustakaanPage from './pages/PerpustakaanPage';
 import PersuratanPage from './pages/PersuratanPage';
+import PublicBerandaPage from './pages/public/PublicBerandaPage';
+import PublicSambutanPage from './pages/public/PublicSambutanPage';
+import PublicVisiMisiPage from './pages/public/PublicVisiMisiPage';
+import PublicSejarahPage from './pages/public/PublicSejarahPage';
+import PublicBeritaPage from './pages/public/PublicBeritaPage';
+import PublicDetailBeritaPage from './pages/public/PublicDetailBeritaPage';
+import PublicAlumniPage from './pages/public/PublicAlumniPage';
+import PublicKontakPage from './pages/public/PublicKontakPage';
+import PublicFasilitasPage from './pages/public/PublicFasilitasPage';
+import PublicKesiswaanPage from './pages/public/PublicKesiswaanPage';
+import HumasPage from './pages/HumasPage';
+import PortalSiswaPage from './pages/PortalSiswaPage';
+import ErrorBoundary from './components/ErrorBoundary';
+import ScrollToTop from './components/ScrollToTop';
 
-const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
+const ProtectedRoute = ({ children, allowedRoles, noLayout = false }) => {
+  const { user, userRoles, hasAnyRole } = useAuth();
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+  if (allowedRoles && !hasAnyRole(allowedRoles)) {
+    if (userRoles.includes('guru')) {
+      return <Navigate to="/guru/presensi" replace />;
+    }
+    if (userRoles.includes('siswa') || userRoles.includes('wali_santri')) {
+      return <Navigate to="/portal-siswa" replace />;
+    }
+    return <Navigate to="/" replace />;
+  }
+  if (noLayout) {
+    return children;
   }
   return <Layout>{children}</Layout>;
 };
@@ -35,32 +62,59 @@ const ProtectedRoute = ({ children }) => {
 function AppRoutes() {
   return (
     <Routes>
+      {/* Website Sekolah Publik (Stitch Tebuireng Academic Heritage) */}
+      <Route path="/" element={<PublicBerandaPage />} />
+      <Route path="/website" element={<Navigate to="/" replace />} />
+      
+      {/* Profil Pages */}
+      <Route path="/profil/sambutan" element={<PublicSambutanPage />} />
+      <Route path="/sambutan" element={<PublicSambutanPage />} />
+      <Route path="/profil/visi-misi" element={<PublicVisiMisiPage />} />
+      <Route path="/visi-dan-misi" element={<PublicVisiMisiPage />} />
+      <Route path="/profil/sejarah" element={<PublicSejarahPage />} />
+      <Route path="/sejarah-sekolah" element={<PublicSejarahPage />} />
+
+      {/* Fasilitas & Kesiswaan Pages */}
+      <Route path="/fasilitas" element={<PublicFasilitasPage />} />
+      <Route path="/fasilitas-2" element={<PublicFasilitasPage />} />
+      <Route path="/kesiswaan" element={<PublicKesiswaanPage />} />
+
+      {/* Berita, Kategori, & Detail Pages */}
+      <Route path="/berita" element={<PublicBeritaPage />} />
+      <Route path="/category/berita" element={<PublicBeritaPage />} />
+      <Route path="/category/:kategoriSlug" element={<PublicBeritaPage />} />
+      <Route path="/berita/:id" element={<PublicDetailBeritaPage />} />
+      
+      {/* Alumni & Kontak */}
+      <Route path="/alumni" element={<PublicAlumniPage />} />
+      <Route path="/kontak" element={<PublicKontakPage />} />
+
       <Route path="/login" element={<Login />} />
       
       {/* Admin */}
       <Route path="/admin" element={
-        <ProtectedRoute><AdminDashboard /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka']}><AdminDashboard /></ProtectedRoute>
       } />
       <Route path="/admin/guru" element={
-        <ProtectedRoute><DataGuru /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka']}><DataGuru /></ProtectedRoute>
       } />
       <Route path="/admin/kelas" element={
-        <ProtectedRoute><DataKelas /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka']}><DataKelas /></ProtectedRoute>
       } />
       <Route path="/admin/siswa" element={
-        <ProtectedRoute><DataSiswa /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka', 'guru']}><DataSiswa /></ProtectedRoute>
       } />
       <Route path="/admin/mapel" element={
-        <ProtectedRoute><AdminMapelPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kurikulum', 'kepala_sekolah']}><AdminMapelPage /></ProtectedRoute>
       } />
       <Route path="/admin/jadwal" element={
-        <ProtectedRoute><AdminJadwalPelajaranPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kurikulum', 'kepala_sekolah']}><AdminJadwalPelajaranPage /></ProtectedRoute>
       } />
       <Route path="/admin/pengaturan" element={
-        <ProtectedRoute><AdminDashboard /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>
       } />
       <Route path="/admin/kalender" element={
-        <ProtectedRoute><KalenderAkademikPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kurikulum', 'kepala_sekolah']}><KalenderAkademikPage /></ProtectedRoute>
       } />
 
       {/* Rapor STS (RAPOR STS X-1.docx) */}
@@ -68,7 +122,10 @@ function AppRoutes() {
         <ProtectedRoute><RaporSTSPage /></ProtectedRoute>
       } />
 
-
+      {/* Menu Wali Kelas (Validasi Rapor 21 Mapel & Catatan Santri) */}
+      <Route path="/walikelas/rapor" element={
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka', 'kurikulum', 'guru', 'wali_kelas']}><WaliKelasRaporPage /></ProtectedRoute>
+      } />
 
       {/* Guru / Mobile */}
       <Route path="/guru/presensi" element={
@@ -80,25 +137,27 @@ function AppRoutes() {
 
       {/* Modul Revisi */}
       <Route path="/kepegawaian" element={
-        <ProtectedRoute><KepegawaianPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'kepala_tu', 'kepegawaian', 'tu']}><KepegawaianPage /></ProtectedRoute>
       } />
       <Route path="/bk" element={
-        <ProtectedRoute><BKPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka', 'kesiswaan', 'bk']}><BKPage /></ProtectedRoute>
       } />
       <Route path="/sarana" element={
-        <ProtectedRoute><SaranaPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'kepala_tu', 'sarana']}><SaranaPage /></ProtectedRoute>
       } />
       <Route path="/persuratan" element={
-        <ProtectedRoute><PersuratanPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'kepala_tu', 'persuratan', 'tu', 'waka', 'staf']}><PersuratanPage /></ProtectedRoute>
       } />
       <Route path="/humas" element={
-        <ProtectedRoute><ModuleRevisiPage type="humas" /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'kepala_sekolah', 'waka', 'humas']}><HumasPage /></ProtectedRoute>
       } />
       <Route path="/perpustakaan" element={
-        <ProtectedRoute><PerpustakaanPage /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin', 'pustakawan', 'kepala_sekolah', 'waka', 'kepala_tu', 'siswa', 'wali_santri']}><PerpustakaanPage /></ProtectedRoute>
       } />
       <Route path="/portal-siswa" element={
-        <ProtectedRoute><ModuleRevisiPage type="portal-siswa" /></ProtectedRoute>
+        <ProtectedRoute allowedRoles={['siswa', 'wali_santri', 'admin']} noLayout={true}>
+          <PortalSiswaPage />
+        </ProtectedRoute>
       } />
 
       {/* Kurikulum */}
@@ -120,8 +179,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
-        <AppRoutes />
+        <ErrorBoundary>
+          <AppRoutes />
+        </ErrorBoundary>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -12,8 +12,11 @@ use App\Http\Controllers\Api\AdminMasterController;
 
 Route::prefix('v1')->group(function () {
 
-    // Public Auth Route
-    Route::post('/auth/login', [AuthController::class, 'login']);
+    // Public Auth Route (Dengan Proteksi Brute-Force Rate Limiting 5x / menit)
+    Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
+    Route::post('/auth/login-siswa', [AuthController::class, 'loginSiswa'])->middleware('throttle:login');
+    Route::get('/humas/konten-publik', [\App\Http\Controllers\Api\HumasController::class, 'getKontenPublik']);
+    Route::get('/humas/konten-publik/{idOrSlug}', [\App\Http\Controllers\Api\HumasController::class, 'detailKontenPublik']);
 
     // Protected Routes (Sanctum)
     Route::middleware('auth:sanctum')->group(function () {
@@ -25,6 +28,10 @@ Route::prefix('v1')->group(function () {
         // Admin & Settings
         Route::get('/admin/pengaturan', [AdminPengaturanController::class, 'getPengaturan']);
         Route::post('/admin/pengaturan', [AdminPengaturanController::class, 'updatePengaturan']);
+        Route::get('/admin/semester', [AdminPengaturanController::class, 'getSemester']);
+        Route::post('/admin/semester/toggle', [AdminPengaturanController::class, 'toggleSemester']);
+        Route::get('/admin/tahun-ajaran', [AdminPengaturanController::class, 'getTahunAjaran']);
+        Route::post('/admin/tahun-ajaran', [AdminPengaturanController::class, 'updateTahunAjaran']);
 
         // Admin Master Data CRUD (Guru, Kelas, Siswa)
         Route::get('/admin/guru', [AdminMasterController::class, 'indexGuru']);
@@ -79,6 +86,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/kurikulum/rekap-jam-mengajar', [KurikulumController::class, 'getRekapJamMengajar']);
 
         // Rapor STS (RAPOR STS X-1.docx)
+        Route::get('/rapor-sts-access/my-permissions', [\App\Http\Controllers\Api\RaporController::class, 'myAccess']);
+        Route::get('/rapor-sts/mapel-kelas', [\App\Http\Controllers\Api\RaporController::class, 'getNilaiMapelKelas']);
+        Route::post('/rapor-sts/mapel-kelas', [\App\Http\Controllers\Api\RaporController::class, 'storeNilaiMapelKelas']);
+        Route::get('/rapor-sts/walikelas-view', [\App\Http\Controllers\Api\RaporController::class, 'getWaliKelasRapor']);
+        Route::post('/rapor-sts/{siswa_id}/catatan-walikelas', [\App\Http\Controllers\Api\RaporController::class, 'saveCatatanWaliKelas']);
+        Route::post('/rapor-sts/{siswa_id}/cancel-validasi', [\App\Http\Controllers\Api\RaporController::class, 'cancelValidasiWaliKelas']);
+        Route::post('/rapor-sts/bulk-approve-walikelas', [\App\Http\Controllers\Api\RaporController::class, 'bulkApproveWaliKelas']);
+        Route::post('/rapor-sts/bulk-cancel-validasi', [\App\Http\Controllers\Api\RaporController::class, 'bulkCancelValidasiWaliKelas']);
         Route::get('/rapor-sts', [\App\Http\Controllers\Api\RaporController::class, 'index']);
         Route::get('/rapor-sts/{siswa_id}', [\App\Http\Controllers\Api\RaporController::class, 'show']);
         Route::post('/rapor-sts', [\App\Http\Controllers\Api\RaporController::class, 'storeOrUpdate']);
@@ -148,7 +163,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/persuratan/generate-nomor', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'generateNomorSurat']);
         Route::get('/persuratan/template', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'getTemplateSurat']);
 
-        Route::get('/humas/konten', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'getHumasKonten']);
+        // Humas & Branding CMS
+        Route::get('/humas/konten', [\App\Http\Controllers\Api\HumasController::class, 'index']);
+        Route::post('/humas/konten', [\App\Http\Controllers\Api\HumasController::class, 'store']);
+        Route::put('/humas/konten/{id}', [\App\Http\Controllers\Api\HumasController::class, 'update']);
+        Route::delete('/humas/konten/{id}', [\App\Http\Controllers\Api\HumasController::class, 'destroy']);
+        Route::post('/humas/konten/{id}/approval', [\App\Http\Controllers\Api\HumasController::class, 'approve']);
+        Route::post('/humas/konten/{id}/toggle-pin', [\App\Http\Controllers\Api\HumasController::class, 'togglePin']);
+        Route::post('/humas/sync-website', [\App\Http\Controllers\Api\HumasController::class, 'syncWebsite']);
 
         // Perpustakaan Digital
         Route::get('/perpustakaan/siswa-list', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'getBKSiswaList']);
@@ -170,5 +192,15 @@ Route::prefix('v1')->group(function () {
         Route::post('/perpustakaan/kunjungan', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'storeKunjunganPerpustakaan']);
         Route::put('/perpustakaan/kunjungan/{id}', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'updateKunjunganPerpustakaan']);
         Route::delete('/perpustakaan/kunjungan/{id}', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'deleteKunjunganPerpustakaan']);
+
+        // Portal Terpadu Santri & Wali Santri (100% Read-Only)
+        Route::prefix('portal-siswa')->group(function () {
+            Route::get('/ringkasan', [\App\Http\Controllers\Api\PortalSiswaController::class, 'ringkasan']);
+            Route::get('/presensi', [\App\Http\Controllers\Api\PortalSiswaController::class, 'presensi']);
+            Route::get('/nilai', [\App\Http\Controllers\Api\PortalSiswaController::class, 'nilai']);
+            Route::get('/jadwal', [\App\Http\Controllers\Api\PortalSiswaController::class, 'jadwal']);
+            Route::get('/kedisiplinan-prestasi', [\App\Http\Controllers\Api\PortalSiswaController::class, 'kedisiplinanPrestasi']);
+            Route::get('/perpustakaan', [\App\Http\Controllers\Api\PortalSiswaController::class, 'perpustakaan']);
+        });
     });
 });

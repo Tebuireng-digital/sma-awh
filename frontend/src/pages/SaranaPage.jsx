@@ -143,126 +143,131 @@ const SaranaPage = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-emerald-100 text-emerald-800 rounded-xl">
-            <Package className="w-6 h-6" />
-          </div>
+      {/* Header Banner */}
+      <div className="bg-gradient-to-r from-[#0d281e] via-[#0f3527] to-[#124231] rounded-2xl p-6 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#c8942a]/15 to-transparent rounded-full blur-2xl pointer-events-none -mr-20 -mt-20"></div>
+        
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-base font-bold text-slate-800">Admin Sarana & Prasarana</h1>
-            <p className="text-xs text-slate-500">
-              Inventaris Barang, Barang Masuk-Keluar, Penghapusan Aset, Perawatan & Pengelolaan Laptop/Aset IT
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold backdrop-blur-sm mb-2 border border-white/10">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Staf Sarana & Prasarana</span>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              Manajemen Sarana, Prasarana & Aset Sekolah
+            </h1>
+            <p className="text-xs sm:text-sm text-emerald-100/80 mt-1 max-w-2xl font-normal">
+              SMA A. Wahid Hasyim • Inventaris Barang, Mutasi Stok, Peminjaman Laptop/Lab IT, Perawatan & Penghapusan Aset
             </p>
           </div>
-        </div>
 
-        <div className="flex items-center space-x-2">
-          {activeTab === 'inventaris' && (
-            <button
-              onClick={() => handleOpenModal('add_barang')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Tambah Aset / Laptop</span>
-            </button>
-          )}
-          {activeTab === 'mutasi' && (
-            <button
-              onClick={() => handleOpenModal('add_mutasi')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Catat Mutasi Stok</span>
-            </button>
-          )}
-          {activeTab === 'peminjaman' && (
-            <button
-              onClick={() => handleOpenModal('add_peminjaman')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Pinjam Laptop / Aset IT</span>
-            </button>
-          )}
-          {activeTab === 'perawatan' && (
-            <button
-              onClick={() => handleOpenModal('add_perawatan')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Log Perawatan / Servis</span>
-            </button>
-          )}
-          {activeTab === 'penghapusan' && (
-            <button
-              onClick={() => handleOpenModal('add_penghapusan')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Ajukan Penghapusan Aset</span>
-            </button>
-          )}
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            {activeTab === 'inventaris' && (
+              <button
+                onClick={() => handleOpenModal('add_barang')}
+                className="flex items-center space-x-1.5 px-4 py-2 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Tambah Aset / Laptop</span>
+              </button>
+            )}
+            {activeTab === 'mutasi' && (
+              <button
+                onClick={() => handleOpenModal('add_mutasi')}
+                className="flex items-center space-x-1.5 px-4 py-2 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Catat Mutasi Stok</span>
+              </button>
+            )}
+            {activeTab === 'peminjaman' && (
+              <button
+                onClick={() => handleOpenModal('add_peminjaman')}
+                className="flex items-center space-x-1.5 px-4 py-2 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Pinjam Laptop / Aset IT</span>
+              </button>
+            )}
+            {activeTab === 'perawatan' && (
+              <button
+                onClick={() => handleOpenModal('add_perawatan')}
+                className="flex items-center space-x-1.5 px-4 py-2 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Log Perawatan / Servis</span>
+              </button>
+            )}
+            {activeTab === 'penghapusan' && (
+              <button
+                onClick={() => handleOpenModal('add_penghapusan')}
+                className="flex items-center space-x-1.5 px-4 py-2 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Ajukan Penghapusan Aset</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {msg && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg flex items-center space-x-2">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs rounded-xl flex items-center space-x-2 font-medium">
           <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{msg}</span>
         </div>
       )}
 
       {/* Tabs Navigation */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-1.5 flex flex-wrap gap-1">
+      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-1.5 flex flex-wrap gap-1.5">
         <button
           onClick={() => setActiveTab('inventaris')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'inventaris' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'inventaris' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Laptop className="w-4 h-4" />
+          <Laptop className="w-4 h-4 text-emerald-400" />
           <span>1. Inventaris & Laptop Aset</span>
         </button>
 
         <button
           onClick={() => setActiveTab('mutasi')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'mutasi' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'mutasi' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <ArrowLeftRight className="w-4 h-4" />
+          <ArrowLeftRight className="w-4 h-4 text-blue-400" />
           <span>2. Barang Masuk - Keluar</span>
         </button>
 
         <button
           onClick={() => setActiveTab('peminjaman')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'peminjaman' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'peminjaman' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Clock className="w-4 h-4" />
+          <Clock className="w-4 h-4 text-teal-400" />
           <span>3. Peminjaman Inventaris</span>
         </button>
 
         <button
           onClick={() => setActiveTab('perawatan')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'perawatan' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'perawatan' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Wrench className="w-4 h-4" />
+          <Wrench className="w-4 h-4 text-[#c8942a]" />
           <span>4. Perawatan & Maintenance</span>
         </button>
 
         <button
           onClick={() => setActiveTab('penghapusan')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'penghapusan' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'penghapusan' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Trash2 className="w-4 h-4" />
-          <span>5. Penghapusan Aset (Write-Off)</span>
+          <Trash2 className="w-4 h-4 text-rose-400" />
+          <span>5. Penghapusan Aset</span>
         </button>
       </div>
 

@@ -12,16 +12,37 @@ class ModuleRevisiController extends Controller
     public function getPegawai(Request $request)
     {
         $user = $request->user();
-        $userRole = $user->role;
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
 
         $query = DB::table('pegawai');
 
-        // Sensitive Data Access Control: Guru / Staff only see their own profile
-        if (in_array($userRole, ['guru', 'siswa', 'wali_santri'])) {
-            $query->where('email', $user->email)->orWhere('nama_lengkap', 'LIKE', '%' . $user->name . '%');
+        // Sensitive Data Access Control: Guru / Staff only see their own profile if not privileged
+        $isPrivileged = count(array_intersect($userRoles, ['admin', 'kepala_sekolah', 'waka', 'kepala_tu', 'kepegawaian'])) > 0;
+        if (!$isPrivileged && in_array($user->role, ['guru', 'siswa', 'wali_santri'])) {
+            $query->where(function($q) use ($user) {
+                if ($user->email) $q->where('email', $user->email);
+                $q->orWhere('nama_lengkap', 'LIKE', '%' . $user->name . '%');
+            });
         }
 
-        $pegawai = $query->orderBy('id', 'desc')->get();
+        $pegawai = $query->orderBy('id', 'asc')->get();
+
+        // Attach additional_roles & id_guru from users table
+        foreach ($pegawai as $p) {
+            $u = DB::table('users')->where('email', $p->email)
+                ->orWhere('name', $p->nama_lengkap)
+                ->orWhere(function($q) use ($p) {
+                    $q->whereNotNull('id_guru')->where('name', 'like', '%' . $p->nama_lengkap . '%');
+                })->first();
+
+            $p->additional_roles = $u && $u->additional_roles ? (json_decode($u->additional_roles, true) ?: []) : [];
+            $p->user_id = $u?->id;
+            $p->username = $u?->username;
+
+            $g = DB::table('guru')->where('nama_lengkap', $p->nama_lengkap)->first();
+            $p->id_guru = $g?->id_guru;
+        }
+
         return response()->json(['status' => 'success', 'data' => $pegawai]);
     }
 
@@ -32,15 +53,18 @@ class ModuleRevisiController extends Controller
             'jabatan' => 'required|string',
         ]);
 
-        DB::table('pegawai')->insert([
+        $cleanName = trim($request->nama_lengkap);
+        $pendidikan = $request->pendidikan ?: 'S1';
+
+        $pegawaiId = DB::table('pegawai')->insertGetId([
             'nip' => $request->nip ?: null,
-            'nama_lengkap' => $request->nama_lengkap,
+            'nama_lengkap' => $cleanName,
             'jabatan' => $request->jabatan,
             'status_kepegawaian' => $request->status_kepegawaian ?: null,
             'no_hp' => $request->no_hp ?: null,
             'email' => $request->email ?: null,
             'tgl_masuk' => $request->tgl_masuk ?: null,
-            'pendidikan' => $request->pendidikan ?: null,
+            'pendidikan' => $pendidikan,
             'gaji_pokok' => $request->gaji_pokok ? (float)$request->gaji_pokok : null,
             'tunjangan' => $request->tunjangan ? (float)$request->tunjangan : null,
             'no_sk_terakhir' => $request->no_sk_terakhir ?: null,
@@ -48,7 +72,68 @@ class ModuleRevisiController extends Controller
             'updated_at' => now(),
         ]);
 
-        return response()->json(['status' => 'success', 'message' => 'Data pegawai berhasil ditambahkan.']);
+        // SINKRONISASI OTOMATIS KE TABEL GURU JIKA JABATAN GURU
+        $isGuru = stripos($request->jabatan, 'guru') !== false;
+        $idGuruAssigned = null;
+
+        if ($isGuru) {
+            $existingGuru = DB::table('guru')->where('nama_lengkap', $cleanName)->first();
+            if (!$existingGuru) {
+                $maxId = (int) DB::table('guru')->max('id_guru');
+                $idGuruAssigned = ($maxId > 0) ? $maxId + 1 : 1;
+
+                DB::table('guru')->insert([
+                    'id_guru' => $idGuruAssigned,
+                    'nama_lengkap' => $cleanName,
+                    'pendidikan_terakhir' => $pendidikan,
+                    'no_hp' => $request->no_hp ?: null,
+                    'status_aktif' => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                // Buatkan akun login guru jika belum ada
+                $username = 'guru_' . $idGuruAssigned;
+                if (!DB::table('users')->where('username', $username)->exists()) {
+                    DB::table('users')->insert([
+                        'name' => $cleanName,
+                        'username' => $username,
+                        'email' => $request->email ?: ($username . '@smaawh.sch.id'),
+                        'password' => \Illuminate\Support\Facades\Hash::make('guru123'),
+                        'role' => 'guru',
+                        'additional_roles' => !empty($request->additional_roles) ? json_encode(array_values((array)$request->additional_roles)) : null,
+                        'id_guru' => $idGuruAssigned,
+                        'no_hp' => $request->no_hp ?: null,
+                        'must_change_password' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            } else {
+                $idGuruAssigned = $existingGuru->id_guru;
+            }
+        }
+
+        // Simpan additional_roles jika ada input peran rangkap
+        if ($request->has('additional_roles')) {
+            $extraRoles = (array) $request->additional_roles;
+            DB::table('users')
+                ->where('name', $cleanName)
+                ->orWhere(function($q) use ($idGuruAssigned) {
+                    if ($idGuruAssigned) $q->where('id_guru', $idGuruAssigned);
+                })
+                ->update([
+                    'additional_roles' => json_encode(array_values($extraRoles)),
+                    'updated_at' => now(),
+                ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data pegawai berhasil ditambahkan' . ($isGuru ? ' dan otomatis tersinkron ke Master Data Guru.' : '.'),
+            'id' => $pegawaiId,
+            'id_guru' => $idGuruAssigned,
+        ]);
     }
 
     public function updatePegawai(Request $request, $id)
@@ -58,32 +143,113 @@ class ModuleRevisiController extends Controller
             'jabatan' => 'required|string',
         ]);
 
+        $existing = DB::table('pegawai')->where('id', $id)->first();
+        if (!$existing) {
+            return response()->json(['status' => 'error', 'message' => 'Data pegawai tidak ditemukan.'], 404);
+        }
+
+        $cleanName = trim($request->nama_lengkap);
+        $pendidikan = $request->pendidikan ?: ($existing->pendidikan ?? 'S1');
+
         DB::table('pegawai')->where('id', $id)->update([
             'nip' => $request->nip ?: null,
-            'nama_lengkap' => $request->nama_lengkap,
+            'nama_lengkap' => $cleanName,
             'jabatan' => $request->jabatan,
             'status_kepegawaian' => $request->status_kepegawaian ?: null,
             'no_hp' => $request->no_hp ?: null,
             'email' => $request->email ?: null,
-            'pendidikan' => $request->pendidikan ?: null,
+            'pendidikan' => $pendidikan,
             'gaji_pokok' => $request->gaji_pokok ? (float)$request->gaji_pokok : null,
             'tunjangan' => $request->tunjangan ? (float)$request->tunjangan : null,
             'no_sk_terakhir' => $request->no_sk_terakhir ?: null,
             'updated_at' => now(),
         ]);
 
-        return response()->json(['status' => 'success', 'message' => 'Data kepegawaian berhasil diperbarui.']);
+        // SINKRONISASI OTOMATIS KE TABEL GURU JIKA JABATAN GURU
+        $isGuru = stripos($request->jabatan, 'guru') !== false;
+        $idGuruAssigned = null;
+
+        if ($isGuru) {
+            $existingGuru = DB::table('guru')->where('nama_lengkap', $cleanName)
+                ->orWhere('nama_lengkap', $existing->nama_lengkap)
+                ->first();
+
+            if (!$existingGuru) {
+                $maxId = (int) DB::table('guru')->max('id_guru');
+                $idGuruAssigned = ($maxId > 0) ? $maxId + 1 : 1;
+
+                DB::table('guru')->insert([
+                    'id_guru' => $idGuruAssigned,
+                    'nama_lengkap' => $cleanName,
+                    'pendidikan_terakhir' => $pendidikan,
+                    'no_hp' => $request->no_hp ?: null,
+                    'status_aktif' => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                // Buatkan akun login guru jika belum ada
+                $username = 'guru_' . $idGuruAssigned;
+                if (!DB::table('users')->where('username', $username)->exists()) {
+                    DB::table('users')->insert([
+                        'name' => $cleanName,
+                        'username' => $username,
+                        'email' => $request->email ?: ($username . '@smaawh.sch.id'),
+                        'password' => \Illuminate\Support\Facades\Hash::make('guru123'),
+                        'role' => 'guru',
+                        'additional_roles' => !empty($request->additional_roles) ? json_encode(array_values((array)$request->additional_roles)) : null,
+                        'id_guru' => $idGuruAssigned,
+                        'no_hp' => $request->no_hp ?: null,
+                        'must_change_password' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            } else {
+                $idGuruAssigned = $existingGuru->id_guru;
+                DB::table('guru')->where('id', $existingGuru->id)->update([
+                    'nama_lengkap' => $cleanName,
+                    'pendidikan_terakhir' => $pendidikan,
+                    'no_hp' => $request->no_hp ?: $existingGuru->no_hp,
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
+        // Sinkronisasi Multi-Role / Merangkap Jabatan jika dikirimkan
+        if ($request->has('additional_roles')) {
+            $extraRoles = (array) $request->additional_roles;
+            DB::table('users')
+                ->where('name', $cleanName)
+                ->orWhere('name', $existing->nama_lengkap)
+                ->orWhere(function($q) use ($idGuruAssigned) {
+                    if ($idGuruAssigned) $q->where('id_guru', $idGuruAssigned);
+                })
+                ->update([
+                    'additional_roles' => json_encode(array_values($extraRoles)),
+                    'updated_at' => now(),
+                ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data kepegawaian berhasil diperbarui' . ($isGuru ? ' dan otomatis tersinkron ke Master Data Guru.' : '.'),
+            'id_guru' => $idGuruAssigned,
+        ]);
     }
 
     public function getPengajuanKepegawaian(Request $request)
     {
-        $userRole = $request->user()->role;
+        $user = $request->user();
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
+        $isPrivileged = count(array_intersect($userRoles, ['admin', 'kepala_sekolah', 'waka', 'kepala_tu', 'kepegawaian'])) > 0;
+
         $query = DB::table('pengajuan_kepegawaian')
             ->join('pegawai', 'pengajuan_kepegawaian.pegawai_id', '=', 'pegawai.id')
             ->select('pengajuan_kepegawaian.*', 'pegawai.nama_lengkap', 'pegawai.nip', 'pegawai.jabatan');
 
-        if (in_array($userRole, ['guru', 'siswa'])) {
-            $query->where('pegawai.email', $request->user()->email);
+        if (!$isPrivileged && (in_array('guru', $userRoles) || in_array('siswa', $userRoles))) {
+            $query->where('pegawai.email', $user->email);
         }
 
         $pengajuan = $query->orderBy('pengajuan_kepegawaian.id', 'desc')->get();
@@ -117,17 +283,18 @@ class ModuleRevisiController extends Controller
 
     public function updateApprovalKepegawaian(Request $request, $id)
     {
-        $userRole = $request->user()->role;
+        $user = $request->user();
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
         $status = $request->status ?? 'Disetujui';
 
-        if (in_array($userRole, ['kepala_tu', 'admin', 'kepala_sekolah', 'kepegawaian'])) {
-            if ($userRole === 'kepala_tu') {
+        if (count(array_intersect($userRoles, ['kepala_tu', 'admin', 'kepala_sekolah', 'kepegawaian'])) > 0) {
+            if (in_array('kepala_tu', $userRoles) && !in_array('kepala_sekolah', $userRoles) && !in_array('admin', $userRoles)) {
                 DB::table('pengajuan_kepegawaian')->where('id', $id)->update([
                     'status_ktu' => $status,
                     'catatan' => $request->catatan ?? 'Berkas diverifikasi Kepala TU',
                     'updated_at' => now(),
                 ]);
-            } else if ($userRole === 'kepala_sekolah') {
+            } else if (in_array('kepala_sekolah', $userRoles)) {
                 DB::table('pengajuan_kepegawaian')->where('id', $id)->update([
                     'status_kepsek' => $status,
                     'catatan' => $request->catatan ?? 'Disetujui Kepala Sekolah',
@@ -755,6 +922,10 @@ class ModuleRevisiController extends Controller
 
     public function getSurat(Request $request)
     {
+        if ($request->user() && $request->user()->role === 'guru') {
+            return response()->json(['status' => 'error', 'message' => 'Akses ditolak. Guru tidak memiliki hak akses ke modul persuratan.'], 403);
+        }
+
         $query = DB::table('surat');
 
         if ($request->has('jenis') && $request->jenis != '') {
@@ -780,14 +951,30 @@ class ModuleRevisiController extends Controller
     public function generateNomorSurat(Request $request)
     {
         $jenis = $request->jenis ?? 'Surat Keluar';
-        $count = DB::table('surat')->whereYear('created_at', date('Y'))->count() + 1;
-        $romanMonth = $this->getRomanMonth(date('n'));
-        $code = ($jenis === 'Surat Masuk') ? 'SM' : 'SK';
-        $noSurat = sprintf('%03d/SMA-AWH/%s/%s/%s', $count, $code, $romanMonth, date('Y'));
+        $bidang = $request->bidang ?? 'MN';
+        $tahun = date('Y');
+
+        $latestSurat = DB::table('surat')
+            ->where('no_surat', 'like', "%/104.13.2/SMA.4/WH/%")
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $nextNumber = 2283;
+        if ($latestSurat && preg_match('/^(\d+)\/104\.13\.2\/SMA\.4\/WH/', $latestSurat->no_surat, $matches)) {
+            $nextNumber = max($nextNumber, (int)$matches[1] + 1);
+        } else {
+            $count = DB::table('surat')->whereYear('created_at', $tahun)->count();
+            if ($count > 0) {
+                $nextNumber = 2282 + $count;
+            }
+        }
+
+        $noSurat = sprintf('%d/104.13.2/SMA.4/WH/%s/%s', $nextNumber, $bidang, $tahun);
 
         return response()->json([
             'status' => 'success',
-            'no_surat' => $noSurat
+            'no_surat' => $noSurat,
+            'next_seq' => $nextNumber
         ]);
     }
 
@@ -798,10 +985,23 @@ class ModuleRevisiController extends Controller
             'pengirim_penerima' => 'required|string',
         ]);
 
-        $count = DB::table('surat')->whereYear('created_at', date('Y'))->count() + 1;
-        $romanMonth = $this->getRomanMonth(date('n'));
-        $code = ($request->jenis === 'Surat Masuk') ? 'SM' : 'SK';
-        $defaultNoSurat = sprintf('%03d/SMA-AWH/%s/%s/%s', $count, $code, $romanMonth, date('Y'));
+        $bidang = $request->bidang ?? 'MN';
+        $tahun = date('Y');
+        $latestSurat = DB::table('surat')
+            ->where('no_surat', 'like', "%/104.13.2/SMA.4/WH/%")
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $nextNumber = 2283;
+        if ($latestSurat && preg_match('/^(\d+)\/104\.13\.2\/SMA\.4\/WH/', $latestSurat->no_surat, $matches)) {
+            $nextNumber = max($nextNumber, (int)$matches[1] + 1);
+        } else {
+            $count = DB::table('surat')->whereYear('created_at', $tahun)->count();
+            if ($count > 0) {
+                $nextNumber = 2282 + $count;
+            }
+        }
+        $defaultNoSurat = sprintf('%d/104.13.2/SMA.4/WH/%s/%s', $nextNumber, $bidang, $tahun);
         $noSurat = $request->no_surat ?: $defaultNoSurat;
 
         $id = DB::table('surat')->insertGetId([
@@ -862,14 +1062,31 @@ class ModuleRevisiController extends Controller
     public function getTemplateSurat()
     {
         $templates = DB::table('template_surat')->get();
-        if ($templates->isEmpty()) {
-            // Seed default templates if empty
+        if ($templates->isEmpty() || $templates->count() < 5) {
+            // Seed or refresh authentic default templates
+            DB::table('template_surat')->truncate();
             $defaults = [
+                [
+                    'kode_template' => 'UND-RESMI',
+                    'nama_template' => 'Surat Undangan Resmi / Kegiatan (Acuan: Apel Pelantikan MPK)',
+                    'kategori' => 'Kesiswaan',
+                    'format_konten' => "Dalam rangka Pelantikan MPK OBTP, kami mengundang seluruh Bapak/Ibu Guru & Karyawan SMA A. Wahid Hasyim Tebuireng untuk mengikuti apel yang akan dilaksanakan pada:\n\nHari : Selasa\nTanggal : 01 September 2026\nPukul : 07.00 WIB\nTempat : Lapangan SMA. A. Wahid Hasyim\nAgenda : Apel Pelantikan MPK OBTP\nKetentuan : Mengenakan Seragam Merah Marron\n\nMengingat pentingnya agenda tersebut, kami mengharapkan kehadiran Bapak/Ibu tepat waktu.\nDemikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, kami ucapkan terima kasih.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'kode_template' => 'ST-JAGA',
+                    'nama_template' => 'Surat Tugas Pengawalan Santri / Jaga Sekolah (Acuan: Surat Tugas)',
+                    'kategori' => 'Kepegawaian',
+                    'format_konten' => "Kepala SMA A. Wahid Hasyim Tebuireng memberikan tugas pengawalan bersama seluruh pimpinan, BK, dan Guru piket yayasan KHM. Hasyim Asy'ari terkait kepulangan/kembalinya santri ke pondok.\n\nKetentuan Pelaksanaan:\n1. Surat tugas ini diberikan kepada yang bersangkutan untuk dilaksanakan dengan sebaik-baiknya.\n2. Apabila terdapat kekeliruan dalam penetapan surat tugas ini, akan dibetulkan sebagaimana mestinya.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
                 [
                     'kode_template' => 'SK-AKTIF',
                     'nama_template' => 'Surat Keterangan Siswa Aktif',
                     'kategori' => 'Kesiswaan',
-                    'format_konten' => 'Yang bertanda tangan di bawah ini Kepala SMA KH. A. Wahid Hasyim Tebuireng menerangkan bahwa [NAMA_SISWA] (NIS: [NIS_SISWA]) adalah benar-benar siswa aktif kelas [KELAS] tahun ajaran 2026/2027.',
+                    'format_konten' => 'Yang bertanda tangan di bawah ini Kepala SMA A. Wahid Hasyim Tebuireng menerangkan bahwa [NAMA_SISWA] (NIS: [NIS_SISWA]) adalah benar-benar siswa aktif kelas [KELAS] tahun ajaran 2026/2027 dan berkelakuan baik.',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
@@ -877,23 +1094,23 @@ class ModuleRevisiController extends Controller
                     'kode_template' => 'UND-ORTU',
                     'nama_template' => 'Surat Undangan Orang Tua / Wali Santri',
                     'kategori' => 'Humas',
-                    'format_konten' => 'Mengharap kehadiran Bapak/Ibu Wali Santri pada Acara Pertemuan Orang Tua dan Sosialisasi Program Sekolah yang akan dilaksanakan pada [TANGGAL_ACARA] bertempat di Aula Sekolah.',
+                    'format_konten' => 'Mengharap kehadiran Bapak/Ibu Wali Santri pada Acara Pertemuan Orang Tua dan Sosialisasi Program Sekolah yang akan dilaksanakan bertempat di Aula Pertemuan SMA A. Wahid Hasyim Tebuireng.',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
                 [
-                    'kode_template' => 'ST-GURU',
+                    'kode_template' => 'ST-DINAS',
                     'nama_template' => 'Surat Tugas / Pengantar Dinas Guru',
                     'kategori' => 'Kepegawaian',
-                    'format_konten' => 'Kepala Sekolah menugaskan [NAMA_GURU] (NIP: [NIP_GURU]) untuk menghadiri Pelatihan dan Workshop Manajemen Sekolah yang diselenggarakan di [LOKASI_TUGAS] pada [TANGGAL_PELAKSANAAN].',
+                    'format_konten' => 'Kepala SMA A. Wahid Hasyim Tebuireng menugaskan [NAMA_GURU] untuk menghadiri Koordinasi dan Pembinaan Teknis Kurikulum Tingkat SMA yang diselenggarakan oleh Cabang Dinas Pendidikan Wilayah Kabupaten Jombang.',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
                 [
                     'kode_template' => 'SK-BEASISWA',
-                    'nama_template' => 'Surat Rekomendasi Beasiswa',
+                    'nama_template' => 'Surat Rekomendasi Beasiswa Siswa',
                     'kategori' => 'Kesiswaan',
-                    'format_konten' => 'Pihak Sekolah memberikan rekomendasi penuh kepada [NAMA_SISWA] untuk mengajukan Permohonan Beasiswa Prestasi Akademik Tahap I Tahun 2026.',
+                    'format_konten' => 'Pihak Sekolah memberikan rekomendasi penuh kepada [NAMA_SISWA] untuk mengajukan Permohonan Beasiswa Prestasi Santri / Akademik Tahun Ajaran 2026/2027.',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]
@@ -912,8 +1129,12 @@ class ModuleRevisiController extends Controller
     }
 
     // === PERPUSTAKAAN DIGITAL ===
-    public function getBuku()
+    public function getBuku(Request $request)
     {
+        if ($request->user() && $request->user()->role === 'guru') {
+            return response()->json(['status' => 'error', 'message' => 'Akses ditolak. Guru tidak memiliki hak akses ke modul perpustakaan digital.'], 403);
+        }
+
         $buku = DB::table('buku_perpustakaan')->orderBy('id', 'desc')->get();
         return response()->json(['status' => 'success', 'data' => $buku]);
     }

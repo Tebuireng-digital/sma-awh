@@ -8,14 +8,14 @@
     "kecamatan": "Diwek",
     "kabupaten": "Jombang",
     "provinsi": "Jawa Timur",
-    "kepala_sekolah": "Drs. H. Hari Winarto, MM.",
+    "kepala_sekolah": "NIKMATURROHMAH, M.Pd.",
     "ketua_komite": "Drs. Fahmi Amrullah Hadzik"
   },
   "total_guru": 66,
   "guru": [
     {
       "id_guru": 1,
-      "nama_lengkap": "Drs. H. Hari Winarto",
+      "nama_lengkap": "NIKMATURROHMAH, M.Pd.",
       "pendidikan_terakhir": "S2 Manajemen"
     },
     {

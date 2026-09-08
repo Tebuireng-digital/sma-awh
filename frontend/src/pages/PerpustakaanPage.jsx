@@ -219,104 +219,114 @@ const PerpustakaanPage = () => {
   return (
     <div className="space-y-6 pb-12">
       {/* HEADER SECTION */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="p-3 bg-teal-50 border border-teal-200 rounded-xl text-teal-700">
-            <Library className="w-8 h-8" />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-slate-800">Perpustakaan Digital & Sirkulasi Literasi</h1>
-            <p className="text-xs text-slate-500">
-              Pengelolaan Katalog Buku, Sirkulasi Peminjaman-Pengembalian, Denda Keterlambatan, dan Log Kunjungan Siswa.
-            </p>
-          </div>
-        </div>
+      <div className="bg-gradient-to-r from-[#0d281e] via-[#0f3527] to-[#124231] rounded-2xl p-6 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#c8942a]/15 to-transparent rounded-full blur-2xl pointer-events-none -mr-20 -mt-20"></div>
 
-        <div className="flex items-center space-x-2">
-          {activeTab === 'katalog' && (
-            <button
-              onClick={() => handleOpenModal('add_buku')}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Tambah Buku Baru</span>
-            </button>
-          )}
-          {activeTab === 'sirkulasi' && (
-            <button
-              onClick={() => handleOpenModal('add_pinjam')}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Transaksi Peminjaman</span>
-            </button>
-          )}
-          {activeTab === 'kunjungan' && (
-            <button
-              onClick={() => handleOpenModal('add_kunjungan')}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Catat Kunjungan Siswa</span>
-            </button>
-          )}
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="flex items-center space-x-3.5">
+            <div className="p-3 bg-white/10 border border-white/10 rounded-2xl text-[#fde047] backdrop-blur-sm shrink-0">
+              <Library className="w-7 h-7" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold backdrop-blur-sm mb-1.5 border border-white/10">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Pustakawan & Sirkulasi Literasi</span>
+              </div>
+              <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Perpustakaan Digital & Sirkulasi Literasi
+              </h1>
+              <p className="text-xs text-emerald-100/80 mt-0.5 max-w-2xl font-normal">
+                SMA A. Wahid Hasyim Tebuireng • Katalog Buku, Sirkulasi Peminjaman-Pengembalian, Denda Keterlambatan & Log Kunjungan Siswa
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            {activeTab === 'katalog' && (
+              <button
+                onClick={() => handleOpenModal('add_buku')}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Tambah Buku Baru</span>
+              </button>
+            )}
+            {activeTab === 'sirkulasi' && (
+              <button
+                onClick={() => handleOpenModal('add_pinjam')}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Transaksi Peminjaman</span>
+              </button>
+            )}
+            {activeTab === 'kunjungan' && (
+              <button
+                onClick={() => handleOpenModal('add_kunjungan')}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Catat Kunjungan Siswa</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* ALERT MESSAGE */}
       {msg && (
-        <div className={`p-4 rounded-xl border text-xs font-semibold ${msg.includes('Gagal') || msg.includes('error') ? 'bg-rose-50 border-rose-200 text-rose-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'}`}>
+        <div className={`p-4 rounded-xl border text-xs font-medium ${msg.includes('Gagal') || msg.includes('error') ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-emerald-50 border-emerald-200 text-emerald-900'}`}>
           {msg}
         </div>
       )}
 
       {/* TABS NAVIGATION */}
-      <div className="flex border-b border-slate-200 bg-white rounded-t-xl px-4 pt-3 space-x-2 overflow-x-auto">
+      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-1.5 flex flex-wrap gap-1.5">
         <button
           onClick={() => setActiveTab('katalog')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'katalog' 
-              ? 'border-teal-600 text-teal-700 bg-teal-50/50' 
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm' 
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="w-4 h-4 text-emerald-400" />
           <span>1. Katalog & Stok Buku</span>
         </button>
 
         <button
           onClick={() => setActiveTab('sirkulasi')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'sirkulasi' 
-              ? 'border-teal-600 text-teal-700 bg-teal-50/50' 
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm' 
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="w-4 h-4 text-blue-400" />
           <span>2. Sirkulasi Pinjam-Kembali</span>
         </button>
 
         <button
           onClick={() => setActiveTab('denda')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'denda' 
-              ? 'border-teal-600 text-teal-700 bg-teal-50/50' 
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm' 
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <DollarSign className="w-4 h-4" />
+          <DollarSign className="w-4 h-4 text-[#c8942a]" />
           <span>3. Rekap Denda Keterlambatan</span>
         </button>
 
         <button
           onClick={() => setActiveTab('kunjungan')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'kunjungan' 
-              ? 'border-teal-600 text-teal-700 bg-teal-50/50' 
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm' 
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <UserCheck className="w-4 h-4" />
+          <UserCheck className="w-4 h-4 text-purple-400" />
           <span>4. Data Kunjungan Perpustakaan</span>
         </button>
       </div>

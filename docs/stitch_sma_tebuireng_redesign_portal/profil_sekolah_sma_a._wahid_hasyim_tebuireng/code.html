@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profil Sekolah - SMA A. Wahid Hasyim Tebuireng Jombang</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with CDN Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Token Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#0d281e",
+            "on-primary-fixed-variant": "#324c41",
+            "secondary-container": "#6cf8bb",
+            "on-error": "#ffffff",
+            "outline-variant": "#c2c8c3",
+            "on-primary": "#ffffff",
+            "border-subtle": "rgba(24, 30, 27, 0.08)",
+            "gold-medal": "#E5B842",
+            "inverse-surface": "#2c322e",
+            "secondary-fixed-dim": "#4edea3",
+            "primary-fixed-dim": "#afcdbe",
+            "tertiary-fixed": "#ffe088",
+            "surface-container-highest": "#dee4df",
+            "surface-glass": "rgba(251, 251, 249, 0.82)",
+            "surface-bright": "#f5fbf5",
+            "surface-tint": "#496458",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#6ffbbe",
+            "surface-container-low": "#eff5f0",
+            "emerald-vibrant": "#16A34A",
+            "on-secondary-container": "#00714d",
+            "inverse-primary": "#afcdbe",
+            "on-tertiary-container": "#4f3e00",
+            "on-secondary-fixed": "#002113",
+            "border-gold": "rgba(212, 175, 55, 0.3)",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#424844",
+            "on-secondary": "#ffffff",
+            "on-surface": "#171d1a",
+            "forest-deep": "#0F382A",
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#171d1a",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#e9efea",
+            "on-tertiary-fixed": "#241a00",
+            "surface-card": "#F4F3EE",
+            "on-secondary-fixed-variant": "#005236",
+            "background": "#f5fbf5",
+            "surface-container-high": "#e4eae4",
+            "primary-fixed": "#cbe9da",
+            "surface-warm": "#FBFBF9",
+            "surface-dim": "#d5dbd6",
+            "error": "#ba1a1a",
+            "surface-variant": "#dee4df",
+            "secondary": "#006c49",
+            "tertiary-fixed-dim": "#e9c349",
+            "on-tertiary-fixed-variant": "#574500",
+            "primary": "#00110a",
+            "outline": "#727974",
+            "surface": "#f5fbf5",
+            "on-primary-fixed": "#052016",
+            "on-primary-container": "#749183",
+            "tertiary-container": "#cca830",
+            "inverse-on-surface": "#ecf2ed",
+            "tertiary": "#735c00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-3xl": "4.5rem",
+            "gutter-desktop": "2rem",
+            "container-max": "1280px",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "space-4xl": "6rem",
+            "space-md": "1rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-lg": ["Sora"],
+            "headline-md": ["Sora"],
+            "body-lg": ["Inter"],
+            "title-editorial": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Sora"],
+            "label-pill": ["Plus Jakarta Sans"],
+            "stat-counter": ["Sora"],
+            "body-md": ["Inter"],
+            "display-hero": ["Sora"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Sora"],
+            "headline-sm": ["Sora"]
+          },
+          "fontSize": {
+            "body-sm": ["14px", { "lineHeight": "22px", "letterSpacing": "0.005em", "fontWeight": "400" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "title-editorial": ["18px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-pill": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "stat-counter": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .shadow-forest-1 {
+      box-shadow: 0 2px 8px -2px rgba(13, 40, 30, 0.04), 0 1px 3px 0 rgba(13, 40, 30, 0.02);
+    }
+    .shadow-forest-2 {
+      box-shadow: 0 12px 24px -6px rgba(13, 40, 30, 0.08), 0 4px 8px -2px rgba(13, 40, 30, 0.03);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-gold-medal selection:text-forest-deep min-h-screen flex flex-col">
+<!-- TOP NAV BAR (Frosted Sticky Component) -->
+<header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-surface-glass dark:bg-forest-deep backdrop-blur-md border-b border-subtle dark:border-forest-deep shadow-sm dark:shadow-none">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop h-[76px] flex items-center justify-between">
+<!-- Brand Logo / Emblem -->
+<a class="flex items-center gap-3 transition-transform duration-200 hover:scale-[1.01]" href="#">
+<img alt="SMA A. Wahid Hasyim Tebuireng Logo" class="h-11 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UqGllxwPNEuFuq6N5h1_Vv7xGDM3bX8D-5TfyHHp3sWXoUHYep9-uscOO09t_rJpP6kkJunFHHcPXeP7rZpCwbICYv4PlsFklfXInONHM6jZ38H_FxOoEm0xmhoNctYoP6kkRhTnuQCadGE4T4bsz-H-pwZMAsQEv9YZpT-eM8mtB0dGF68lB2oopfxmuh1_EPlMYD_xFVJHmw69vnKu_lnkQB7bFHxSlmbGS9QHyz9KcTA46T71oDemI"/>
+<span class="sr-only">SMA A. Wahid Hasyim Tebuireng</span>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-7">
+<a class="text-label-pill font-label-pill text-on-surface-variant dark:text-outline-variant font-medium hover:text-forest-deep dark:hover:text-surface transition-colors duration-200" href="#">Beranda</a>
+<!-- Active Nav: Profil -->
+<a class="text-label-pill font-label-pill text-secondary dark:text-secondary-fixed font-bold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-1.5 after:h-1.5 after:rounded-full after:bg-gold-medal" href="#">Profil</a>
+<a class="text-label-pill font-label-pill text-on-surface-variant dark:text-outline-variant font-medium hover:text-forest-deep dark:hover:text-surface transition-colors duration-200" href="#">Kurikulum</a>
+<a class="text-label-pill font-label-pill text-on-surface-variant dark:text-outline-variant font-medium hover:text-forest-deep dark:hover:text-surface transition-colors duration-200" href="#">Prestasi</a>
+<a class="text-label-pill font-label-pill text-on-surface-variant dark:text-outline-variant font-medium hover:text-forest-deep dark:hover:text-surface transition-colors duration-200" href="#">Kehidupan Santri</a>
+<a class="text-label-pill font-label-pill text-on-surface-variant dark:text-outline-variant font-medium hover:text-forest-deep dark:hover:text-surface transition-colors duration-200" href="#">Berita</a>
+</nav>
+<!-- Trailing Action Buttons -->
+<div class="flex items-center gap-3">
+<button aria-label="Pencarian" class="p-2 text-forest-deep dark:text-inverse-primary hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-forest-deep text-surface font-label-pill text-label-pill font-bold shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-border-gold" href="#ppdb">
+          PPDB 2026/2027
+        </a>
+<!-- Mobile Menu Trigger -->
+<button aria-label="Buka Menu Navigasi" class="md:hidden p-2 text-forest-deep dark:text-inverse-primary">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT AREA -->
+<main class="flex-grow pt-[76px]">
+<!-- HERO SECTION -->
+<section class="relative min-h-[500px] md:min-h-[560px] flex items-end overflow-hidden pb-12 pt-20">
+<!-- Background Architecture with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Gedung Utama SMA A. Wahid Hasyim Tebuireng" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk738D15rrvwrUba6AUbNQOvFtkRuC_-nI3Tj0XZeL0-4qi1twujmLkSZ7a36s_at4deVLiczQz_uZEXaGzVEcAKbt2EARXZMLBeKcv3-0Xoca7-PN2CWU868Fqxg5EZMtcsmb4woFnlHzhLQoHXjaLh2BH0hXkBjUwhprjymkVAq5w3iQL5AVIM8T9fwV4d2ZoXdqbOVzRqrfPe7XHGXh8y6gWidJHhwfXVHq8tT_nK2YLSyWktOD"/>
+<!-- Deep forest gradient overlay preserving architectural dignity -->
+<div class="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/80 to-forest-deep/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-forest-deep/90 via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop w-full">
+<div class="max-w-3xl">
+<!-- Institutional Pill Badge -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-vibrant/20 border border-emerald-vibrant/40 backdrop-blur-md text-secondary-fixed font-label-caps text-label-caps mb-4 tracking-wider">
+<span class="w-2 h-2 rounded-full bg-gold-medal animate-pulse"></span>
+            PROFIL INSTITUSI • TEBUIRENG JOMBANG
+          </div>
+<!-- Hero Headline -->
+<h1 class="text-surface font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold tracking-tight mb-4">
+            Profil SMA A. Wahid Hasyim Tebuireng
+          </h1>
+<!-- Hero Subtitle -->
+<p class="text-surface-container-highest font-body-lg text-body-md md:text-body-lg mb-8 leading-relaxed max-w-2xl">
+            Mengenal lebih dekat sekolah yang memadukan pendidikan umum berkualitas tinggi, nilai luhur pesantren, dan pembentukan karakter generasi berwawasan global.
+          </p>
+</div>
+<!-- Tab Sub-Navigation (Editorial Pills Track) -->
+<div class="mt-4 pt-4 border-t border-surface/15 flex items-center overflow-x-auto no-scrollbar gap-2">
+<a class="px-5 py-2.5 rounded-full bg-surface-warm text-forest-deep font-label-pill text-label-pill font-bold shadow-forest-1 flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-gold-medal"></span>
+            Overview / Profil
+          </a>
+<a class="px-5 py-2.5 rounded-full bg-forest-deep/40 hover:bg-forest-deep/80 backdrop-blur-md text-surface-bright font-label-pill text-label-pill font-medium border border-white/10 hover:border-white/20 transition-all whitespace-nowrap" href="#sambutan">
+            Sambutan Kepala Sekolah
+          </a>
+<a class="px-5 py-2.5 rounded-full bg-forest-deep/40 hover:bg-forest-deep/80 backdrop-blur-md text-surface-bright font-label-pill text-label-pill font-medium border border-white/10 hover:border-white/20 transition-all whitespace-nowrap" href="#visi-misi">
+            Visi &amp; Misi
+          </a>
+<a class="px-5 py-2.5 rounded-full bg-forest-deep/40 hover:bg-forest-deep/80 backdrop-blur-md text-surface-bright font-label-pill text-label-pill font-medium border border-white/10 hover:border-white/20 transition-all whitespace-nowrap" href="#sejarah">
+            Sejarah Sekolah
+          </a>
+<a class="px-5 py-2.5 rounded-full bg-forest-deep/40 hover:bg-forest-deep/80 backdrop-blur-md text-surface-bright font-label-pill text-label-pill font-medium border border-white/10 hover:border-white/20 transition-all whitespace-nowrap" href="#fasilitas">
+            Fasilitas &amp; Asrama
+          </a>
+</div>
+</div>
+</section>
+<!-- SECTION: SIAPA KAMI? (Editorial Split 50:50) -->
+<section class="py-space-3xl max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Column: Visual Activity & Accreditation Badge -->
+<div class="lg:col-span-6 relative">
+<div class="relative rounded-2xl overflow-hidden shadow-forest-2 border border-border-subtle group">
+<img alt="Kegiatan kolaboratif santri dan siswi di perpustakaan SMA A. Wahid Hasyim" class="w-full h-[420px] md:h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1XPZiWzDS3K5ZGjYwE8AGHaimJ3AkieGqR8EJtxvmjEioIAGLFPY6dIoVifWqKzzjKSDekUoITo-5bGsFpzJPpgGDuAGyVawESEP6VWd0qb4n4IGOU3Ol3tLUDWBxB4dj7zcpSMqBnkmbg63kf2O_e3y5UEysTP6kT2zsQxob73x6HOkFhuoD8jYge8O70g2oXjgmH4jZUleTD2iNrwWKOsqWu43Y_J97bdalBWtZyfl74ugYFFYFeNHvA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+</div>
+<!-- Floating Prestige Badge Overlay -->
+<div class="absolute -bottom-6 -right-2 md:bottom-6 md:-right-6 bg-surface-warm/95 backdrop-blur-md p-5 rounded-xl border border-border-gold shadow-forest-2 max-w-xs flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-forest-deep flex items-center justify-center text-gold-medal flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-bold text-forest-deep leading-tight">Terakreditasi A</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">Predikat Unggul (BAN-S/M)</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Editorial Narrative -->
+<div class="lg:col-span-6 space-y-5">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-vibrant/10 text-forest-deep font-label-caps text-label-caps tracking-widest uppercase">
+<span class="material-symbols-outlined text-[16px] text-emerald-vibrant">auto_awesome</span>
+            Selayang Pandang
+          </div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-forest-deep tracking-tight leading-tight">
+            Harmonisasi Sains Modern &amp; Nilai Keislaman Pesantren
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<span class="font-semibold text-forest-deep">SMA A. Wahid Hasyim Tebuireng</span> adalah institusi pendidikan menengah atas unggulan yang bernaung di bawah <span class="text-forest-deep font-semibold">Pondok Pesantren Tebuireng Jombang</span>. Didirikan dengan memadukan kurikulum nasional Kemendikbudristek secara komprehensif bersama khazanah keilmuan kitab kuning dan adab kepesantrenan.
+          </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Kami mencetak lulusan yang tidak hanya mahir dalam sains, teknologi, serta nalar riset global, namun juga kokoh memegang tauhid, bertutur luhur, dan siap memimpin peradaban dengan keteladanan akhlak santri.
+          </p>
+<!-- Core Metrics Highlight -->
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-border-subtle">
+<div class="p-4 rounded-xl bg-surface-card border border-border-subtle">
+<p class="font-stat-counter text-stat-counter font-extrabold text-forest-deep">94%</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Diterima di PTN &amp; Kampus Luar Negeri</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-card border border-border-subtle">
+<p class="font-stat-counter text-stat-counter font-extrabold text-secondary">100%</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Lingkungan Pembiasaan Adab &amp; Tahfidz</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: IDENTITAS SEKOLAH (Official Data & Credentials) -->
+<section class="py-space-2xl bg-surface-container-low border-y border-border-subtle">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="font-label-caps text-label-caps text-secondary font-bold tracking-widest uppercase">Legalitas &amp; Identitas</span>
+<h2 class="font-headline-md text-headline-md font-bold text-forest-deep mt-2">Informasi Resmi Institusi</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Data pokok pendidikan dan status operasional resmi SMA A. Wahid Hasyim Tebuireng.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Card 1 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Nama Resmi</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">SMA A. Wahid Hasyim Tebuireng</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Akronim resmi: SMAWH Tebuireng</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">numbers</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">NPSN</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">20503433</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Kementerian Pendidikan Dasar &amp; Menengah</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-gold-medal mb-4">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Status Akreditasi</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Akreditasi A (Unggul)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">SK BAN-S/M No: 1347/BAN-SM/SK/2021</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">corporate_fare</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Status Sekolah</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Swasta Berbasis Pesantren</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Boarding School Terpadu Putra &amp; Putri</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">mosque</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Naungan Yayasan</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Pondok Pesantren Tebuireng</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Hadratusysyaikh KH. M. Hasyim Asy'ari</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Kurikulum</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Merdeka &amp; Khazanah Salaf</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Kemendikbudristek + Kitab Turats</p>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Bahasa Pengantar</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Trilingual Ecosystem</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Bahasa Indonesia, Arab &amp; Inggris</p>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface-lowest p-6 rounded-2xl border border-border-subtle shadow-forest-1 hover:shadow-forest-2 hover:-translate-y-1 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-emerald-vibrant/10 flex items-center justify-center text-forest-deep mb-4">
+<span class="material-symbols-outlined text-[22px]">location_on</span>
+</div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Domisili Kampus</p>
+<p class="font-title-editorial text-title-editorial font-bold text-forest-deep mt-1">Jombang, Jawa Timur</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Jl. Irian Jaya No. 10, Cukir, Diwek 61471</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: NILAI PENDIDIKAN KAMI (4 Core Pillars) -->
+<section class="py-space-3xl max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<span class="font-label-caps text-label-caps text-secondary font-bold tracking-widest uppercase">Prinsip &amp; Nilai Dasar</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-forest-deep mt-1">
+            Empat Pilar Pendidikan Tebuireng
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Kerangka komprehensif yang menjamin santri berkembang seimbang antara intelektual, spiritualitas, etika moral, dan daya juang prestasi.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pilar 1: Akademik -->
+<div class="bg-surface-card p-8 rounded-2xl border border-border-subtle flex flex-col justify-between hover:border-gold transition-all duration-300">
+<div>
+<div class="w-12 h-12 rounded-xl bg-forest-deep text-surface flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[26px]">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep mb-3">1. Keunggulan Akademik</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Membangun nalar kritis analitis, kebiasaan riset sains terapan, serta persiapan intensif menembus universitas bergengsi di dalam dan luar negeri.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center gap-2 text-forest-deep font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px] text-emerald-vibrant">check_circle</span>
+            STEM &amp; Kesiapan Global
+          </div>
+</div>
+<!-- Pilar 2: Keislaman -->
+<div class="bg-surface-card p-8 rounded-2xl border border-border-subtle flex flex-col justify-between hover:border-gold transition-all duration-300">
+<div>
+<div class="w-12 h-12 rounded-xl bg-forest-deep text-gold-medal flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[26px]">auto_stories</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep mb-3">2. Ruh Keislaman</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Penanaman Aqidah Ahlussunnah wal Jama'ah an-Nahdliyyah, penguasaan literatur kitab kuning salaf, serta program tahsin dan tahfidz Al-Qur'an bersanad.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center gap-2 text-forest-deep font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px] text-emerald-vibrant">check_circle</span>
+            Aswaja &amp; Tahfidz Al-Qur'an
+          </div>
+</div>
+<!-- Pilar 3: Karakter -->
+<div class="bg-surface-card p-8 rounded-2xl border border-border-subtle flex flex-col justify-between hover:border-gold transition-all duration-300">
+<div>
+<div class="w-12 h-12 rounded-xl bg-forest-deep text-surface flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[26px]">volunteer_activism</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep mb-3">3. Karakter &amp; Adab</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Membentuk akhlakul karimah, ketawadhuan khas santri, kejujuran integritas, serta kemandirian hidup berdampingan di lingkungan asrama pesantren.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center gap-2 text-forest-deep font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px] text-emerald-vibrant">check_circle</span>
+            Integritas &amp; Kemandirian
+          </div>
+</div>
+<!-- Pilar 4: Prestasi -->
+<div class="bg-surface-card p-8 rounded-2xl border border-border-subtle flex flex-col justify-between hover:border-gold transition-all duration-300">
+<div>
+<div class="w-12 h-12 rounded-xl bg-forest-deep text-gold-medal flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[26px]">emoji_events</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep mb-3">4. Daya Prestasi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Inkubasi talenta melalui keikutsertaan aktif dalam Olimpiade Sains Nasional (OSN), Karya Ilmiah Remaja (KIR), debat multi-bahasa, dan seni islami.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center gap-2 text-forest-deep font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px] text-emerald-vibrant">check_circle</span>
+            Kompetitif Nasional &amp; Global
+          </div>
+</div>
+</div>
+</section>
+<!-- SECTION: CTA EKSPLORASI SUB-HALAMAN (Bento Interactive Navigation) -->
+<section class="py-space-2xl bg-forest-deep text-surface">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<span class="font-label-caps text-label-caps text-gold-medal font-bold tracking-widest uppercase">Eksplorasi Lanjutan</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-surface mt-1">
+              Kenali SMA A. Wahid Hasyim Lebih Dalam
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline-variant max-w-md">
+            Pilihlah portal informasi di bawah untuk menyimak pesan pimpinan, visi institusi, perjalanan sejarah, maupun sarana prasarana penunjang santri.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Sub-Card 1: Sambutan KS -->
+<a class="group bg-primary-container p-6 rounded-2xl border border-white/10 hover:border-gold-medal transition-all duration-300 flex flex-col justify-between h-64" href="#sambutan">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface/10 flex items-center justify-center text-gold-medal group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">record_voice_over</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-surface mt-6 group-hover:text-gold-medal transition-colors">Sambutan Kepala Sekolah</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mt-2 line-clamp-2">Pesan kepemimpinan dari Ibu Ni'maturrohmah, M.Pd. tentang arah dan orientasi pendidikan.</p>
+</div>
+<div class="flex items-center gap-2 text-gold-medal font-label-caps text-label-caps pt-4">
+<span>BACA SAMBUTAN</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Sub-Card 2: Visi & Misi -->
+<a class="group bg-primary-container p-6 rounded-2xl border border-white/10 hover:border-gold-medal transition-all duration-300 flex flex-col justify-between h-64" href="#visi-misi">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface/10 flex items-center justify-center text-gold-medal group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-surface mt-6 group-hover:text-gold-medal transition-colors">Visi &amp; Misi Sekolah</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mt-2 line-clamp-2">Cita-cita strategis dan target pencapaian mutu lulusan SMA A. Wahid Hasyim.</p>
+</div>
+<div class="flex items-center gap-2 text-gold-medal font-label-caps text-label-caps pt-4">
+<span>LIHAT VISI MISI</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Sub-Card 3: Sejarah & Warisan -->
+<a class="group bg-primary-container p-6 rounded-2xl border border-white/10 hover:border-gold-medal transition-all duration-300 flex flex-col justify-between h-64" href="#sejarah">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface/10 flex items-center justify-center text-gold-medal group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">history_edu</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-surface mt-6 group-hover:text-gold-medal transition-colors">Jejak Sejarah &amp; KH. Wahid Hasyim</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mt-2 line-clamp-2">Warisan intelektual dan nasionalisme dari tokoh Pahlawan Nasional KH. A. Wahid Hasyim.</p>
+</div>
+<div class="flex items-center gap-2 text-gold-medal font-label-caps text-label-caps pt-4">
+<span>TELUSURI SEJARAH</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Sub-Card 4: Fasilitas & Asrama -->
+<a class="group bg-primary-container p-6 rounded-2xl border border-white/10 hover:border-gold-medal transition-all duration-300 flex flex-col justify-between h-64" href="#fasilitas">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface/10 flex items-center justify-center text-gold-medal group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-surface mt-6 group-hover:text-gold-medal transition-colors">Fasilitas &amp; Kehidupan Asrama</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mt-2 line-clamp-2">Laboratorium riset, sarana olahraga, perpustakaan modern, dan kenyamanan hunian santri.</p>
+</div>
+<div class="flex items-center gap-2 text-gold-medal font-label-caps text-label-caps pt-4">
+<span>TUR FASILITAS</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Institutional Editorial Component) -->
+<footer class="w-full relative mt-space-4xl bg-forest-deep dark:bg-primary border-t border-border-gold dark:border-forest-deep text-surface">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop pt-space-3xl pb-space-xl grid grid-cols-1 md:grid-cols-4 gap-space-xl">
+<!-- Brand & Address Column -->
+<div class="space-y-4 md:col-span-1">
+<div class="flex items-center gap-3">
+<img alt="Logo SMA A. Wahid Hasyim Tebuireng" class="h-12 w-auto bg-white/10 p-1.5 rounded-lg" src="https://lh3.googleusercontent.com/aida/AEtjO1UqGllxwPNEuFuq6N5h1_Vv7xGDM3bX8D-5TfyHHp3sWXoUHYep9-uscOO09t_rJpP6kkJunFHHcPXeP7rZpCwbICYv4PlsFklfXInONHM6jZ38H_FxOoEm0xmhoNctYoP6kkRhTnuQCadGE4T4bsz-H-pwZMAsQEv9YZpT-eM8mtB0dGF68lB2oopfxmuh1_EPlMYD_xFVJHmw69vnKu_lnkQB7bFHxSlmbGS9QHyz9KcTA46T71oDemI"/>
+<div>
+<h3 class="font-title-editorial text-title-editorial font-bold text-surface tracking-tight leading-none">SMA A. Wahid Hasyim</h3>
+<p class="font-label-caps text-label-caps text-gold-medal tracking-wider mt-1">TEBUIRENG JOMBANG</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant leading-relaxed">
+          Pondok Pesantren Tebuireng Jombang, Jl. Irian Jaya No. 10, Cukir, Kec. Diwek, Kabupaten Jombang, Jawa Timur 61471.
+        </p>
+<p class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant">
+          Telp: (0321) 861-133 • Email: info@smawh-tebuireng.sch.id
+        </p>
+</div>
+<!-- Links Column 1: Profil Pesantren -->
+<div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-gold-medal mb-4">Profil &amp; Institusi</h4>
+<ul class="space-y-2.5">
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Profil Pesantren</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-gold-medal dark:text-gold-medal font-semibold" href="#">Direktori Guru</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Akreditasi &amp; Legalitas</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Fasilitas &amp; Asrama</a>
+</li>
+</ul>
+</div>
+<!-- Links Column 2: Akademik -->
+<div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-gold-medal mb-4">Akademik &amp; Santri</h4>
+<ul class="space-y-2.5">
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Kalender Akademik</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Portal Orang Tua</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Program Tahfidz &amp; Kitab</a>
+</li>
+<li>
+<a class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant hover:text-gold-medal dark:hover:text-gold-medal transition-colors duration-150" href="#">Kebijakan Privasi</a>
+</li>
+</ul>
+</div>
+<!-- Links Column 3: Pendaftaran PPDB -->
+<div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-gold-medal mb-4">Penerimaan Siswa Baru</h4>
+<p class="font-body-sm text-body-sm text-surface-container-highest dark:text-outline-variant mb-4 leading-relaxed">
+          Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 telah dibuka secara daring.
+        </p>
+<a class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-gold-medal text-forest-deep font-label-caps text-label-caps tracking-wider hover:brightness-105 active:scale-[0.98] transition-all font-bold" href="#ppdb">
+          DAFTAR PPDB 2026/2027
+        </a>
+</div>
+</div>
+<!-- Copyright Sub-bar -->
+<div class="border-t border-white/10 py-6 text-center">
+<p class="font-body-sm text-body-sm text-surface-container-highest/70">
+        © 2026 SMA A. Wahid Hasyim Tebuireng Jombang. Seluruh Hak Cipta Dilindungi.
+      </p>
+</div>
+</footer>
+</body></html>

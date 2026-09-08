@@ -49,24 +49,34 @@ const PersuratanPage = () => {
     status: 'Diarsipkan'
   });
 
-  // Letter Generator Form State
+  // Letter Generator Form State (Official Reference: SMA A. Wahid Hasyim Tebuireng)
   const [genData, setGenData] = useState({
-    selectedTemplate: 'SK-AKTIF',
-    no_surat: '',
+    selectedTemplate: 'UND-RESMI',
+    layout_type: 'undangan', // 'undangan' (Surat Biasa/Edaran) atau 'tugas' (Surat Tugas Resmi Tabel)
+    bidang: 'MN',
+    no_surat: '2283/104.13.2/SMA.4/WH/MN/2026',
     tanggal_surat: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
     lampiran: '-',
-    perihal: 'Surat Keterangan Siswa Aktif',
-    penerima_tujuan: 'Siswa / Orang Tua Wali',
-    nama_subjek: 'Ahmad Subagyo',
-    nis_nip: '2026001 / Class X-1',
-    isi_custom: 'Yang bertanda tangan di bawah ini Kepala SMA KH. A. Wahid Hasyim Tebuireng menerangkan bahwa nama yang tercantum di atas adalah benar-benar siswa aktif tahun ajaran 2026/2027 dan berkelakuan baik.',
-    penandatangan_nama: 'Dr. H. Ahmad Zaki, M.Pd.',
+    perihal: 'Undangan Apel Pelantikan MPK OBTP',
+    penerima_tujuan: 'Bapak/Ibu Guru & Karyawan',
+    nama_subjek: '-',
+    nis_nip: '-',
+    isi_custom: "Dalam rangka Pelantikan MPK OBTP, kami mengundang seluruh Bapak/Ibu Guru & Karyawan SMA A. Wahid Hasyim Tebuireng untuk mengikuti apel yang akan dilaksanakan pada:\n\nHari : Selasa\nTanggal : 01 September 2026\nPukul : 07.00 WIB\nTempat : Lapangan SMA. A. Wahid Hasyim\nAgenda : Apel Pelantikan MPK OBTP\nKetentuan : Mengenakan Seragam Merah Marron\n\nMengingat pentingnya agenda tersebut, kami mengharapkan kehadiran Bapak/Ibu tepat waktu.\nDemikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, kami ucapkan terima kasih.",
+    // Field khusus Surat Tugas (Tabel Resmi)
+    tugas_pemberi: 'Kepala SMA A. Wahid Hasyim Tebuireng',
+    tugas_nama: "Pengawalan bersama seluruh pimpinan, BK, dan Guru piket yayasan KHM. Hasyim Asy'ari terkait kepulangan/kembalinya santri ke pondok",
+    tugas_penerima: 'Tercantum dalam lampiran',
+    tugas_waktu: 'Terjadwal dalam lampiran',
+    tugas_keterangan: "1. Surat tugas ini diberikan kepada yang bersangkutan untuk dilaksanakan dengan sebaik-baiknya.\n2. Apabila terdapat kekeliruan dalam penetapan surat tugas ini, akan dibetulkan sebagaimana mestinya.",
+    // Penandatangan Resmi (Acuan: Ni'maturrohmah, M. Pd)
+    penandatangan_nama: "Ni'maturrohmah, M. Pd",
     penandatangan_jabatan: 'Kepala Sekolah'
   });
 
   useEffect(() => {
     fetchSuratList();
     fetchTemplateList();
+    handleGenerateNoSurat('Surat Keluar', 'MN');
   }, [filterJenis]);
 
   const fetchSuratList = async () => {
@@ -92,9 +102,9 @@ const PersuratanPage = () => {
     }
   };
 
-  const handleGenerateNoSurat = async (jenis = 'Surat Keluar') => {
+  const handleGenerateNoSurat = async (jenis = 'Surat Keluar', bidang = 'MN') => {
     try {
-      const res = await api.get(`/persuratan/generate-nomor?jenis=${jenis}`);
+      const res = await api.get(`/persuratan/generate-nomor?jenis=${jenis}&bidang=${bidang}`);
       if (res.data && res.data.no_surat) {
         setFormData(prev => ({ ...prev, no_surat: res.data.no_surat }));
         setGenData(prev => ({ ...prev, no_surat: res.data.no_surat }));
@@ -180,16 +190,17 @@ const PersuratanPage = () => {
   const handleSaveGeneratedToArchive = async () => {
     setLoading(true);
     try {
+      const isTugas = genData.layout_type === 'tugas';
       const payload = {
         jenis: 'Surat Keluar',
-        kategori: 'Kesiswaan',
+        kategori: isTugas ? 'Kepegawaian' : (genData.bidang === 'KS' ? 'Kesiswaan' : 'Umum'),
         kerahasiaan: 'Biasa',
-        no_surat: genData.no_surat || '001/SMA-AWH/SK/IX/2026',
-        perihal: genData.perihal,
-        pengirim_penerima: genData.penerima_tujuan,
+        no_surat: genData.no_surat || '2283/104.13.2/SMA.4/WH/MN/2026',
+        perihal: isTugas ? (genData.tugas_nama || genData.perihal) : genData.perihal,
+        pengirim_penerima: isTugas ? (genData.tugas_penerima || 'Guru & Karyawan') : genData.penerima_tujuan,
         tanggal: new Date().toISOString().split('T')[0],
-        isi_surat: genData.isi_custom,
-        lokasi_arsip: 'Digital Archive / Generated Letters',
+        isi_surat: isTugas ? genData.tugas_keterangan : genData.isi_custom,
+        lokasi_arsip: 'Digital Archive / Surat Resmi Sekolah',
         status: 'Selesai'
       };
       const res = await api.post('/persuratan/surat', payload);
@@ -206,13 +217,18 @@ const PersuratanPage = () => {
   };
 
   const handleSelectTemplate = (tpl) => {
+    const isTugas = tpl.kode_template === 'ST-JAGA' || tpl.kode_template?.startsWith('ST-');
+    const bidang = tpl.kategori === 'Kesiswaan' ? 'KS' : (tpl.kategori === 'Kurikulum' ? 'PP' : 'MN');
     setGenData(prev => ({
       ...prev,
       selectedTemplate: tpl.kode_template,
+      layout_type: isTugas ? 'tugas' : 'undangan',
+      bidang: bidang,
       perihal: tpl.nama_template,
-      isi_custom: tpl.format_konten
+      isi_custom: tpl.format_konten,
+      tugas_nama: isTugas ? tpl.nama_template : prev.tugas_nama,
     }));
-    handleGenerateNoSurat('Surat Keluar');
+    handleGenerateNoSurat('Surat Keluar', bidang);
   };
 
   // Search Filter
@@ -227,101 +243,109 @@ const PersuratanPage = () => {
   return (
     <div className="space-y-6 pb-12">
       {/* HEADER SECTION */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700">
-            <Mail className="w-8 h-8" />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-slate-800">Persuratan & Pengarsipan Digital</h1>
-            <p className="text-xs text-slate-500">
-              Pengelolaan Surat Masuk & Keluar, Penomoran Otomatis, Pembuat Surat Berkop Resmi Sekolah, & Arsip Digital Searchable.
-            </p>
-          </div>
-        </div>
+      <div className="print:hidden bg-gradient-to-r from-[#0d281e] via-[#0f3527] to-[#124231] rounded-2xl p-6 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#c8942a]/15 to-transparent rounded-full blur-2xl pointer-events-none -mr-20 -mt-20"></div>
 
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => {
-              setActiveTab('generator');
-              handleGenerateNoSurat('Surat Keluar');
-            }}
-            className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow transition-colors"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>+ Pembuat Surat Berkop</span>
-          </button>
-          <button
-            onClick={() => handleOpenModal('add_surat')}
-            className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg shadow transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            <span>+ Registrasi Surat</span>
-          </button>
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="flex items-center space-x-3.5">
+            <div className="p-3 bg-white/10 border border-white/10 rounded-2xl text-[#fde047] backdrop-blur-sm shrink-0">
+              <Mail className="w-7 h-7" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold backdrop-blur-sm mb-1.5 border border-white/10">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Tata Usaha & Administrasi Persuratan</span>
+              </div>
+              <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Persuratan & Pengarsipan Digital</h1>
+              <p className="text-xs text-emerald-100/80 mt-0.5 max-w-2xl font-normal">
+                SMA A. Wahid Hasyim Tebuireng • Registrasi Surat Masuk & Keluar, Penomoran Otomatis, Template Berkop Resmi & Pengarsipan Elektronik
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <button
+              onClick={() => {
+                setActiveTab('generator');
+                handleGenerateNoSurat('Surat Keluar', genData.bidang || 'MN');
+              }}
+              className="inline-flex items-center space-x-1.5 px-4 py-2.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>+ Buat Surat Berkop</span>
+            </button>
+            <button
+              onClick={() => handleOpenModal('add_surat')}
+              className="inline-flex items-center space-x-1.5 px-4 py-2.5 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>+ Registrasi Surat</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* ALERT MESSAGE */}
       {msg && (
-        <div className={`p-4 rounded-xl border text-xs font-semibold ${msg.includes('Gagal') || msg.includes('error') ? 'bg-rose-50 border-rose-200 text-rose-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'}`}>
+        <div className={`print:hidden p-4 rounded-xl border text-xs font-medium ${msg.includes('Gagal') || msg.includes('error') ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-emerald-50 border-emerald-200 text-emerald-900'}`}>
           {msg}
         </div>
       )}
 
       {/* TABS NAVIGATION */}
-      <div className="flex border-b border-slate-200 bg-white rounded-t-xl px-4 pt-3 space-x-2 overflow-x-auto">
+      <div className="print:hidden bg-white rounded-2xl border border-slate-200/90 shadow-sm p-1.5 flex flex-wrap gap-1.5">
         <button
           onClick={() => setActiveTab('surat')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'surat'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Inbox className="w-4 h-4" />
+          <Inbox className="w-4 h-4 text-emerald-400" />
           <span>1. Registrasi Surat Masuk & Keluar</span>
         </button>
 
         <button
           onClick={() => setActiveTab('generator')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'generator'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <FileText className="w-4 h-4" />
+          <FileText className="w-4 h-4 text-blue-400" />
           <span>2. Pembuat Surat Berkop Resmi</span>
         </button>
 
         <button
           onClick={() => setActiveTab('arsip')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'arsip'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Archive className="w-4 h-4" />
+          <Archive className="w-4 h-4 text-[#c8942a]" />
           <span>3. Arsip Digital & Metadata</span>
         </button>
 
         <button
           onClick={() => setActiveTab('template')}
-          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition-colors border-b-2 ${
+          className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
             activeTab === 'template'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
-              : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#0d281e] text-white shadow-sm'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Building className="w-4 h-4" />
+          <Building className="w-4 h-4 text-purple-400" />
           <span>4. Master Template Surat</span>
         </button>
       </div>
 
       {/* FILTER & SEARCH BAR (for tab surat & arsip) */}
       {(activeTab === 'surat' || activeTab === 'arsip') && (
-        <div className="bg-white p-4 border-x border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="print:hidden bg-white p-4 border-x border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div className="flex items-center space-x-2 w-full md:w-auto">
             <div className="relative w-full max-w-xs">
               <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
@@ -453,23 +477,53 @@ const PersuratanPage = () => {
             {activeTab === 'generator' && (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* CONTROL PANEL FORM */}
-                <div className="lg:col-span-5 space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                <div className="print:hidden lg:col-span-5 space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
                   <div className="flex items-center justify-between border-b pb-3">
                     <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center space-x-1.5">
                       <Sparkles className="w-4 h-4 text-emerald-600" />
                       <span>Form Generator Surat Resmi</span>
                     </h3>
                     <button
-                      onClick={() => handleGenerateNoSurat('Surat Keluar')}
+                      onClick={() => handleGenerateNoSurat('Surat Keluar', genData.bidang || 'MN')}
                       className="text-[10px] text-emerald-700 font-bold bg-emerald-100 hover:bg-emerald-200 px-2 py-1 rounded"
+                      title="Hitung nomor urut otomatis berikutnya"
                     >
                       Auto No. Surat
                     </button>
                   </div>
 
                   <div className="space-y-3 text-xs">
+                    {/* TIPE LAYOUT SURAT */}
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Pilih Template Surat</label>
+                      <label className="block font-semibold text-slate-700 mb-1">Format Layout Surat</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setGenData(prev => ({ ...prev, layout_type: 'undangan' }))}
+                          className={`py-1.5 px-2 text-xs font-semibold rounded-md border text-center transition-colors ${
+                            genData.layout_type === 'undangan'
+                              ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                              : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
+                          }`}
+                        >
+                          Surat Biasa / Undangan
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setGenData(prev => ({ ...prev, layout_type: 'tugas' }))}
+                          className={`py-1.5 px-2 text-xs font-semibold rounded-md border text-center transition-colors ${
+                            genData.layout_type === 'tugas'
+                              ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                              : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
+                          }`}
+                        >
+                          Surat Tugas (Tabel Resmi)
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block font-semibold text-slate-700 mb-1">Pilih Template Surat Siap Pakai</label>
                       <select
                         value={genData.selectedTemplate}
                         onChange={(e) => {
@@ -486,9 +540,9 @@ const PersuratanPage = () => {
                       </select>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="block font-semibold text-slate-700 mb-1">Nomor Surat Official</label>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="col-span-2">
+                        <label className="block font-semibold text-slate-700 mb-1">Nomor Surat Baku</label>
                         <input
                           type="text"
                           value={genData.no_surat}
@@ -496,6 +550,26 @@ const PersuratanPage = () => {
                           className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 font-mono text-[11px] font-bold text-emerald-900"
                         />
                       </div>
+                      <div>
+                        <label className="block font-semibold text-slate-700 mb-1">Bidang</label>
+                        <select
+                          value={genData.bidang || 'MN'}
+                          onChange={(e) => {
+                            const newBidang = e.target.value;
+                            setGenData(prev => ({ ...prev, bidang: newBidang }));
+                            handleGenerateNoSurat('Surat Keluar', newBidang);
+                          }}
+                          className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 font-semibold"
+                        >
+                          <option value="MN">MN (Umum)</option>
+                          <option value="KS">KS (Kesiswaan)</option>
+                          <option value="PP">PP (Kurikulum)</option>
+                          <option value="TU">TU (Tata Usaha)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
                       <div>
                         <label className="block font-semibold text-slate-700 mb-1">Tanggal Surat</label>
                         <input
@@ -505,60 +579,134 @@ const PersuratanPage = () => {
                           className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
                         />
                       </div>
-                    </div>
-
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Perihal / Hal</label>
-                      <input
-                        type="text"
-                        value={genData.perihal}
-                        onChange={(e) => setGenData({ ...genData, perihal: e.target.value })}
-                        className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Penerima / Tujuan Surat</label>
-                      <input
-                        type="text"
-                        value={genData.penerima_tujuan}
-                        onChange={(e) => setGenData({ ...genData, penerima_tujuan: e.target.value })}
-                        className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block font-semibold text-slate-700 mb-1">Nama Subjek / Ybs</label>
+                        <label className="block font-semibold text-slate-700 mb-1">Lampiran</label>
                         <input
                           type="text"
-                          value={genData.nama_subjek}
-                          onChange={(e) => setGenData({ ...genData, nama_subjek: e.target.value })}
-                          className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-semibold text-slate-700 mb-1">NIS / NIP / Kelas</label>
-                        <input
-                          type="text"
-                          value={genData.nis_nip}
-                          onChange={(e) => setGenData({ ...genData, nis_nip: e.target.value })}
+                          value={genData.lampiran}
+                          onChange={(e) => setGenData({ ...genData, lampiran: e.target.value })}
+                          placeholder="-"
                           className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
                         />
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Isi Konten Surat</label>
-                      <textarea
-                        rows={4}
-                        value={genData.isi_custom}
-                        onChange={(e) => setGenData({ ...genData, isi_custom: e.target.value })}
-                        className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    {/* FORM SESUAI TIPE LAYOUT */}
+                    {genData.layout_type === 'tugas' ? (
+                      <div className="space-y-3 pt-2 border-t border-slate-200">
+                        <span className="text-[11px] font-bold text-slate-600 block uppercase">Parameter Surat Tugas (Tabel)</span>
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">1. Yang Memberi Tugas</label>
+                          <input
+                            type="text"
+                            value={genData.tugas_pemberi}
+                            onChange={(e) => setGenData({ ...genData, tugas_pemberi: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">2. Nama Tugas / Deskripsi</label>
+                          <textarea
+                            rows={2}
+                            value={genData.tugas_nama}
+                            onChange={(e) => setGenData({ ...genData, tugas_nama: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="block font-semibold text-slate-700 mb-1">3. Nama Yang Diberi Tugas</label>
+                            <input
+                              type="text"
+                              value={genData.tugas_penerima}
+                              onChange={(e) => setGenData({ ...genData, tugas_penerima: e.target.value })}
+                              className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 mb-1">4. Waktu Pelaksanaan</label>
+                            <input
+                              type="text"
+                              value={genData.tugas_waktu}
+                              onChange={(e) => setGenData({ ...genData, tugas_waktu: e.target.value })}
+                              className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">5. Keterangan / Poin Penugasan</label>
+                          <textarea
+                            rows={3}
+                            value={genData.tugas_keterangan}
+                            onChange={(e) => setGenData({ ...genData, tugas_keterangan: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3 pt-2 border-t border-slate-200">
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">Perihal / Hal</label>
+                          <input
+                            type="text"
+                            value={genData.perihal}
+                            onChange={(e) => setGenData({ ...genData, perihal: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">Penerima / Tujuan Surat</label>
+                          <input
+                            type="text"
+                            value={genData.penerima_tujuan}
+                            onChange={(e) => setGenData({ ...genData, penerima_tujuan: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="block font-semibold text-slate-700 mb-1">Nama Subjek / Ybs (Opsional)</label>
+                            <input
+                              type="text"
+                              value={genData.nama_subjek}
+                              onChange={(e) => setGenData({ ...genData, nama_subjek: e.target.value })}
+                              className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 mb-1">NIS / NIP / Kelas</label>
+                            <input
+                              type="text"
+                              value={genData.nis_nip}
+                              onChange={(e) => setGenData({ ...genData, nis_nip: e.target.value })}
+                              className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block font-semibold text-slate-700 mb-1">Isi Konten Surat</label>
+                          <textarea
+                            rows={4}
+                            value={genData.isi_custom}
+                            onChange={(e) => setGenData({ ...genData, isi_custom: e.target.value })}
+                            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* PENANDATANGAN */}
+                    <div className="pt-2 border-t border-slate-200">
+                      <label className="block font-semibold text-slate-700 mb-1">Penandatangan Resmi</label>
+                      <input
+                        type="text"
+                        value={genData.penandatangan_nama}
+                        onChange={(e) => setGenData({ ...genData, penandatangan_nama: e.target.value })}
+                        className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 font-semibold"
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 pt-2 border-t">
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
                       <button
                         type="button"
                         onClick={() => window.print()}
@@ -580,60 +728,171 @@ const PersuratanPage = () => {
                 </div>
 
                 {/* PREVIEW KOP SURAT RESMI */}
-                <div className="lg:col-span-7 bg-white p-8 rounded-xl border border-slate-300 shadow-md font-serif text-slate-900 space-y-6">
-                  {/* HEADER KOP RESMI */}
-                  <div className="text-center border-b-4 border-double border-slate-900 pb-3 relative">
-                    <div className="space-y-0.5">
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-slate-700">YAYASAN BODRI TEBUIRENG</h4>
-                      <h2 className="text-lg font-black uppercase tracking-wider text-emerald-900">SMA KH. A. WAHID HASYIM</h2>
-                      <p className="text-[10px] font-bold text-slate-600 uppercase">STATUS: TERAKREDITASI A (UNGGUL) | NSS: 302050401001 NPSN: 20504001</p>
-                      <p className="text-[9px] italic text-slate-500">Jl. Irian Jaya No. 55 Tebuireng, Cukir, Diwek, Jombang 61471 | Telp: (0321) 861123</p>
-                    </div>
-                  </div>
-
-                  {/* SURAT BODY */}
-                  <div className="space-y-4 text-xs font-sans">
-                    <div className="flex justify-between items-start text-xs border-b border-slate-100 pb-2 font-mono">
-                      <div>
-                        <p><strong>Nomor</strong> : {genData.no_surat || '001/SMA-AWH/SK/IX/2026'}</p>
-                        <p><strong>Lamp.</strong> : {genData.lampiran}</p>
-                        <p><strong>Hal</strong> : {genData.perihal}</p>
+                <div className="lg:col-span-7 bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-sm font-serif text-slate-900 space-y-5 print:p-0 print:border-none print:shadow-none print:w-full print:m-0">
+                  {/* HEADER KOP RESMI (SESUAI DOKUMEN ASLI) */}
+                  <div className="border-b-2 border-slate-900 pb-1">
+                    <div className="flex items-center gap-4 pb-2 border-b border-slate-900">
+                      {/* Logo Sekolah di Kiri */}
+                      <div className="w-20 md:w-24 shrink-0 flex items-center justify-center">
+                        <img
+                          src="/logo.png"
+                          alt="Logo SMA A. Wahid Hasyim"
+                          className="w-20 h-auto max-h-24 object-contain"
+                        />
                       </div>
-                      <div className="text-right">
-                        <p>Jombang, {genData.tanggal_surat}</p>
-                      </div>
-                    </div>
 
-                    <div className="pt-2">
-                      <p>Kepada Yth,</p>
-                      <p className="font-bold text-slate-800">{genData.penerima_tujuan}</p>
-                      <p className="text-slate-500 italic">di Tempat</p>
-                    </div>
-
-                    <div className="space-y-3 leading-relaxed text-justify pt-2">
-                      <p><em>Assalamu'alaikum Wr. Wb.</em></p>
-                      <p>{genData.isi_custom}</p>
-                      <div className="bg-slate-50 p-3 rounded border border-slate-200 text-xs font-mono space-y-1">
-                        <p><strong>Nama</strong> : {genData.nama_subjek}</p>
-                        <p><strong>NIS/NIP/Identitas</strong> : {genData.nis_nip}</p>
-                      </div>
-                      <p>Demikian surat resmi ini diterbitkan untuk dipergunakan sebagaimana mestinya.</p>
-                      <p><em>Wassalamu'alaikum Wr. Wb.</em></p>
-                    </div>
-
-                    {/* SIGNATURE BLOCK */}
-                    <div className="pt-8 flex justify-end">
-                      <div className="text-center w-56 space-y-12">
-                        <div>
-                          <p className="text-[11px]">Kepala SMA KH. A. Wahid Hasyim</p>
-                        </div>
-                        <div>
-                          <p className="font-bold underline text-xs">{genData.penandatangan_nama}</p>
-                          <p className="text-[10px] text-slate-500 font-mono">NIP. 197808122005011002</p>
-                        </div>
+                      {/* Teks Kop Resmi */}
+                      <div className="flex-1 text-center space-y-0.5">
+                        <h3 className="font-serif text-xs md:text-sm font-bold uppercase tracking-widest text-[#1b4b73]">
+                          YAYASAN HASYIM ASY'ARI
+                        </h3>
+                        <h1 className="font-serif text-lg md:text-2xl font-black uppercase tracking-wider text-[#153e61] leading-tight">
+                          SMA A. WAHID HASYIM
+                        </h1>
+                        <h2 className="font-serif text-xs md:text-sm font-bold uppercase tracking-wider text-[#1b4b73]">
+                          TEBUIRENG - JOMBANG
+                        </h2>
+                        <p className="font-sans text-[10px] md:text-[11px] font-bold text-[#14729c] tracking-normal pt-0.5">
+                          STATUS : TERAKREDITASI "A" &nbsp;&nbsp; NSS : 304050402007 &nbsp;&nbsp; NPSN : 20540307
+                        </p>
+                        <p className="font-sans text-[9px] md:text-[10px] text-slate-700 tracking-tight">
+                          Tromol Pos 5 Jombang 61471 Telp. (0321) 874289. Fax. 867867, E-mail : smatebuireng@gmail.com
+                        </p>
                       </div>
                     </div>
                   </div>
+
+                  {/* SURAT BODY BERDASARKAN LAYOUT */}
+                  {genData.layout_type === 'tugas' ? (
+                    /* LAYOUT A: SURAT TUGAS RESMI (TABEL) */
+                    <div className="space-y-4 text-xs font-sans text-slate-900 pt-2">
+                      <div className="text-center py-2 space-y-1">
+                        <h2 className="text-base md:text-lg font-bold uppercase tracking-wider underline decoration-1 text-slate-900 font-serif">
+                          SURAT TUGAS
+                        </h2>
+                        <p className="text-xs font-mono font-bold text-slate-800">
+                          NO : {genData.no_surat || '2270/104.13.2/SMA.4/WH/MN/2026'}
+                        </p>
+                      </div>
+
+                      <table className="w-full border-collapse border border-slate-900 text-xs text-slate-900">
+                        <tbody>
+                          <tr>
+                            <td className="w-8 border border-slate-900 p-2 text-center align-top font-semibold">1.</td>
+                            <td className="w-44 border border-slate-900 p-2 align-top font-semibold">Yang Memberi Tugas</td>
+                            <td className="w-4 border-y border-slate-900 p-2 align-top text-center">:</td>
+                            <td className="border border-slate-900 p-2 align-top">{genData.tugas_pemberi}</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-slate-900 p-2 text-center align-top font-semibold">2.</td>
+                            <td className="border border-slate-900 p-2 align-top font-semibold">Nama Tugas</td>
+                            <td className="border-y border-slate-900 p-2 align-top text-center">:</td>
+                            <td className="border border-slate-900 p-2 align-top leading-relaxed">{genData.tugas_nama}</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-slate-900 p-2 text-center align-top font-semibold">3.</td>
+                            <td className="border border-slate-900 p-2 align-top font-semibold">Nama Yang Diberi Tugas</td>
+                            <td className="border-y border-slate-900 p-2 align-top text-center">:</td>
+                            <td className="border border-slate-900 p-2 align-top">{genData.tugas_penerima}</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-slate-900 p-2 text-center align-top font-semibold">4.</td>
+                            <td className="border border-slate-900 p-2 align-top font-semibold">Waktu Pelaksanaan</td>
+                            <td className="border-y border-slate-900 p-2 align-top text-center">:</td>
+                            <td className="border border-slate-900 p-2 align-top">{genData.tugas_waktu}</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-slate-900 p-2 text-center align-top font-semibold">5.</td>
+                            <td className="border border-slate-900 p-2 align-top font-semibold">Keterangan</td>
+                            <td className="border-y border-slate-900 p-2 align-top text-center">:</td>
+                            <td className="border border-slate-900 p-2 align-top leading-relaxed whitespace-pre-line">
+                              {genData.tugas_keterangan}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <p className="pt-2 text-xs leading-relaxed">
+                        Demikian surat tugas ini dibuat, atas kerjasamanya disampaikan terima kasih.
+                      </p>
+
+                      {/* SIGNATURE BLOCK */}
+                      <div className="pt-6 flex justify-end">
+                        <div className="text-center w-64 space-y-16">
+                          <div>
+                            <p className="text-xs">Jombang, {genData.tanggal_surat}</p>
+                            <p className="text-xs font-semibold">Kepala Sekolah</p>
+                          </div>
+                          <div>
+                            <p className="font-bold underline text-xs text-slate-900">{genData.penandatangan_nama}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    /* LAYOUT B: SURAT BIASA / UNDANGAN RESMI */
+                    <div className="space-y-4 text-xs font-sans text-slate-900 pt-1">
+                      <div className="flex justify-between items-start text-xs pb-1 font-sans">
+                        <div className="space-y-0.5">
+                          <p className="grid grid-cols-[70px_10px_1fr]">
+                            <span className="font-semibold">Nomor</span>
+                            <span>:</span>
+                            <span className="font-mono font-bold text-slate-900">{genData.no_surat || '2282/104.13.2/SMA.4/WH/MN/2026'}</span>
+                          </p>
+                          <p className="grid grid-cols-[70px_10px_1fr]">
+                            <span className="font-semibold">Lampiran</span>
+                            <span>:</span>
+                            <span>{genData.lampiran || '-'}</span>
+                          </p>
+                          <p className="grid grid-cols-[70px_10px_1fr]">
+                            <span className="font-semibold">H a l</span>
+                            <span>:</span>
+                            <span className="font-semibold text-slate-900">{genData.perihal}</span>
+                          </p>
+                        </div>
+                        <div className="text-right font-sans">
+                          <p>Jombang, {genData.tanggal_surat}</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-1 space-y-0.5">
+                        <p>Kepada Yth.</p>
+                        <p className="font-bold text-slate-900 underline">{genData.penerima_tujuan}</p>
+                        <p className="font-semibold text-slate-800">SMA A. Wahid Hasyim Tebuireng</p>
+                        <p className="text-slate-600 italic">di Tempat</p>
+                      </div>
+
+                      <div className="space-y-3 leading-relaxed text-justify pt-1">
+                        <p className="italic font-serif">Assalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+
+                        <div className="whitespace-pre-line leading-relaxed text-slate-900">
+                          {genData.isi_custom}
+                        </div>
+
+                        {genData.nama_subjek && genData.nama_subjek !== '-' && (
+                          <div className="bg-slate-50 p-3 rounded border border-slate-200 text-xs space-y-1 font-mono">
+                            <p><strong>Nama</strong> : {genData.nama_subjek}</p>
+                            <p><strong>NIS / NIP / Rombel</strong> : {genData.nis_nip}</p>
+                          </div>
+                        )}
+
+                        <p className="italic font-serif">Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+                      </div>
+
+                      {/* SIGNATURE BLOCK */}
+                      <div className="pt-6 flex justify-end">
+                        <div className="text-center w-64 space-y-16">
+                          <div>
+                            <p className="text-xs">Jombang, {genData.tanggal_surat}</p>
+                            <p className="text-xs font-semibold">Kepala Sekolah</p>
+                          </div>
+                          <div>
+                            <p className="font-bold underline text-xs text-slate-900">{genData.penandatangan_nama}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

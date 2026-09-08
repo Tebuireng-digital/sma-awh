@@ -175,79 +175,89 @@ const BKPage = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-rose-100 text-rose-800 rounded-xl">
-            <HeartHandshake className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-base font-bold text-slate-800">Modul Bimbingan Konseling (BK) & Catatan Rahasia</h1>
-            <p className="text-xs text-slate-500">
-              Absensi BK, Prestasi, Pelanggaran & Kasus, Tracing Study, Rencana Studi Lanjut, Bimbingan Karir, Konseling Rahasia
-            </p>
-          </div>
-        </div>
+      {/* Header Banner */}
+      <div className="bg-gradient-to-r from-[#0d281e] via-[#0f3527] to-[#124231] rounded-2xl p-6 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#c8942a]/15 to-transparent rounded-full blur-2xl pointer-events-none -mr-20 -mt-20"></div>
 
-        <div className="flex items-center space-x-2">
-          {activeTab === 'konseling' && isPrivileged && (
-            <button
-              onClick={() => handleOpenModal('add_catatan')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Catatan Konseling Rahasia</span>
-            </button>
-          )}
-          {activeTab === 'pelanggaran' && isPrivileged && (
-            <button
-              onClick={() => handleOpenModal('add_pelanggaran')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Catat Pelanggaran / Kasus</span>
-            </button>
-          )}
-          {activeTab === 'prestasi' && (
-            <button
-              onClick={() => handleOpenModal('add_prestasi')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Catat Prestasi Siswa</span>
-            </button>
-          )}
-          {activeTab === 'studi_lanjut' && (
-            <button
-              onClick={() => handleOpenModal('add_studi')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Input Tracing & Studi Lanjut</span>
-            </button>
-          )}
-          {activeTab === 'absensi' && (
-            <button
-              onClick={() => handleOpenModal('add_absensi')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>+ Catat Absensi Khusus BK</span>
-            </button>
-          )}
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center space-x-3.5">
+            <div className="p-3 bg-white/10 border border-white/10 rounded-2xl text-[#fde047] backdrop-blur-sm shrink-0">
+              <HeartHandshake className="w-7 h-7" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold backdrop-blur-sm mb-1.5 border border-white/10">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Guru BK & Bimbingan Konseling</span>
+              </div>
+              <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Bimbingan Konseling & Layanan Santri
+              </h1>
+              <p className="text-xs text-emerald-100/80 mt-0.5 max-w-2xl font-normal">
+                SMA A. Wahid Hasyim Tebuireng • Konseling Rahasia, Kedisiplinan & Kasus, Prestasi, Tracing Study Lanjut & Karir Santri
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            {activeTab === 'konseling' && isPrivileged && (
+              <button
+                onClick={() => handleOpenModal('add_catatan')}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Catatan Konseling Rahasia</span>
+              </button>
+            )}
+            {activeTab === 'pelanggaran' && isPrivileged && (
+              <button
+                onClick={() => handleOpenModal('add_pelanggaran')}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Catat Pelanggaran / Kasus</span>
+              </button>
+            )}
+            {activeTab === 'prestasi' && (
+              <button
+                onClick={() => handleOpenModal('add_prestasi')}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Catat Prestasi Siswa</span>
+              </button>
+            )}
+            {activeTab === 'studi_lanjut' && (
+              <button
+                onClick={() => handleOpenModal('add_studi')}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Tracing & Studi Lanjut</span>
+              </button>
+            )}
+            {activeTab === 'absensi' && (
+              <button
+                onClick={() => handleOpenModal('add_absensi')}
+                className="flex items-center space-x-1.5 px-4 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Catat Absensi Khusus BK</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {msg && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg flex items-center space-x-2">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs rounded-xl flex items-center space-x-2 font-medium">
           <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{msg}</span>
         </div>
       )}
 
       {/* Privacy Notice Banner */}
-      <div className={`p-3.5 rounded-xl border text-xs flex items-start space-x-3 ${
-        isPrivileged ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-amber-50 border-amber-200 text-amber-900'
+      <div className={`p-4 rounded-2xl border text-xs flex items-start space-x-3 shadow-sm ${
+        isPrivileged ? 'bg-emerald-50/80 border-emerald-200 text-emerald-950' : 'bg-amber-50/80 border-amber-200 text-amber-950'
       }`}>
         {isPrivileged ? (
           <Unlock className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
@@ -255,69 +265,69 @@ const BKPage = () => {
           <Lock className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
         )}
         <div>
-          <strong className="block font-bold">
+          <strong className="block font-bold text-sm">
             {isPrivileged 
               ? 'Akses Spesial Terbuka (Guru BK / Kepala Sekolah / Waka Kesiswaan)' 
               : 'Proteksi Kerahasiaan Rekam Konseling (Guru / Wali Kelas)'}
           </strong>
-          <span className="text-[11px] leading-relaxed block mt-0.5">
+          <span className="text-xs leading-relaxed block mt-1">
             {isPrivileged
               ? 'Anda memiliki hak akses penuh untuk membaca dan mencatat Detail Konseling Rahasia, Kasus Siswa, dan Catatan Rujukan BK.'
-              : 'Data konseling bersifat RAHASIA — Akses detail catatan konseling dibatasi hanya untuk BK, Kepala Sekolah, dan Waka Kesiswaan. Wali Kelas / Guru melihat status umum (misal: "Sedang ditangani BK").'}
+              : 'Data konseling bersifat RAHASIA — Akses detail catatan konseling dibatasi hanya untuk BK, Kepala Sekolah, dan Waka Kesiswaan. Wali Kelas / Guru melihat status umum.'}
           </span>
         </div>
       </div>
 
       {/* Tabs Navigation */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-1.5 flex flex-wrap gap-1">
+      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-1.5 flex flex-wrap gap-1.5">
         <button
           onClick={() => setActiveTab('absensi')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'absensi' ? 'bg-rose-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'absensi' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <CalendarCheck className="w-4 h-4" />
+          <CalendarCheck className="w-4 h-4 text-blue-400" />
           <span>1. Absensi Siswa BK</span>
         </button>
 
         <button
           onClick={() => setActiveTab('konseling')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'konseling' ? 'bg-rose-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'konseling' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <HeartHandshake className="w-4 h-4" />
-          <span>2. Bimbingan Konseling & Catatan Rahasia</span>
+          <HeartHandshake className="w-4 h-4 text-rose-400" />
+          <span>2. Konseling & Catatan Rahasia</span>
         </button>
 
         <button
           onClick={() => setActiveTab('pelanggaran')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'pelanggaran' ? 'bg-rose-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'pelanggaran' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <ShieldAlert className="w-4 h-4" />
+          <ShieldAlert className="w-4 h-4 text-amber-400" />
           <span>3. Pelanggaran & Kelola Kasus</span>
         </button>
 
         <button
           onClick={() => setActiveTab('prestasi')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'prestasi' ? 'bg-rose-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'prestasi' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <Award className="w-4 h-4" />
+          <Award className="w-4 h-4 text-emerald-400" />
           <span>4. Prestasi Siswa</span>
         </button>
 
         <button
           onClick={() => setActiveTab('studi_lanjut')}
-          className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors ${
-            activeTab === 'studi_lanjut' ? 'bg-rose-700 text-white' : 'text-slate-600 hover:bg-slate-100'
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'studi_lanjut' ? 'bg-[#0d281e] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
           }`}
         >
-          <GraduationCap className="w-4 h-4" />
-          <span>5. Tracing Study & Bimbingan Karir</span>
+          <GraduationCap className="w-4 h-4 text-[#c8942a]" />
+          <span>5. Tracing Study & Karir</span>
         </button>
       </div>
 

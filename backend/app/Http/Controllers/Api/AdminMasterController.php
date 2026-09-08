@@ -35,6 +35,12 @@ class AdminMasterController extends Controller
 
         $guruList = $query->orderBy('id_guru', 'asc')->get();
 
+        foreach ($guruList as $g) {
+            $u = User::where('id_guru', $g->id_guru)->first();
+            $g->additional_roles = $u && $u->additional_roles ? (is_array($u->additional_roles) ? $u->additional_roles : (json_decode($u->additional_roles, true) ?: [])) : [];
+            $g->username = $u?->username;
+        }
+
         return response()->json([
             'status' => 'success',
             'total' => count($guruList),
@@ -64,6 +70,8 @@ class AdminMasterController extends Controller
         $username = 'guru_' . $request->id_guru;
         $existingUser = User::where('username', $username)->first();
 
+        $extraRoles = $request->has('additional_roles') ? array_values((array)$request->additional_roles) : [];
+
         if (!$existingUser) {
             User::create([
                 'name' => $request->nama_lengkap,
@@ -71,15 +79,31 @@ class AdminMasterController extends Controller
                 'email' => $username . '@smaawh.sch.id',
                 'password' => Hash::make('guru123'),
                 'role' => 'guru',
+                'additional_roles' => count($extraRoles) > 0 ? $extraRoles : null,
                 'id_guru' => $request->id_guru,
                 'no_hp' => $request->no_hp,
                 'must_change_password' => true,
+            ]);
+        } else if (count($extraRoles) > 0) {
+            $existingUser->update(['additional_roles' => $extraRoles]);
+        }
+
+        // Sinkronisasi otomatis ke Data Pegawai
+        $existsPegawai = DB::table('pegawai')->where('nama_lengkap', $request->nama_lengkap)->first();
+        if (!$existsPegawai) {
+            DB::table('pegawai')->insert([
+                'nama_lengkap' => $request->nama_lengkap,
+                'jabatan' => 'Guru',
+                'pendidikan' => $request->pendidikan_terakhir ?: 'S1',
+                'no_hp' => $request->no_hp ?: null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data Guru & akun user login berhasil ditambahkan.',
+            'message' => 'Data Guru & akun user login berhasil ditambahkan serta tersinkron ke Kepegawaian.',
             'guru' => $guru,
         ], 201);
     }
@@ -97,6 +121,7 @@ class AdminMasterController extends Controller
         ]);
 
         $oldIdGuru = $guru->id_guru;
+        $oldNama = $guru->nama_lengkap;
 
         $guru->update([
             'id_guru' => $request->id_guru,
@@ -107,15 +132,28 @@ class AdminMasterController extends Controller
         ]);
 
         // Update corresponding User account if exists
-        User::where('id_guru', $oldIdGuru)->update([
+        $userUpdateData = [
             'id_guru' => $request->id_guru,
             'name' => $request->nama_lengkap,
             'no_hp' => $request->no_hp,
+        ];
+        if ($request->has('additional_roles')) {
+            $userUpdateData['additional_roles'] = json_encode(array_values((array)$request->additional_roles));
+        }
+
+        User::where('id_guru', $oldIdGuru)->orWhere('id_guru', $request->id_guru)->update($userUpdateData);
+
+        // Sinkronisasi otomatis ke Data Pegawai
+        DB::table('pegawai')->where('nama_lengkap', $oldNama)->update([
+            'nama_lengkap' => $request->nama_lengkap,
+            'pendidikan' => $request->pendidikan_terakhir ?: 'S1',
+            'no_hp' => $request->no_hp ?: null,
+            'updated_at' => now(),
         ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data Guru berhasil diperbarui.',
+            'message' => 'Data Guru berhasil diperbarui serta tersinkron ke Kepegawaian.',
             'guru' => $guru,
         ]);
     }
@@ -267,6 +305,7 @@ class AdminMasterController extends Controller
         return response()->json([
             'status' => 'success',
             'total' => count($siswaList),
+            'data' => $siswaList,
             'siswa' => $siswaList,
         ]);
     }

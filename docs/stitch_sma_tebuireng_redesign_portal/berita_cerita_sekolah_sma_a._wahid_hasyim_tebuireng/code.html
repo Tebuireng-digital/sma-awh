@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Berita &amp; Cerita Sekolah - SMA A. Wahid Hasyim Tebuireng Jombang</title>
+<!-- Google Fonts: Sora, Plus Jakarta Sans, Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "surface-tint": "#496458",
+            "surface-bright": "#f5fbf5",
+            "inverse-primary": "#afcdbe",
+            "tertiary-fixed": "#ffe088",
+            "on-surface": "#171d1a",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#324c41",
+            "border-gold": "rgba(212, 175, 55, 0.3)",
+            "border-subtle": "rgba(24, 30, 27, 0.08)",
+            "secondary-fixed-dim": "#4edea3",
+            "on-secondary-fixed": "#002113",
+            "on-background": "#171d1a",
+            "surface-container-high": "#e4eae4",
+            "on-tertiary-fixed-variant": "#574500",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#6ffbbe",
+            "on-tertiary-container": "#4f3e00",
+            "gold-medal": "#E5B842",
+            "tertiary": "#735c00",
+            "outline-variant": "#c2c8c3",
+            "on-secondary-container": "#00714d",
+            "surface-container-low": "#eff5f0",
+            "surface": "#f5fbf5",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#dee4df",
+            "tertiary-fixed-dim": "#e9c349",
+            "on-tertiary-fixed": "#241a00",
+            "forest-deep": "#0F382A",
+            "surface-variant": "#dee4df",
+            "surface-dim": "#d5dbd6",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#424844",
+            "error": "#ba1a1a",
+            "primary": "#00110a",
+            "primary-fixed-dim": "#afcdbe",
+            "tertiary-container": "#cca830",
+            "surface-card": "#F4F3EE",
+            "outline": "#727974",
+            "on-error-container": "#93000a",
+            "secondary-container": "#6cf8bb",
+            "inverse-on-surface": "#ecf2ed",
+            "primary-container": "#0d281e",
+            "background": "#f5fbf5",
+            "on-secondary-fixed-variant": "#005236",
+            "on-primary-container": "#749183",
+            "emerald-vibrant": "#16A34A",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2c322e",
+            "secondary": "#006c49",
+            "primary-fixed": "#cbe9da",
+            "surface-glass": "rgba(251, 251, 249, 0.82)",
+            "on-primary-fixed": "#052016",
+            "surface-container": "#e9efea",
+            "surface-warm": "#FBFBF9"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xl": "3rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-4xl": "6rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "2rem",
+            "space-sm": "0.75rem",
+            "space-3xl": "4.5rem",
+            "space-xs": "0.5rem",
+            "space-md": "1rem",
+            "container-max": "1280px"
+          },
+          "fontFamily": {
+            "label-caps": ["Plus Jakarta Sans"],
+            "stat-counter": ["Sora"],
+            "body-lg": ["Inter"],
+            "display-hero": ["Sora"],
+            "body-md": ["Inter"],
+            "label-pill": ["Plus Jakarta Sans"],
+            "headline-md": ["Sora"],
+            "headline-sm": ["Sora"],
+            "headline-lg": ["Sora"],
+            "display-hero-mobile": ["Sora"],
+            "headline-lg-mobile": ["Sora"],
+            "title-editorial": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "stat-counter": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-lg": ["18px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-pill": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "title-editorial": ["18px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "body-sm": ["14px", { "lineHeight": "22px", "letterSpacing": "0.005em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .elevation-1 {
+      box-shadow: 0 2px 8px -2px rgba(13, 40, 30, 0.04), 0 1px 3px 0 rgba(13, 40, 30, 0.02);
+    }
+    .elevation-2 {
+      box-shadow: 0 12px 24px -6px rgba(13, 40, 30, 0.08), 0 4px 8px -2px rgba(13, 40, 30, 0.03);
+    }
+    .elevation-3 {
+      box-shadow: 0 24px 48px -12px rgba(13, 40, 30, 0.16), 0 8px 16px -4px rgba(13, 40, 30, 0.06);
+    }
+    .prestige-gold-glow {
+      box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-emerald-vibrant selection:text-surface-lowest">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-surface-glass backdrop-blur-md shadow-sm">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop h-[76px] flex items-center justify-between">
+<!-- Brand & Emblem -->
+<a class="flex items-center gap-space-sm group" href="#">
+<img alt="Logo SMA A. Wahid Hasyim Tebuireng" class="h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1UqGllxwPNEuFuq6N5h1_Vv7xGDM3bX8D-5TfyHHp3sWXoUHYep9-uscOO09t_rJpP6kkJunFHHcPXeP7rZpCwbICYv4PlsFklfXInONHM6jZ38H_FxOoEm0xmhoNctYoP6kkRhTnuQCadGE4T4bsz-H-pwZMAsQEv9YZpT-eM8mtB0dGF68lB2oopfxmuh1_EPlMYD_xFVJHmw69vnKu_lnkQB7bFHxSlmbGS9QHyz9KcTA46T71oDemI"/>
+<div class="flex flex-col">
+<span class="font-title-editorial text-title-editorial font-bold text-forest-deep tracking-tight leading-tight">SMA A. Wahid Hasyim</span>
+<span class="font-label-caps text-label-caps text-secondary tracking-wider font-semibold">TEBUIRENG JOMBANG</span>
+</div>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-space-lg">
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Beranda</a>
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Profil</a>
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Kurikulum</a>
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Prestasi</a>
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Kehidupan Santri</a>
+<!-- Active link: Berita -->
+<a class="text-secondary font-label-pill text-label-pill font-bold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-1.5 after:h-1.5 after:rounded-full after:bg-gold-medal" href="#">Berita</a>
+<a class="text-on-surface-variant font-label-pill text-label-pill font-medium hover:text-forest-deep hover:text-secondary transition-colors duration-200" href="#">Kontak</a>
+</nav>
+<!-- Trailing Action Icons & Primary CTA Button -->
+<div class="flex items-center gap-space-sm">
+<button aria-label="Cari Berita" class="w-10 h-10 rounded-full flex items-center justify-center text-forest-deep hover:bg-surface-container transition-colors duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button aria-label="Menu" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest-deep hover:bg-surface-container transition-colors duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<a class="hidden sm:inline-flex items-center justify-center bg-forest-deep text-surface-warm font-label-pill text-label-pill px-5 py-2.5 rounded-lg font-bold hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 elevation-1 hover:bg-opacity-95" href="#">
+          PPDB 2026/2027
+        </a>
+</div>
+</div>
+</header>
+<main class="pt-[96px]">
+<!-- SECTION 1: Page Header & Magazine Eyebrow -->
+<section class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop pt-space-xl pb-space-lg">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="mb-space-md">
+<ol class="flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant">
+<li>
+<a class="hover:text-forest-deep transition-colors" href="#">Beranda</a>
+</li>
+<li class="flex items-center text-outline-variant">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</li>
+<li aria-current="page" class="text-secondary font-bold">Berita &amp; Publikasi</li>
+</ol>
+</nav>
+<!-- Eyebrow Badge & Title -->
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="inline-flex items-center gap-2 self-start bg-emerald-vibrant/10 px-3.5 py-1.5 rounded-full border border-emerald-vibrant/20">
+<span class="w-2 h-2 rounded-full bg-emerald-vibrant animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-forest-deep font-bold tracking-wider">WARTA &amp; JURNALISTIK TEBUIRENG • KABAR KAMPUS TERKINI</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-forest-deep tracking-tight mt-space-2xs">
+          Berita &amp; Cerita Sekolah
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          Menyajikan kabar capaian prestasi, dinamika keilmuan santri, agenda madrasah, dan inspirasi keteladanan dari jantung Pesantren Tebuireng.
+        </p>
+</div>
+<!-- Search & Quick Filter Bar -->
+<div class="mt-space-xl bg-surface-card border border-border-subtle p-space-sm md:p-space-md rounded-2xl elevation-1 flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="w-full pl-11 pr-4 py-2.5 bg-surface-container-lowest border border-border-subtle rounded-xl text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-emerald-vibrant/40 focus:border-emerald-vibrant transition-all" placeholder="Cari berita, agenda, atau nama siswa..." type="text"/>
+</div>
+<!-- Filter Pills Scroll -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-bold bg-forest-deep text-surface-warm elevation-1">
+            Semua Kategori
+          </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-medium bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container transition-colors border border-border-subtle">
+            Prestasi Sains
+          </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-medium bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container transition-colors border border-border-subtle">
+            Keislaman &amp; Pesantren
+          </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-medium bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container transition-colors border border-border-subtle">
+            Akademik &amp; Kurikulum
+          </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-medium bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container transition-colors border border-border-subtle">
+            Kesiswaan &amp; Ekskul
+          </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-pill text-label-pill font-medium bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container transition-colors border border-border-subtle">
+            Opini &amp; Esai Santri
+          </button>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Featured News (Berita Utama - 60:40 Editorial Split) -->
+<section class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-space-md">
+<div class="bg-surface-card rounded-2xl md:rounded-3xl border border-border-subtle overflow-hidden elevation-2 grid grid-cols-1 lg:grid-cols-12">
+<!-- Left / Top Media Frame (60% / 7 cols) -->
+<div class="lg:col-span-7 relative min-h-[380px] lg:min-h-[460px] overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Joyful Indonesian high school students in deep green school blazers and clean white hijabs holding a golden science olympiad trophy and winner certificate in front of the grand islamic-arched campus building. Natural daylight illuminates smiling faces surrounded by celebrating peers under bright blue skies in an authoritative modern islamic boarding school environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfqTkpLsy4vAWkpPszsTK2QbgfeHAEN0I87KwQGgMa4JyKhw3J9G2rUktRUWVRtvdbA22b1nKqj4xh_vZUJUERujprHZchUGnv5punDf9oS6Xje_H_O1QAXbG2ZQAMxmmPLxf4NXyPZB7EoWtGon5ps1OGmvd-u0Ye6hYK-ahIGXd-uGejxSauHw-Y2agCSMpq99mP_W24W0UaEa5Sgdjk8leu8Kv9XrT58hRocaoP2V9aBYrypTcw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent"></div>
+<!-- Badges Overlay -->
+<div class="absolute top-space-md left-space-md flex flex-wrap items-center gap-2">
+<span class="px-3 py-1.5 rounded-full font-label-caps text-label-caps font-bold bg-gold-medal text-primary tracking-wide shadow-md">
+              LAPORAN UTAMA • PRESTASI SAINS
+            </span>
+<span class="px-3 py-1.5 rounded-full font-label-caps text-label-caps font-semibold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              24 Maret 2026
+            </span>
+</div>
+<div class="absolute bottom-space-md left-space-md flex items-center gap-2 text-surface-warm font-label-pill text-label-pill">
+<span class="material-symbols-outlined text-gold-medal text-sm" data-icon="schedule">schedule</span>
+<span>4 Menit Waktu Baca</span>
+</div>
+</div>
+<!-- Right / Bottom Content Frame (40% / 5 cols) -->
+<div class="lg:col-span-5 p-space-lg md:p-space-xl flex flex-col justify-between bg-surface-card">
+<div class="space-y-space-md">
+<div class="flex items-center gap-2 text-secondary font-label-caps text-label-caps tracking-wider">
+<span class="material-symbols-outlined text-sm">stars</span>
+<span>KARYA UNGGULAN SANTRI TEBUIRENG</span>
+</div>
+<a class="block group" href="#">
+<h2 class="font-headline-md text-headline-md font-bold text-forest-deep group-hover:text-secondary transition-colors duration-200 leading-snug">
+                Santri SMA A. Wahid Hasyim Raih Juara 1 Olimpiade Sains Nasional (OSN) 2026: Dedikasi Riset Berakar Nilai Salaf
+              </h2>
+</a>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Tim delegasi riset madrasah berhasil memadukan metodologi sains eksperimental dengan kedalaman falsafah keilmuan kitab kuning, mengungguli ratusan kontingen sekolah unggulan dari seluruh pelosok tanah air.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-md border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-vibrant/20 border border-emerald-vibrant/30 flex items-center justify-center text-forest-deep font-bold font-title-editorial">
+                WT
+              </div>
+<div class="flex flex-col">
+<span class="font-label-pill text-label-pill font-bold text-forest-deep">Redaksi Warta Tebuireng</span>
+<span class="font-body-sm text-body-sm text-outline">Tim Jurnalistik Santri</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1.5 font-label-pill text-label-pill font-bold text-forest-deep hover:text-gold-medal transition-colors group" href="#">
+<span>Baca Selengkapnya</span>
+<span class="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Grid Berita Terbaru (3-Column Editorial Grid) -->
+<section class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-space-2xl">
+<!-- Section Subheading -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-space-xl pb-space-sm border-b border-border-subtle gap-4">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold tracking-wider">Arsip Warta Terkini</span>
+<h2 class="font-headline-md text-headline-md font-bold text-forest-deep mt-1">Dinamika Riset, Akademik &amp; Kepesantrenan</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-container-lowest text-forest-deep hover:bg-surface-container text-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">tune</span> Filter
+          </button>
+<button class="px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-container-lowest text-forest-deep hover:bg-surface-container text-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">sort</span> Urutkan: Teranyar
+          </button>
+</div>
+</div>
+<!-- 3-Column Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern university lecture hall signing ceremony atmosphere between scholars in formal suits and islamic delegates with green accessories, official memorandum documents and international flags on polished wooden desks under clear architectural indoor lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPhk2ToP7bJCZH1EFYfLegHJkNJyf_YlU1cy-pGyMH5CeJn8lTmeydlfrLNAT1zxDod59e9ilnaBhNeGcfewVZg5biORhRchAiPK6E2boRc8LRGNDt4CSMymrhhCMmLe1daRQF7NVrYCz8SF_S71SIUZFiZrC7pW7AdqCIT4-qCphVFCT1cM8IlHxYI2WgHH0-yttoQ-OuyUf5avDiG4JRkePf3knTtuH8mocPV3KaTEctZLDjfD2i"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Kerjasama Global
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>18 Maret 2026</span>
+<span>•</span>
+<span>3 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Kerjasama Global: SMA A. Wahid Hasyim Tanda Tangani MoU Beasiswa Kuliah ke Universitas Al-Azhar Kairo &amp; Jerman
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Kemitraan strategis ini membuka koridor beasiswa penuh bagi santri berprestasi untuk studi integrasi ilmu syariah di Mesir serta bidang teknik di institusi riset ternama Jerman.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">Biro Kerjasama Luar Negeri</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Solemn congregation of islamic high school students and teachers in neat white prayer robes and dark blazers gathered inside an exquisite mosque sanctuary with intricate islamic archways and warm ambient lighting for annual commemoration prayer." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWWOezHdWaSMnPCK3-NJCEkSyLXUPqhx-HwauHF2KVwJMNmdCLQto0Vr9KozY2M0X3HYyLGjn6HPjkUjiPF9kuDRq8-Z31fLhimrCC5-oi12K_hymQhcItHuA4tWJJP887zL6O3rImrh7qaPybNacGcYCGra7Cu1TBh7197DHxYRi7KxGsbOFAqK192bfpeyk6K84V2uyQRCtfJV1JDUk0VTrHjcqX7N-yfLXBoT5FmlX0M1Ya7vR1"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Keagamaan &amp; Tradisi
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>12 Maret 2026</span>
+<span>•</span>
+<span>5 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Haul Masyayikh Tebuireng 2026: Refleksi Penguatan Karakter Ulul Albab Menghadapi Kecerdasan Buatan (AI)
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Rangkaian haul diisi simposium santri yang membedah etika pemanfaatan teknologi generatif kecerdasan buatan melalui kerangka Maqasid Syariah dan keteladanan Hadratussyaikh.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">Lajnah Ta'lif wan Nasyr</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Young indonesian student researchers wearing laboratory coats and green ties analyzing bioplastic polymer samples in test tubes and beakers inside an advanced high school chemistry laboratory with soft daylight entering large glass windows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrvKKFQwc_8p95miIiF4iJ_qokmvyvZK9j961--B7JoG4lbXEL97vV3x1urJ7DcNYmyiH0B3Ni4h8-zLHlrfxSruq0bDJDaKfK_P0sE1k5MSY4SkqoGneXtfRT_koxmkdFvWtux5vmIqCQdfCfTnlZJ4lirpuwVPAdNzAvmLoyidNB4hhtN7owksyXfeIEHRCr2w5WUJBiKBN4Mnr03azsD0ccFc8UbfJiBsrCiJ1OwRQXCLuN-v-F"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Riset Siswa
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>05 Maret 2026</span>
+<span>•</span>
+<span>4 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Inovasi Bioplastik Berbasis Ampas Tebu: Karya Siswa KIR Rebut Medali Emas LKIR Nasional 2026
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Memanfaatkan limbah agroindustri lokal di Jombang, tim Karya Ilmiah Remaja berhasil mensintesis biopolimer ramah lingkungan yang mampu terurai dalam tanah hanya dalam tempo 28 hari.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">KIR Sains Tebuireng</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Student council elections at an islamic high school where students vote at dignified wooden ballot stations in an open courtyard, enthusiastic yet orderly atmosphere with school banners and lush greenery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvV-SWnMQNtKOLZq7dJccVN3nhi56olsX1P0Ku8K_S2TBylUs98g_mhcM_TEaSasKl2Q0Q1y9-7Pg_marRb2MR105cCLe-8vt1RKVuj7dMpzjoluZVsTFqihbrkCHp0OOOc8j0xgPxtkM_a3jpCIJls1wzOVWsrInj2LilDfUHDrY42HV_o5Sps7DP5bVUL3HeztY_yoWM1xinibryNHZGlRN-x3pL88xIENej9cOPWGMwzer_dCpJ"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Kesiswaan &amp; OSIS
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>28 Februari 2026</span>
+<span>•</span>
+<span>3 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Musyawarah Besar &amp; PEMIRA 2026: Menumbuhkan Demokrasi Santri yang Beradab dan Aspiratif
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Pemilihan Raya Ketua Organisasi Santri Intra Sekolah (OSIS) berlangsung dinamis dan beretika tinggi dengan adu gagasan program kemaslahatan antarpasangan calon.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">Komisi Pemilihan Santri</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Confident indonesian female student in white hijab speaking eloquently from a wooden podium with microphone during an international debate competition, expressive hand gestures, modern auditorium background with audience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9BzfWnwtk2GOATWN_z1ei5JCmTkjiAqKWrS9sKuJtxCSpAHukJgTl75hlgScTRJpXZzVKrrOTkMBtLl_Sqr4Ul525j9Vl-jCxHoagX3LBNPXDfEhpr53jSjy9S8i4YC3muCnjQ-gmFcoHU7oinU_-NjHU5LsJhjEt0yNzzonWtlbLOkbn2c6j5-nPrf10_4AmX3mSoHh9lk112vhY8jC6GLtymmpZBmPH9NpwFaPK_yBCgago9fnG"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Pengembangan Bahasa
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>20 Februari 2026</span>
+<span>•</span>
+<span>4 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Pelatihan Intensif Arabic &amp; English Public Speaking Siapkan Santri Masuk Panggung Debat Internasional
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Program karantina bahasa asing membekali santri keterampilan argumentasi logis, retorika diplomatis, dan penguasaan isu geopolitik kontemporer dunia Islam dan Barat.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">Language Development Center</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden elevation-1 hover:elevation-2 transition-all duration-300 flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Dignified graduation ceremony of quran memorizers in a grand traditional pesanten hall, students receiving quranic certificates from senior kyai and scholars, decorated with warm golden lighting and floral arrangements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUff1YZYQmp3yW6VM9EkIJWbnldpmqL2OWEnAdj9z195bdArV5DrZSpTWFghUQo6ga_HbmNnlCI2S4sHY3fSNWTUDtEPx_O9nwRgTzdwUEwzaVo8K1eeqkZB125oDSdt4sC5btXoTmHleXbASs4RLq3NQAaPC3B9XqP2yUCCcMWp_zUCcJHsAQhimyuUqMrPDUtKiNJHc4vEU6iA9NdvBiHZ1z7dXig1Peq1MMHxug04YG6dMmsGGJ"/>
+<span class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold bg-surface-glass backdrop-blur-md text-forest-deep border border-border-subtle">
+              Tahfidz &amp; Quran
+            </span>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps">
+<span>14 Februari 2026</span>
+<span>•</span>
+<span>5 Menit Baca</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-forest-deep group-hover:text-secondary transition-colors line-clamp-2">
+                Wisuda Tahfidz 30 Juz &amp; Sanad Matan Jazariyyah Angkatan ke-XXVIII Digelar Khidmat di Pesantren
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">
+                Sebanyak 84 santri putra dan putri resmi mengkhatamkan setoran hafalan mutqin bersanad, memperkuat pilar keilmuan Al-Qur'an sebagai pondasi utama kepribadian siswa.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle flex items-center justify-between">
+<span class="font-label-pill text-label-pill text-outline">Markaz Al-Qur'an Tebuireng</span>
+<span class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 4: Rubrik Khusus: Suara Santri & Buletin Mingguan -->
+<section class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-space-xl">
+<div class="bg-forest-deep text-surface-warm rounded-3xl p-space-lg md:p-space-2xl border border-border-gold shadow-2xl relative overflow-hidden">
+<!-- Subtle Decorative Background Pattern -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-emerald-vibrant/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -top-20 w-96 h-96 rounded-full bg-gold-medal/10 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left Column: E-Magazine / Bulletin Download (7 cols) -->
+<div class="lg:col-span-7 flex flex-col md:flex-row gap-space-lg items-center">
+<!-- Magazine Mockup Card -->
+<div class="w-full sm:w-56 flex-shrink-0 bg-surface-card text-forest-deep rounded-2xl p-4 elevation-3 border border-gold-medal/40 relative transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+<div class="bg-forest-deep text-surface-warm p-3 rounded-lg text-center border-b border-border-gold mb-3">
+<span class="font-label-caps text-[10px] text-gold-medal tracking-widest block font-bold">BULETIN LITERASI SANTRI</span>
+<span class="font-title-editorial text-title-editorial font-bold">AL-FIKR</span>
+<span class="text-[11px] text-primary-fixed-dim block">Edisi 42 • Syawal 1447 H</span>
+</div>
+<div class="h-44 rounded bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Editorial magazine cover preview depicting green modern calligraphy design and silhouette of pesatren scholars discussing under a futuristic dome of stars with typography title Al-Fikr in rich deep green and golden foil accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlqRZMo_d8Fs84EJ53LT0cVeVhAwhxPgNLFuVNYjSEB-7dACaOhcSpDT3ar-SqLOC2yJzwBJOdR9nuZj7ORU_32RJj-se33vWeEf9YXioiiBuG1oLZlGcMdc_Wx1PVy6ZU_yYKZLHrJjwx5IA59inj2vM4Y2pumnyNOpmtfaURDxylIuuxOfJ03DGleyiYufl7YiBF6cebd3QPnjFXQ4yrH_FeNcHrxfT_jnhoz1G3vPQy5tP9mbPC"/>
+<div class="absolute bottom-2 right-2 bg-forest-deep/90 text-gold-medal px-2 py-0.5 rounded text-[10px] font-bold">
+                  PDF • 14 MB
+                </div>
+</div>
+<div class="mt-3 text-center">
+<span class="font-label-caps text-label-caps text-outline block text-[11px]">Tema Khusus:</span>
+<span class="font-label-pill text-label-pill font-bold text-forest-deep">Sains &amp; Maqasid Syariah</span>
+</div>
+</div>
+<!-- Bulletin Details -->
+<div class="space-y-space-sm flex-1 text-center md:text-left">
+<span class="inline-block px-3 py-1 rounded-full font-label-caps text-label-caps bg-gold-medal/20 text-gold-medal border border-gold-medal/30">
+                PUBLIKASI PERIODIK MADRASAH
+              </span>
+<h3 class="font-headline-md text-headline-md font-bold text-surface-warm leading-tight">
+                E-Majalah &amp; Buletin Digital "Al-Fikr" Edisi Terbaru
+              </h3>
+<p class="font-body-sm text-body-sm text-surface-container-highest leading-relaxed">
+                Menghadirkan kompilasi esai kritis santri, rangkuman kajian kitab kuning kontemporer, liputan prestasi olimpiade internasional, dan galeri karya seni kaligrafi santri.
+              </p>
+<div class="pt-space-xs flex flex-wrap items-center justify-center md:justify-start gap-space-sm">
+<a class="inline-flex items-center gap-2 bg-gold-medal text-primary font-label-pill text-label-pill font-bold px-5 py-2.5 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+<span>Unduh Buletin PDF (Edisi 42)</span>
+</a>
+<a class="inline-flex items-center gap-1 font-label-pill text-label-pill text-surface-warm/80 hover:text-gold-medal transition-colors py-2 px-3" href="#">
+<span>Lihat Arsip Edisi Lalu</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Divider for Mobile -->
+<div class="lg:hidden w-full h-px bg-forest-deep/40 border-t border-border-gold/30"></div>
+<!-- Right Column: Submission Callout (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest/10 backdrop-blur-md rounded-2xl p-space-lg border border-border-gold/30 flex flex-col justify-between">
+<div class="space-y-space-xs">
+<div class="w-12 h-12 rounded-xl bg-gold-medal/20 text-gold-medal flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-2xl" data-icon="edit_note">edit_note</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-surface-warm">
+                Kirimkan Karya Tulismu
+              </h4>
+<p class="font-body-sm text-body-sm text-surface-container-highest leading-relaxed">
+                Bagi santri, asatidz, dan alumni yang memiliki karya tulis ilmiah, opini sosial-keagamaan, puisi sufistik, atau resensi kitab, redaksi Warta Tebuireng membuka ruang publikasi seluas-luasnya.
+              </p>
+</div>
+<div class="mt-space-md pt-space-sm">
+<a class="w-full inline-flex items-center justify-center gap-2 bg-surface-warm text-forest-deep font-label-pill text-label-pill font-bold px-4 py-3 rounded-xl hover:bg-gold-medal transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+<span>Panduan Pengiriman Naskah</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Pagination -->
+<section class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-space-lg">
+<nav aria-label="Navigasi Halaman Berita" class="flex items-center justify-center gap-2">
+<button class="w-10 h-10 rounded-xl border border-border-subtle bg-surface-container-lowest text-outline hover:text-forest-deep hover:bg-surface-container flex items-center justify-center transition-colors disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+</button>
+<!-- Active Page 1 -->
+<button class="w-10 h-10 rounded-xl bg-forest-deep text-gold-medal font-label-pill text-label-pill font-bold elevation-1 flex items-center justify-center">
+          1
+        </button>
+<button class="w-10 h-10 rounded-xl border border-border-subtle bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container font-label-pill text-label-pill font-semibold flex items-center justify-center transition-colors">
+          2
+        </button>
+<button class="w-10 h-10 rounded-xl border border-border-subtle bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container font-label-pill text-label-pill font-semibold flex items-center justify-center transition-colors">
+          3
+        </button>
+<span class="w-8 text-center text-outline font-bold">...</span>
+<button class="w-10 h-10 rounded-xl border border-border-subtle bg-surface-container-lowest text-on-surface-variant hover:text-forest-deep hover:bg-surface-container font-label-pill text-label-pill font-semibold flex items-center justify-center transition-colors">
+          12
+        </button>
+<button class="w-10 h-10 rounded-xl border border-border-subtle bg-surface-container-lowest text-forest-deep hover:bg-surface-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</nav>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full relative mt-space-4xl bg-forest-deep border-t border-border-gold">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop pt-space-3xl pb-space-xl grid grid-cols-1 md:grid-cols-4 gap-space-xl">
+<!-- Col 1: Brand & Identity -->
+<div class="space-y-space-md md:col-span-1">
+<div class="flex items-center gap-space-xs">
+<img alt="Emblem SMA A. Wahid Hasyim" class="h-10 w-auto brightness-200 invert" src="https://lh3.googleusercontent.com/aida/AEtjO1UqGllxwPNEuFuq6N5h1_Vv7xGDM3bX8D-5TfyHHp3sWXoUHYep9-uscOO09t_rJpP6kkJunFHHcPXeP7rZpCwbICYv4PlsFklfXInONHM6jZ38H_FxOoEm0xmhoNctYoP6kkRhTnuQCadGE4T4bsz-H-pwZMAsQEv9YZpT-eM8mtB0dGF68lB2oopfxmuh1_EPlMYD_xFVJHmw69vnKu_lnkQB7bFHxSlmbGS9QHyz9KcTA46T71oDemI"/>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-surface tracking-tight leading-none">SMA A. Wahid Hasyim</span>
+<span class="font-label-caps text-[11px] text-gold-medal tracking-widest mt-1">TEBUIRENG JOMBANG</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-highest leading-relaxed">
+          Madrasah Berbasis Pesantren yang memadukan keunggulan sains, ketajaman nalar intelektual, dan keluhuran akhlak Salafus Shalih.
+        </p>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-lowest/10 border border-border-gold/30">
+<span class="material-symbols-outlined text-gold-medal text-sm" data-icon="verified">verified</span>
+<span class="font-label-caps text-label-caps text-gold-medal">Terakreditasi "A" BAN-S/M</span>
+</div>
+</div>
+<!-- Col 2: Hubungi & Alamat -->
+<div class="space-y-space-sm">
+<h4 class="font-label-caps text-label-caps text-gold-medal font-bold uppercase tracking-wider">
+          Kampus &amp; Pesantren
+        </h4>
+<div class="font-body-sm text-body-sm text-surface-container-highest space-y-2">
+<p class="flex items-start gap-2">
+<span class="material-symbols-outlined text-gold-medal text-sm mt-1" data-icon="location_on">location_on</span>
+<span>Jl. Irian Jaya No. 10, Cukir, Kec. Diwek, Kabupaten Jombang, Jawa Timur 61471</span>
+</p>
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gold-medal text-sm" data-icon="call">call</span>
+<span>(0321) 861-129 / +62 812-3456-7890</span>
+</p>
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gold-medal text-sm" data-icon="mail">mail</span>
+<span>humas@smawh-tebuireng.sch.id</span>
+</p>
+</div>
+</div>
+<!-- Col 3: Navigasi Cepat (Shared Component Links) -->
+<div class="space-y-space-sm">
+<h4 class="font-label-caps text-label-caps text-gold-medal font-bold uppercase tracking-wider">
+          Tautan Cepat
+        </h4>
+<ul class="font-body-sm text-body-sm space-y-2">
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Profil Pesantren</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Direktori Guru</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Kalender Akademik</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Fasilitas &amp; Asrama</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Akreditasi &amp; Legalitas</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Portal Orang Tua</a></li>
+<li><a class="text-surface-container-highest hover:text-gold-medal transition-colors" href="#">Kebijakan Privasi</a></li>
+</ul>
+</div>
+<!-- Col 4: Kanal Resmi & Buletin -->
+<div class="space-y-space-sm">
+<h4 class="font-label-caps text-label-caps text-gold-medal font-bold uppercase tracking-wider">
+          Kanal Digital
+        </h4>
+<p class="font-body-sm text-body-sm text-surface-container-highest">
+          Ikuti warta multimedia terkini santri di kanal resmi media sosial Pesantren Tebuireng:
+        </p>
+<div class="flex items-center gap-3 pt-2">
+<a aria-label="YouTube" class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-gold-medal hover:text-primary transition-all flex items-center justify-center text-surface-warm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="smart_display">smart_display</span>
+</a>
+<a aria-label="Instagram" class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-gold-medal hover:text-primary transition-all flex items-center justify-center text-surface-warm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="photo_camera">photo_camera</span>
+</a>
+<a aria-label="Facebook" class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-gold-medal hover:text-primary transition-all flex items-center justify-center text-surface-warm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="public">public</span>
+</a>
+<a aria-label="Podcasts" class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-gold-medal hover:text-primary transition-all flex items-center justify-center text-surface-warm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="podcasts">podcasts</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Copyright Bottom Row -->
+<div class="border-t border-border-gold/40">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-space-md flex flex-col sm:flex-row items-center justify-between text-xs text-surface-container-highest">
+<span>© 2026 SMA A. Wahid Hasyim Tebuireng Jombang. Seluruh Hak Cipta Dilindungi.</span>
+<span class="mt-2 sm:mt-0 font-medium text-gold-medal">Modern Islamic Prestige Editorial Portal</span>
+</div>
+</div>
+</footer>
+</body></html>
