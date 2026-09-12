@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\PresensiMuridController;
 use App\Http\Controllers\Api\KurikulumController;
 use App\Http\Controllers\Api\KalenderAkademikController;
 use App\Http\Controllers\Api\AdminMasterController;
+use App\Http\Controllers\Api\KenaikanKelasController;
+use App\Http\Controllers\Api\SiswaImportExportController;
 
 Route::prefix('v1')->group(function () {
 
@@ -32,6 +34,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/admin/semester/toggle', [AdminPengaturanController::class, 'toggleSemester']);
         Route::get('/admin/tahun-ajaran', [AdminPengaturanController::class, 'getTahunAjaran']);
         Route::post('/admin/tahun-ajaran', [AdminPengaturanController::class, 'updateTahunAjaran']);
+        Route::get('/admin/rapor-validation-status', [AdminPengaturanController::class, 'getValidationStatus']);
 
         // Admin Master Data CRUD (Guru, Kelas, Siswa)
         Route::get('/admin/guru', [AdminMasterController::class, 'indexGuru']);
@@ -48,6 +51,19 @@ Route::prefix('v1')->group(function () {
         Route::post('/admin/siswa', [AdminMasterController::class, 'storeSiswa']);
         Route::put('/admin/siswa/{id}', [AdminMasterController::class, 'updateSiswa']);
         Route::delete('/admin/siswa/{id}', [AdminMasterController::class, 'destroySiswa']);
+        Route::post('/admin/siswa/{id}/reset-password', [AdminMasterController::class, 'resetPasswordSiswa']);
+        Route::post('/admin/siswa/{id}/keluarkan-mutasi', [KenaikanKelasController::class, 'keluarkanMutasiSiswa']);
+        Route::get('/admin/siswa/template-excel', [SiswaImportExportController::class, 'downloadTemplate']);
+        Route::post('/admin/siswa/import-excel', [SiswaImportExportController::class, 'importExcel']);
+
+        // Kenaikan Kelas, Kelulusan & Buku Induk Alumni (Khusus Admin)
+        Route::get('/admin/kenaikan-kelas/status', [KenaikanKelasController::class, 'getStatus']);
+        Route::get('/admin/kenaikan-kelas/siswa-xii', [KenaikanKelasController::class, 'getSiswaKelasXii']);
+        Route::get('/admin/kenaikan-kelas/siswa-tingkat/{tingkat}', [KenaikanKelasController::class, 'getSiswaByTingkat']);
+        Route::post('/admin/kenaikan-kelas/luluskan-keluarkan-xii', [KenaikanKelasController::class, 'luluskanKeluarkankelasXii']);
+        Route::post('/admin/kenaikan-kelas/promosikan-kelas', [KenaikanKelasController::class, 'promosikanKelas']);
+        Route::get('/admin/alumni', [KenaikanKelasController::class, 'getAlumniList']);
+        Route::get('/admin/alumni/{id}', [KenaikanKelasController::class, 'getAlumniDetail']);
 
         // Admin Master Data CRUD (Mapel & Jadwal)
         Route::get('/admin/mapel', [\App\Http\Controllers\Api\AdminJadwalController::class, 'indexMapel']);
@@ -91,9 +107,15 @@ Route::prefix('v1')->group(function () {
         Route::post('/rapor-sts/mapel-kelas', [\App\Http\Controllers\Api\RaporController::class, 'storeNilaiMapelKelas']);
         Route::get('/rapor-sts/walikelas-view', [\App\Http\Controllers\Api\RaporController::class, 'getWaliKelasRapor']);
         Route::post('/rapor-sts/{siswa_id}/catatan-walikelas', [\App\Http\Controllers\Api\RaporController::class, 'saveCatatanWaliKelas']);
+        Route::post('/rapor-sts/request-cancel-validasi', [\App\Http\Controllers\Api\RaporController::class, 'requestCancelValidasi']);
+        Route::get('/rapor-sts/unvalidation-requests', [\App\Http\Controllers\Api\RaporController::class, 'getUnvalidationRequests']);
+        Route::post('/rapor-sts/unvalidation-requests/{id}/approve', [\App\Http\Controllers\Api\RaporController::class, 'approveUnvalidationRequest']);
+        Route::post('/rapor-sts/unvalidation-requests/{id}/reject', [\App\Http\Controllers\Api\RaporController::class, 'rejectUnvalidationRequest']);
         Route::post('/rapor-sts/{siswa_id}/cancel-validasi', [\App\Http\Controllers\Api\RaporController::class, 'cancelValidasiWaliKelas']);
-        Route::post('/rapor-sts/bulk-approve-walikelas', [\App\Http\Controllers\Api\RaporController::class, 'bulkApproveWaliKelas']);
         Route::post('/rapor-sts/bulk-cancel-validasi', [\App\Http\Controllers\Api\RaporController::class, 'bulkCancelValidasiWaliKelas']);
+        Route::post('/rapor-sts/bulk-approve-walikelas', [\App\Http\Controllers\Api\RaporController::class, 'bulkApproveWaliKelas']);
+        Route::get('/rapor-sts/export-zip', [\App\Http\Controllers\Api\RaporController::class, 'exportZipKelas']);
+        Route::get('/rapor-sts/export-zip-all', [\App\Http\Controllers\Api\RaporController::class, 'exportZipAll']);
         Route::get('/rapor-sts', [\App\Http\Controllers\Api\RaporController::class, 'index']);
         Route::get('/rapor-sts/{siswa_id}', [\App\Http\Controllers\Api\RaporController::class, 'show']);
         Route::post('/rapor-sts', [\App\Http\Controllers\Api\RaporController::class, 'storeOrUpdate']);
@@ -102,6 +124,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/rapor-sts/{siswa_id}/approve-kepsek', [\App\Http\Controllers\Api\RaporController::class, 'approveKepsek']);
         Route::post('/rapor-sts/{siswa_id}/reset', [\App\Http\Controllers\Api\RaporController::class, 'resetToDraft']);
         Route::get('/rapor-sts/{siswa_id}/export', [\App\Http\Controllers\Api\RaporController::class, 'exportExcel']);
+        Route::get('/rapor-sts/{siswa_id}/export-pdf', [\App\Http\Controllers\Api\RaporController::class, 'exportPdf']);
 
         // Modul Kepegawaian (HRD)
         Route::get('/kepegawaian/pegawai', [\App\Http\Controllers\Api\ModuleRevisiController::class, 'getPegawai']);
@@ -170,6 +193,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('/humas/konten/{id}', [\App\Http\Controllers\Api\HumasController::class, 'destroy']);
         Route::post('/humas/konten/{id}/approval', [\App\Http\Controllers\Api\HumasController::class, 'approve']);
         Route::post('/humas/konten/{id}/toggle-pin', [\App\Http\Controllers\Api\HumasController::class, 'togglePin']);
+        Route::post('/humas/konten/{id}/toggle-public', [\App\Http\Controllers\Api\HumasController::class, 'togglePublic']);
         Route::post('/humas/sync-website', [\App\Http\Controllers\Api\HumasController::class, 'syncWebsite']);
 
         // Perpustakaan Digital
@@ -198,6 +222,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/ringkasan', [\App\Http\Controllers\Api\PortalSiswaController::class, 'ringkasan']);
             Route::get('/presensi', [\App\Http\Controllers\Api\PortalSiswaController::class, 'presensi']);
             Route::get('/nilai', [\App\Http\Controllers\Api\PortalSiswaController::class, 'nilai']);
+            Route::get('/rapor-pdf', [\App\Http\Controllers\Api\PortalSiswaController::class, 'raporPdf']);
             Route::get('/jadwal', [\App\Http\Controllers\Api\PortalSiswaController::class, 'jadwal']);
             Route::get('/kedisiplinan-prestasi', [\App\Http\Controllers\Api\PortalSiswaController::class, 'kedisiplinanPrestasi']);
             Route::get('/perpustakaan', [\App\Http\Controllers\Api\PortalSiswaController::class, 'perpustakaan']);

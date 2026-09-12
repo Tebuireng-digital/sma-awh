@@ -91,6 +91,21 @@ class KalenderAkademikController extends Controller
             'tanggal_selesai' => 'required|date',
         ]);
 
+        $currentTaRow = \Illuminate\Support\Facades\DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $currentTa = $currentTaRow ? $currentTaRow->nama : '2026/2027';
+
+        // Syarat: KEDUA semester (Ganjil dan Genap) pada tahun ajaran aktif harus sudah divalidasi penuh oleh seluruh wali kelas!
+        $fullYearValidation = \App\Services\RaporValidationService::checkFullYearValidation($currentTa);
+
+        if (!$fullYearValidation['can_proceed']) {
+            return response()->json([
+                'status' => 'error',
+                'can_change_year' => false,
+                'message' => "Rollover Tahun Ajaran belum dapat dilakukan. Seluruh wali kelas harus memvalidasi 100% rapor untuk Semester Ganjil dan Semester Genap pada Tahun Pelajaran {$currentTa} terlebih dahulu.",
+                'validation' => $fullYearValidation,
+            ], 422);
+        }
+
         $result = TahunAjaranRolloverService::createNewAcademicYear(
             $request->tahun_ajaran,
             $request->tanggal_mulai,

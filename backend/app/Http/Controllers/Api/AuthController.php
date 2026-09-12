@@ -130,18 +130,13 @@ class AuthController extends Controller
             }
         }
 
-        // Cek password hash atau default 'siswa123'
+        // Verifikasi kata sandi dengan hash
         $isValidAuth = \Illuminate\Support\Facades\Hash::check($passwordInput, $user->password);
-        if (!$isValidAuth && $passwordInput === 'siswa123') {
-            $user->password = \Illuminate\Support\Facades\Hash::make('siswa123');
-            $user->save();
-            $isValidAuth = true;
-        }
 
         if (!$isValidAuth) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Kata sandi tidak sesuai. Kata sandi bawaan adalah siswa123.',
+                'message' => 'Kata sandi tidak sesuai. Silakan periksa kembali kata sandi Anda.',
             ], 401);
         }
 

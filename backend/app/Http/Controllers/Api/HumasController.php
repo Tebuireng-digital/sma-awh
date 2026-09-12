@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\HumasSyncService;
+use App\Services\ImageOptimizerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -31,8 +32,20 @@ class HumasController extends Controller
         $query = DB::table('humas_konten')
             ->where('status', 'Published')
             ->orderBy('is_pinned', 'desc')
+            ->orderByRaw('COALESCE(pinned_at, updated_at) desc')
             ->orderBy('published_at', 'desc')
             ->orderBy('id', 'desc');
+
+        if ($request->has('is_public')) {
+            $query->where('is_public', $request->boolean('is_public') ? 1 : 0);
+        } elseif ($kategori === 'Aset Web') {
+            // Ketika query spesifik aset web (misal galeri kesiswaan, foto profil),
+            // jangan filter is_public agar tetap bisa dimuat oleh layout aset halaman
+        } else {
+            // Standar publik utama (Berita, Sorotan Beranda, Pengumuman, Prestasi):
+            // hanya tampilkan konten yang ditandai untuk publik utama
+            $query->where('is_public', 1);
+        }
 
         if ($kategori && $kategori !== 'Semua') {
             $query->where('kategori', $kategori);
@@ -51,6 +64,7 @@ class HumasController extends Controller
         $itemList = $items->items();
         foreach ($itemList as $item) {
             $item->is_pinned = (bool)($item->is_pinned ?? false);
+            $item->is_public = (bool)($item->is_public ?? true);
             if (!empty($item->galeri_images) && is_string($item->galeri_images)) {
                 $item->galeri_images = json_decode($item->galeri_images, true) ?: [];
             } else {
@@ -60,12 +74,12 @@ class HumasController extends Controller
 
         // Kategori count stats (4 Kategori Resmi: Berita, Pengumuman, Prestasi Akademik, Prestasi Non Akademik)
         $stats = [
-            'total' => DB::table('humas_konten')->where('status', 'Published')->where('kategori', '!=', 'Aset Web')->count(),
-            'berita' => DB::table('humas_konten')->where('status', 'Published')->where('kategori', 'Berita')->count(),
-            'pengumuman' => DB::table('humas_konten')->where('status', 'Published')->where('kategori', 'Pengumuman')->count(),
-            'prestasi_akademik' => DB::table('humas_konten')->where('status', 'Published')->where('kategori', 'Prestasi Akademik')->count(),
-            'prestasi_non_akademik' => DB::table('humas_konten')->where('status', 'Published')->where('kategori', 'Prestasi Non Akademik')->count(),
-            'pinned' => DB::table('humas_konten')->where('status', 'Published')->where('is_pinned', 1)->count(),
+            'total' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->count(),
+            'berita' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->where('kategori', 'Berita')->count(),
+            'pengumuman' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->where('kategori', 'Pengumuman')->count(),
+            'prestasi_akademik' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->where('kategori', 'Prestasi Akademik')->count(),
+            'prestasi_non_akademik' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->where('kategori', 'Prestasi Non Akademik')->count(),
+            'pinned' => DB::table('humas_konten')->where('status', 'Published')->where('is_public', 1)->where('is_pinned', 1)->count(),
         ];
 
         return response()->json([
@@ -137,6 +151,7 @@ class HumasController extends Controller
         $status = $request->query('status');
         $kategori = $request->query('kategori');
         $search = $request->query('search');
+        $isPublic = $request->query('is_public');
 
         $query = DB::table('humas_konten')->orderBy('id', 'desc');
 
@@ -146,6 +161,10 @@ class HumasController extends Controller
 
         if ($kategori && $kategori !== 'Semua') {
             $query->where('kategori', $kategori);
+        }
+
+        if ($request->has('is_public') && $isPublic !== 'Semua') {
+            $query->where('is_public', $request->boolean('is_public') ? 1 : 0);
         }
 
         if ($search) {
@@ -159,6 +178,7 @@ class HumasController extends Controller
 
         foreach ($data as $item) {
             $item->is_pinned = (bool)($item->is_pinned ?? false);
+            $item->is_public = (bool)($item->is_public ?? true);
             if (!empty($item->galeri_images) && is_string($item->galeri_images)) {
                 $item->galeri_images = json_decode($item->galeri_images, true) ?: [];
             } else {
@@ -166,7 +186,7 @@ class HumasController extends Controller
             }
         }
 
-        // Rekapitulasi status & pin
+        // Rekapitulasi status, pin, & publik utama
         $statusSummary = [
             'total' => DB::table('humas_konten')->count(),
             'published' => DB::table('humas_konten')->where('status', 'Published')->count(),
@@ -174,12 +194,17 @@ class HumasController extends Controller
             'draft' => DB::table('humas_konten')->where('status', 'Draft')->count(),
             'rejected' => DB::table('humas_konten')->where('status', 'Rejected')->count(),
             'pinned' => DB::table('humas_konten')->where('is_pinned', 1)->count(),
+            'public' => DB::table('humas_konten')->where('is_public', 1)->count(),
+            'internal_only' => DB::table('humas_konten')->where('is_public', 0)->count(),
         ];
+
+        $realStudentCount = DB::table('siswa')->where('status_aktif', 1)->count();
 
         return response()->json([
             'status' => 'success',
             'data' => $data,
             'summary' => $statusSummary,
+            'real_student_count' => $realStudentCount,
         ]);
     }
 
@@ -208,16 +233,9 @@ class HumasController extends Controller
         // Jika upload berkas foto langsung
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('humas', $filename, 'public');
+            $path = ImageOptimizerService::optimizeAndStore($file, 'humas', 1200, 82);
             $localImagePath = '/storage/' . $path;
             $imageUrl = $localImagePath;
-
-            // Salin ke frontend/public jika ada
-            $frontendDir = base_path('../frontend/public/humas');
-            if (is_dir($frontendDir)) {
-                @copy(storage_path('app/public/' . $path), $frontendDir . '/' . $filename);
-            }
         }
 
         // Simpan Berkas Gambar Pelengkap / Galeri Tambahan
@@ -227,22 +245,48 @@ class HumasController extends Controller
             if (!is_array($files)) {
                 $files = [$files];
             }
-            $frontendDir = base_path('../frontend/public/humas');
-            foreach ($files as $idx => $file) {
+            foreach ($files as $file) {
                 if ($file && $file->isValid()) {
-                    $filename = time() . '_' . ($idx + 1) . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('humas', $filename, 'public');
-                    $gUrl = '/storage/' . $path;
-                    $galeriImages[] = $gUrl;
-                    if (is_dir($frontendDir)) {
-                        @copy(storage_path('app/public/' . $path), $frontendDir . '/' . $filename);
-                    }
+                    $path = ImageOptimizerService::optimizeAndStore($file, 'humas', 1200, 82);
+                    $galeriImages[] = '/storage/' . $path;
                 }
             }
         }
 
+        $user = $request->user();
+        $userRoles = $user ? (method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role]) : [];
+        $canApprove = count(array_intersect($userRoles, ['admin', 'kepala_sekolah'])) > 0;
+
         $status = $request->input('status', 'Pending Approval');
+        if ($status === 'Published' && !$canApprove && $request->kategori !== 'Aset Web') {
+            $status = 'Pending Approval';
+        }
         $publishedAt = ($status === 'Published') ? now() : null;
+
+        $isPublic = $request->has('is_public')
+            ? ($request->boolean('is_public') ? 1 : 0)
+            : (($request->kategori === 'Aset Web') ? 0 : 1);
+
+        $isPinned = $request->boolean('is_pinned') ? 1 : 0;
+        if ($isPinned) {
+            $currentPinned = DB::table('humas_konten')
+                ->where('is_pinned', 1)
+                ->orderByRaw('COALESCE(pinned_at, updated_at) asc')
+                ->orderBy('id', 'asc')
+                ->get();
+
+            if ($currentPinned->count() >= 3) {
+                $excessCount = ($currentPinned->count() + 1) - 3;
+                $toUnpin = $currentPinned->take($excessCount);
+                foreach ($toUnpin as $old) {
+                    DB::table('humas_konten')->where('id', $old->id)->update([
+                        'is_pinned' => 0,
+                        'pinned_at' => null,
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
 
         $id = DB::table('humas_konten')->insertGetId([
             'judul' => $request->judul,
@@ -255,7 +299,9 @@ class HumasController extends Controller
             'local_image_path' => $localImagePath,
             'galeri_images' => count($galeriImages) > 0 ? json_encode(array_values($galeriImages)) : null,
             'status' => $status,
-            'is_pinned' => $request->boolean('is_pinned') ? 1 : 0,
+            'is_pinned' => $isPinned,
+            'pinned_at' => $isPinned ? now() : null,
+            'is_public' => $isPublic,
             'author' => auth()->user()?->name ?? 'Staf Humas SMA AWH',
             'published_at' => $publishedAt,
             'created_at' => now(),
@@ -292,18 +338,19 @@ class HumasController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('humas', $filename, 'public');
+            $path = ImageOptimizerService::optimizeAndStore($file, 'humas', 1200, 82);
             $localImagePath = '/storage/' . $path;
             $imageUrl = $localImagePath;
-
-            $frontendDir = base_path('../frontend/public/humas');
-            if (is_dir($frontendDir)) {
-                @copy(storage_path('app/public/' . $path), $frontendDir . '/' . $filename);
-            }
         }
 
+        $user = $request->user();
+        $userRoles = $user ? (method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role]) : [];
+        $canApprove = count(array_intersect($userRoles, ['admin', 'kepala_sekolah'])) > 0;
+
         $status = $request->input('status', $existing->status);
+        if ($status === 'Published' && !$canApprove && $existing->status !== 'Published' && $request->kategori !== 'Aset Web') {
+            $status = 'Pending Approval';
+        }
         $publishedAt = $existing->published_at;
         if ($status === 'Published' && !$publishedAt) {
             $publishedAt = now();
@@ -335,16 +382,10 @@ class HumasController extends Controller
             if (!is_array($files)) {
                 $files = [$files];
             }
-            $frontendDir = base_path('../frontend/public/humas');
-            foreach ($files as $idx => $file) {
+            foreach ($files as $file) {
                 if ($file && $file->isValid()) {
-                    $filename = time() . '_' . ($idx + 1) . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('humas', $filename, 'public');
-                    $gUrl = '/storage/' . $path;
-                    $galeriImages[] = $gUrl;
-                    if (is_dir($frontendDir)) {
-                        @copy(storage_path('app/public/' . $path), $frontendDir . '/' . $filename);
-                    }
+                    $path = ImageOptimizerService::optimizeAndStore($file, 'humas', 1200, 82);
+                    $galeriImages[] = '/storage/' . $path;
                 }
             }
         }
@@ -365,7 +406,33 @@ class HumasController extends Controller
         ];
 
         if ($request->has('is_pinned')) {
-            $updateData['is_pinned'] = $request->boolean('is_pinned') ? 1 : 0;
+            $isPinned = $request->boolean('is_pinned') ? 1 : 0;
+            if ($isPinned && empty($existing->is_pinned)) {
+                $currentPinned = DB::table('humas_konten')
+                    ->where('is_pinned', 1)
+                    ->where('id', '!=', $id)
+                    ->orderByRaw('COALESCE(pinned_at, updated_at) asc')
+                    ->orderBy('id', 'asc')
+                    ->get();
+
+                if ($currentPinned->count() >= 3) {
+                    $excessCount = ($currentPinned->count() + 1) - 3;
+                    $toUnpin = $currentPinned->take($excessCount);
+                    foreach ($toUnpin as $old) {
+                        DB::table('humas_konten')->where('id', $old->id)->update([
+                            'is_pinned' => 0,
+                            'pinned_at' => null,
+                            'updated_at' => now(),
+                        ]);
+                    }
+                }
+            }
+            $updateData['is_pinned'] = $isPinned;
+            $updateData['pinned_at'] = $isPinned ? ($existing->pinned_at ?? now()) : null;
+        }
+
+        if ($request->has('is_public')) {
+            $updateData['is_public'] = $request->boolean('is_public') ? 1 : 0;
         }
 
         DB::table('humas_konten')->where('id', $id)->update($updateData);
@@ -398,10 +465,19 @@ class HumasController extends Controller
     }
 
     /**
-     * Alur Approval Kepala Sekolah / Waka Humas
+     * Verifikasi & Persetujuan Publikasi (Khusus Kepala Sekolah dan Admin)
      */
     public function approve(Request $request, $id)
     {
+        $user = $request->user();
+        $userRoles = $user ? (method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role]) : [];
+        if (!count(array_intersect($userRoles, ['admin', 'kepala_sekolah']))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Hanya Kepala Sekolah dan Administrator yang berwenang melakukan verifikasi dan persetujuan publikasi konten.',
+            ], 403);
+        }
+
         $request->validate([
             'action' => 'required|in:approve,reject',
             'catatan' => 'nullable|string',
@@ -443,7 +519,10 @@ class HumasController extends Controller
     }
 
     /**
-     * One-Click Toggle PIN untuk Menampilkan Berita di 3 Sorotan Beranda
+     * One-Click Toggle PIN untuk Menampilkan Berita di 3 Sorotan Beranda.
+     * Aturan: Tidak boleh lebih dari 3 konten yang disematkan.
+     * Jika sudah ada 3 konten yang disematkan dan user menyematkan konten ke-4,
+     * maka konten yang terlama disematkan otomatis dilepas (unpinned).
      */
     public function togglePin($id)
     {
@@ -452,21 +531,94 @@ class HumasController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Konten tidak ditemukan.'], 404);
         }
 
-        $newPinned = empty($konten->is_pinned) ? 1 : 0;
-        DB::table('humas_konten')->where('id', $id)->update([
-            'is_pinned' => $newPinned,
-            'updated_at' => now(),
-        ]);
+        $wasPinned = !empty($konten->is_pinned);
+        $newPinned = $wasPinned ? 0 : 1;
+        $unpinnedItem = null;
 
-        $totalPinned = DB::table('humas_konten')->where('is_pinned', 1)->count();
+        if ($newPinned === 1) {
+            // Cek jumlah konten yang saat ini disematkan (selain item ini)
+            $currentPinned = DB::table('humas_konten')
+                ->where('is_pinned', 1)
+                ->where('id', '!=', $id)
+                ->orderByRaw('COALESCE(pinned_at, updated_at) asc')
+                ->orderBy('id', 'asc')
+                ->get();
+
+            // Jika sudah ada >= 3 konten yang disematkan, lepaskan yang terlama
+            if ($currentPinned->count() >= 3) {
+                $excessCount = ($currentPinned->count() + 1) - 3;
+                $toUnpin = $currentPinned->take($excessCount);
+                foreach ($toUnpin as $old) {
+                    DB::table('humas_konten')->where('id', $old->id)->update([
+                        'is_pinned' => 0,
+                        'pinned_at' => null,
+                        'updated_at' => now(),
+                    ]);
+                    $unpinnedItem = $old;
+                }
+            }
+
+            // Sematkan konten yang diminta
+            DB::table('humas_konten')->where('id', $id)->update([
+                'is_pinned' => 1,
+                'pinned_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else {
+            // Lepas sematan
+            DB::table('humas_konten')->where('id', $id)->update([
+                'is_pinned' => 0,
+                'pinned_at' => null,
+                'updated_at' => now(),
+            ]);
+        }
+
+        $allPinned = DB::table('humas_konten')
+            ->where('is_pinned', 1)
+            ->orderByRaw('COALESCE(pinned_at, updated_at) desc')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $pinnedIds = $allPinned->pluck('id')->all();
+
+        $message = $newPinned
+            ? ($unpinnedItem
+                ? "Berita \"{$konten->judul}\" berhasil disematkan! Pin pada \"{$unpinnedItem->judul}\" otomatis dilepas karena batas maksimal 3 pin."
+                : "Berita \"{$konten->judul}\" berhasil disematkan di 3 Sorotan Beranda!")
+            : "Sematkan (PIN) pada berita dilepas.";
 
         return response()->json([
             'status' => 'success',
-            'message' => $newPinned
-                ? "Berita \"{$konten->judul}\" berhasil disematkan (PIN) di Beranda!"
-                : "Sematkan (PIN) pada berita dilepas.",
+            'message' => $message,
             'is_pinned' => (bool)$newPinned,
-            'total_pinned' => $totalPinned,
+            'unpinned_id' => $unpinnedItem ? $unpinnedItem->id : null,
+            'pinned_ids' => $pinnedIds,
+            'total_pinned' => count($pinnedIds),
+        ]);
+    }
+
+    /**
+     * One-Click Toggle untuk Menampilkan / Menyembunyikan Konten dari Publik Utama (Berita & Beranda)
+     */
+    public function togglePublic($id)
+    {
+        $konten = DB::table('humas_konten')->where('id', $id)->first();
+        if (!$konten) {
+            return response()->json(['status' => 'error', 'message' => 'Konten tidak ditemukan.'], 404);
+        }
+
+        $newPublic = empty($konten->is_public) ? 1 : 0;
+        DB::table('humas_konten')->where('id', $id)->update([
+            'is_public' => $newPublic,
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => $newPublic
+                ? "Konten \"{$konten->judul}\" sekarang DITAMPILKAN di Publik Utama (Berita & Beranda)!"
+                : "Konten \"{$konten->judul}\" sekarang DISEMBUNYIKAN dari Publik Utama (hanya internal/aset).",
+            'is_public' => (bool)$newPublic,
         ]);
     }
 }

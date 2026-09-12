@@ -50,21 +50,23 @@ export default function PublicBeritaPage() {
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data.data) && data.data.length > 0) {
-            const apiItems = data.data.map((item) => ({
-              id: item.id,
-              kategori: item.kategori || 'Berita',
-              is_pinned: !!item.is_pinned,
-              tanggal: item.created_at
-                ? new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
-                : 'Tebuireng',
-              penulis: item.author || 'Humas SMA AWH',
-              waktuBaca: '3 Menit Baca',
-              judul: item.judul,
-              ringkasan: item.ringkasan,
-              image_url: item.image_url,
-              isi: item.isi,
-              galeri: item.galeri_images || [],
-            }));
+            const apiItems = data.data
+              .filter((item) => item.is_public !== false)
+              .map((item) => ({
+                id: item.id,
+                kategori: item.kategori || 'Berita',
+                is_pinned: !!item.is_pinned,
+                tanggal: item.created_at
+                  ? new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+                  : 'Tebuireng',
+                penulis: item.author || 'Humas SMA AWH',
+                waktuBaca: '3 Menit Baca',
+                judul: item.judul || '',
+                ringkasan: item.ringkasan || (item.isi ? item.isi.replace(/<[^>]+>/g, '').slice(0, 160) + '...' : ''),
+                image_url: item.image_url || '/logo.png',
+                isi: item.isi || '',
+                galeri: item.galeri_images || [],
+              }));
             setPosts(apiItems);
           }
         }
@@ -92,10 +94,17 @@ export default function PublicBeritaPage() {
       selectedKategori === 'Semua' ||
       post.kategori === selectedKategori ||
       (Array.isArray(post.semuaKategori) && post.semuaKategori.includes(selectedKategori));
-    const matchSearch =
-      !searchQuery ||
-      post.judul.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.ringkasan.toLowerCase().includes(searchQuery.toLowerCase());
+
+    if (!searchQuery || !searchQuery.trim()) {
+      return matchCat;
+    }
+
+    const q = searchQuery.toLowerCase().trim();
+    const judul = (post.judul || '').toLowerCase();
+    const ringkasan = (post.ringkasan || '').toLowerCase();
+    const isi = (typeof post.isi === 'string' ? post.isi.replace(/<[^>]+>/g, '') : '').toLowerCase();
+
+    const matchSearch = judul.includes(q) || ringkasan.includes(q) || isi.includes(q);
     return matchCat && matchSearch;
   });
 
@@ -262,58 +271,85 @@ export default function PublicBeritaPage() {
             </div>
 
             {/* News Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="border border-border-subtle rounded-2xl bg-surface-card overflow-hidden flex flex-col justify-between hover:border-forest-deep transition-all duration-200 group shadow-sm hover:shadow-md elevation-1"
-                >
-                  {post.image_url && (
-                    <div className="h-48 overflow-hidden bg-surface-container relative">
-                      <img
-                        alt={post.judul}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        src={post.image_url}
-                      />
-                      <div className="absolute top-2.5 left-2.5 bg-forest-deep/80 backdrop-blur-sm text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                        {post.kategoriPill || post.kategori}
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-16 bg-surface-card border border-border-subtle rounded-3xl p-8 max-w-xl mx-auto shadow-sm">
+                <span className="material-symbols-outlined text-5xl text-outline-variant mb-3 block">
+                  search_off
+                </span>
+                <h4 className="font-headline-md text-lg sm:text-xl font-bold text-forest-deep">
+                  Tidak Ada Berita Ditemukan
+                </h4>
+                <p className="text-xs sm:text-sm text-on-surface-variant mt-2 leading-relaxed">
+                  Tidak ditemukan berita yang cocok dengan kata kunci &ldquo;<span className="font-semibold text-forest-deep">{searchQuery}</span>&rdquo;
+                  {selectedKategori !== 'Semua' && ` pada kategori "${selectedKategori}"`}.
+                </p>
+                <div className="pt-5 flex items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedKategori('Semua');
+                    }}
+                    className="px-4 py-2 bg-forest-deep text-white rounded-xl text-xs font-semibold hover:bg-forest-deep/90 transition-all cursor-pointer shadow-xs"
+                  >
+                    Reset Pencarian
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredPosts.map((post) => (
+                  <article
+                    key={post.id}
+                    className="border border-border-subtle rounded-2xl bg-surface-card overflow-hidden flex flex-col justify-between hover:border-forest-deep transition-all duration-200 group shadow-sm hover:shadow-md elevation-1"
+                  >
+                    {post.image_url && (
+                      <div className="h-48 overflow-hidden bg-surface-container relative">
+                        <img
+                          alt={post.judul}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          src={post.image_url}
+                        />
+                        <div className="absolute top-2.5 left-2.5 bg-forest-deep/80 backdrop-blur-sm text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                          {post.kategoriPill || post.kategori}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
-                    <div>
-                      <div className="flex items-center justify-between text-[11px] text-on-surface-variant mb-2">
-                        <span>{post.tanggal}</span>
-                        <span>•</span>
-                        <span>{post.waktuBaca}</span>
+                    <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                      <div>
+                        <div className="flex items-center justify-between text-[11px] text-on-surface-variant mb-2">
+                          <span>{post.tanggal}</span>
+                          <span>•</span>
+                          <span>{post.waktuBaca}</span>
+                        </div>
+
+                        <h4 className="font-headline-md text-sm sm:text-base font-bold text-forest-deep group-hover:text-emerald-vibrant transition-colors line-clamp-2 leading-snug">
+                          <Link to={`/berita/${post.id}`}>
+                            {post.judul}
+                          </Link>
+                        </h4>
+
+                        <p className="text-xs text-on-surface-variant line-clamp-3 leading-relaxed mt-2 font-normal">
+                          {post.ringkasan}
+                        </p>
                       </div>
 
-                      <h4 className="font-headline-md text-sm sm:text-base font-bold text-forest-deep group-hover:text-emerald-vibrant transition-colors line-clamp-2 leading-snug">
-                        <Link to={`/berita/${post.id}`}>
-                          {post.judul}
+                      <div className="pt-3 border-t border-border-subtle flex items-center justify-between text-xs text-forest-deep font-semibold">
+                        <span className="text-on-surface-variant font-normal text-[11px]">{post.penulis}</span>
+                        <Link
+                          to={`/berita/${post.id}`}
+                          className="inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                        >
+                          <span>Baca</span>
+                          <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
                         </Link>
-                      </h4>
-
-                      <p className="text-xs text-on-surface-variant line-clamp-3 leading-relaxed mt-2 font-normal">
-                        {post.ringkasan}
-                      </p>
+                      </div>
                     </div>
-
-                    <div className="pt-3 border-t border-border-subtle flex items-center justify-between text-xs text-forest-deep font-semibold">
-                      <span className="text-on-surface-variant font-normal text-[11px]">{post.penulis}</span>
-                      <Link
-                        to={`/berita/${post.id}`}
-                        className="inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-                      >
-                        <span>Baca</span>
-                        <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

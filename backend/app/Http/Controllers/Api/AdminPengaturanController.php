@@ -38,6 +38,27 @@ class AdminPengaturanController extends Controller
         ]);
     }
 
+    public function getValidationStatus(Request $request)
+    {
+        $ta = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $sem = DB::table('semester')->where('is_active', true)->first();
+
+        $tahunAjaran = $request->get('tahun_ajaran', $ta ? $ta->nama : '2026/2027');
+        $semester = $request->get('semester', $sem ? $sem->nama : 'Ganjil');
+        $mode = $request->get('mode', 'semester'); // 'semester' or 'full_year'
+
+        if ($mode === 'full_year') {
+            $data = \App\Services\RaporValidationService::checkFullYearValidation($tahunAjaran);
+        } else {
+            $data = \App\Services\RaporValidationService::checkSemesterValidation($tahunAjaran, $semester);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+        ]);
+    }
+
     public function getSemester()
     {
         $sem = DB::table('semester')->where('is_active', true)->first();
@@ -61,6 +82,21 @@ class AdminPengaturanController extends Controller
         $current = $sem ? $sem->nama : 'Ganjil';
         $newSemester = ($current === 'Ganjil') ? 'Genap' : 'Ganjil';
 
+        $ta = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $currentTa = $ta ? $ta->nama : '2026/2027';
+
+        // Syarat: Seluruh wali kelas harus sudah melakukan validasi pada semester yang sedang aktif saat ini!
+        $validation = \App\Services\RaporValidationService::checkSemesterValidation($currentTa, $current);
+
+        if (!$validation['can_proceed']) {
+            return response()->json([
+                'status' => 'error',
+                'can_toggle' => false,
+                'message' => "Pemindahan semester belum dapat dilakukan. Seluruh wali kelas (100% siswa) harus memvalidasi rapor untuk Semester {$current} pada Tahun Pelajaran {$currentTa} terlebih dahulu.",
+                'validation' => $validation,
+            ], 422);
+        }
+
         if ($sem) {
             DB::table('semester')->where('id', $sem->id)->update([
                 'nama' => $newSemester,
@@ -76,11 +112,7 @@ class AdminPengaturanController extends Controller
             ]);
         }
 
-        // Sinkronkan ke seluruh data rapor_sts
-        DB::table('rapor_sts')->update([
-            'semester' => $newSemester,
-            'updated_at' => now(),
-        ]);
+        // Histori rapor lama dipertahankan, tidak ditimpa!
 
         return response()->json([
             'status' => 'success',
@@ -116,6 +148,21 @@ class AdminPengaturanController extends Controller
 
         $newTa = trim($request->tahun_ajaran);
 
+        $currentTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $currentTa = $currentTaRow ? $currentTaRow->nama : '2026/2027';
+
+        // Syarat: KEDUA semester (Ganjil dan Genap) pada tahun ajaran aktif harus sudah divalidasi penuh oleh seluruh wali kelas!
+        $fullYearValidation = \App\Services\RaporValidationService::checkFullYearValidation($currentTa);
+
+        if (!$fullYearValidation['can_proceed']) {
+            return response()->json([
+                'status' => 'error',
+                'can_change_year' => false,
+                'message' => "Perubahan tahun pelajaran belum dapat dilakukan. Seluruh wali kelas harus memvalidasi 100% rapor untuk Semester Ganjil dan Semester Genap pada Tahun Pelajaran {$currentTa} terlebih dahulu.",
+                'validation' => $fullYearValidation,
+            ], 422);
+        }
+
         DB::table('tahun_ajaran')->update(['is_active' => false]);
         $existing = DB::table('tahun_ajaran')->where('nama', $newTa)->first();
         if ($existing) {
@@ -132,11 +179,7 @@ class AdminPengaturanController extends Controller
             ]);
         }
 
-        // Sinkronkan ke seluruh data rapor_sts
-        DB::table('rapor_sts')->update([
-            'tahun_ajaran' => $newTa,
-            'updated_at' => now(),
-        ]);
+        // Histori rapor lama dipertahankan, tidak ditimpa!
 
         return response()->json([
             'status' => 'success',

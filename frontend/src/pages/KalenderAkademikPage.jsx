@@ -78,7 +78,8 @@ const KalenderAkademikPage = () => {
       setMessage({ type: 'success', text: res.data.message });
       setShowRolloverModal(false);
     } catch (e) {
-      setMessage({ type: 'error', text: 'Gagal menjalankan Rollover Tahun Ajaran.' });
+      const errMsg = e.response?.data?.message || 'Gagal menjalankan Rollover Tahun Ajaran.';
+      setMessage({ type: 'error', text: errMsg });
     } finally {
       setSubmitting(false);
     }

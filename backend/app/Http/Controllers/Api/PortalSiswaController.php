@@ -128,11 +128,12 @@ class PortalSiswaController extends Controller
                     'persentase_kehadiran' => $persenHadir,
                     'total_hari_presensi' => $totalHari,
                     'total_hadir' => $totalHadir,
-                    'rata_rata_sts' => $realRataRata,
+                    'rata_rata_sts' => ($rapor && in_array($rapor->status_validasi, ['approved_by_walikelas', 'approved_by_kepsek'])) ? $realRataRata : null,
                     'mapel_dinilai_count' => $mapelDinilaiCount,
                     'total_mapel' => 21,
                     'kktp_standar' => $rapor ? $rapor->kktp : 75,
                     'status_validasi' => $rapor->status_validasi ?? 'draft',
+                    'is_validated' => (bool)($rapor && in_array($rapor->status_validasi, ['approved_by_walikelas', 'approved_by_kepsek'])),
                     'pinjaman_buku_aktif' => $pinjamanAktif,
                     'total_prestasi' => $totalPrestasi,
                     'total_poin_pelanggaran' => $totalPoinPelanggaran,
@@ -183,6 +184,7 @@ class PortalSiswaController extends Controller
     /**
      * 3. GET /v1/portal-siswa/nilai
      * Nilai Rapor STS & Rapor Digital (Read-Only)
+     * Wajib sudah divalidasi oleh Wali Kelas
      */
     public function nilai(Request $request)
     {
@@ -192,6 +194,31 @@ class PortalSiswaController extends Controller
             ->where('siswa_id', $siswaId)
             ->latest('created_at')
             ->first();
+
+        $isValidated = $rapor && in_array($rapor->status_validasi, ['approved_by_walikelas', 'approved_by_kepsek']);
+
+        if (!$isValidated) {
+            $kelasInfo = DB::table('anggota_kelas')
+                ->join('kelas', 'anggota_kelas.kelas_id', '=', 'kelas.id')
+                ->leftJoin('guru', 'kelas.id_guru_wali', '=', 'guru.id_guru')
+                ->where('anggota_kelas.siswa_id', $siswaId)
+                ->select('kelas.nama_kelas', 'guru.nama_lengkap as nama_wali')
+                ->first();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'is_validated' => false,
+                    'status_validasi' => $rapor->status_validasi ?? 'draft',
+                    'tahun_ajaran' => $rapor->tahun_ajaran ?? '2026/2027',
+                    'semester' => $rapor->semester ?? 'Ganjil',
+                    'wali_kelas' => $kelasInfo->nama_wali ?? 'Wali Kelas',
+                    'nama_kelas' => $kelasInfo->nama_kelas ?? '-',
+                    'message' => 'Rapor Sumatif Tengah Semester (STS) belum divalidasi oleh Wali Kelas. Rapor resmi hanya dapat diakses dalam format PDF setelah proses validasi selesai.',
+                    'daftar_nilai' => []
+                ]
+            ]);
+        }
 
         // 21 Subject Definitions
         $subjects = [
@@ -244,6 +271,8 @@ class PortalSiswaController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => [
+                'is_validated' => true,
+                'pdf_url' => '/api/v1/portal-siswa/rapor-pdf',
                 'tahun_ajaran' => $rapor->tahun_ajaran ?? '2026/2027',
                 'semester' => $rapor->semester ?? 'Ganjil',
                 'kktp' => $rapor->kktp ?? 75,
@@ -254,6 +283,65 @@ class PortalSiswaController extends Controller
                 'catatan_wali_kelas' => ($rapor && !empty($rapor->catatan_wali_kelas)) ? $rapor->catatan_wali_kelas : null,
                 'daftar_nilai' => $daftarNilai
             ]
+        ]);
+    }
+
+    /**
+     * Download / Stream Lembar Resmi PDF Rapor STS untuk Santri
+     * Hanya dapat diakses jika rapor telah divalidasi oleh Wali Kelas
+     */
+    public function raporPdf(Request $request)
+    {
+        $siswaId = $this->getAuthenticatedSiswaId($request);
+
+        $siswa = DB::table('siswa as s')
+            ->leftJoin('anggota_kelas as ak', 's.id', '=', 'ak.siswa_id')
+            ->leftJoin('kelas as k', 'ak.kelas_id', '=', 'k.id')
+            ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
+            ->select('s.id as siswa_id', 's.nama', 's.nis', 's.nisn', 'k.nama_kelas', 'k.tingkat', 'g.nama_lengkap as nama_wali')
+            ->where('s.id', $siswaId)
+            ->first();
+
+        if (!$siswa) {
+            return response()->json(['status' => 'error', 'message' => 'Data santri tidak ditemukan.'], 404);
+        }
+
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $semester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $tahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($tahunAjaran, '/') ? str_replace('/', '-', $tahunAjaran) : str_replace('-', '/', $tahunAjaran);
+
+        $rapor = DB::table('rapor_sts')
+            ->where('siswa_id', $siswaId)
+            ->whereIn('tahun_ajaran', [$tahunAjaran, $altTa])
+            ->where('semester', $semester)
+            ->first();
+
+        if (!$rapor || !in_array($rapor->status_validasi, ['approved_by_walikelas', 'approved_by_kepsek'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Rapor STS belum divalidasi oleh Wali Kelas. Rapor resmi hanya dapat diakses setelah divalidasi.'
+            ], 403);
+        }
+
+        $profilSekolah = DB::table('profil_sekolah')->first();
+        $namaKepsek = $profilSekolah ? $profilSekolah->kepala_sekolah : 'NIKMATURROHMAH, M.Pd.';
+
+        $fakeKelas = (object)[
+            'nama_kelas' => $siswa->nama_kelas ?? '-',
+            'nama_wali' => $siswa->nama_wali ?? '-',
+        ];
+
+        $raporController = app(\App\Http\Controllers\Api\RaporController::class);
+        $pdfBinary = $raporController->generateRaporPdfBinary($siswa, $fakeKelas, $rapor, $semester, $tahunAjaran, $namaKepsek);
+
+        $safeNama = preg_replace('/[^A-Za-z0-9_]/', '_', $siswa->nama);
+        $pdfName = "Rapor_STS_{$siswa->nis}_{$safeNama}.pdf";
+
+        return response($pdfBinary, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $pdfName . '"',
         ]);
     }
 

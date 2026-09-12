@@ -268,20 +268,20 @@ export default function PublicKesiswaanPage() {
         </section>
 
         {/* SECTIONS LIST */}
-        <div className="py-12 md:py-16 space-y-16 max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
+        <div className="py-12 md:py-16 flex flex-col gap-12 sm:gap-16 lg:gap-20 max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
           {sections.map((sec, sIdx) => (
             <section
               key={sec.id}
               id={sec.id}
-              className={`gsap-kesiswaan-sec rounded-3xl border border-border-subtle p-6 sm:p-10 elevation-1 ${
+              className={`gsap-kesiswaan-sec rounded-3xl border border-border-subtle p-6 sm:p-10 lg:p-12 elevation-1 ${
                 sIdx % 2 === 0 ? 'bg-surface-card' : 'bg-surface-warm'
               }`}
             >
-              <div className="space-y-4 mb-8">
-                <span className="px-3 py-1 rounded-full bg-forest-deep text-white text-xs font-bold uppercase tracking-wider">
+              <div className="flex flex-col items-start mb-8 sm:mb-10">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-forest-deep text-white text-xs font-bold uppercase tracking-wider mb-4 sm:mb-5 shadow-xs">
                   {sec.badge}
                 </span>
-                <h2 className="font-headline-xl text-xl sm:text-2xl lg:text-3xl font-bold text-forest-deep">
+                <h2 className="font-headline-xl text-xl sm:text-2xl lg:text-3xl font-bold text-forest-deep mb-3 sm:mb-4 tracking-tight">
                   {sec.title}
                 </h2>
                 <p className="text-xs sm:text-sm md:text-base text-on-surface-variant leading-relaxed max-w-3xl">

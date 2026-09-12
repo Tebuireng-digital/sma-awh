@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import client from '../api/client';
+import { useAuth } from '../context/AuthContext';
 import {
   Globe, Share2, Plus, Edit, Trash2, CheckCircle, Clock, AlertTriangle,
   Eye, ExternalLink, Image as ImageIcon, Send,
   Search, Filter, Check, X, ShieldAlert, Sparkles, FileText, ChevronRight, Images,
-  Film, Copy, CheckCheck
+  Film, Copy, CheckCheck, RefreshCw, Users, CheckCircle2
 } from 'lucide-react';
 
-const InstagramIcon = ({ className = "w-4 h-4" }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-  </svg>
-);
-
 export default function HumasPage() {
-  const [activeTab, setActiveTab] = useState('konten'); // 'konten', 'approval', 'editor', 'instagram'
+  const { user, hasAnyRole } = useAuth();
+  const canApprove = hasAnyRole(['admin', 'kepala_sekolah']);
+
+  const [activeTab, setActiveTab] = useState('konten'); // 'konten', 'aset', 'approval', 'editor'
+
+  // Pastikan staf biasa tidak bisa berada di tab approval
+  useEffect(() => {
+    if (!canApprove && activeTab === 'approval') {
+      setActiveTab('konten');
+    }
+  }, [canApprove, activeTab]);
+
   const [kontenList, setKontenList] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Filter & Search
   const [filterKategori, setFilterKategori] = useState('Semua');
   const [filterStatus, setFilterStatus] = useState('Semua');
+  const [filterPublic, setFilterPublic] = useState('Semua'); // 'Semua', 'Publik', 'Internal'
   const [searchQuery, setSearchQuery] = useState('');
 
   // Galeri & Aset Website Filters
@@ -41,13 +46,14 @@ export default function HumasPage() {
     image_url: '',
     status: 'Pending Approval',
     is_pinned: false,
+    is_public: true,
   });
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
-  
-  // Gallery Images State (Gambar Pelengkap / Galeri Tambahan)
+
+  // Multiple Image Gallery Form State
+  const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
   const [existingGalleryImages, setExistingGalleryImages] = useState([]);
-  const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]); // [{ file, preview }]
 
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formMessage, setFormMessage] = useState(null);
@@ -60,6 +66,67 @@ export default function HumasPage() {
   // Preview Modal
   const [previewPost, setPreviewPost] = useState(null);
   const [copiedSlug, setCopiedSlug] = useState(null);
+
+  // Quick Edit State untuk Statistik Siswa & Slogan Beranda
+  const [statData, setStatData] = useState({
+    id: null,
+    slogan: 'Sekolah Nyantri Ngaji Berprestasi',
+    labelTahun: 'Jumlah Siswa Tahun Akademik 2025-2026',
+    jumlahSiswa: '769',
+  });
+  const [statSubmitting, setStatSubmitting] = useState(false);
+  const [statMessage, setStatMessage] = useState(null);
+  const [realStudentCount, setRealStudentCount] = useState(null);
+
+  const handleSaveStatistik = async (e) => {
+    if (e) e.preventDefault();
+    setStatSubmitting(true);
+    setStatMessage(null);
+
+    const postData = new FormData();
+    postData.append('judul', (statData.slogan || '').trim());
+    postData.append('isi', (statData.labelTahun || '').trim());
+    postData.append('ringkasan', String(statData.jumlahSiswa || '').trim());
+    postData.append('kategori', 'Aset Web');
+    postData.append('platform_target', 'Website');
+    postData.append('status', 'Published');
+    postData.append('is_public', '0');
+
+    try {
+      let targetId = statData.id;
+      if (!targetId) {
+        const found = kontenList.find((i) => i.slug === 'aset-statistik-siswa-beranda');
+        if (found) targetId = found.id;
+      }
+
+      if (targetId) {
+        postData.append('_method', 'PUT');
+        const res = await client.post(`/humas/konten/${targetId}`, postData);
+        if (res.data && res.data.status === 'success') {
+          setStatMessage({ type: 'success', text: 'Statistik & Slogan Beranda berhasil disimpan dan langsung aktif di website!' });
+          await fetchKonten();
+        } else {
+          setStatMessage({ type: 'error', text: res.data?.message || 'Gagal menyimpan perubahan.' });
+        }
+      } else {
+        postData.append('slug', 'aset-statistik-siswa-beranda');
+        const res = await client.post('/humas/konten', postData);
+        if (res.data && res.data.status === 'success') {
+          setStatMessage({ type: 'success', text: 'Statistik & Slogan Beranda berhasil dibuat!' });
+          await fetchKonten();
+        } else {
+          setStatMessage({ type: 'error', text: res.data?.message || 'Gagal menyimpan statistik.' });
+        }
+      }
+    } catch (err) {
+      console.error('Error saving statistik:', err);
+      setStatMessage({ type: 'error', text: err.response?.data?.message || 'Gagal menyimpan statistik ke server.' });
+    } finally {
+      setStatSubmitting(false);
+      setTimeout(() => setStatMessage(null), 6000);
+    }
+  };
+
 
   const handleCopyUrl = (url, slug) => {
     const fullUrl = url?.startsWith('http') ? url : window.location.origin + (url || '');
@@ -250,6 +317,15 @@ export default function HumasPage() {
           group: 'kesiswaan',
           isVideo: false,
         };
+      case 'aset-statistik-siswa-beranda':
+        return {
+          location: 'Halaman Beranda (Statistik Siswa & Slogan)',
+          link: '/#student-count-sec',
+          badge: 'Statistik Beranda',
+          group: 'profil',
+          isStats: true,
+          isVideo: false,
+        };
       default:
         return {
           location: slug?.startsWith('aset-kesiswaan') ? 'Halaman Kesiswaan' : 'Aset Website Umum',
@@ -270,7 +346,20 @@ export default function HumasPage() {
     try {
       const res = await client.get('/humas/konten');
       if (res.data && res.data.status === 'success') {
-        setKontenList(res.data.data || []);
+        const list = res.data.data || [];
+        setKontenList(list);
+        if (res.data.real_student_count !== undefined) {
+          setRealStudentCount(res.data.real_student_count);
+        }
+        const statItem = list.find((i) => i.slug === 'aset-statistik-siswa-beranda');
+        if (statItem) {
+          setStatData({
+            id: statItem.id,
+            slogan: statItem.judul || 'Sekolah Nyantri Ngaji Berprestasi',
+            labelTahun: statItem.isi || 'Jumlah Siswa Tahun Akademik 2025-2026',
+            jumlahSiswa: statItem.ringkasan || '769',
+          });
+        }
       }
     } catch (err) {
       console.error('Gagal mengambil data konten:', err);
@@ -283,14 +372,39 @@ export default function HumasPage() {
     try {
       const res = await client.post(`/humas/konten/${postId}/toggle-pin`);
       if (res.data && res.data.status === 'success') {
+        const { is_pinned, pinned_ids, unpinned_id } = res.data;
         setKontenList((prev) =>
-          prev.map((item) =>
-            item.id === postId ? { ...item, is_pinned: res.data.is_pinned } : item
-          )
+          prev.map((item) => {
+            if (Array.isArray(pinned_ids)) {
+              return { ...item, is_pinned: pinned_ids.includes(item.id) };
+            }
+            if (item.id === postId) {
+              return { ...item, is_pinned: is_pinned };
+            }
+            if (unpinned_id && item.id === unpinned_id) {
+              return { ...item, is_pinned: false };
+            }
+            return item;
+          })
         );
       }
     } catch (err) {
       console.error('Gagal mengubah status pin:', err);
+    }
+  };
+
+  const handleTogglePublic = async (postId) => {
+    try {
+      const res = await client.post(`/humas/konten/${postId}/toggle-public`);
+      if (res.data && res.data.status === 'success') {
+        setKontenList((prev) =>
+          prev.map((item) =>
+            item.id === postId ? { ...item, is_public: res.data.is_public } : item
+          )
+        );
+      }
+    } catch (err) {
+      console.error('Gagal mengubah status tampil publik:', err);
     }
   };
 
@@ -305,6 +419,7 @@ export default function HumasPage() {
       image_url: '',
       status: 'Pending Approval',
       is_pinned: false,
+      is_public: true,
     });
     setSelectedFile(null);
     setImagePreview('');
@@ -324,6 +439,7 @@ export default function HumasPage() {
       image_url: post.image_url || '',
       status: post.status || 'Draft',
       is_pinned: !!post.is_pinned,
+      is_public: post.is_public !== undefined ? !!post.is_public : (post.kategori !== 'Aset Web'),
     });
     setImagePreview(post.image_url || '');
     setSelectedFile(null);
@@ -386,6 +502,7 @@ export default function HumasPage() {
     postData.append('platform_target', formData.platform_target);
     postData.append('status', formData.status);
     postData.append('is_pinned', formData.is_pinned ? '1' : '0');
+    postData.append('is_public', formData.is_public ? '1' : '0');
     if (formData.image_url && !selectedFile) {
       postData.append('image_url', formData.image_url);
     }
@@ -470,10 +587,11 @@ export default function HumasPage() {
   const filteredKonten = kontenList.filter(item => {
     const matchCat = filterKategori === 'Semua' || item.kategori === filterKategori;
     const matchStat = filterStatus === 'Semua' || item.status === filterStatus;
+    const matchPublic = filterPublic === 'Semua' || (filterPublic === 'Publik' ? !!item.is_public : !item.is_public);
     const matchSearch = !searchQuery ||
       item.judul?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.ringkasan?.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchCat && matchStat && matchSearch;
+    return matchCat && matchStat && matchPublic && matchSearch;
   });
 
   // Filtered Aset Web
@@ -505,7 +623,7 @@ export default function HumasPage() {
 
   return (
     <div className="space-y-6">
-      
+
       {/* 1. HEADER HALAMAN */}
       <div className="bg-gradient-to-r from-[#0d281e] via-[#0f3527] to-[#124231] rounded-2xl p-6 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#c8942a]/15 to-transparent rounded-full blur-2xl pointer-events-none -mr-20 -mt-20"></div>
@@ -525,26 +643,16 @@ export default function HumasPage() {
                 <span className="text-xs bg-[#c8942a] text-[#0d281e] px-2 py-0.5 rounded-full font-bold">CMS Web</span>
               </h1>
               <p className="text-xs text-emerald-100/80 mt-1 max-w-xl">
-                Kelola 4 klasifikasi konten (Berita, Pengumuman, Prestasi Akademik, Prestasi Non Akademik), 3 Pin Sorotan Beranda, dan sinkronisasi otomatis.
+                Kelola 4 klasifikasi konten (Berita, Pengumuman, Prestasi Akademik, Prestasi Non Akademik) dan 3 Pin Sorotan Beranda Sekolah.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5 flex-wrap">
             <button
-              onClick={handleSyncWebsite}
-              disabled={syncLoading}
-              className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-3.5 py-2.5 rounded-xl text-xs backdrop-blur-sm transition-all cursor-pointer disabled:opacity-50 shadow-sm"
-              title="Tarik warta terbaru dari website resmi smaawhtebuireng.sch.id"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 text-[#fde047] ${syncLoading ? 'animate-spin' : ''}`} />
-              <span>{syncLoading ? 'Sinkronisasi...' : 'Sinkron Website'}</span>
-            </button>
-
-            <button
               onClick={() => {
                 handleResetForm();
-                setShowModal(true);
+                setActiveTab('editor');
               }}
               className="inline-flex items-center gap-1.5 bg-[#c8942a] hover:bg-[#b08122] text-[#0d281e] font-bold px-4 py-2.5 rounded-xl text-xs shadow-sm transition-all cursor-pointer"
             >
@@ -587,7 +695,20 @@ export default function HumasPage() {
           </div>
         </div>
 
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-sm flex items-center gap-3.5">
+        <div
+          onClick={() => {
+            if (canApprove) {
+              setActiveTab('approval');
+            } else {
+              setFilterStatus('Pending Approval');
+              setActiveTab('konten');
+            }
+          }}
+          className={`bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-sm flex items-center gap-3.5 cursor-pointer transition-all hover:border-amber-400 ${
+            activeTab === 'approval' ? 'border-amber-500 ring-2 ring-amber-500/20' : ''
+          }`}
+          title={canApprove ? "Buka Verifikasi & Persetujuan Publikasi" : "Filter konten yang menunggu persetujuan"}
+        >
           <div className="p-3 rounded-xl bg-amber-50 text-amber-700">
             <Clock className="w-5 h-5" />
           </div>
@@ -612,77 +733,62 @@ export default function HumasPage() {
       <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-1.5 flex flex-wrap gap-1.5">
         <button
           onClick={() => setActiveTab('konten')}
-          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'konten'
+          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${activeTab === 'konten'
               ? 'bg-[#0d281e] text-white shadow-sm'
               : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-          }`}
+            }`}
         >
           <FileText className="w-4 h-4 text-emerald-400" />
           <span>Semua Konten</span>
-          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
-            activeTab === 'konten' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
-          }`}>
+          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${activeTab === 'konten' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+            }`}>
             {kontenList.length}
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab('aset')}
-          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'aset'
+          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${activeTab === 'aset'
               ? 'bg-[#0d281e] text-white shadow-sm'
               : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-          }`}
+            }`}
         >
           <Images className="w-4 h-4 text-cyan-400" />
           <span>Galeri & Aset Website</span>
-          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
-            activeTab === 'aset' ? 'bg-white/20 text-white' : 'bg-cyan-100 text-cyan-800'
-          }`}>
+          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${activeTab === 'aset' ? 'bg-white/20 text-white' : 'bg-cyan-100 text-cyan-800'
+            }`}>
             {kontenList.filter(i => i.kategori === 'Aset Web').length}
           </span>
         </button>
 
-        <button
-          onClick={() => setActiveTab('approval')}
-          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'approval'
-              ? 'bg-[#0d281e] text-white shadow-sm'
-              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-          }`}
-        >
-          <ShieldAlert className="w-4 h-4 text-amber-400" />
-          <span>Antrean Approval Kepsek</span>
-          {countPending > 0 && (
-            <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold">
-              {countPending}
-            </span>
-          )}
-        </button>
+        {/* Tab Approval Khusus Kepala Sekolah dan Admin */}
+        {canApprove && (
+          <button
+            onClick={() => setActiveTab('approval')}
+            className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${activeTab === 'approval'
+                ? 'bg-[#0d281e] text-white shadow-sm'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+          >
+            <ShieldAlert className="w-4 h-4 text-amber-400" />
+            <span>Verifikasi & Persetujuan Publikasi</span>
+            {countPending > 0 && (
+              <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold">
+                {countPending}
+              </span>
+            )}
+          </button>
+        )}
 
         <button
           onClick={() => setActiveTab('editor')}
-          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'editor'
+          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${activeTab === 'editor'
               ? 'bg-[#0d281e] text-white shadow-sm'
               : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-          }`}
+            }`}
         >
           <Plus className="w-4 h-4 text-blue-400" />
           <span>{editingId ? 'Edit Artikel' : 'Editor Publikasi'}</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('instagram')}
-          className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'instagram'
-              ? 'bg-[#0d281e] text-white shadow-sm'
-              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-          }`}
-        >
-          <InstagramIcon className="w-4 h-4 text-pink-500" />
-          <span>Simulator Feed Medsos</span>
         </button>
       </div>
 
@@ -721,53 +827,188 @@ export default function HumasPage() {
               </button>
             </div>
 
+            {/* Quick Editor: Pengaturan Slogan & Statistik Siswa Beranda */}
+            <div id="quick-edit-statistik" className="mt-5 p-5 bg-gradient-to-br from-emerald-50/70 via-slate-50 to-amber-50/40 rounded-2xl border border-emerald-200/80 shadow-xs">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-emerald-100">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/90 text-emerald-900 text-[11px] font-bold border border-emerald-300/60 mb-1.5">
+                    <Users className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>Konfigurasi Publik Beranda</span>
+                  </div>
+                  <h4 className="font-bold text-sm sm:text-base text-slate-900 flex items-center gap-2">
+                    <span>Slogan Utama & Statistik Jumlah Siswa Beranda</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-800 text-white font-normal">Aktif di Website</span>
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Ubah teks slogan ("Sekolah Nyantri Ngaji Berprestasi"), label tahun ajaran, dan total angka siswa yang tampil pada banner di halaman Beranda.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 self-start lg:self-auto">
+                  <a
+                    href="/#student-count-sec"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-emerald-800 bg-white hover:bg-emerald-50 border border-emerald-200 font-semibold px-3 py-1.5 rounded-xl shadow-xs transition-all"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Lihat di Beranda</span>
+                  </a>
+                </div>
+              </div>
+
+              <form onSubmit={handleSaveStatistik} className="pt-4 grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                <div className="lg:col-span-8 space-y-3.5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Slogan Utama Beranda
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={statData.slogan}
+                        onChange={(e) => setStatData({ ...statData, slogan: e.target.value })}
+                        placeholder="Contoh: Sekolah Nyantri Ngaji Berprestasi"
+                        className="w-full text-xs px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white font-medium"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Label / Keterangan Tahun Akademik
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={statData.labelTahun}
+                        onChange={(e) => setStatData({ ...statData, labelTahun: e.target.value })}
+                        placeholder="Contoh: Jumlah Siswa Tahun Akademik 2025-2026"
+                        className="w-full text-xs px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 items-end">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="block text-xs font-bold text-slate-700">
+                          Jumlah Siswa (Angka Tampil)
+                        </label>
+                        {realStudentCount && (
+                          <button
+                            type="button"
+                            onClick={() => setStatData({ ...statData, jumlahSiswa: String(realStudentCount) })}
+                            className="text-[10px] text-emerald-700 hover:text-emerald-900 font-semibold underline cursor-pointer"
+                            title="Klik untuk otomatis mengisi dengan data siswa aktif saat ini"
+                          >
+                            Isi dari Data Riil ({realStudentCount} Siswa)
+                          </button>
+                        )}
+                      </div>
+                      <input
+                        type="text"
+                        required
+                        value={statData.jumlahSiswa}
+                        onChange={(e) => setStatData({ ...statData, jumlahSiswa: e.target.value })}
+                        placeholder="Contoh: 769"
+                        className="w-full text-xs px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white font-mono font-bold text-slate-800"
+                      />
+                    </div>
+
+                    <div>
+                      <button
+                        type="submit"
+                        disabled={statSubmitting}
+                        className="w-full inline-flex items-center justify-center gap-2 bg-emerald-800 hover:bg-emerald-900 disabled:opacity-50 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer"
+                      >
+                        {statSubmitting ? (
+                          <>
+                            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                            <span>Menyimpan...</span>
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <span>Simpan Perubahan Statistik</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {statMessage && (
+                    <div className={`p-2.5 rounded-xl text-xs flex items-center gap-2 ${
+                      statMessage.type === 'success' ? 'bg-emerald-100 text-emerald-900 border border-emerald-200' : 'bg-rose-100 text-rose-900 border border-rose-200'
+                    }`}>
+                      {statMessage.type === 'success' ? <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />}
+                      <span>{statMessage.text}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Pratinjau Tampilan Beranda */}
+                <div className="lg:col-span-4 bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+                    <span>Pratinjau Live Beranda</span>
+                    <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                  <div className="bg-[#FAF7F0] p-4 rounded-xl text-center border border-slate-200/80 space-y-1">
+                    <div className="text-xs font-bold text-[#1B4332] leading-tight line-clamp-2">
+                      {statData.slogan || 'Sekolah Nyantri Ngaji Berprestasi'}
+                    </div>
+                    <div className="text-[10px] text-slate-500">
+                      {statData.labelTahun || 'Jumlah Siswa Tahun Akademik 2025-2026'}
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#1B4332] font-mono pt-1">
+                      {statData.jumlahSiswa || '769'}
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
             {/* Filter Sub-Tabs & Search Bar for Aset */}
             <div className="pt-4 flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
                 <button
                   onClick={() => setAssetFilter('all')}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                    assetFilter === 'all'
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${assetFilter === 'all'
                       ? 'bg-emerald-800 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   <span>Semua Media Web</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    assetFilter === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
-                  }`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${assetFilter === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                    }`}>
                     {totalAsetCount}
                   </span>
                 </button>
 
                 <button
                   onClick={() => setAssetFilter('profil')}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                    assetFilter === 'profil'
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${assetFilter === 'profil'
                       ? 'bg-emerald-800 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   <span>Beranda & Profil Utama</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    assetFilter === 'profil' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
-                  }`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${assetFilter === 'profil' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                    }`}>
                     {profilAsetCount}
                   </span>
                 </button>
 
                 <button
                   onClick={() => setAssetFilter('kesiswaan')}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                    assetFilter === 'kesiswaan'
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${assetFilter === 'kesiswaan'
                       ? 'bg-emerald-800 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   <span>Halaman Kesiswaan</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    assetFilter === 'kesiswaan' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
-                  }`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${assetFilter === 'kesiswaan' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                    }`}>
                     {kesiswaanAsetCount}
                   </span>
                 </button>
@@ -806,111 +1047,150 @@ export default function HumasPage() {
                   const info = getAssetLocationInfo(item.slug);
                   const isVideo = item.image_url?.endsWith('.mp4') || info.isVideo;
 
-                return (
-                  <div key={item.id} className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 flex flex-col justify-between hover:shadow-md transition-all group">
-                    <div>
-                      {/* Media Header / Placement Info */}
-                      <div className="flex items-center justify-between gap-2 mb-2.5">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-100 text-cyan-800 border border-cyan-200/60">
-                          {info.badge}
-                        </span>
-                        <span className="text-[10px] font-mono font-semibold text-slate-400">
-                          ID #{item.id}
-                        </span>
-                      </div>
-
-                      {/* Visual Preview */}
-                      <div className="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 mb-3 aspect-video flex items-center justify-center">
-                        {isVideo ? (
-                          <video
-                            src={item.image_url}
-                            controls
-                            preload="metadata"
-                            className="w-full h-full object-cover"
-                          >
-                            Browser Anda tidak mendukung tag video.
-                          </video>
-                        ) : (
-                          <img
-                            src={item.image_url}
-                            alt={item.judul}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            onError={(e) => {
-                              e.currentTarget.onerror = null;
-                              e.currentTarget.src = '/logo.png';
-                            }}
-                          />
-                        )}
-                        {isVideo && (
-                          <span className="absolute top-2 right-2 bg-black/70 text-amber-300 text-[10px] px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1 backdrop-blur-sm pointer-events-none">
-                            <Film className="w-3 h-3" /> MP4 Video
+                  return (
+                    <div key={item.id} className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 flex flex-col justify-between hover:shadow-md transition-all group">
+                      <div>
+                        {/* Media Header / Placement Info */}
+                        <div className="flex items-center justify-between gap-2 mb-2.5">
+                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-100 text-cyan-800 border border-cyan-200/60">
+                            {info.badge}
                           </span>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => handleTogglePublic(item.id)}
+                              title={item.is_public ? "Ditampilkan di publik utama. Klik untuk sembunyikan dari Berita & Beranda." : "Tidak tampil di publik utama. Klik untuk tampilkan di Berita & Beranda."}
+                              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
+                                item.is_public
+                                  ? 'bg-emerald-100 text-emerald-800 border-emerald-300 hover:bg-emerald-200'
+                                  : 'bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-200 hover:text-slate-800'
+                              }`}
+                            >
+                              <span>{item.is_public ? '🌐 Publik' : '🚫 Internal'}</span>
+                            </button>
+                            <span className="text-[10px] font-mono font-semibold text-slate-400">
+                              ID #{item.id}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Visual Preview */}
+                        {info.isStats ? (
+                          <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-[#FAF7F0] via-emerald-50/70 to-emerald-100/40 border border-emerald-200 mb-3 aspect-video flex flex-col items-center justify-center p-3 text-center">
+                            <span className="text-[10px] font-semibold text-emerald-800 line-clamp-1 mb-0.5">
+                              {item.isi}
+                            </span>
+                            <span className="text-3xl sm:text-4xl font-extrabold text-emerald-950 font-mono">
+                              {item.ringkasan}
+                            </span>
+                            <span className="text-[11px] font-bold text-slate-700 mt-1 line-clamp-1">
+                              {item.judul}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 mb-3 aspect-video flex items-center justify-center">
+                            {isVideo ? (
+                              <video
+                                src={item.image_url}
+                                controls
+                                preload="metadata"
+                                className="w-full h-full object-cover"
+                              >
+                                Browser Anda tidak mendukung tag video.
+                              </video>
+                            ) : (
+                              <img
+                                src={item.image_url}
+                                alt={item.judul}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                onError={(e) => {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = '/logo.png';
+                                }}
+                              />
+                            )}
+                            {isVideo && (
+                              <span className="absolute top-2 right-2 bg-black/70 text-amber-300 text-[10px] px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1 backdrop-blur-sm pointer-events-none">
+                                <Film className="w-3 h-3" /> MP4 Video
+                              </span>
+                            )}
+                          </div>
                         )}
+
+                        {/* Title & Description */}
+                        <h4 className="font-bold text-slate-900 text-xs sm:text-sm leading-snug mb-1 line-clamp-2">
+                          {item.judul}
+                        </h4>
+                        <p className="text-[11px] text-slate-500 line-clamp-2 mb-3 leading-relaxed">
+                          {item.ringkasan || item.isi}
+                        </p>
+
+                        {/* Placement in Web */}
+                        <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 text-[11px] space-y-1 mb-3">
+                          <div className="text-slate-500 flex items-center gap-1">
+                            <span className="font-semibold text-slate-700">Tampil Pada:</span>
+                            <span className="text-emerald-800 font-bold">{info.location}</span>
+                          </div>
+                          <div className="text-slate-400 font-mono text-[10px] truncate" title={item.image_url}>
+                            {item.image_url}
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Title & Description */}
-                      <h4 className="font-bold text-slate-900 text-xs sm:text-sm leading-snug mb-1 line-clamp-2">
-                        {item.judul}
-                      </h4>
-                      <p className="text-[11px] text-slate-500 line-clamp-2 mb-3 leading-relaxed">
-                        {item.ringkasan || item.isi}
-                      </p>
+                      {/* Actions */}
+                      <div className="pt-3 border-t border-slate-200/80 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => {
+                              if (info.isStats) {
+                                const elem = document.getElementById('quick-edit-statistik');
+                                if (elem) {
+                                  elem.scrollIntoView({ behavior: 'smooth' });
+                                } else {
+                                  handleStartEdit(item);
+                                }
+                              } else {
+                                handleStartEdit(item);
+                              }
+                            }}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
+                            title={info.isStats ? 'Edit Slogan & Angka Siswa' : 'Ganti Foto atau Video ini'}
+                          >
+                            <Edit className="w-3 h-3" />
+                            <span>{info.isStats ? 'Ubah Statistik' : 'Ganti / Edit'}</span>
+                          </button>
+                          <button
+                            onClick={() => handleCopyUrl(item.image_url || '/#student-count-sec', item.slug)}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-all cursor-pointer"
+                            title="Salin path URL aset"
+                          >
+                            {copiedSlug === item.slug ? (
+                              <>
+                                <CheckCheck className="w-3 h-3 text-emerald-600" />
+                                <span className="text-emerald-700 text-[10px]">Tersalin!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3 h-3 text-slate-500" />
+                                <span className="text-[10px]">Salin URL</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
 
-                      {/* Placement in Web */}
-                      <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 text-[11px] space-y-1 mb-3">
-                        <div className="text-slate-500 flex items-center gap-1">
-                          <span className="font-semibold text-slate-700">Tampil Pada:</span>
-                          <span className="text-emerald-800 font-bold">{info.location}</span>
-                        </div>
-                        <div className="text-slate-400 font-mono text-[10px] truncate" title={item.image_url}>
-                          {item.image_url}
-                        </div>
+                        <Link
+                          to={info.link}
+                          target="_blank"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
+                          title="Tinjau di Halaman Web"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
                       </div>
                     </div>
-
-                    {/* Actions */}
-                    <div className="pt-3 border-t border-slate-200/80 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          onClick={() => handleStartEdit(item)}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
-                          title="Ganti Foto atau Video ini"
-                        >
-                          <Edit className="w-3 h-3" />
-                          <span>Ganti / Edit</span>
-                        </button>
-                        <button
-                          onClick={() => handleCopyUrl(item.image_url, item.slug)}
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-all cursor-pointer"
-                          title="Salin path URL gambar"
-                        >
-                          {copiedSlug === item.slug ? (
-                            <>
-                              <CheckCheck className="w-3 h-3 text-emerald-600" />
-                              <span className="text-emerald-700 text-[10px]">Tersalin!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3 text-slate-500" />
-                              <span className="text-[10px]">Salin URL</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-
-                      <Link
-                        to={info.link}
-                        target="_blank"
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
-                        title="Tinjau di Halaman Web"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
             )}
           </div>
         </div>
@@ -919,7 +1199,7 @@ export default function HumasPage() {
       {/* 4. TAB CONTENT: SEMUA KONTEN */}
       {activeTab === 'konten' && (
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          
+
           {/* Filter Bar */}
           <div className="p-4 border-b border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50/50">
             <div className="relative w-full sm:w-64">
@@ -964,6 +1244,19 @@ export default function HumasPage() {
                   <option value="Rejected">Rejected</option>
                 </select>
               </div>
+
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-slate-500 font-medium">Tampil:</span>
+                <select
+                  value={filterPublic}
+                  onChange={(e) => setFilterPublic(e.target.value)}
+                  className="text-xs py-1 px-2 rounded-lg border border-slate-300 bg-white"
+                >
+                  <option value="Semua">Semua Tampilan</option>
+                  <option value="Publik">Publik Utama Saja</option>
+                  <option value="Internal">Internal / Aset Saja</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -975,6 +1268,7 @@ export default function HumasPage() {
                   <th className="py-3 px-4 w-12">#</th>
                   <th className="py-3 px-4">Artikel / Konten</th>
                   <th className="py-3 px-4 w-36">Kategori</th>
+                  <th className="py-3 px-3 w-32 text-center">Publik Utama</th>
                   <th className="py-3 px-3 w-32 text-center">Pin Beranda</th>
                   <th className="py-3 px-4 w-28">Platform</th>
                   <th className="py-3 px-4 w-36">Status</th>
@@ -985,13 +1279,13 @@ export default function HumasPage() {
               <tbody className="divide-y divide-slate-100">
                 {loading ? (
                   <tr>
-                    <td colSpan="8" className="text-center py-10 text-slate-400">
+                    <td colSpan="9" className="text-center py-10 text-slate-400">
                       Memuat data konten...
                     </td>
                   </tr>
                 ) : filteredKonten.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="text-center py-10 text-slate-400">
+                    <td colSpan="9" className="text-center py-10 text-slate-400">
                       Tidak ada konten yang sesuai filter.
                     </td>
                   </tr>
@@ -1038,31 +1332,44 @@ export default function HumasPage() {
                         </div>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
-                          item.kategori === 'Prestasi Akademik'
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${item.kategori === 'Prestasi Akademik'
                             ? 'bg-blue-50 text-blue-700 border-blue-200'
                             : item.kategori === 'Prestasi Non Akademik'
-                            ? 'bg-amber-50 text-amber-800 border-amber-200'
-                            : item.kategori === 'Pengumuman'
-                            ? 'bg-rose-50 text-rose-700 border-rose-200'
-                            : item.kategori === 'Aset Web'
-                            ? 'bg-cyan-50 text-cyan-800 border-cyan-200'
-                            : 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                        }`}>
+                              ? 'bg-amber-50 text-amber-800 border-amber-200'
+                              : item.kategori === 'Pengumuman'
+                                ? 'bg-rose-50 text-rose-700 border-rose-200'
+                                : item.kategori === 'Aset Web'
+                                  ? 'bg-cyan-50 text-cyan-800 border-cyan-200'
+                                  : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          }`}>
                           {item.kategori}
                         </span>
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <button
+                          type="button"
+                          onClick={() => handleTogglePublic(item.id)}
+                          title={item.is_public ? "Ditampilkan di Publik Utama (Berita & Beranda). Klik untuk sembunyikan." : "Tidak tampil di publik utama (hanya internal/aset). Klik untuk tampilkan."}
+                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all shadow-xs cursor-pointer ${
+                            item.is_public
+                              ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 hover:bg-emerald-200'
+                              : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 border border-slate-200'
+                          }`}
+                        >
+                          <span>{item.is_public ? '🌐' : '🚫'}</span>
+                          <span>{item.is_public ? 'Ya' : 'Tidak'}</span>
+                        </button>
                       </td>
                       <td className="py-3 px-3 text-center">
                         {item.kategori !== 'Aset Web' ? (
                           <button
                             type="button"
                             onClick={() => handleTogglePin(item.id)}
-                            title={item.is_pinned ? "Klik untuk melepas Pin dari Beranda" : "Klik untuk sematkan di 3 Pin Beranda"}
-                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all shadow-xs cursor-pointer ${
-                              item.is_pinned
+                            title={item.is_pinned ? "Klik untuk melepas Pin dari Beranda" : "Sematkan di 3 Pin Beranda (Maksimal 3, jika penuh pin terlama otomatis dilepas)"}
+                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all shadow-xs cursor-pointer ${item.is_pinned
                                 ? 'bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200'
                                 : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 border border-slate-200'
-                            }`}
+                              }`}
                           >
                             <span>📌</span>
                             <span>{item.is_pinned ? 'Disematkan' : 'Pin'}</span>
@@ -1075,15 +1382,14 @@ export default function HumasPage() {
                         {item.platform_target || 'Website'}
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 w-fit ${
-                          item.status === 'Published'
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 w-fit ${item.status === 'Published'
                             ? 'bg-emerald-100 text-emerald-800'
                             : item.status === 'Pending Approval'
-                            ? 'bg-amber-100 text-amber-800'
-                            : item.status === 'Rejected'
-                            ? 'bg-rose-100 text-rose-800'
-                            : 'bg-slate-200 text-slate-700'
-                        }`}>
+                              ? 'bg-amber-100 text-amber-800'
+                              : item.status === 'Rejected'
+                                ? 'bg-rose-100 text-rose-800'
+                                : 'bg-slate-200 text-slate-700'
+                          }`}>
                           {item.status === 'Published' && <CheckCircle className="w-3 h-3" />}
                           {item.status === 'Pending Approval' && <Clock className="w-3 h-3" />}
                           {item.status === 'Rejected' && <X className="w-3 h-3" />}
@@ -1128,16 +1434,16 @@ export default function HumasPage() {
         </div>
       )}
 
-      {/* 5. TAB CONTENT: ANTREAN APPROVAL KEPSEK / WAKA */}
-      {activeTab === 'approval' && (
+      {/* 5. TAB CONTENT: ANTREAN APPROVAL KEPSEK / ADMIN */}
+      {canApprove && activeTab === 'approval' && (
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-6">
           <div className="border-b border-slate-100 pb-4">
             <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-amber-600" />
-              <span>Verifikasi & Persetujuan Publikasi Kepala Sekolah / Waka</span>
+              <span>Verifikasi & Persetujuan Publikasi Kepala Sekolah dan Admin</span>
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              Semua konten yang dibuat oleh staf Humas berstatus <em>Pending Approval</em> harus ditinjau dan disetujui pimpinan sebelum tayang di Website Publik.
+              Semua konten yang diajukan dengan status <em>Pending Approval</em> harus diverifikasi dan disetujui Kepala Sekolah atau Administrator sebelum tayang di Website Publik.
             </p>
           </div>
 
@@ -1229,126 +1535,170 @@ export default function HumasPage() {
           </div>
 
           {formMessage && (
-            <div className={`p-3 rounded-lg text-xs flex items-center gap-2 ${
-              formMessage.type === 'success'
+            <div className={`p-3 rounded-lg text-xs flex items-center gap-2 ${formMessage.type === 'success'
                 ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                 : 'bg-rose-50 text-rose-800 border border-rose-200'
-            }`}>
+              }`}>
               {formMessage.type === 'success' ? <CheckCircle className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
               <span>{formMessage.text}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmitForm} className="space-y-4">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Judul Artikel <span className="text-rose-500">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.judul}
-                onChange={(e) => setFormData({ ...formData, judul: e.target.value })}
-                placeholder="Contoh: Selamat dan Sukses Peserta Kompetisi Sains Hardiknas 2026..."
-                className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600"
-              />
-            </div>
+          {(() => {
+            const isEditingStatistik = editingId && kontenList.find(i => i.id === editingId)?.slug === 'aset-statistik-siswa-beranda';
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Kategori <span className="text-rose-500">*</span>
-                </label>
-                <select
-                  value={formData.kategori}
-                  onChange={(e) => setFormData({ ...formData, kategori: e.target.value })}
-                  className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
-                >
-                  <option value="Berita">Berita</option>
-                  <option value="Pengumuman">Pengumuman</option>
-                  <option value="Prestasi Akademik">Prestasi Akademik</option>
-                  <option value="Prestasi Non Akademik">Prestasi Non Akademik</option>
-                  <option value="Aset Web">Aset Web & Media Website</option>
-                </select>
-              </div>
+            return (
+              <form onSubmit={handleSubmitForm} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    {isEditingStatistik ? 'Slogan Utama Beranda' : 'Judul Artikel'} <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.judul}
+                    onChange={(e) => setFormData({ ...formData, judul: e.target.value })}
+                    placeholder={isEditingStatistik ? 'Contoh: Sekolah Nyantri Ngaji Berprestasi' : 'Contoh: Selamat dan Sukses Peserta Kompetisi Sains Hardiknas 2026...'}
+                    className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 font-medium"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Target Publikasi
-                </label>
-                <select
-                  value={formData.platform_target}
-                  onChange={(e) => setFormData({ ...formData, platform_target: e.target.value })}
-                  className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
-                >
-                  <option value="Website">Website Sekolah</option>
-                  <option value="Instagram">Instagram Feed</option>
-                  <option value="Semua">Semua (Website & Instagram)</option>
-                </select>
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Kategori <span className="text-rose-500">*</span>
+                    </label>
+                    <select
+                      value={formData.kategori}
+                      onChange={(e) => setFormData({ ...formData, kategori: e.target.value })}
+                      className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
+                    >
+                      <option value="Berita">Berita</option>
+                      <option value="Pengumuman">Pengumuman</option>
+                      <option value="Prestasi Akademik">Prestasi Akademik</option>
+                      <option value="Prestasi Non Akademik">Prestasi Non Akademik</option>
+                      <option value="Aset Web">Aset Web & Media Website</option>
+                    </select>
+                  </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Status Publikasi
-                </label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
-                >
-                  <option value="Pending Approval">Ajukan Approval (Rekomendasi)</option>
-                  <option value="Published">Langsung Terbitkan (Published)</option>
-                  <option value="Draft">Simpan Draft</option>
-                </select>
-              </div>
-            </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Target Publikasi
+                    </label>
+                    <select
+                      value={formData.platform_target}
+                      onChange={(e) => setFormData({ ...formData, platform_target: e.target.value })}
+                      className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
+                    >
+                      <option value="Website">Website Sekolah</option>
+                      <option value="Instagram">Instagram Feed</option>
+                      <option value="Semua">Semua (Website & Instagram)</option>
+                    </select>
+                  </div>
 
-            {formData.kategori !== 'Aset Web' && (
-              <div className="flex items-center gap-2.5 p-3 bg-amber-50/80 border border-amber-200 rounded-xl">
-                <input
-                  type="checkbox"
-                  id="modal_is_pinned"
-                  checked={formData.is_pinned}
-                  onChange={(e) => setFormData({ ...formData, is_pinned: e.target.checked })}
-                  className="w-4 h-4 rounded text-amber-600 focus:ring-amber-500 cursor-pointer"
-                />
-                <label htmlFor="modal_is_pinned" className="text-xs font-semibold text-amber-900 cursor-pointer flex items-center gap-1.5">
-                  <span>📌</span>
-                  <span>Sematkan di Beranda (Tampilkan dalam 3 Pin Utama Beranda)</span>
-                </label>
-              </div>
-            )}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Status Publikasi
+                    </label>
+                    <select
+                      value={formData.status}
+                      onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                      className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white"
+                    >
+                      <option value="Pending Approval">Ajukan Persetujuan (Pending Approval)</option>
+                      {canApprove && (
+                        <option value="Published">Langsung Terbitkan (Published)</option>
+                      )}
+                      {!canApprove && formData.status === 'Published' && (
+                        <option value="Published" disabled>Sudah Terbit (Published)</option>
+                      )}
+                      <option value="Draft">Simpan Draft</option>
+                    </select>
+                  </div>
+                </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Ringkasan Singkat (Excerpt)
-              </label>
-              <textarea
-                rows="2"
-                value={formData.ringkasan}
-                onChange={(e) => setFormData({ ...formData, ringkasan: e.target.value })}
-                placeholder="Ringkasan 1-2 kalimat untuk pratinjau di kartu berita..."
-                className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600"
-              />
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex items-start gap-2.5 p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl">
+                    <input
+                      type="checkbox"
+                      id="modal_is_public"
+                      checked={formData.is_public}
+                      onChange={(e) => setFormData({ ...formData, is_public: e.target.checked })}
+                      className="w-4 h-4 mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer shrink-0"
+                    />
+                    <label htmlFor="modal_is_public" className="text-xs font-semibold text-emerald-950 cursor-pointer select-none">
+                      <span className="flex items-center gap-1.5 font-bold">
+                        <span>🌐</span>
+                        <span>Tampilkan di Publik Utama (Berita & Beranda)</span>
+                      </span>
+                      <span className="block text-[11px] font-normal text-slate-600 mt-0.5 leading-normal">
+                        Muncul di daftar berita publik website & beranda utama. Hilangkan centang jika hanya untuk arsip atau aset internal.
+                      </span>
+                    </label>
+                  </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Isi Berita Lengkap <span className="text-rose-500">*</span>
-              </label>
-              <textarea
-                rows="8"
-                required
-                value={formData.isi}
-                onChange={(e) => setFormData({ ...formData, isi: e.target.value })}
-                placeholder="Tuliskan berita lengkap, narasi kegiatan, atau daftar pemenang lomba..."
-                className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 font-sans leading-relaxed"
-              />
-            </div>
+                  {formData.kategori !== 'Aset Web' ? (
+                    <div className="flex items-start gap-2.5 p-3 bg-amber-50/80 border border-amber-200 rounded-xl">
+                      <input
+                        type="checkbox"
+                        id="modal_is_pinned"
+                        checked={formData.is_pinned}
+                        onChange={(e) => setFormData({ ...formData, is_pinned: e.target.checked })}
+                        className="w-4 h-4 mt-0.5 rounded text-amber-600 focus:ring-amber-500 cursor-pointer shrink-0"
+                      />
+                      <label htmlFor="modal_is_pinned" className="text-xs font-semibold text-amber-900 cursor-pointer select-none">
+                        <span className="flex items-center gap-1.5 font-bold">
+                          <span>📌</span>
+                          <span>Sematkan di Beranda (3 Pin Utama)</span>
+                        </span>
+                        <span className="block text-[11px] font-normal text-amber-800/80 mt-0.5 leading-normal">
+                          Sorot artikel ini di 3 kartu teratas halaman beranda website sekolah.
+                        </span>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center text-xs text-slate-400">
+                      <span>📌 Pin Beranda hanya berlaku untuk artikel publik (bukan Aset Web).</span>
+                    </div>
+                  )}
+                </div>
 
-            {/* Media Upload: Foto Utama & Foto Pelengkap (Galeri) */}
-            <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-5">
-              
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    {isEditingStatistik ? 'Jumlah Siswa (Angka Tampil)' : 'Ringkasan Singkat (Excerpt)'}
+                  </label>
+                  <textarea
+                    rows={isEditingStatistik ? 1 : 2}
+                    value={formData.ringkasan}
+                    onChange={(e) => setFormData({ ...formData, ringkasan: e.target.value })}
+                    placeholder={isEditingStatistik ? 'Contoh: 769' : 'Ringkasan 1-2 kalimat untuk pratinjau di kartu berita...'}
+                    className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 font-mono"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    {isEditingStatistik ? 'Label / Keterangan Tahun Akademik' : 'Isi Berita Lengkap'} <span className="text-rose-500">*</span>
+                  </label>
+                  <textarea
+                    rows={isEditingStatistik ? 2 : 8}
+                    required
+                    value={formData.isi}
+                    onChange={(e) => setFormData({ ...formData, isi: e.target.value })}
+                    placeholder={isEditingStatistik ? 'Contoh: Jumlah Siswa Tahun Akademik 2025-2026' : 'Tuliskan berita lengkap, narasi kegiatan, atau daftar pemenang lomba...'}
+                    className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 font-sans leading-relaxed"
+                  />
+                </div>
+
+                {isEditingStatistik ? (
+                  <div className="p-4 bg-emerald-50/80 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Aset ini berupa konfigurasi teks dan angka statistik beranda. Berkas gambar/video tidak diperlukan.</span>
+                  </div>
+                ) : (
+                  /* Media Upload: Foto Utama & Foto Pelengkap (Galeri) */
+                  <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-5">
+
               {/* 1. Foto Utama */}
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -1504,8 +1854,8 @@ export default function HumasPage() {
                   )}
                 </div>
               </div>
-
             </div>
+          )}
 
             <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
               <button
@@ -1525,63 +1875,18 @@ export default function HumasPage() {
               </button>
             </div>
           </form>
+            );
+          })()}
         </div>
       )}
 
-      {/* 7. TAB CONTENT: SIMULATOR INSTAGRAM FEED */}
-      {activeTab === 'instagram' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
-            <div>
-              <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
-                <InstagramIcon className="w-5 h-5 text-pink-600" />
-                <span>Simulator Feed Instagram Resmi @smaawhtebuireng</span>
-              </h3>
-              <p className="text-xs text-slate-500">
-                Tinjau keselarasan visual konten media sosial sekolah dengan rasio 1:1 square
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {kontenList.slice(0, 12).map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setPreviewPost(item)}
-                className="aspect-square relative rounded-xl overflow-hidden bg-slate-100 border border-slate-200 cursor-pointer group shadow-sm hover:shadow-md transition-all"
-              >
-                <img
-                  src={item.image_url || '/logo.png'}
-                  alt=""
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => { e.target.onerror = null; e.target.src = '/logo.png'; }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2.5 flex flex-col justify-end text-white text-[11px]">
-                  <span className="font-bold line-clamp-2">{item.judul}</span>
-                  <span className="text-[10px] text-amber-300 mt-0.5">#{item.kategori} #SMAAWH</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-2">
-            <h4 className="font-bold text-slate-800">Format Standar Caption & Tagar Humas:</h4>
-            <div className="p-3 bg-white rounded-lg border border-slate-200 font-mono text-[11px] text-slate-700">
-              [JUDUL KEGIATAN/PRESTASI]<br /><br />
-              SMA A. Wahid Hasyim Tebuireng terus berkomitmen mewujudkan generasi yang berakhlakul karimah, unggul dalam sains, dan berakar pada tradisi keilmuan pesantren.<br /><br />
-              #SMAAWH #TebuirengJombang #SantriBerprestasi #ResearchCultureSchool #Hardiknas2026 #PesantrenTebuireng
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 8. MODAL APPROVAL KEPSEK / WAKA */}
-      {approvalModalPost && (
+      {/* 7. MODAL APPROVAL KEPSEK / ADMIN */}
+      {canApprove && approvalModalPost && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="font-bold text-base text-slate-900">
-                Persetujuan Publikasi Artikel
+                Verifikasi & Persetujuan Publikasi Artikel
               </h3>
               <button onClick={() => setApprovalModalPost(null)} className="text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />

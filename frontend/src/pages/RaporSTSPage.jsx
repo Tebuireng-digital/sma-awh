@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
-import { 
-  Save, CheckCircle2, AlertCircle, Users, BookOpen, 
+import {
+  Save, CheckCircle2, AlertCircle, Users, BookOpen,
   Award, Sparkles, RefreshCw, Filter, ArrowRight, Check, Search
 } from 'lucide-react';
 
@@ -107,8 +107,8 @@ const RaporSTSPage = () => {
       const res = await api.get(`/rapor-sts/mapel-kelas?kelas_id=${kelasId}&mapel_key=${mapelKey}`);
       if (res.data?.status === 'success') {
         setKelasData(res.data.kelas);
-        setSiswaGrades(res.data.siswa || []);
-        setStats(res.data.statistik || {});
+        setSiswaGrades(res.data.siswa || res.data.grades || []);
+        setStats(res.data.statistik || res.data.stats || {});
         setEditedSiswaIds(new Set());
       }
     } catch (e) {
@@ -421,9 +421,8 @@ const RaporSTSPage = () => {
       </div>
 
       {message && (
-        <div className={`p-4 rounded-xl border text-xs flex items-center gap-2 ${
-          message.type === 'success' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'
-        }`}>
+        <div className={`p-4 rounded-xl border text-xs flex items-center gap-2 ${message.type === 'success' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'
+          }`}>
           {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />}
           <span className="font-semibold">{message.text}</span>
         </div>
@@ -468,7 +467,7 @@ const RaporSTSPage = () => {
                   const isPassed = siswa.nilai >= 75;
 
                   return (
-                    <tr 
+                    <tr
                       key={siswa.siswa_id}
                       className={`transition-colors ${isEdited ? 'bg-amber-50/40' : 'hover:bg-slate-50/70'}`}
                     >
@@ -504,11 +503,10 @@ const RaporSTSPage = () => {
                       </td>
                       <td className="py-2.5 px-4 text-center">
                         {siswa.is_filled ? (
-                          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                            isPassed 
-                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
+                          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold ${isPassed
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                               : 'bg-amber-100 text-amber-800 border border-amber-300'
-                          }`}>
+                            }`}>
                             {isPassed ? '✓ Tuntas' : 'Belum Tuntas'}
                           </span>
                         ) : (

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import client from '../api/client';
 import { 
   Settings, CheckCircle, AlertCircle, Clock, Users, GraduationCap, 
-  BookOpen, Building2, Calendar, FileText, ArrowRight, Server, ShieldCheck 
+  BookOpen, Building2, Calendar, FileText, ArrowRight, Server, ShieldCheck,
+  RotateCcw, ShieldAlert
 } from 'lucide-react';
+import UnvalidationQueueModal from '../components/UnvalidationQueueModal';
 
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -13,10 +15,24 @@ const AdminDashboard = () => {
 
   // Settings State
   const [terlambat, setTerlambat] = useState(20);
+  const [pendingUnvalidationCount, setPendingUnvalidationCount] = useState(0);
+  const [isQueueModalOpen, setIsQueueModalOpen] = useState(false);
 
   useEffect(() => {
     fetchSettings();
+    fetchUnvalidationCount();
   }, []);
+
+  const fetchUnvalidationCount = async () => {
+    try {
+      const res = await client.get('/rapor-sts/unvalidation-requests?status=pending');
+      if (res.data?.status === 'success') {
+        setPendingUnvalidationCount(res.data.pending_count || 0);
+      }
+    } catch (e) {
+      console.error('Gagal mengambil permohonan pembatalan validasi:', e);
+    }
+  };
 
   const fetchSettings = async () => {
     try {
@@ -65,6 +81,7 @@ const AdminDashboard = () => {
     { title: 'Rombongan Belajar (Kelas)', desc: '25 rombel Fase E, F & Wali Kelas', path: '/admin/kelas', icon: Building2, color: 'text-blue-700 bg-blue-50 border-blue-200' },
     { title: 'Mata Pelajaran & CP', desc: 'Struktur kurikulum nasional & pesantren', path: '/admin/mapel', icon: BookOpen, color: 'text-teal-700 bg-teal-50 border-teal-200' },
     { title: 'Jadwal KBM Harian', desc: 'Plotting jam ke-1 s/d jam ke-8', path: '/admin/jadwal', icon: Calendar, color: 'text-indigo-700 bg-indigo-50 border-indigo-200' },
+    { title: 'Rapor STS & Validasi', desc: 'Audit validasi rapor, cetak PDF & antrean pembatalan', path: '/walikelas/rapor', icon: RotateCcw, color: 'text-amber-800 bg-amber-50 border-amber-200' },
     { title: 'Tata Usaha & Persuratan', desc: 'Surat masuk/keluar, SK, & disposisi', path: '/persuratan', icon: FileText, color: 'text-rose-700 bg-rose-50 border-rose-200' },
   ];
 
@@ -154,6 +171,37 @@ const AdminDashboard = () => {
         }`}>
           {message.type === 'success' ? <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" /> : <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />}
           <span>{message.text}</span>
+        </div>
+      )}
+
+      {/* Pending Unvalidation Alert Banner */}
+      {pendingUnvalidationCount > 0 && (
+        <div className="bg-amber-50 border border-amber-300/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-start gap-3.5">
+            <div className="p-2.5 bg-amber-600 text-white rounded-xl shrink-0 shadow-xs">
+              <RotateCcw className="w-5 h-5 animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-bold text-amber-950">
+                  Permohonan Pembatalan Validasi Rapor Menunggu Persetujuan
+                </h2>
+                <span className="px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-mono font-bold text-[10px]">
+                  {pendingUnvalidationCount} Permohonan
+                </span>
+              </div>
+              <p className="text-xs text-amber-900/80 mt-0.5 max-w-2xl leading-relaxed">
+                Wali kelas telah mengajukan permohonan pembatalan validasi lembar rapor untuk perbaikan nilai. Rapor tetap berstatus divalidasi hingga Anda menyetujui pembatalan.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsQueueModalOpen(true)}
+            className="px-4 py-2 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 justify-center"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Tinjau Antrean ({pendingUnvalidationCount})</span>
+          </button>
         </div>
       )}
 
@@ -299,6 +347,14 @@ const AdminDashboard = () => {
         </div>
 
       </div>
+
+      {/* Modal Antrean Pembatalan Validasi (Admin) */}
+      <UnvalidationQueueModal
+        isOpen={isQueueModalOpen}
+        onClose={() => setIsQueueModalOpen(false)}
+        isAdmin={true}
+        onActionComplete={fetchUnvalidationCount}
+      />
     </div>
   );
 };

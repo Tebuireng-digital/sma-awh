@@ -147,7 +147,7 @@ const DataGuru = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Apakah Anda yakin ingin menghapus data guru ini beserta akun loginya?')) return;
-    
+
     setDeletingId(id);
     setMessage(null);
     try {
@@ -187,9 +187,8 @@ const DataGuru = () => {
       </div>
 
       {message && (
-        <div className={`p-3 rounded border text-xs flex items-center justify-between ${
-          message.type === 'success' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'
-        }`}>
+        <div className={`p-3 rounded border text-xs flex items-center justify-between ${message.type === 'success' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'
+          }`}>
           <div className="flex items-center space-x-2">
             {message.type === 'success' ? <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />}
             <span>{message.text}</span>
@@ -274,13 +273,15 @@ const DataGuru = () => {
                     <td className="py-3 px-4 font-mono font-bold text-slate-900">{g.id_guru}</td>
                     <td className="py-3 px-4">
                       <div className="font-semibold text-slate-900">{g.nama_lengkap}</div>
-                      {Array.isArray(g.additional_roles) && g.additional_roles.length > 0 && (
+                      {Array.isArray(g.additional_roles) && g.additional_roles.filter(ar => ar !== 'guru').length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-1">
-                          {g.additional_roles.map((ar) => (
-                            <span key={ar} className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
-                              +{roleLabelMap[ar] || ar}
-                            </span>
-                          ))}
+                          {g.additional_roles
+                            .filter(ar => ar !== 'guru')
+                            .map((ar) => (
+                              <span key={ar} className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                                +{roleLabelMap[ar] || ar}
+                              </span>
+                            ))}
                         </div>
                       )}
                     </td>
@@ -431,13 +432,12 @@ const DataGuru = () => {
                   {AVAILABLE_ADDITIONAL_ROLES.map((r) => {
                     const isChecked = Array.isArray(formData.additional_roles) && formData.additional_roles.includes(r.key);
                     return (
-                      <label 
-                        key={r.key} 
-                        className={`flex items-center space-x-2 p-1.5 rounded border cursor-pointer transition-all ${
-                          isChecked 
-                            ? 'bg-emerald-50 border-emerald-400 text-emerald-950 font-bold shadow-xs' 
+                      <label
+                        key={r.key}
+                        className={`flex items-center space-x-2 p-1.5 rounded border cursor-pointer transition-all ${isChecked
+                            ? 'bg-emerald-50 border-emerald-400 text-emerald-950 font-bold shadow-xs'
                             : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
+                          }`}
                       >
                         <input
                           type="checkbox"

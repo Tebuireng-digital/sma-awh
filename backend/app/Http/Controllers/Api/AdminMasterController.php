@@ -432,4 +432,66 @@ class AdminMasterController extends Controller
             'message' => 'Data Siswa berhasil dihapus.',
         ]);
     }
+
+    public function resetPasswordSiswa(Request $request, $id)
+    {
+        $currentUser = $request->user();
+        $allowedRoles = ['admin', 'kepala_sekolah', 'waka', 'kesiswaan', 'kepala_tu', 'tu'];
+        $userRoles = $currentUser->all_roles ?: [$currentUser->role];
+        $isAuthorized = count(array_intersect($allowedRoles, $userRoles)) > 0;
+
+        if (!$isAuthorized) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda tidak memiliki hak akses untuk mereset kata sandi siswa.',
+            ], 403);
+        }
+
+        $request->validate([
+            'new_password' => 'required|string|min:6|confirmed',
+        ], [
+            'new_password.required' => 'Kata sandi baru wajib diisi.',
+            'new_password.min' => 'Kata sandi baru minimal 6 karakter.',
+            'new_password.confirmed' => 'Konfirmasi kata sandi baru tidak sesuai.',
+        ]);
+
+        $siswa = Siswa::findOrFail($id);
+
+        $usernameCandidates = array_filter([
+            $siswa->nisn,
+            $siswa->nis,
+            'siswa_' . $siswa->nis,
+        ]);
+
+        $user = User::where('id_siswa', $siswa->id)
+            ->orWhere(function ($q) use ($usernameCandidates) {
+                $q->where('role', 'siswa')
+                  ->whereIn('username', $usernameCandidates);
+            })
+            ->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $siswa->nama,
+                'username' => $siswa->nisn ?: ('siswa_' . $siswa->nis),
+                'email' => ($siswa->nisn ?: $siswa->nis) . '@siswa.smaawh.sch.id',
+                'password' => Hash::make($request->new_password),
+                'role' => 'siswa',
+                'id_siswa' => $siswa->id,
+                'must_change_password' => false,
+            ]);
+        } else {
+            $user->password = Hash::make($request->new_password);
+            $user->must_change_password = false;
+            if (!$user->id_siswa) {
+                $user->id_siswa = $siswa->id;
+            }
+            $user->save();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Kata sandi untuk siswa {$siswa->nama} (NIS: {$siswa->nis}) berhasil diperbarui.",
+        ]);
+    }
 }

@@ -3,16 +3,13 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/client';
 import {
-  GraduationCap,
   Calendar,
-  BookOpen,
   Award,
   AlertTriangle,
   Library,
   LogOut,
   Clock,
   CheckCircle2,
-  XCircle,
   ShieldCheck,
   Printer,
   Sparkles,
@@ -20,7 +17,12 @@ import {
   Eye,
   EyeOff,
   X,
-  Lock
+  Lock,
+  Download,
+  ExternalLink,
+  FileText,
+  RefreshCw,
+  LayoutDashboard
 } from 'lucide-react';
 
 export default function PortalSiswaPage() {
@@ -37,6 +39,11 @@ export default function PortalSiswaPage() {
   const [jadwalList, setJadwalList] = useState([]);
   const [bkData, setBkData] = useState({ prestasi: [], pelanggaran: [], total_poin_pelanggaran: 0 });
   const [perpusList, setPerpusList] = useState([]);
+
+  // States PDF Rapor
+  const [pdfBlobUrl, setPdfBlobUrl] = useState(null);
+  const [loadingPdf, setLoadingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState(null);
 
   // States Ganti Sandi Modal
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -89,6 +96,29 @@ export default function PortalSiswaPage() {
       setLoading(false);
     }
   };
+
+  const loadRaporPdf = async () => {
+    setLoadingPdf(true);
+    setPdfError(null);
+    try {
+      const response = await api.get('/portal-siswa/rapor-pdf', { responseType: 'blob' });
+      const file = new Blob([response.data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+      setPdfBlobUrl(fileURL);
+    } catch (err) {
+      console.error('Gagal memuat PDF rapor:', err);
+      const msg = err.response?.data?.message || 'Gagal memuat dokumen resmi PDF rapor santri.';
+      setPdfError(msg);
+    } finally {
+      setLoadingPdf(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'nilai' && nilaiData?.is_validated && !pdfBlobUrl) {
+      loadRaporPdf();
+    }
+  }, [activeTab, nilaiData?.is_validated, pdfBlobUrl]);
 
   const handleLogout = async () => {
     await logout();
@@ -163,7 +193,7 @@ export default function PortalSiswaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white pb-16">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white pb-20 md:pb-16">
       
       {/* 1. TOP HEADER APP BAR */}
       <header className="bg-[#0d281e] text-white border-b border-emerald-900/40 sticky top-0 z-30 shadow-md">
@@ -191,11 +221,11 @@ export default function PortalSiswaPage() {
                 setPasswordSuccess(null);
                 setShowPasswordModal(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 text-emerald-100 text-xs font-semibold border border-emerald-600/50 transition-all hover:scale-105 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 text-emerald-100 text-xs font-semibold border border-emerald-600/50 transition-all hover:scale-105 shadow-sm"
               title="Ganti Kata Sandi Akun"
             >
               <KeyRound className="w-3.5 h-3.5 text-amber-300" />
-              <span>Ganti Sandi</span>
+              <span className="hidden sm:inline">Ganti Sandi</span>
             </button>
 
             {/* Tombol Keluar */}
@@ -260,70 +290,56 @@ export default function PortalSiswaPage() {
         </div>
       </div>
 
-      {/* 3. QUICK STATS SUMMARY BAR */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 -mt-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-          {/* Metrik 1: Kehadiran */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Presensi</p>
-              <p className="text-lg font-bold text-slate-800">{metrik.persentase_kehadiran}%</p>
-            </div>
-          </div>
-
-          {/* Metrik 2: Rata-rata STS */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
-              <BookOpen className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Rata-Rata STS</p>
-              <p className="text-lg font-bold text-slate-800">
-                {metrik.rata_rata_sts > 0 ? metrik.rata_rata_sts : '-'}
-              </p>
-              <p className="text-[10px] text-slate-400">
-                {metrik.mapel_dinilai_count > 0 ? `${metrik.mapel_dinilai_count} / ${metrik.total_mapel || 21} Mapel Dinilai` : 'Belum ada nilai'}
-              </p>
-            </div>
-          </div>
-
-          {/* Metrik 3: Prestasi */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
-              <Award className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Prestasi</p>
-              <p className="text-lg font-bold text-slate-800">{metrik.total_prestasi} Penghargaan</p>
-            </div>
-          </div>
-
-          {/* Metrik 4: Pinjaman Perpustakaan */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0">
-              <Library className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Perpustakaan</p>
-              <p className="text-lg font-bold text-slate-800">{metrik.pinjaman_buku_aktif} Buku Aktif</p>
-            </div>
+      {/* 3. PORTAL NAVIGATION NAVBAR (Desktop only) */}
+      <div className="hidden md:block max-w-6xl mx-auto px-4 sm:px-6 -mt-5 sticky top-[61px] z-20 print:hidden">
+        <div className="bg-white rounded-2xl p-1.5 shadow-md border border-slate-200/90 flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1 shrink-0">
+            {[
+              { id: 'ringkasan', label: 'Ringkasan', icon: LayoutDashboard },
+              { id: 'nilai', label: 'Rapor STS', icon: FileText, badge: nilaiData?.is_validated ? 'PDF' : 'Draf' },
+              { id: 'presensi', label: 'Presensi', icon: Calendar, badge: `${metrik.persentase_kehadiran}%` },
+              { id: 'jadwal', label: 'Jadwal Pelajaran', icon: Clock },
+              { id: 'bk', label: 'Prestasi & Disiplin', icon: Award },
+              { id: 'perpustakaan', label: 'Perpustakaan', icon: Library },
+            ].map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? 'bg-emerald-800 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-emerald-800 hover:bg-slate-100'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{tab.label}</span>
+                  {tab.badge && (
+                    <span className={`px-1.5 py-0.2 rounded text-[10px] font-bold font-mono ${
+                      isActive ? 'bg-emerald-950/70 text-emerald-200' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {tab.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* 4. NAVIGATION TABS */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-6">
-        <div className="bg-white rounded-2xl p-1.5 shadow-sm border border-slate-200 flex items-center gap-1 overflow-x-auto no-scrollbar">
+      {/* 3b. MOBILE BOTTOM NAVIGATION BAR */}
+      <nav className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/95 backdrop-blur-lg border-t border-slate-200/80 shadow-[0_-2px_12px_rgba(0,0,0,0.06)] print:hidden">
+        <div className="flex items-stretch justify-around px-1 py-1">
           {[
-            { id: 'ringkasan', label: 'Ringkasan', icon: GraduationCap },
-            { id: 'nilai', label: 'Rapor & Nilai', icon: BookOpen },
+            { id: 'ringkasan', label: 'Beranda', icon: LayoutDashboard },
+            { id: 'nilai', label: 'Rapor', icon: FileText },
             { id: 'presensi', label: 'Presensi', icon: Calendar },
-            { id: 'jadwal', label: 'Jadwal Pelajaran', icon: Clock },
-            { id: 'bk', label: 'Prestasi & Disiplin', icon: Award },
-            { id: 'perpustakaan', label: 'Perpustakaan', icon: Library }
+            { id: 'jadwal', label: 'Jadwal', icon: Clock },
+            { id: 'bk', label: 'Prestasi', icon: Award },
+            { id: 'perpustakaan', label: 'Perpus', icon: Library },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -331,21 +347,31 @@ export default function PortalSiswaPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
+                className={`flex flex-col items-center justify-center gap-0.5 px-1 py-1.5 rounded-xl transition-all flex-1 min-w-0 ${
                   isActive
-                    ? 'bg-emerald-700 text-white shadow-sm'
-                    : 'text-slate-600 hover:text-emerald-800 hover:bg-slate-100'
+                    ? 'text-emerald-700'
+                    : 'text-slate-400 hover:text-emerald-700'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                <span>{tab.label}</span>
+                <div className="relative">
+                  <Icon className={`w-5 h-5 transition-colors ${isActive ? 'text-emerald-700' : ''}`} />
+                  {isActive && (
+                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                  )}
+                </div>
+                <span className={`text-[9px] font-bold truncate leading-none mt-0.5 ${isActive ? 'text-emerald-800' : ''}`}>
+                  {tab.label}
+                </span>
+                {isActive && (
+                  <span className="w-4 h-0.5 bg-emerald-600 rounded-full mt-0.5"></span>
+                )}
               </button>
             );
           })}
         </div>
-      </div>
+      </nav>
 
-      {/* 5. TAB CONTENT PANELS */}
+      {/* 4. CONTENT PANELS */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 mt-6">
         {loading ? (
           <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-sm">
@@ -356,10 +382,85 @@ export default function PortalSiswaPage() {
           <div>
             
             {/* ============================================================ */}
-            {/* TAB 1: RINGKASAN & OVERVIEW                                  */}
+            {/* VIEW 1: DASHBOARD AWAL RINGKASAN                             */}
             {/* ============================================================ */}
             {activeTab === 'ringkasan' && (
               <div className="space-y-6">
+                {/* 4 Quick Stat Summary Cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                  {/* Card 1: Presensi */}
+                  <div 
+                    onClick={() => setActiveTab('presensi')}
+                    className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-emerald-300 hover:shadow-md transition-all flex items-center gap-3 cursor-pointer group"
+                    title="Klik untuk melihat detail Presensi Harian"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <Calendar className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Presensi</p>
+                      <p className="text-lg font-bold text-slate-800 font-mono">{metrik.persentase_kehadiran}%</p>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Rata-Rata STS */}
+                  <div 
+                    onClick={() => setActiveTab('nilai')}
+                    className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-amber-300 hover:shadow-md transition-all flex items-center gap-3 cursor-pointer group"
+                    title="Klik untuk membuka Lembar Rapor STS (PDF)"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Rata-Rata STS</p>
+                      {metrik.is_validated ? (
+                        <>
+                          <p className="text-lg font-bold text-slate-800 tabular-nums">
+                            {metrik.rata_rata_sts > 0 ? metrik.rata_rata_sts : '-'}
+                          </p>
+                          <p className="text-[10px] text-emerald-700 font-medium">Tervalidasi Resmi</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-sm font-bold text-amber-700">Draf / Proses</p>
+                          <p className="text-[10px] text-slate-400">Menunggu validasi</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Card 3: Prestasi */}
+                  <div 
+                    onClick={() => setActiveTab('bk')}
+                    className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-indigo-300 hover:shadow-md transition-all flex items-center gap-3 cursor-pointer group"
+                    title="Klik untuk melihat catatan Prestasi & Kedisiplinan BK"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Prestasi</p>
+                      <p className="text-lg font-bold text-slate-800">{metrik.total_prestasi} Piagam</p>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Perpustakaan */}
+                  <div 
+                    onClick={() => setActiveTab('perpustakaan')}
+                    className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-sky-300 hover:shadow-md transition-all flex items-center gap-3 cursor-pointer group"
+                    title="Klik untuk melihat peminjaman buku Perpustakaan"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <Library className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Perpustakaan</p>
+                      <p className="text-lg font-bold text-slate-800">{metrik.pinjaman_buku_aktif} Buku Aktif</p>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Catatan Khusus Wali Kelas */}
                 <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-5 shadow-sm">
                   <div className="flex items-start gap-3.5">
@@ -456,6 +557,17 @@ export default function PortalSiswaPage() {
                         </button>
                       </div>
                       {(() => {
+                        if (!nilaiData?.is_validated) {
+                          return (
+                            <div className="p-5 rounded-xl bg-amber-50/60 border border-amber-200/70 text-center text-xs text-amber-900 space-y-1.5">
+                              <p className="font-semibold text-slate-800">Rapor Sedang Dalam Proses Validasi</p>
+                              <p className="text-slate-600 text-[11px]">
+                                Lembar resmi PDF rapor STS akan ditampilkan setelah divalidasi oleh Wali Kelas.
+                              </p>
+                            </div>
+                          );
+                        }
+
                         const topGrades = (nilaiData?.daftar_nilai || [])
                           .filter(n => n.is_dinilai && n.nilai > 0)
                           .sort((a, b) => b.nilai - a.nilai)
@@ -477,7 +589,7 @@ export default function PortalSiswaPage() {
                                   <p className="text-xs font-semibold text-slate-800">{n.mapel}</p>
                                   <p className="text-[10px] text-slate-500">{n.kategori}</p>
                                 </div>
-                                <span className="text-sm font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg">
+                                <span className="text-sm font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg tabular-nums">
                                   {n.nilai}
                                 </span>
                               </div>
@@ -544,116 +656,171 @@ export default function PortalSiswaPage() {
             {/* TAB 2: RAPOR & NILAI DIGITAL                                 */}
             {/* ============================================================ */}
             {activeTab === 'nilai' && (
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-                  <div>
-                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
-                      Tahun Ajaran {nilaiData?.tahun_ajaran || '2026/2027'} • Semester {nilaiData?.semester || 'Ganjil'}
-                    </span>
-                    <h3 className="text-xl font-extrabold text-slate-900 mt-0.5">
-                      Rapor Sumatif Tengah Semester (STS)
-                    </h3>
-                    <p className="text-xs text-slate-500">
-                      Evaluasi Kurikulum Merdeka Terintegrasi Pesantren Tebuireng
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => window.print()}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
-                    >
-                      <Printer className="w-4 h-4" />
-                      <span>Cetak / Unduh PDF</span>
-                    </button>
-                  </div>
-                </div>
+              <div className="space-y-6">
+                {!nilaiData?.is_validated ? (
+                  /* KONDISI 1: RAPOR BELUM DIVALIDASI WALI KELAS */
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+                      <div>
+                        <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
+                          Tahun Ajaran {nilaiData?.tahun_ajaran || '2026/2027'} • Semester {nilaiData?.semester || 'Ganjil'}
+                        </span>
+                        <h3 className="text-xl font-extrabold text-slate-900 mt-0.5">
+                          Rapor Sumatif Tengah Semester (STS)
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Evaluasi Kurikulum Merdeka Terintegrasi Pesantren Tebuireng
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold">
+                        <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                        <span>Menunggu Validasi Wali Kelas</span>
+                      </div>
+                    </div>
 
-                {/* Score Stats Banner */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 text-center sm:text-left">
-                  <div className="p-2">
-                    <p className="text-xs text-emerald-800 font-semibold">Kriteria Ketercapaian (KKTP)</p>
-                    <p className="text-2xl font-black text-emerald-950 mt-1">75</p>
-                  </div>
-                  <div className="p-2">
-                    <p className="text-xs text-emerald-800 font-semibold">Rata-Rata Nilai (Mapel Dinilai)</p>
-                    <p className="text-2xl font-black text-emerald-700 mt-1">
-                      {nilaiData?.rata_rata > 0 ? nilaiData.rata_rata : '-'}
-                    </p>
-                  </div>
-                  <div className="p-2">
-                    <p className="text-xs text-emerald-800 font-semibold">Progres Penilaian</p>
-                    <p className="text-lg font-bold text-emerald-900 mt-1 flex items-center justify-center sm:justify-start gap-1.5">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                      <span>{nilaiData?.mapel_dinilai_count || 0} dari {nilaiData?.total_mapel || 21} Mapel Dinilai</span>
-                    </p>
-                  </div>
-                </div>
+                    <div className="p-6 rounded-2xl bg-amber-50/70 border border-amber-200 text-center sm:text-left flex flex-col sm:flex-row items-center gap-5">
+                      <div className="w-14 h-14 rounded-2xl bg-amber-100 border border-amber-300 text-amber-800 flex items-center justify-center shrink-0 shadow-sm">
+                        <FileText className="w-7 h-7" />
+                      </div>
+                      <div className="space-y-1.5 flex-1">
+                        <h4 className="font-bold text-slate-900 text-base">Lembar Rapor Resmi Sedang Dalam Proses Validasi</h4>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Laporan Hasil Belajar Sumatif Tengah Semester (STS) untuk santri ini sedang dalam proses penyusunan/verifikasi oleh dewan guru dan belum divalidasi oleh Wali Kelas ({nilaiData?.wali_kelas || siswa.wali_kelas}).
+                        </p>
+                        <p className="text-[11px] text-amber-900 font-medium">
+                          Sesuai kebijakan akademik SMA KH. A. Wahid Hasyim, dokumen resmi rapor hanya akan disajikan dan dapat diunduh dalam format PDF bertanda tangan elektronik setelah proses validasi resmi disahkan.
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Table of Subjects */}
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                    <thead>
-                      <tr className="bg-slate-100/80 text-slate-700 font-bold border-y border-slate-200 uppercase text-[11px] tracking-wider">
-                        <th className="py-3 px-4 w-12 text-center">No</th>
-                        <th className="py-3 px-4">Mata Pelajaran</th>
-                        <th className="py-3 px-4 hidden md:table-cell">Kelompok Kurikulum</th>
-                        <th className="py-3 px-4 text-center w-24">KKTP</th>
-                        <th className="py-3 px-4 text-center w-24">Nilai STS</th>
-                        <th className="py-3 px-4 text-center w-28">Keterangan</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {(nilaiData?.daftar_nilai || []).map((n, idx) => {
-                        const isGraded = n.is_dinilai && n.nilai !== null && n.nilai > 0;
-                        const isPass = isGraded && n.nilai >= 75;
-                        return (
-                          <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                            <td className="py-3 px-4 text-center text-slate-400 font-semibold">{idx + 1}</td>
-                            <td className="py-3 px-4 font-semibold text-slate-800">{n.mapel}</td>
-                            <td className="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">{n.kategori}</td>
-                            <td className="py-3 px-4 text-center text-slate-500 font-medium">75</td>
-                            <td className="py-3 px-4 text-center font-bold text-slate-900">
-                              {isGraded ? (
-                                <span className={`px-2.5 py-1 rounded-lg ${isPass ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
-                                  {n.nilai}
-                                </span>
-                              ) : (
-                                <span className="text-slate-400 font-normal italic">-</span>
-                              )}
-                            </td>
-                            <td className="py-3 px-4 text-center">
-                              {isGraded ? (
-                                <span className={`inline-flex items-center gap-1 text-xs font-bold ${isPass ? 'text-emerald-700' : 'text-rose-700'}`}>
-                                  {isPass ? (
-                                    <>
-                                      <CheckCircle2 className="w-3.5 h-3.5" />
-                                      <span>Tuntas</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <XCircle className="w-3.5 h-3.5" />
-                                      <span>Remedial</span>
-                                    </>
-                                  )}
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
-                                  Belum Diinput
-                                </span>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <p className="font-medium text-slate-500">Rombongan Belajar</p>
+                        <p className="font-bold text-slate-800 text-sm mt-0.5">Kelas {nilaiData?.nama_kelas || siswa.kelas}</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <p className="font-medium text-slate-500">Wali Kelas Pengampu</p>
+                        <p className="font-bold text-slate-800 text-sm mt-0.5">{nilaiData?.wali_kelas || siswa.wali_kelas}</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <p className="font-medium text-slate-500">Status Dokumen</p>
+                        <p className="font-bold text-amber-700 text-sm mt-0.5">Draf / Belum Disahkan</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* KONDISI 2: RAPOR SUDAH DIVALIDASI RESMI - TAMPILKAN PDF RESMI */
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                            Tahun Ajaran {nilaiData?.tahun_ajaran || '2026/2027'} • Semester {nilaiData?.semester || 'Ganjil'}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
+                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                            <span>Tervalidasi Elektronik</span>
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-extrabold text-slate-900">
+                          Dokumen Resmi Rapor STS (Format PDF)
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Lembar Hasil Belajar Resmi Ber-Kop Sekolah SMA AWH & Bertanda Tangan Digital
+                        </p>
+                      </div>
 
-                {/* Validation Footer */}
-                <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
-                  <p>Dokumen ini adalah data resmi sekolah yang dapat diakses mandiri oleh siswa dan wali murid.</p>
-                  <p className="font-semibold text-slate-700">Tercatat di Pangkalan Data SMA A. Wahid Hasyim Tebuireng</p>
-                </div>
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        <button
+                          onClick={loadRaporPdf}
+                          disabled={loadingPdf}
+                          className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold border border-slate-300 transition-all disabled:opacity-50"
+                          title="Muat Ulang Dokumen PDF"
+                        >
+                          <RefreshCw className={`w-3.5 h-3.5 ${loadingPdf ? 'animate-spin' : ''}`} />
+                          <span>Segarkan</span>
+                        </button>
+
+                        {pdfBlobUrl && (
+                          <>
+                            <button
+                              onClick={() => window.open(pdfBlobUrl, '_blank')}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              <span>Buka Tab Baru</span>
+                            </button>
+                            <a
+                              href={pdfBlobUrl}
+                              download={`Rapor_STS_${siswa.nis}_${(siswa.nama || 'Santri').replace(/\s+/g, '_')}.pdf`}
+                              className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                              <span>Unduh PDF Resmi</span>
+                            </a>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Ringkasan Skor Header */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                      <div>
+                        <p className="text-slate-500 font-medium">Standar Kelulusan (KKTP)</p>
+                        <p className="text-lg font-bold text-slate-800 mt-0.5">75</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-500 font-medium">Rata-Rata Nilai STS</p>
+                        <p className="text-lg font-bold text-emerald-700 mt-0.5 tabular-nums">
+                          {nilaiData?.rata_rata > 0 ? nilaiData.rata_rata : '-'}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-slate-500 font-medium">Pengesahan Dokumen</p>
+                        <p className="text-xs font-semibold text-emerald-800 mt-1 flex items-center gap-1">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Divalidasi oleh {siswa.wali_kelas}</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* PDF Viewer Container */}
+                    {loadingPdf ? (
+                      <div className="h-[650px] flex flex-col items-center justify-center space-y-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="w-10 h-10 border-3 border-emerald-700 border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-xs font-medium text-slate-600">Memuat lembar resmi PDF rapor santri...</p>
+                      </div>
+                    ) : pdfError ? (
+                      <div className="p-8 text-center bg-rose-50 border border-rose-200 rounded-xl space-y-3">
+                        <AlertTriangle className="w-8 h-8 text-rose-600 mx-auto" />
+                        <p className="text-sm font-bold text-rose-900">{pdfError}</p>
+                        <button
+                          onClick={loadRaporPdf}
+                          className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm"
+                        >
+                          Coba Lagi
+                        </button>
+                      </div>
+                    ) : pdfBlobUrl ? (
+                      <div className="rounded-xl overflow-hidden border border-slate-300 shadow-sm bg-slate-100">
+                        <iframe
+                          src={`${pdfBlobUrl}#toolbar=1&navpanes=0`}
+                          className="w-full h-[750px] border-0"
+                          title="Lembar Rapor Resmi STS Santri"
+                        />
+                      </div>
+                    ) : (
+                      <div className="p-8 text-center bg-slate-50 border border-slate-200 rounded-xl">
+                        <p className="text-xs text-slate-500">Klik tombol Segarkan untuk memuat lembar PDF rapor.</p>
+                      </div>
+                    )}
+
+                    <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+                      <p>Dokumen PDF ini adalah arsip resmi sekolah yang dapat diakses mandiri oleh santri dan wali santri.</p>
+                      <p className="font-semibold text-slate-700">Pangkalan Data SMA A. Wahid Hasyim Tebuireng</p>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -918,7 +1085,7 @@ export default function PortalSiswaPage() {
                     required
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
-                    placeholder="Kata sandi saat ini (default: siswa123)"
+                    placeholder="Kata sandi saat ini"
                     className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
                   />
                   <button

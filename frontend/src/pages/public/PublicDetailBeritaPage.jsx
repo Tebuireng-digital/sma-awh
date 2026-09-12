@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import PublicNavbar from '../../components/public/PublicNavbar';
 import PublicFooter from '../../components/public/PublicFooter';
+import PhotoLightboxModal from '../../components/public/PhotoLightboxModal';
 import { INITIAL_POSTS } from '../../data/publicNewsData';
 
 export default function PublicDetailBeritaPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [copiedLink, setCopiedLink] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Cari artikel berdasarkan ID (dengan fallback ke INITIAL_POSTS)
   const [post, setPost] = useState(
@@ -39,7 +42,11 @@ export default function PublicDetailBeritaPage() {
               image_url: item.image_url,
               ringkasan: item.ringkasan,
               isi: item.isi,
-              galeri: Array.isArray(item.galeri_images) ? item.galeri_images : [],
+              galeri: Array.isArray(item.galeri_images)
+                ? item.galeri_images
+                : (typeof item.galeri_images === 'string'
+                    ? (() => { try { return JSON.parse(item.galeri_images) || []; } catch(e) { return []; } })()
+                    : (Array.isArray(item.galeri) ? item.galeri : [])),
             });
 
             if (Array.isArray(json.related) && json.related.length > 0) {
@@ -76,6 +83,73 @@ export default function PublicDetailBeritaPage() {
       navigator.clipboard.writeText(window.location.href);
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2500);
+    }
+  };
+
+  // Kumpulkan seluruh foto dokumentasi berita untuk Lightbox
+  const allArticleImages = useMemo(() => {
+    const list = [];
+    const seen = new Set();
+
+    // Foto Sampul Utama (jika ada)
+    if (post.image_url) {
+      list.push({
+        src: post.image_url,
+        full_src: post.image_url,
+        alt: `Foto Utama - ${post.judul || 'Dokumentasi Berita'}`,
+        caption: `Dokumentasi Utama: ${post.judul}`,
+      });
+      seen.add(post.image_url);
+    }
+
+    // Galeri Foto Dokumentasi Kegiatan
+    if (Array.isArray(post.galeri) && post.galeri.length > 0) {
+      post.galeri.forEach((g, idx) => {
+        if (!g) return;
+        const src = typeof g === 'string' ? g : (g.src || g.full_src || g.image_url || '');
+        const fullSrc = typeof g === 'string' ? g : (g.full_src || g.src || g.image_url || '');
+        if (src && !seen.has(src) && !seen.has(fullSrc)) {
+          list.push(
+            typeof g === 'string'
+              ? {
+                  src,
+                  full_src: fullSrc,
+                  alt: `${post.judul} (Dokumentasi ${idx + 1})`,
+                  caption: `Dokumentasi Kegiatan #${idx + 1}`,
+                }
+              : {
+                  ...g,
+                  alt: g.alt || `${post.judul} (Dokumentasi ${idx + 1})`,
+                  caption: g.caption || g.alt || `Dokumentasi Kegiatan #${idx + 1}`,
+                }
+          );
+          seen.add(src);
+          if (fullSrc) seen.add(fullSrc);
+        }
+      });
+    }
+
+    return list;
+  }, [post.galeri, post.image_url, post.judul]);
+
+  // Buka lightbox pada foto yang dipilih
+  const handleOpenLightbox = (targetSrc, fallbackIndex = 0) => {
+    if (!allArticleImages || allArticleImages.length === 0) return;
+    const foundIdx = allArticleImages.findIndex((item) => {
+      const s = typeof item === 'string' ? item : (item.full_src || item.src || item.image_url);
+      return s === targetSrc;
+    });
+    setLightboxIndex(foundIdx !== -1 ? foundIdx : Math.min(fallbackIndex, allArticleImages.length - 1));
+    setIsLightboxOpen(true);
+  };
+
+  // Intercept klik gambar di dalam teks isi berita
+  const handleArticleBodyClick = (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      const clickedSrc = e.target.getAttribute('src');
+      if (clickedSrc) {
+        handleOpenLightbox(clickedSrc);
+      }
     }
   };
 
@@ -188,15 +262,32 @@ export default function PublicDetailBeritaPage() {
             {/* LEFT COLUMN: MAIN ARTICLE (8 cols) */}
             <article className="lg:col-span-8 space-y-8">
               {/* Featured Cover Image */}
-              <div className="rounded-3xl overflow-hidden border border-border-subtle shadow-md bg-surface-card relative elevation-1">
+              <div
+                onClick={() => handleOpenLightbox(post.image_url, 0)}
+                className="rounded-3xl overflow-hidden border border-border-subtle shadow-md bg-surface-card relative elevation-1 cursor-pointer group hover:border-forest-deep transition-all duration-300"
+                title="Klik untuk melihat foto dokumentasi resmi"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleOpenLightbox(post.image_url, 0);
+                  }
+                }}
+              >
                 <img
                   alt={post.judul}
-                  className="w-full h-72 sm:h-96 md:h-[440px] object-cover"
+                  className="w-full h-72 sm:h-96 md:h-[440px] object-cover group-hover:scale-102 transition-transform duration-500"
                   src={post.image_url}
                 />
-                <div className="p-3.5 bg-surface-card border-t border-border-subtle flex items-center gap-2 text-xs text-on-surface-variant">
-                  <span className="material-symbols-outlined text-forest-deep text-[18px]">photo_camera</span>
-                  <span>Dokumentasi Resmi Prestasi Siswa SMA A. Wahid Hasyim Tebuireng Jombang.</span>
+                <div className="p-3.5 bg-surface-card border-t border-border-subtle flex items-center justify-between gap-2 text-xs text-on-surface-variant">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-forest-deep text-[18px]">photo_camera</span>
+                    <span>Dokumentasi Resmi Prestasi Siswa SMA A. Wahid Hasyim Tebuireng Jombang.</span>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold text-gold-burnished group-hover:underline shrink-0">
+                    <span className="material-symbols-outlined text-[16px]">zoom_in</span>
+                    <span>Lihat Foto</span>
+                  </span>
                 </div>
               </div>
 
@@ -217,6 +308,7 @@ export default function PublicDetailBeritaPage() {
 
               {/* Formatted Article Body */}
               <div
+                onClick={handleArticleBodyClick}
                 className="prose prose-emerald max-w-none text-sm sm:text-base text-on-surface leading-relaxed font-normal space-y-4"
                 dangerouslySetInnerHTML={{ __html: post.isi }}
               />
@@ -224,26 +316,62 @@ export default function PublicDetailBeritaPage() {
               {/* Photo Gallery if present in the authentic article */}
               {Array.isArray(post.galeri) && post.galeri.length > 0 && (
                 <div className="pt-6 border-t border-border-subtle space-y-4">
-                  <h3 className="font-headline-md text-base sm:text-lg font-bold text-forest-deep flex items-center gap-2">
-                    <span className="material-symbols-outlined text-gold-burnished text-xl">photo_library</span>
-                    <span>Dokumentasi Foto Kegiatan ({post.galeri.length} Foto)</span>
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {post.galeri.map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="rounded-2xl overflow-hidden border border-border-subtle bg-surface-card shadow-sm elevation-1 group"
-                      >
-                        <a href={img.full_src || img.src} target="_blank" rel="noopener noreferrer">
-                          <img
-                            alt={img.alt || `${post.judul} ${idx + 1}`}
-                            className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                            src={img.src}
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
-                    ))}
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <h3 className="font-headline-md text-base sm:text-lg font-bold text-forest-deep flex items-center gap-2">
+                      <span className="material-symbols-outlined text-gold-burnished text-xl">photo_library</span>
+                      <span>Dokumentasi Foto Kegiatan ({post.galeri.length} Foto)</span>
+                    </h3>
+                    <span className="text-xs text-on-surface-variant flex items-center gap-1 font-medium bg-surface-warm px-2.5 py-1 rounded-full border border-border-subtle">
+                      <span className="material-symbols-outlined text-[15px] text-forest-deep">touch_app</span>
+                      <span>Klik untuk memperbesar & menggeser</span>
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {post.galeri.map((img, idx) => {
+                      const imageSrc = typeof img === 'string' ? img : (img?.src || img?.full_src || img?.image_url || '');
+                      const imageFullSrc = typeof img === 'string' ? img : (img?.full_src || img?.src || img?.image_url || '');
+                      const imageAlt = (typeof img === 'object' && img?.alt) ? img.alt : `${post.judul} (Dokumentasi ${idx + 1})`;
+                      return (
+                        <div
+                          key={idx}
+                          className="rounded-2xl overflow-hidden border border-border-subtle bg-surface-card shadow-sm elevation-1 group hover:border-forest-deep hover:shadow-md transition-all duration-300"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => handleOpenLightbox(imageFullSrc || imageSrc, idx)}
+                            className="w-full h-48 sm:h-56 relative block overflow-hidden focus:outline-none focus:ring-2 focus:ring-gold-medal text-left"
+                            title="Klik untuk membuka dokumentasi foto (pop-up)"
+                            aria-label={`Buka foto dokumentasi ${idx + 1}`}
+                          >
+                            <img
+                              alt={imageAlt}
+                              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out bg-surface-container"
+                              src={imageSrc}
+                              loading="lazy"
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = '/logo.png';
+                              }}
+                            />
+                            {/* Hover overlay dengan tombol zoom & nomor urut */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/80 via-forest-deep/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 text-white">
+                              <div className="self-end p-2 rounded-full bg-black/50 backdrop-blur-sm hover:scale-110 transition-transform">
+                                <span className="material-symbols-outlined text-lg">fullscreen</span>
+                              </div>
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="font-semibold truncate max-w-[150px] drop-shadow">
+                                  {imageAlt}
+                                </span>
+                                <span className="px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-sm text-[11px] font-bold">
+                                  {idx + 1} / {post.galeri.length}
+                                </span>
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -382,6 +510,16 @@ export default function PublicDetailBeritaPage() {
           </div>
         </section>
       </main>
+
+      {/* LIGHTBOX POP-UP FOTO DOKUMENTASI BERITA */}
+      {isLightboxOpen && (
+        <PhotoLightboxModal
+          images={allArticleImages}
+          initialIndex={lightboxIndex}
+          onClose={() => setIsLightboxOpen(false)}
+          title={post.judul}
+        />
+      )}
 
       {/* FOOTER */}
       <PublicFooter />

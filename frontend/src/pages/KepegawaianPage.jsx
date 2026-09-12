@@ -10,7 +10,6 @@ import {
   FileText, 
   Award, 
   Briefcase, 
-  DollarSign, 
   Lock, 
   Search, 
   Filter,
@@ -312,7 +311,7 @@ const KepegawaianPage = () => {
           <div className="text-center py-10 text-slate-500 text-xs">Memuat data Kepegawaian...</div>
         ) : (
           <>
-            {/* TAB 1: DATA INDUK & GAJI PEGAWAI */}
+            {/* TAB 1: DATA INDUK PEGAWAI */}
             {activeTab === 'pegawai' && (
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
@@ -350,9 +349,6 @@ const KepegawaianPage = () => {
                         <th className="px-4 py-2.5">Jabatan / Unit</th>
                         <th className="px-4 py-2.5">Status Kepegawaian</th>
                         <th className="px-4 py-2.5">No. SK Terakhir</th>
-                        <th className="px-4 py-2.5 text-right">Gaji Pokok</th>
-                        <th className="px-4 py-2.5 text-right">Tunjangan</th>
-                        <th className="px-4 py-2.5 text-center">Sinkronisasi Keuangan</th>
                         <th className="px-4 py-2.5 text-center">Aksi</th>
                       </tr>
                     </thead>
@@ -365,21 +361,18 @@ const KepegawaianPage = () => {
                             <span className="text-slate-500 text-[11px]">{p.pendidikan || '-'}</span>
                           </td>
                           <td className="px-4 py-3">
-                            <div className="font-semibold text-slate-800 flex items-center gap-1.5 flex-wrap">
-                              <span>{p.jabatan || 'Guru'}</span>
-                              {(p.jabatan === 'Guru' || (p.jabatan && p.jabatan.toLowerCase().includes('guru'))) && (
-                                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                                  Guru
-                                </span>
-                              )}
-                            </div>
-                            {Array.isArray(p.additional_roles) && p.additional_roles.length > 0 && (
+                            <span className="font-semibold text-slate-800 block">
+                              {p.jabatan || 'Guru'}
+                            </span>
+                            {Array.isArray(p.additional_roles) && p.additional_roles.filter(ar => ar !== 'guru' && ar !== p.jabatan?.toLowerCase()).length > 0 && (
                               <div className="flex flex-wrap gap-1 mt-1">
-                                {p.additional_roles.map((ar) => (
-                                  <span key={ar} className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
-                                    +{roleLabelMap[ar] || ar}
-                                  </span>
-                                ))}
+                                {p.additional_roles
+                                  .filter(ar => ar !== 'guru' && ar !== p.jabatan?.toLowerCase())
+                                  .map((ar) => (
+                                    <span key={ar} className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                                      +{roleLabelMap[ar] || ar}
+                                    </span>
+                                  ))}
                               </div>
                             )}
                           </td>
@@ -393,17 +386,6 @@ const KepegawaianPage = () => {
                             )}
                           </td>
                           <td className="px-4 py-3 font-mono text-slate-600 text-[11px]">{p.no_sk_terakhir || '-'}</td>
-                          <td className="px-4 py-3 text-right font-mono font-bold text-slate-800">
-                            {p.gaji_pokok ? `Rp ${Number(p.gaji_pokok).toLocaleString('id-ID')}` : '-'}
-                          </td>
-                          <td className="px-4 py-3 text-right font-mono font-bold text-emerald-700">
-                            {p.tunjangan ? `Rp ${Number(p.tunjangan).toLocaleString('id-ID')}` : '-'}
-                          </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">
-                              Auto-Synced (Read-Only)
-                            </span>
-                          </td>
                           <td className="px-4 py-3 text-center">
                             {isPrivileged && (
                               <button
@@ -429,7 +411,7 @@ const KepegawaianPage = () => {
                   <ShieldCheck className="w-4 h-4 text-blue-700 shrink-0" />
                   <span>
                     Alur Hak Akses Berjenjang: 
-                    <strong className="ml-1">(1) Staf Input Pengajuan &rarr; (2) Kepala TU Verifikasi Berkas &rarr; (3) Kepala Sekolah Approve Final SK &rarr; (4) Auto Sync ke Keuangan</strong>
+                    <strong className="ml-1">(1) Staf Input Pengajuan &rarr; (2) Kepala TU Verifikasi Berkas &rarr; (3) Kepala Sekolah Approve Final SK</strong>
                   </span>
                 </div>
 
@@ -703,28 +685,7 @@ const KepegawaianPage = () => {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Gaji Pokok (Rp)</label>
-                      <input
-                        type="number"
-                        placeholder="misal: 3500000"
-                        value={formData.gaji_pokok || ''}
-                        onChange={(e) => setFormData({ ...formData, gaji_pokok: e.target.value })}
-                        className="w-full p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Tunjangan (Rp)</label>
-                      <input
-                        type="number"
-                        placeholder="misal: 500000"
-                        value={formData.tunjangan || ''}
-                        onChange={(e) => setFormData({ ...formData, tunjangan: e.target.value })}
-                        className="w-full p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
-                      />
-                    </div>
-                  </div>
+
 
                   {/* Multi-Role / Merangkap Jabatan Checkboxes */}
                   <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2 mt-2">

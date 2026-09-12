@@ -1,10 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Menu, Globe, ShieldCheck } from 'lucide-react';
+import { LogOut, Menu, Globe, ShieldCheck, KeyRound, Eye, EyeOff, Lock, CheckCircle2, AlertCircle, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import client from '../api/client';
 
 const Navbar = ({ onToggleMobileMenu }) => {
   const { user, logout } = useAuth();
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+    setSuccessMsg('');
+
+    if (newPassword.length < 6) {
+      setErrorMsg('Kata sandi baru minimal 6 karakter.');
+      return;
+    }
+
+    if (newPassword !== newPasswordConfirmation) {
+      setErrorMsg('Konfirmasi kata sandi baru tidak sesuai.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await client.post('/auth/change-password', {
+        old_password: oldPassword,
+        new_password: newPassword,
+        new_password_confirmation: newPasswordConfirmation,
+      });
+
+      setSuccessMsg(res.data.message || 'Kata sandi berhasil diperbarui.');
+      setOldPassword('');
+      setNewPassword('');
+      setNewPasswordConfirmation('');
+      setTimeout(() => {
+        setShowPasswordModal(false);
+        setSuccessMsg('');
+      }, 1500);
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Gagal mengganti kata sandi. Pastikan kata sandi lama Anda benar.';
+      setErrorMsg(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getRoleBadge = (role) => {
     switch (role) {
@@ -124,6 +174,22 @@ const Navbar = ({ onToggleMobileMenu }) => {
             </a>
 
             <button
+              onClick={() => {
+                setErrorMsg('');
+                setSuccessMsg('');
+                setOldPassword('');
+                setNewPassword('');
+                setNewPasswordConfirmation('');
+                setShowPasswordModal(true);
+              }}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-700/70 hover:bg-emerald-600/80 text-emerald-100 px-3 py-1.5 rounded-xl border border-emerald-500/40 transition-all hover:scale-105 shadow-sm"
+              title="Ganti Kata Sandi Akun Anda"
+            >
+              <KeyRound className="w-3.5 h-3.5 text-amber-300" />
+              <span className="hidden sm:inline">Ganti Sandi</span>
+            </button>
+
+            <button
               onClick={logout}
               className="inline-flex items-center gap-1.5 text-xs font-semibold bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 px-3 py-1.5 rounded-xl border border-rose-500/30 transition-all hover:scale-105"
               title="Keluar dari Akun"
@@ -134,6 +200,145 @@ const Navbar = ({ onToggleMobileMenu }) => {
           </div>
         )}
       </div>
+
+      {/* Modal Ganti Kata Sandi Pegawai */}
+      {showPasswordModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200 text-slate-800">
+            {/* Modal Header */}
+            <div className="px-6 py-4 bg-[#0d281e] text-white flex items-center justify-between border-b border-emerald-900/50">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-white/10 text-amber-300">
+                  <KeyRound className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold tracking-tight text-white">
+                    Ganti Kata Sandi Akun
+                  </h3>
+                  <p className="text-[11px] text-emerald-300">
+                    {user?.name}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowPasswordModal(false)}
+                className="text-emerald-200 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body / Form */}
+            <form onSubmit={handleChangePassword} className="p-6 space-y-4">
+              {errorMsg && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
+              {successMsg && (
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+                  <span>{successMsg}</span>
+                </div>
+              )}
+
+              {/* Old Password */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Kata Sandi Lama <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showOldPassword ? "text" : "password"}
+                    required
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    placeholder="Masukkan kata sandi saat ini"
+                    className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                  >
+                    {showOldPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* New Password */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Kata Sandi Baru <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    required
+                    minLength={6}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Minimal 6 karakter"
+                    className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                  >
+                    {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Konfirmasi Kata Sandi Baru <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    required
+                    minLength={6}
+                    value={newPasswordConfirmation}
+                    onChange={(e) => setNewPasswordConfirmation(e.target.value)}
+                    placeholder="Ulangi kata sandi baru"
+                    className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center justify-end gap-2.5 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordModal(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
+                >
+                  <Lock className="w-3.5 h-3.5" />
+                  <span>{loading ? 'Menyimpan...' : 'Perbarui Kata Sandi'}</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

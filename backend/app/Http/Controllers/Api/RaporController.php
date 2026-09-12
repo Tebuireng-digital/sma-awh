@@ -649,7 +649,7 @@ class RaporController extends Controller
         $sheet->mergeCells('A2:E2');
         $sheet->setCellValue('A2', 'SMA KH. A. WAHID HASYIM TEBUIRENG');
         $sheet->mergeCells('A3:E3');
-        $sheet->setCellValue('A3', 'LAPORAN HASIL BELAJAR SUMATIF TENGAH SEMESTER (STS)');
+        $sheet->setCellValue('A3', 'LAPORAN HASIL BELAJAR');
 
         $styleTitle = [
             'font' => ['bold' => true, 'size' => 14],
@@ -796,6 +796,513 @@ class RaporController extends Controller
         exit;
     }
 
+    /**
+     * Generate lembar resmi PDF rapor STS siswa
+     */
+    public function generateRaporPdfBinary($siswa, $kelas, $rapor, $semester, $tahunAjaran, $namaKepsek)
+    {
+        $mapels = [
+            'nilai_pai' => 'Pendidikan Agama Islam (PAI)',
+            'nilai_ppkn' => 'Pendidikan Pancasila & Kewarganegaraan (PPKN)',
+            'nilai_indo' => 'Bahasa Indonesia',
+            'nilai_mtk' => 'Matematika',
+            'nilai_inggris' => 'Bahasa Inggris',
+            'nilai_seni' => 'Seni Budaya',
+            'nilai_penjas' => 'Pendidikan Jasmani, Olahraga & Kesehatan',
+            'nilai_informa' => 'Informatika',
+            'nilai_sejarah' => 'Sejarah',
+            'nilai_biologi' => 'IPA Biologi',
+            'nilai_fisika' => 'Fisika',
+            'nilai_kimia' => 'Kimia',
+            'nilai_geografi' => 'IPS Geografi',
+            'nilai_sosiologi' => 'Sosiologi',
+            'nilai_ekonomi' => 'Ekonomi',
+            'nilai_pkwu' => 'Prakarya & Kewirausahaan (PKWU)',
+            'nilai_alquran' => 'Al-Qur\'an',
+            'nilai_akhlaq' => 'Akhlaq',
+            'nilai_fiqih' => 'Fiqih',
+            'nilai_nahwu' => 'Nahwu Shorof',
+            'nilai_aswaja' => 'Ke-Aswaja-an'
+        ];
+
+        $kktp = $rapor ? (int)$rapor->kktp : 75;
+        $jumlah = $rapor ? (int)$rapor->jumlah : 0;
+        $rataRata = $rapor ? number_format((float)$rapor->rata_rata, 2) : '0.00';
+        $catatan = $rapor && !empty($rapor->catatan_wali_kelas) ? htmlspecialchars($rapor->catatan_wali_kelas) : 'Pertahankan prestasi belajar dan tingkatkan kedisiplinan beribadah.';
+        $statusValidasi = $rapor ? ($rapor->status_validasi ?? 'draft') : 'draft';
+        $isApproved = in_array($statusValidasi, ['approved_by_walikelas', 'approved_by_kepsek']);
+
+        $rowsHtml = '';
+        $no = 1;
+        foreach ($mapels as $key => $name) {
+            $nilai = $rapor ? (int)($rapor->{$key} ?? 0) : 0;
+            $terbilang = $this->terbilang($nilai);
+            $rowsHtml .= "<tr>
+                <td style=\"text-align: center;\">{$no}</td>
+                <td>" . htmlspecialchars($name) . "</td>
+                <td style=\"text-align: center;\">{$kktp}</td>
+                <td style=\"text-align: center; font-weight: bold;\">{$nilai}</td>
+                <td style=\"text-align: center;\">{$terbilang}</td>
+            </tr>";
+            $no++;
+        }
+
+        // Extra mapels if any
+        $extraScores = json_decode($rapor ? ($rapor->nilai_tambahan ?? '{}') : '{}', true) ?: [];
+        foreach ($extraScores as $ext) {
+            $nilai = (int)($ext['nilai'] ?? 0);
+            $namaMapel = htmlspecialchars($ext['nama_mapel'] ?? "Mata Pelajaran {$no}");
+            $terbilang = $this->terbilang($nilai);
+            $rowsHtml .= "<tr>
+                <td style=\"text-align: center;\">{$no}</td>
+                <td>{$namaMapel}</td>
+                <td style=\"text-align: center;\">{$kktp}</td>
+                <td style=\"text-align: center; font-weight: bold;\">{$nilai}</td>
+                <td style=\"text-align: center;\">{$terbilang}</td>
+            </tr>";
+            $no++;
+        }
+
+        $namaSiswa = htmlspecialchars($siswa->nama);
+        $nis = htmlspecialchars($siswa->nis);
+        $nisn = htmlspecialchars($siswa->nisn ?: '-');
+        $namaKelas = htmlspecialchars($kelas->nama_kelas ?? '-');
+        $namaWali = htmlspecialchars($kelas->nama_wali ?? 'Wali Kelas');
+        $tanggalCetak = date('d F Y');
+
+        // Logo sekolah di atas kop surat
+        $logoPath = public_path('logo.png');
+        if (!file_exists($logoPath) && file_exists(base_path('../frontend/public/logo.png'))) {
+            $logoPath = base_path('../frontend/public/logo.png');
+        }
+        $logoHtml = '';
+        if (file_exists($logoPath)) {
+            $logoData = base64_encode(file_get_contents($logoPath));
+            $logoHtml = '<div style="margin-bottom: 3px;"><img src="data:image/png;base64,' . $logoData . '" style="width: 48px; height: auto;" alt="Logo SMA AWH"></div>';
+        }
+
+        $html = <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Laporan Hasil Belajar - {$namaSiswa}</title>
+    <style>
+        @page {
+            margin: 0.9cm 1.5cm 0.9cm 1.5cm;
+        }
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 8.5pt;
+            color: #111827;
+            line-height: 1.25;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0f172a;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+        .header h3 {
+            margin: 0;
+            font-size: 10.5pt;
+            font-weight: bold;
+            color: #15803d;
+            letter-spacing: 0.5px;
+        }
+        .header h2 {
+            margin: 2px 0;
+            font-size: 13pt;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+        }
+        .header p {
+            margin: 1px 0;
+            font-size: 8pt;
+            color: #475569;
+        }
+        .title-doc {
+            text-align: center;
+            margin: 7px 0;
+        }
+        .title-doc h4 {
+            margin: 0;
+            font-size: 10pt;
+            text-decoration: underline;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .info-table {
+            width: 100%;
+            margin-bottom: 8px;
+            font-size: 8.5pt;
+        }
+        .info-table td {
+            padding: 1.5px 0;
+            vertical-align: top;
+        }
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            font-size: 8pt;
+        }
+        .grade-table th, .grade-table td {
+            border: 0.75px solid #334155;
+            padding: 3.5px 5px;
+        }
+        .grade-table th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            text-align: center;
+            font-size: 8pt;
+        }
+        .summary-row td {
+            font-weight: bold;
+            background-color: #f8fafc;
+        }
+        .catatan-box {
+            border: 0.75px solid #334155;
+            padding: 5px 8px;
+            margin-bottom: 10px;
+            font-size: 8pt;
+            background-color: #fafafa;
+        }
+        .signatures {
+            width: 100%;
+            margin-top: 6px;
+            font-size: 8.5pt;
+        }
+        .signatures td {
+            text-align: center;
+            vertical-align: top;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        {$logoHtml}
+        <h3>YAYASAN HASYIM ASY'ARI</h3>
+        <h2>SMA KH. A. WAHID HASYIM TEBUIRENG</h2>
+        <p>NSS: 20540007 • NPSN: 20540007 • Terakreditasi "A" (Unggul)</p>
+        <p>Jl. Irian Jaya, Cukir, Kec. Diwek, Kabupaten Jombang, Jawa Timur 61471</p>
+    </div>
+
+    <div class="title-doc">
+        <h4>LAPORAN HASIL BELAJAR</h4>
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td style="width: 18%;">Nama Peserta Didik</td>
+            <td style="width: 2%;">:</td>
+            <td style="width: 40%; font-weight: bold;">{$namaSiswa}</td>
+            <td style="width: 15%;">Kelas</td>
+            <td style="width: 2%;">:</td>
+            <td style="width: 23%; font-weight: bold;">{$namaKelas}</td>
+        </tr>
+        <tr>
+            <td>Nomor Induk / NISN</td>
+            <td>:</td>
+            <td>{$nis} / {$nisn}</td>
+            <td>Semester</td>
+            <td>:</td>
+            <td>{$semester}</td>
+        </tr>
+        <tr>
+            <td>Sekolah</td>
+            <td>:</td>
+            <td>SMA KH. A. Wahid Hasyim</td>
+            <td>Tahun Pelajaran</td>
+            <td>:</td>
+            <td>{$tahunAjaran}</td>
+        </tr>
+    </table>
+
+    <table class="grade-table">
+        <thead>
+            <tr>
+                <th style="width: 5%;">NO</th>
+                <th style="width: 45%;">MATA PELAJARAN</th>
+                <th style="width: 10%;">KKTP</th>
+                <th style="width: 14%;">NILAI ANGKA</th>
+                <th style="width: 26%;">HURUF / TERBILANG</th>
+            </tr>
+        </thead>
+        <tbody>
+            {$rowsHtml}
+            <tr class="summary-row">
+                <td colspan="3" style="text-align: center;">JUMLAH</td>
+                <td style="text-align: center;">{$jumlah}</td>
+                <td></td>
+            </tr>
+            <tr class="summary-row">
+                <td colspan="3" style="text-align: center;">RATA-RATA</td>
+                <td style="text-align: center;">{$rataRata}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="catatan-box">
+        <strong>Catatan Wali Kelas:</strong><br>
+        <span style="font-style: italic;">{$catatan}</span>
+    </div>
+
+    <table class="signatures">
+        <tr>
+            <td style="width: 50%;">
+                Mengetahui,<br>
+                Orang Tua / Wali Santri<br><br><br><br>
+                <strong>( ............................................ )</strong>
+            </td>
+            <td style="width: 50%;">
+                Jombang, {$tanggalCetak}<br>
+                Wali Kelas {$namaKelas}<br><br><br><br>
+                <strong><u>{$namaWali}</u></strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 15px;">
+                Mengetahui,<br>
+                Kepala SMA KH. A. Wahid Hasyim Tebuireng<br><br><br><br>
+                <strong><u>{$namaKepsek}</u></strong>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+HTML;
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadHTML($html);
+        $pdf->setPaper('a4', 'portrait');
+        return $pdf->output();
+    }
+
+    /**
+     * Download Rapor PDF Tunggal untuk Siswa
+     */
+    public function exportPdf(Request $request, $siswa_id)
+    {
+        $siswa = DB::table('siswa as s')
+            ->leftJoin('anggota_kelas as ak', 's.id', '=', 'ak.siswa_id')
+            ->leftJoin('kelas as k', 'ak.kelas_id', '=', 'k.id')
+            ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
+            ->select('s.id as siswa_id', 's.nama', 's.nis', 's.nisn', 'k.nama_kelas', 'k.tingkat', 'g.nama_lengkap as nama_wali')
+            ->where('s.id', $siswa_id)
+            ->first();
+
+        if (!$siswa) {
+            return response()->json(['status' => 'error', 'message' => 'Siswa tidak ditemukan.'], 404);
+        }
+
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $semester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $tahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($tahunAjaran, '/') ? str_replace('/', '-', $tahunAjaran) : str_replace('-', '/', $tahunAjaran);
+
+        $rapor = DB::table('rapor_sts')
+            ->where('siswa_id', $siswa_id)
+            ->whereIn('tahun_ajaran', [$tahunAjaran, $altTa])
+            ->where('semester', $semester)
+            ->first();
+
+        // Validasi Akses: Santri / Wali Santri hanya dapat mengakses jika rapor telah divalidasi oleh Wali Kelas!
+        $user = $request->user();
+        if ($user) {
+            $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
+            $isStudentOrParent = in_array('siswa', $userRoles) || in_array('wali_santri', $userRoles);
+            if ($isStudentOrParent) {
+                if ($user->id_siswa && (int)$user->id_siswa !== (int)$siswa_id) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Anda tidak memiliki hak akses untuk rapor santri lain.'
+                    ], 403);
+                }
+                if (!$rapor || !in_array($rapor->status_validasi, ['approved_by_walikelas', 'approved_by_kepsek'])) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Rapor STS belum divalidasi oleh Wali Kelas. Rapor resmi hanya dapat diakses setelah divalidasi.'
+                    ], 403);
+                }
+            }
+        }
+
+        $profilSekolah = DB::table('profil_sekolah')->first();
+        $namaKepsek = $profilSekolah ? $profilSekolah->kepala_sekolah : 'NIKMATURROHMAH, M.Pd.';
+
+        $fakeKelas = (object)[
+            'nama_kelas' => $siswa->nama_kelas ?? '-',
+            'nama_wali' => $siswa->nama_wali ?? '-',
+        ];
+
+        $pdfBinary = $this->generateRaporPdfBinary($siswa, $fakeKelas, $rapor, $semester, $tahunAjaran, $namaKepsek);
+
+        $safeNama = preg_replace('/[^A-Za-z0-9_]/', '_', $siswa->nama);
+        $pdfName = "Rapor_STS_{$siswa->nis}_{$safeNama}.pdf";
+
+        return response($pdfBinary, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $pdfName . '"',
+        ]);
+    }
+
+    /**
+     * Download Berkas ZIP berisi PDF Rapor Seluruh Siswa dalam 1 Kelas
+     */
+    public function exportZipKelas(Request $request)
+    {
+        $user = $request->user();
+        $kelasId = $request->get('kelas_id');
+
+        $isFullAccess = in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka']);
+        if (!$kelasId && !$isFullAccess && $user->id_guru) {
+            $myKelas = DB::table('kelas')->where('id_guru_wali', $user->id_guru)->first();
+            $kelasId = $myKelas ? $myKelas->id : null;
+        }
+
+        if (!$kelasId) {
+            return response()->json(['status' => 'error', 'message' => 'Parameter kelas_id wajib diisi.'], 400);
+        }
+
+        $kelas = DB::table('kelas as k')
+            ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
+            ->select('k.id', 'k.nama_kelas', 'k.tingkat', 'g.nama_lengkap as nama_wali')
+            ->where('k.id', $kelasId)
+            ->first();
+
+        if (!$kelas) {
+            return response()->json(['status' => 'error', 'message' => 'Kelas tidak ditemukan.'], 404);
+        }
+
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $semester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $tahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($tahunAjaran, '/') ? str_replace('/', '-', $tahunAjaran) : str_replace('-', '/', $tahunAjaran);
+
+        $siswaList = DB::table('siswa as s')
+            ->join('anggota_kelas as ak', 's.id', '=', 'ak.siswa_id')
+            ->where('ak.kelas_id', $kelasId)
+            ->select('s.id as siswa_id', 's.nama', 's.nis', 's.nisn', 's.jenis_kelamin')
+            ->orderBy('s.nama', 'asc')
+            ->get();
+
+        if ($siswaList->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'Tidak ada siswa di kelas ini.'], 404);
+        }
+
+        $raporRows = DB::table('rapor_sts')
+            ->whereIn('siswa_id', $siswaList->pluck('siswa_id'))
+            ->whereIn('tahun_ajaran', [$tahunAjaran, $altTa])
+            ->where('semester', $semester)
+            ->get()
+            ->keyBy('siswa_id');
+
+        $profilSekolah = DB::table('profil_sekolah')->first();
+        $namaKepsek = $profilSekolah ? $profilSekolah->kepala_sekolah : 'NIKMATURROHMAH, M.Pd.';
+
+        $zip = new \ZipArchive();
+        $tmpFile = tempnam(sys_get_temp_dir(), 'rapor_zip_');
+
+        if ($zip->open($tmpFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+            return response()->json(['status' => 'error', 'message' => 'Gagal membuat arsip ZIP di server.'], 500);
+        }
+
+        foreach ($siswaList as $idx => $s) {
+            $r = $raporRows[$s->siswa_id] ?? null;
+            $pdfContent = $this->generateRaporPdfBinary($s, $kelas, $r, $semester, $tahunAjaran, $namaKepsek);
+
+            $safeNama = preg_replace('/[^A-Za-z0-9_]/', '_', $s->nama);
+            $fileName = sprintf("%02d_%s_%s_Rapor_STS.pdf", $idx + 1, $s->nis, $safeNama);
+            $zip->addFromString($fileName, $pdfContent);
+        }
+
+        $zip->close();
+
+        $cleanKelasName = str_replace(['/', ' '], '_', $kelas->nama_kelas);
+        $cleanTa = str_replace(['/', ' '], '-', $tahunAjaran);
+        $zipDownloadName = "Rapor_STS_Kelas_{$cleanKelasName}_{$semester}_{$cleanTa}.zip";
+
+        return response()->download($tmpFile, $zipDownloadName, [
+            'Content-Type' => 'application/zip',
+        ])->deleteFileAfterSend(true);
+    }
+
+    /**
+     * Download Berkas ZIP Seluruh Kelas di Sekolah (Arsip Massal PDF)
+     */
+    public function exportZipAll(Request $request)
+    {
+        $user = $request->user();
+        if (!in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka'])) {
+            return response()->json(['status' => 'error', 'message' => 'Hanya pimpinan dan Administrator yang dapat mengunduh seluruh rapor sekolah.'], 403);
+        }
+
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $semester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $tahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($tahunAjaran, '/') ? str_replace('/', '-', $tahunAjaran) : str_replace('-', '/', $tahunAjaran);
+
+        $allKelas = DB::table('kelas as k')
+            ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
+            ->select('k.id', 'k.nama_kelas', 'k.tingkat', 'g.nama_lengkap as nama_wali')
+            ->orderBy('k.nama_kelas')
+            ->get();
+
+        $profilSekolah = DB::table('profil_sekolah')->first();
+        $namaKepsek = $profilSekolah ? $profilSekolah->kepala_sekolah : 'NIKMATURROHMAH, M.Pd.';
+
+        $zip = new \ZipArchive();
+        $tmpFile = tempnam(sys_get_temp_dir(), 'rapor_all_zip_');
+
+        if ($zip->open($tmpFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+            return response()->json(['status' => 'error', 'message' => 'Gagal membuat file ZIP di server.'], 500);
+        }
+
+        foreach ($allKelas as $kelas) {
+            $siswaList = DB::table('siswa as s')
+                ->join('anggota_kelas as ak', 's.id', '=', 'ak.siswa_id')
+                ->where('ak.kelas_id', $kelas->id)
+                ->select('s.id as siswa_id', 's.nama', 's.nis', 's.nisn', 's.jenis_kelamin')
+                ->orderBy('s.nama', 'asc')
+                ->get();
+
+            if ($siswaList->isEmpty()) continue;
+
+            $raporRows = DB::table('rapor_sts')
+                ->whereIn('siswa_id', $siswaList->pluck('siswa_id'))
+                ->whereIn('tahun_ajaran', [$tahunAjaran, $altTa])
+                ->where('semester', $semester)
+                ->get()
+                ->keyBy('siswa_id');
+
+            $cleanKelas = str_replace(['/', ' '], '_', $kelas->nama_kelas);
+
+            foreach ($siswaList as $idx => $s) {
+                $r = $raporRows[$s->siswa_id] ?? null;
+                $pdfContent = $this->generateRaporPdfBinary($s, $kelas, $r, $semester, $tahunAjaran, $namaKepsek);
+
+                $safeNama = preg_replace('/[^A-Za-z0-9_]/', '_', $s->nama);
+                $fileName = sprintf("Kelas_%s/%02d_%s_%s_Rapor_STS.pdf", $cleanKelas, $idx + 1, $s->nis, $safeNama);
+                $zip->addFromString($fileName, $pdfContent);
+            }
+        }
+
+        $zip->close();
+
+        $cleanTa = str_replace(['/', ' '], '-', $tahunAjaran);
+        $zipDownloadName = "Rapor_STS_Semua_Kelas_{$semester}_{$cleanTa}.zip";
+
+        return response()->download($tmpFile, $zipDownloadName, [
+            'Content-Type' => 'application/zip',
+        ])->deleteFileAfterSend(true);
+    }
+
     public function getNilaiMapelKelas(Request $request)
     {
         $request->validate([
@@ -819,8 +1326,16 @@ class RaporController extends Controller
             ->orderBy('s.nama', 'asc')
             ->get();
 
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $targetSemester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $targetTa = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($targetTa, '/') ? str_replace('/', '-', $targetTa) : str_replace('-', '/', $targetTa);
+
         $raporRows = DB::table('rapor_sts')
             ->whereIn('siswa_id', $siswaList->pluck('siswa_id'))
+            ->whereIn('tahun_ajaran', [$targetTa, $altTa])
+            ->where('semester', $targetSemester)
             ->get()
             ->keyBy('siswa_id');
 
@@ -857,7 +1372,7 @@ class RaporController extends Controller
             }
 
             $items[] = [
-                'no' => $idx + 1,
+                'index' => $idx + 1,
                 'siswa_id' => $s->siswa_id,
                 'nama' => $s->nama,
                 'nis' => $s->nis,
@@ -868,6 +1383,7 @@ class RaporController extends Controller
                 'kktp' => 75,
                 'status_tuntas' => $statusTuntas,
                 'status_validasi' => $rapor->status_validasi ?? 'draft',
+                'is_extra' => $isExtra,
             ];
         }
 
@@ -876,19 +1392,26 @@ class RaporController extends Controller
             $minNilai = 0;
         }
 
+        $statsData = [
+            'total_siswa' => $totalSiswa,
+            'total_terisi' => $totalTerisi,
+            'total_belum_terisi' => $totalSiswa - $totalTerisi,
+            'rata_rata' => $rataRata,
+            'tertinggi' => $maxNilai,
+            'terendah' => $minNilai,
+            'total_tuntas' => $totalTuntas,
+            'total_belum_tuntas' => $totalBelumTuntas,
+        ];
+
         return response()->json([
             'status' => 'success',
             'kelas' => $kelas,
             'mapel_key' => $mapelKey,
-            'statistik' => [
-                'total_siswa' => $totalSiswa,
-                'total_terisi' => $totalTerisi,
-                'rata_rata' => $rataRata,
-                'tertinggi' => $maxNilai,
-                'terendah' => $minNilai,
-                'total_tuntas' => $totalTuntas,
-                'total_belum_tuntas' => $totalBelumTuntas,
-            ],
+            'semester' => $targetSemester,
+            'tahun_ajaran' => $targetTa,
+            'stats' => $statsData,
+            'statistik' => $statsData,
+            'grades' => $items,
             'siswa' => $items,
         ]);
     }
@@ -903,6 +1426,9 @@ class RaporController extends Controller
             'grades.*.nilai' => 'required|numeric|min:0|max:100',
         ]);
 
+        $kelasId = $request->kelas_id;
+        $mapelKey = $request->mapel_key;
+
         $allKeys = [
             'nilai_pai', 'nilai_ppkn', 'nilai_indo', 'nilai_mtk', 'nilai_inggris',
             'nilai_seni', 'nilai_penjas', 'nilai_informa', 'nilai_sejarah', 'nilai_biologi',
@@ -910,7 +1436,6 @@ class RaporController extends Controller
             'nilai_pkwu', 'nilai_alquran', 'nilai_akhlaq', 'nilai_fiqih', 'nilai_nahwu', 'nilai_aswaja'
         ];
 
-        $mapelKey = $request->mapel_key;
         $isExtra = str_starts_with($mapelKey, 'mapel_');
         $extraMapelId = $isExtra ? (int)str_replace('mapel_', '', $mapelKey) : null;
         $extraMapelObj = null;
@@ -918,7 +1443,7 @@ class RaporController extends Controller
         if ($isExtra) {
             $extraMapelObj = DB::table('mata_pelajaran')->where('id', $extraMapelId)->first();
             if (!$extraMapelObj) {
-                return response()->json(['status' => 'error', 'message' => 'Mata pelajaran tambahan tidak valid.'], 400);
+                return response()->json(['status' => 'error', 'message' => 'Mata pelajaran tambahan tidak valid.'], 404);
             }
         } else if (!in_array($mapelKey, $allKeys)) {
             return response()->json(['status' => 'error', 'message' => 'Kolom mata pelajaran tidak valid.'], 400);
@@ -946,7 +1471,10 @@ class RaporController extends Controller
         }
 
         $activeSemRow = DB::table('semester')->where('is_active', true)->first();
-        $currentSemester = $activeSemRow ? $activeSemRow->nama : 'Ganjil';
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $targetSemester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $targetTa = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($targetTa, '/') ? str_replace('/', '-', $targetTa) : str_replace('-', '/', $targetTa);
 
         DB::beginTransaction();
         try {
@@ -955,7 +1483,11 @@ class RaporController extends Controller
                 $siswaId = $item['siswa_id'];
                 $nilaiBaru = intval($item['nilai']);
 
-                $existing = DB::table('rapor_sts')->where('siswa_id', $siswaId)->first();
+                $existing = DB::table('rapor_sts')
+                    ->where('siswa_id', $siswaId)
+                    ->whereIn('tahun_ajaran', [$targetTa, $altTa])
+                    ->where('semester', $targetSemester)
+                    ->first();
 
                 if ($existing) {
                     $dataToSave = [
@@ -995,8 +1527,8 @@ class RaporController extends Controller
                 } else {
                     $dataToSave = [
                         'siswa_id' => $siswaId,
-                        'tahun_ajaran' => '2026/2027',
-                        'semester' => $currentSemester,
+                        'tahun_ajaran' => $targetTa,
+                        'semester' => $targetSemester,
                         'kktp' => 75,
                         'catatan_wali_kelas' => '',
                         'status_validasi' => 'draft',
@@ -1119,21 +1651,38 @@ class RaporController extends Controller
             'nilai_pkwu', 'nilai_alquran', 'nilai_akhlaq', 'nilai_fiqih', 'nilai_nahwu', 'nilai_aswaja'
         ];
 
-        $raporRows = DB::table('rapor_sts')
-            ->whereIn('siswa_id', $siswaList->pluck('siswa_id'))
-            ->get()
-            ->keyBy('siswa_id');
-
         $activeSemRow = DB::table('semester')->where('is_active', true)->first();
-        $currentSemester = $activeSemRow ? $activeSemRow->nama : 'Ganjil';
+        $currentSemester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
 
         $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
-        $currentTahunAjaran = $activeTaRow ? $activeTaRow->nama : '2026/2027';
+        $currentTahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($currentTahunAjaran, '/') ? str_replace('/', '-', $currentTahunAjaran) : str_replace('-', '/', $currentTahunAjaran);
+
+        $raporRows = DB::table('rapor_sts')
+            ->whereIn('siswa_id', $siswaList->pluck('siswa_id'))
+            ->whereIn('tahun_ajaran', [$currentTahunAjaran, $altTa])
+            ->where('semester', $currentSemester)
+            ->get()
+            ->keyBy('siswa_id');
 
         $totalSiswa = count($siswaList);
         $totalDivalidasi = 0;
         $totalDraft = 0;
         $sumRataRata = 0;
+
+        // Cek permohonan pembatalan validasi yang berstatus pending untuk kelas ini
+        $pendingRequests = DB::table('rapor_pembatalan_validasi')
+            ->where('kelas_id', $kelasId)
+            ->whereIn('tahun_ajaran', [$currentTahunAjaran, $altTa])
+            ->where('semester', $currentSemester)
+            ->where('status', 'pending')
+            ->get();
+
+        $hasClassPending = $pendingRequests->contains(function ($item) {
+            return is_null($item->siswa_id);
+        });
+        $classPendingReason = $hasClassPending ? $pendingRequests->firstWhere('siswa_id', null)->alasan : null;
+        $studentPendingMap = $pendingRequests->whereNotNull('siswa_id')->keyBy('siswa_id');
 
         $students = [];
         foreach ($siswaList as $idx => $s) {
@@ -1160,6 +1709,11 @@ class RaporController extends Controller
             $rataRata = $r ? (float)$r->rata_rata : 0;
             $sumRataRata += $rataRata;
 
+            $isPendingUnvalidation = $hasClassPending || isset($studentPendingMap[$s->siswa_id]);
+            $pendingReason = $hasClassPending 
+                ? $classPendingReason 
+                : ($studentPendingMap[$s->siswa_id]->alasan ?? null);
+
             $students[] = [
                 'index' => $idx + 1,
                 'siswa_id' => $s->siswa_id,
@@ -1168,6 +1722,8 @@ class RaporController extends Controller
                 'nisn' => $s->nisn,
                 'jenis_kelamin' => $s->jenis_kelamin,
                 'status_validasi' => $statusVal,
+                'has_pending_unvalidation' => $isPendingUnvalidation,
+                'pending_unvalidation_alasan' => $pendingReason,
                 'catatan_wali_kelas' => $r->catatan_wali_kelas ?? '',
                 'jumlah' => $r ? (int)$r->jumlah : 0,
                 'rata_rata' => $rataRata,
@@ -1201,52 +1757,36 @@ class RaporController extends Controller
                     'nilai_fiqih' => (int)$r->nilai_fiqih,
                     'nilai_nahwu' => (int)$r->nilai_nahwu,
                     'nilai_aswaja' => (int)$r->nilai_aswaja,
-                ] : array_fill_keys($allKeys, 0),
+                ] : null,
             ];
         }
 
-        // Kumpulkan daftar mata pelajaran tambahan di kelas ini
-        $extraMapelsInClass = [];
-        $scheduledMapels = DB::table('jadwal_pelajaran')
-            ->join('mata_pelajaran', 'jadwal_pelajaran.mapel_id', '=', 'mata_pelajaran.id')
-            ->where('jadwal_pelajaran.kelas_id', $kelasId)
-            ->select('mata_pelajaran.id', 'mata_pelajaran.nama_mapel')
-            ->distinct()
+        $avgClass = $totalSiswa > 0 ? round($sumRataRata / $totalSiswa, 2) : 0;
+
+        // Ambil daftar kelas untuk dropdown
+        $daftarKelas = DB::table('kelas as k')
+            ->leftJoin('guru as g', 'k.id_guru_wali', '=', 'g.id_guru')
+            ->select('k.id', 'k.nama_kelas', 'k.tingkat', 'k.jumlah_siswa', 'g.nama_lengkap as nama_wali')
+            ->orderBy('k.nama_kelas')
             ->get();
-        foreach ($scheduledMapels as $sm) {
-            if (empty(self::mapelNameToKeys($sm->nama_mapel))) {
-                $extraMapelsInClass[$sm->id] = [
-                    'mapel_id' => $sm->id,
-                    'nama_mapel' => $sm->nama_mapel,
-                    'key' => 'mapel_' . $sm->id,
-                ];
-            }
-        }
-        foreach ($students as $st) {
-            foreach ($st['extra_scores'] as $mid => $info) {
-                if (!isset($extraMapelsInClass[$mid])) {
-                    $extraMapelsInClass[$mid] = [
-                        'mapel_id' => (int)$mid,
-                        'nama_mapel' => $info['nama_mapel'] ?? "Mapel {$mid}",
-                        'key' => 'mapel_' . $mid,
-                    ];
-                }
-            }
-        }
 
         return response()->json([
             'status' => 'success',
+            'is_wali_of_this_class' => $isWaliOfThisClass,
+            'is_full_access' => $isFullAccess,
             'kelas' => $kelas,
             'semester' => $currentSemester,
             'tahun_ajaran' => $currentTahunAjaran,
-            'is_wali_of_this_class' => $isWaliOfThisClass,
-            'daftar_kelas' => $allKelasList,
-            'daftar_extra_mapel' => array_values($extraMapelsInClass),
+            'daftar_kelas' => $daftarKelas,
             'summary' => [
                 'total_siswa' => $totalSiswa,
                 'total_divalidasi' => $totalDivalidasi,
                 'total_draft' => $totalDraft,
-                'rata_rata_kelas' => $totalSiswa > 0 ? round($sumRataRata / $totalSiswa, 1) : 0,
+                'rata_rata_kelas' => $avgClass,
+                'persentase_validasi' => $totalSiswa > 0 ? round(($totalDivalidasi / $totalSiswa) * 100, 1) : 0,
+                'has_class_pending_unvalidation' => $hasClassPending,
+                'class_pending_unvalidation_alasan' => $classPendingReason,
+                'total_pending_unvalidation' => $pendingRequests->count(),
             ],
             'students' => $students,
         ]);
@@ -1283,12 +1823,23 @@ class RaporController extends Controller
             }
         }
 
-        $rapor = DB::table('rapor_sts')->where('siswa_id', $siswa_id)->first();
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $currentSemester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $currentTahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($currentTahunAjaran, '/') ? str_replace('/', '-', $currentTahunAjaran) : str_replace('-', '/', $currentTahunAjaran);
+
+        $rapor = DB::table('rapor_sts')
+            ->where('siswa_id', $siswa_id)
+            ->whereIn('tahun_ajaran', [$currentTahunAjaran, $altTa])
+            ->where('semester', $currentSemester)
+            ->first();
+
         if (!$rapor) {
             DB::table('rapor_sts')->insert([
                 'siswa_id' => $siswa_id,
-                'tahun_ajaran' => '2026/2027',
-                'semester' => 'Ganjil',
+                'tahun_ajaran' => $currentTahunAjaran,
+                'semester' => $currentSemester,
                 'kktp' => 75,
                 'catatan_wali_kelas' => $request->catatan_wali_kelas ?? '',
                 'status_validasi' => $request->validate_now ? 'approved_by_walikelas' : 'draft',
@@ -1343,15 +1894,48 @@ class RaporController extends Controller
             }
         }
 
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $currentSemester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $currentTahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+        $altTa = str_contains($currentTahunAjaran, '/') ? str_replace('/', '-', $currentTahunAjaran) : str_replace('-', '/', $currentTahunAjaran);
+
         $siswaIds = DB::table('anggota_kelas')->where('kelas_id', $request->kelas_id)->pluck('siswa_id');
 
-        $updated = DB::table('rapor_sts')
+        $existingSiswaIds = DB::table('rapor_sts')
             ->whereIn('siswa_id', $siswaIds)
-            ->update([
+            ->whereIn('tahun_ajaran', [$currentTahunAjaran, $altTa])
+            ->where('semester', $currentSemester)
+            ->pluck('siswa_id')
+            ->toArray();
+
+        $updated = 0;
+        if (!empty($existingSiswaIds)) {
+            $updated += DB::table('rapor_sts')
+                ->whereIn('siswa_id', $existingSiswaIds)
+                ->whereIn('tahun_ajaran', [$currentTahunAjaran, $altTa])
+                ->where('semester', $currentSemester)
+                ->update([
+                    'status_validasi' => 'approved_by_walikelas',
+                    'ttd_walikelas' => now(),
+                    'updated_at' => now(),
+                ]);
+        }
+
+        $missingSiswaIds = array_diff($siswaIds->toArray(), $existingSiswaIds);
+        foreach ($missingSiswaIds as $mId) {
+            DB::table('rapor_sts')->insert([
+                'siswa_id' => $mId,
+                'tahun_ajaran' => $currentTahunAjaran,
+                'semester' => $currentSemester,
+                'kktp' => 75,
                 'status_validasi' => 'approved_by_walikelas',
                 'ttd_walikelas' => now(),
+                'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            $updated++;
+        }
 
         return response()->json([
             'status' => 'success',
@@ -1359,30 +1943,251 @@ class RaporController extends Controller
         ]);
     }
 
-    public function cancelValidasiWaliKelas(Request $request, $siswa_id)
+    /**
+     * Pengajuan Pembatalan Validasi Rapor oleh Wali Kelas (Wajib disetujui Admin)
+     */
+    public function requestCancelValidasi(Request $request)
     {
+        $request->validate([
+            'kelas_id' => 'required|exists:kelas,id',
+            'siswa_id' => 'nullable|exists:siswa,id',
+            'alasan' => 'required|string|min:5|max:1000',
+        ], [
+            'alasan.required' => 'Alasan pembatalan validasi wajib diisi.',
+            'alasan.min' => 'Alasan pembatalan minimal 5 karakter.',
+        ]);
+
         $user = $request->user();
-        $isFullAccess = $user ? in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka']) : true;
+        $isFullAccess = $user ? in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka']) : false;
+
+        $idGuru = $user ? $user->id_guru : null;
+        if (!$idGuru && $user && $user->role === 'guru') {
+            $guruRow = DB::table('guru')->where('nama_lengkap', 'LIKE', '%' . $user->name . '%')->first();
+            if ($guruRow) $idGuru = $guruRow->id_guru;
+        }
 
         if (!$isFullAccess) {
-            $idGuru = $user ? $user->id_guru : null;
-            if (!$idGuru && $user && $user->role === 'guru') {
+            $isMyClass = DB::table('kelas')
+                ->where('id', $request->kelas_id)
+                ->where('id_guru_wali', $idGuru)
+                ->exists();
+
+            if (!$isMyClass) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Anda tidak memiliki wewenang untuk mengajukan pembatalan validasi pada kelas ini.'
+                ], 403);
+            }
+        }
+
+        $activeSemRow = DB::table('semester')->where('is_active', true)->first();
+        $activeTaRow = DB::table('tahun_ajaran')->where('is_active', true)->first();
+        $semester = $request->get('semester', $activeSemRow ? $activeSemRow->nama : 'Ganjil');
+        $tahunAjaran = $request->get('tahun_ajaran', $activeTaRow ? $activeTaRow->nama : '2026/2027');
+
+        // Cek apakah sudah ada permohonan pending yang sama
+        $queryExist = DB::table('rapor_pembatalan_validasi')
+            ->where('kelas_id', $request->kelas_id)
+            ->where('tahun_ajaran', $tahunAjaran)
+            ->where('semester', $semester)
+            ->where('status', 'pending');
+
+        if ($request->siswa_id) {
+            $queryExist->where('siswa_id', $request->siswa_id);
+        } else {
+            $queryExist->whereNull('siswa_id');
+        }
+
+        $alreadyPending = $queryExist->first();
+        if ($alreadyPending) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Permohonan pembatalan validasi untuk data ini sudah diajukan sebelumnya dan sedang menunggu persetujuan Administrator.'
+            ], 422);
+        }
+
+        $requestId = DB::table('rapor_pembatalan_validasi')->insertGetId([
+            'kelas_id' => $request->kelas_id,
+            'siswa_id' => $request->siswa_id ?: null,
+            'id_guru_pemohon' => $idGuru,
+            'tahun_ajaran' => $tahunAjaran,
+            'semester' => $semester,
+            'alasan' => $request->alasan,
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Permohonan pembatalan validasi berhasil diajukan. Menunggu verifikasi dan persetujuan Administrator.',
+            'request_id' => $requestId,
+        ], 201);
+    }
+
+    /**
+     * Mengambil daftar Permohonan Pembatalan Validasi Rapor (Admin & Wali Kelas)
+     */
+    public function getUnvalidationRequests(Request $request)
+    {
+        $user = $request->user();
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
+        $isAdmin = count(array_intersect($userRoles, ['admin', 'kepala_sekolah', 'waka', 'kurikulum'])) > 0;
+
+        $query = DB::table('rapor_pembatalan_validasi as rpv')
+            ->join('kelas as k', 'rpv.kelas_id', '=', 'k.id')
+            ->leftJoin('siswa as s', 'rpv.siswa_id', '=', 's.id')
+            ->leftJoin('guru as g', 'rpv.id_guru_pemohon', '=', 'g.id_guru')
+            ->leftJoin('users as u', 'rpv.disetujui_oleh', '=', 'u.id')
+            ->select(
+                'rpv.*',
+                'k.nama_kelas',
+                'k.tingkat',
+                's.nama as nama_siswa',
+                's.nis as nis_siswa',
+                'g.nama_lengkap as nama_wali_pemohon',
+                'u.name as nama_admin_penyetuju'
+            )
+            ->orderBy('rpv.created_at', 'desc');
+
+        if (!$isAdmin) {
+            $idGuru = $user->id_guru;
+            if (!$idGuru && $user->role === 'guru') {
                 $guruRow = DB::table('guru')->where('nama_lengkap', 'LIKE', '%' . $user->name . '%')->first();
                 if ($guruRow) $idGuru = $guruRow->id_guru;
             }
+            $query->where('rpv.id_guru_pemohon', $idGuru);
+        }
 
-            $isMyStudent = DB::table('anggota_kelas as ak')
-                ->join('kelas as k', 'ak.kelas_id', '=', 'k.id')
-                ->where('ak.siswa_id', $siswa_id)
-                ->where('k.id_guru_wali', $idGuru)
-                ->exists();
+        if ($request->has('status') && !empty($request->status)) {
+            $query->where('rpv.status', $request->status);
+        }
 
-            if (!$isMyStudent) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Anda tidak memiliki wewenang untuk membatalkan validasi santri ini.'
-                ], 403);
-            }
+        $requests = $query->get();
+        $pendingCount = DB::table('rapor_pembatalan_validasi')->where('status', 'pending')->count();
+
+        return response()->json([
+            'status' => 'success',
+            'pending_count' => $pendingCount,
+            'data' => $requests,
+        ]);
+    }
+
+    /**
+     * Admin Menyetujui Pembatalan Validasi (Rapor kembali ke Draft)
+     */
+    public function approveUnvalidationRequest(Request $request, $id)
+    {
+        $user = $request->user();
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
+        if (!count(array_intersect($userRoles, ['admin', 'kepala_sekolah']))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Hanya Administrator atau Kepala Sekolah yang berwenang menyetujui pembatalan validasi rapor.'
+            ], 403);
+        }
+
+        $reqRow = DB::table('rapor_pembatalan_validasi')->where('id', $id)->first();
+        if (!$reqRow) {
+            return response()->json(['status' => 'error', 'message' => 'Permohonan tidak ditemukan.'], 404);
+        }
+
+        if ($reqRow->status !== 'pending') {
+            return response()->json([
+                'status' => 'error',
+                'message' => "Permohonan ini telah diproses sebelumnya dengan status {$reqRow->status}."
+            ], 422);
+        }
+
+        $altTa = str_contains($reqRow->tahun_ajaran, '/') ? str_replace('/', '-', $reqRow->tahun_ajaran) : str_replace('-', '/', $reqRow->tahun_ajaran);
+
+        // Ubah status rapor ke 'draft'
+        $queryRapor = DB::table('rapor_sts')
+            ->whereIn('tahun_ajaran', [$reqRow->tahun_ajaran, $altTa])
+            ->where('semester', $reqRow->semester);
+
+        if ($reqRow->siswa_id) {
+            $queryRapor->where('siswa_id', $reqRow->siswa_id);
+        } else {
+            $siswaIds = DB::table('anggota_kelas')->where('kelas_id', $reqRow->kelas_id)->pluck('siswa_id');
+            $queryRapor->whereIn('siswa_id', $siswaIds);
+        }
+
+        $updatedCount = $queryRapor->update([
+            'status_validasi' => 'draft',
+            'ttd_walikelas' => null,
+            'updated_at' => now(),
+        ]);
+
+        DB::table('rapor_pembatalan_validasi')->where('id', $id)->update([
+            'status' => 'approved',
+            'catatan_admin' => $request->catatan_admin ?: 'Disetujui Administrator',
+            'disetujui_oleh' => $user->id,
+            'disetujui_pada' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Pembatalan validasi berhasil disetujui. {$updatedCount} rapor dikembalikan ke status Draft.",
+        ]);
+    }
+
+    /**
+     * Admin Menolak Pembatalan Validasi (Rapor tetap Validated)
+     */
+    public function rejectUnvalidationRequest(Request $request, $id)
+    {
+        $user = $request->user();
+        $userRoles = method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role];
+        if (!count(array_intersect($userRoles, ['admin', 'kepala_sekolah']))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Hanya Administrator atau Kepala Sekolah yang berwenang menolak pembatalan validasi rapor.'
+            ], 403);
+        }
+
+        $reqRow = DB::table('rapor_pembatalan_validasi')->where('id', $id)->first();
+        if (!$reqRow) {
+            return response()->json(['status' => 'error', 'message' => 'Permohonan tidak ditemukan.'], 404);
+        }
+
+        if ($reqRow->status !== 'pending') {
+            return response()->json([
+                'status' => 'error',
+                'message' => "Permohonan ini telah diproses sebelumnya dengan status {$reqRow->status}."
+            ], 422);
+        }
+
+        DB::table('rapor_pembatalan_validasi')->where('id', $id)->update([
+            'status' => 'rejected',
+            'catatan_admin' => $request->catatan_admin ?: 'Permohonan ditolak oleh Administrator',
+            'disetujui_oleh' => $user->id,
+            'disetujui_pada' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Permohonan pembatalan validasi berhasil ditolak. Status rapor tetap tervalidasi.',
+        ]);
+    }
+
+    /**
+     * Eksekusi langsung pembatalan validasi (Khusus hak akses Administrator)
+     */
+    public function cancelValidasiWaliKelas(Request $request, $siswa_id)
+    {
+        $user = $request->user();
+        $userRoles = $user ? (method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role]) : [];
+        $isAdmin = in_array('admin', $userRoles) || in_array('kepala_sekolah', $userRoles);
+
+        if (!$isAdmin) {
+            return response()->json([
+                'status' => 'error',
+                'requires_admin_approval' => true,
+                'message' => 'Pembatalan validasi rapor oleh Wali Kelas harus diajukan dan disetujui oleh Administrator terlebih dahulu. Silakan gunakan tombol Ajukan Pembatalan Validasi.',
+            ], 403);
         }
 
         DB::table('rapor_sts')
@@ -1395,10 +2200,13 @@ class RaporController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Validasi rapor berhasil dibatalkan. Status rapor kembali menjadi Draft.',
+            'message' => 'Validasi rapor berhasil dibatalkan oleh Administrator. Status rapor kembali menjadi Draft.',
         ]);
     }
 
+    /**
+     * Eksekusi langsung pembatalan validasi 1 kelas (Khusus hak akses Administrator)
+     */
     public function bulkCancelValidasiWaliKelas(Request $request)
     {
         $request->validate([
@@ -1406,26 +2214,15 @@ class RaporController extends Controller
         ]);
 
         $user = $request->user();
-        $isFullAccess = $user ? in_array($user->role, ['admin', 'kurikulum', 'kepala_sekolah', 'waka']) : true;
+        $userRoles = $user ? (method_exists($user, 'getAllRolesAttribute') ? $user->all_roles : [$user->role]) : [];
+        $isAdmin = in_array('admin', $userRoles) || in_array('kepala_sekolah', $userRoles);
 
-        if (!$isFullAccess) {
-            $idGuru = $user ? $user->id_guru : null;
-            if (!$idGuru && $user && $user->role === 'guru') {
-                $guruRow = DB::table('guru')->where('nama_lengkap', 'LIKE', '%' . $user->name . '%')->first();
-                if ($guruRow) $idGuru = $guruRow->id_guru;
-            }
-
-            $isMyClass = DB::table('kelas')
-                ->where('id', $request->kelas_id)
-                ->where('id_guru_wali', $idGuru)
-                ->exists();
-
-            if (!$isMyClass) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Anda tidak memiliki wewenang untuk membatalkan validasi kelas ini.'
-                ], 403);
-            }
+        if (!$isAdmin) {
+            return response()->json([
+                'status' => 'error',
+                'requires_admin_approval' => true,
+                'message' => 'Pembatalan validasi seluruh kelas oleh Wali Kelas harus diajukan dan disetujui oleh Administrator terlebih dahulu. Silakan gunakan tombol Ajukan Pembatalan Validasi.',
+            ], 403);
         }
 
         $siswaIds = DB::table('anggota_kelas')->where('kelas_id', $request->kelas_id)->pluck('siswa_id');
@@ -1440,7 +2237,7 @@ class RaporController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => "Berhasil membatalkan validasi seluruh rapor siswa kelas ({$updated} rapor dikembalikan ke Draft).",
+            'message' => "Berhasil membatalkan validasi seluruh rapor siswa kelas ({$updated} rapor dikembalikan ke Draft oleh Administrator).",
         ]);
     }
 }

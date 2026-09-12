@@ -61,6 +61,9 @@ export default function PublicBerandaPage() {
     kompleksPutri: '/humas/sma-putri.png',
     videoProfil: '/humas/video-profil-sma-awh.mp4',
     fotoKepsek: '/humas/kepala-sekolah-nikmaturrohmah.jpg',
+    sloganSiswa: 'Sekolah Nyantri Ngaji Berprestasi',
+    labelTahunSiswa: 'Jumlah Siswa Tahun Akademik 2025-2026',
+    jumlahSiswa: '769',
   });
 
   // Auto-slide every 5 seconds (5000ms) smoothly without bottom buttons
@@ -84,19 +87,21 @@ export default function PublicBerandaPage() {
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data.data) && data.data.length > 0) {
-            const apiItems = data.data.map((item) => ({
-              id: item.id,
-              kategori: item.kategori || 'Berita',
-              is_pinned: !!item.is_pinned,
-              tanggal: item.created_at
-                ? new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
-                : 'Tebuireng',
-              judul: item.judul,
-              ringkasan: item.ringkasan,
-              image_url: item.image_url,
-              isi: item.isi,
-              galeri_images: item.galeri_images
-            }));
+            const apiItems = data.data
+              .filter((item) => item.is_public !== false)
+              .map((item) => ({
+                id: item.id,
+                kategori: item.kategori || 'Berita',
+                is_pinned: !!item.is_pinned,
+                tanggal: item.created_at
+                  ? new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+                  : 'Tebuireng',
+                judul: item.judul,
+                ringkasan: item.ringkasan,
+                image_url: item.image_url,
+                isi: item.isi,
+                galeri_images: item.galeri_images
+              }));
             setPosts(apiItems);
           }
         }
@@ -105,7 +110,7 @@ export default function PublicBerandaPage() {
       }
 
       try {
-        const resAset = await fetch('/api/v1/humas/konten-publik?kategori=Aset%20Web');
+        const resAset = await fetch('/api/v1/humas/konten-publik?kategori=Aset%20Web&limit=100');
         if (resAset.ok) {
           const jsonAset = await resAset.json();
           if (Array.isArray(jsonAset.data)) {
@@ -116,6 +121,7 @@ export default function PublicBerandaPage() {
             const kpi = items.find((i) => i.slug === 'aset-gedung-kompleks-putri')?.image_url;
             const vid = items.find((i) => i.slug === 'aset-video-profil-resmi-sma-awh')?.image_url;
             const fk = items.find((i) => i.slug === 'aset-foto-kepala-sekolah')?.image_url;
+            const statSiswa = items.find((i) => i.slug === 'aset-statistik-siswa-beranda');
             setMediaAssets((prev) => ({
               fotoVisi1: v1 || prev.fotoVisi1,
               fotoVisi2: v2 || prev.fotoVisi2,
@@ -123,6 +129,9 @@ export default function PublicBerandaPage() {
               kompleksPutri: kpi || prev.kompleksPutri,
               videoProfil: vid || prev.videoProfil,
               fotoKepsek: fk || prev.fotoKepsek,
+              sloganSiswa: statSiswa?.judul || prev.sloganSiswa,
+              labelTahunSiswa: statSiswa?.isi || prev.labelTahunSiswa,
+              jumlahSiswa: statSiswa?.ringkasan || prev.jumlahSiswa,
             }));
           }
         }
@@ -263,12 +272,13 @@ export default function PublicBerandaPage() {
       }
     );
 
-    // 7. Student Number Counter (769)
+    // 7. Student Number Counter
     const counterElem = document.getElementById('student-count-val');
     if (counterElem) {
+      const targetVal = parseInt(mediaAssets.jumlahSiswa, 10) || 769;
       const obj = { val: 0 };
       gsap.to(obj, {
-        val: 769,
+        val: targetVal,
         duration: 2,
         ease: 'power1.out',
         scrollTrigger: {
@@ -339,7 +349,7 @@ export default function PublicBerandaPage() {
         },
       }
     );
-  }, { scope: mainRef });
+  }, { scope: mainRef, dependencies: [mediaAssets.jumlahSiswa] });
 
   // Hero Slide Text Entrance per slide change
   useGSAP(() => {
@@ -959,18 +969,18 @@ export default function PublicBerandaPage() {
           </div>
         </section>
 
-        {/* ==================== 11. JUMLAH SISWA TAHUN AKADEMIK 2025-2026 ==================== */}
+        {/* ==================== 11. JUMLAH SISWA TAHUN AKADEMIK ==================== */}
         <section className="py-16 bg-surface-warm border-y border-border-subtle" id="student-count-sec">
           <div className="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop">
             <div className="text-center max-w-2xl mx-auto mb-10 space-y-1">
               <h2 className="font-headline-xl text-xl sm:text-2xl font-bold text-forest-deep">
-                Sekolah Nyantri Ngaji Berprestasi
+                {mediaAssets.sloganSiswa || 'Sekolah Nyantri Ngaji Berprestasi'}
               </h2>
               <p className="text-xs sm:text-sm text-on-surface-variant">
-                Jumlah Siswa Tahun Akademik 2025-2026
+                {mediaAssets.labelTahunSiswa || 'Jumlah Siswa Tahun Akademik 2025-2026'}
               </p>
               <div id="student-count-val" className="font-headline-xl text-4xl sm:text-5xl font-extrabold text-forest-deep pt-2">
-                769
+                {mediaAssets.jumlahSiswa || '769'}
               </div>
             </div>
 
